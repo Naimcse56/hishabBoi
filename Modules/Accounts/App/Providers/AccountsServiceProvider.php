@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Modules\Accounts\App\Models\DayCloseFiscalYear;
 use Modules\Accounts\App\Models\FiscalYear;
+use Modules\Accounts\App\Repository\Eloquents\LedgerRepository;
+use Modules\Accounts\App\Repository\Interfaces\LedgerRepositoryInterface;
 
 class AccountsServiceProvider extends ServiceProvider
 {
@@ -56,6 +58,7 @@ class AccountsServiceProvider extends ServiceProvider
                 };
             });
         }
+        $this->app->bind(LedgerRepositoryInterface::class, LedgerRepository::class);
     }
 
     /**

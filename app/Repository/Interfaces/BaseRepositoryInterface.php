@@ -14,6 +14,14 @@ interface BaseRepositoryInterface
      * @param array $relations
      * @return Collection
      */
+    public function allDataTable(array $condition, array $columns = ['*'], array $relations = []);
+    /**
+     * Get all models
+     *
+     * @param array|string[] $columns
+     * @param array $relations
+     * @return Collection
+     */
     public function all(array $columns = ['*'], array $relations = []) : Collection;
     /**
      * Count models

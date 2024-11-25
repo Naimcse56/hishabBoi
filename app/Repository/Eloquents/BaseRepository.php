@@ -20,6 +20,15 @@ class BaseRepository implements BaseRepositoryInterface
     {
         $this->model = $model;
     }
+    /**
+     * @param array|string[] $columns
+     * @param array $relations
+     * @return Collection
+     */
+    public function allDataTable(array $condition = [], array $columns = ['*'], array $relations = [])
+    {
+        return $this->model->with($relations)->where($condition)->orderBy('id','asc');
+    }
 
     /**
      * @param array|string[] $columns
@@ -28,7 +37,7 @@ class BaseRepository implements BaseRepositoryInterface
      */
     public function all(array $columns = ['*'], array $relations = []): Collection
     {
-        return $this->model->with($relations)->get($columns);
+        return $this->model->with($relations)->paginate(10,$columns);
     }
 
     public function count(): int
@@ -45,7 +54,7 @@ class BaseRepository implements BaseRepositoryInterface
 
     public function getByCondition(array $condition, array $relations = [], array $columns = ['*']): Collection
     {
-        return $this->model->where($condition)->with($relations)->get($columns);
+        return $this->model->where($condition)->with($relations)->paginate(10,$columns);
     }
 
     /**

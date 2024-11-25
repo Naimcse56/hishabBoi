@@ -56,3 +56,10 @@ if (!function_exists('showDefaultImage')) {
         }
     }
 }
+
+if (!function_exists('currencySymbol')) {
+    function currencySymbol($amount)
+    {
+        return "BDT ".number_format(floatval($amount), 2);
+    }
+}

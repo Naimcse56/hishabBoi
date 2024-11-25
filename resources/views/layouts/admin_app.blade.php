@@ -3,7 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <script>
+        const APP_URL = '{{url('/')}}';
+        const APP_TOKEN = '{{csrf_token()}}';
+    </script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('title', 'Dashboard') | {{ config('app.name', 'Base Laravel') }}</title>
@@ -15,6 +18,7 @@
     <link href="{{asset('assets/plugins/flatpickr/flatpickr.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/summernote/summernote.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" type="text/css" />
 
     @stack('css')
@@ -54,9 +58,11 @@
     <script src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/plugins/flatpickr/flatpickr.js')}}"></script>
     <script src="{{asset('assets/plugins/summernote/summernote.min.js')}}"></script>
+    <script src="{{asset('assets/js/sweetAlert.js')}}"></script>
     <script src="{{asset('assets/js/scripts.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
-    <script src="{{asset('assets/js/datatables-simple-demo.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/datatables/dataTables.bootstrap5.min.js')}}"></script>
 
     @stack('scripts')
 </body>
