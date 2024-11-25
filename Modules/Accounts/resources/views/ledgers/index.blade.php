@@ -3,9 +3,11 @@
 My Account
 @endsection
 @section('content')
-        <!--breadcrumb-->
     <div class="container-fluid px-4">
-        <h4 class="mt-4">Ledger Accounts</h4>
+        <div class="d-flex justify-content-between">
+            <div><h4 class="mt-4">Ledger Accounts</h4></div>
+            <div><a href="{{route('ledger.create')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> Add New Ledger</a></div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

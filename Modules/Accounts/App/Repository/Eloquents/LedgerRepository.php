@@ -62,8 +62,7 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
         } elseif ($account_type) {
             $items = $items->where('type',$account_type);
         }
-        $branch_id = app('branch_info')['current_branch_id'];
-        $items = $items->whereIn('branch_id',[0, $branch_id])->paginate(10,['id','name','code','ac_no','acc_type']);
+        $items = $items->paginate(10,['id','name','code','ac_no','acc_type']);
 
         $response = [];
         if ($page == 1) {
