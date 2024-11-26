@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type')->nullable()->comment('1 => Asset, 2 => Liability, 3 => Expense, 4 => Income, 5 => Equity');
             $table->foreignId('parent_id')->nullable();
             $table->tinyInteger("level")->default(0);
+            $table->string('bank_ac_name', 180)->nullable()->index()->comment('Bank Account Name');
             $table->string('ac_no', 100)->nullable()->index()->comment('Bank Account No');
             $table->string('bank_address', 300)->nullable()->index()->comment('Bank Address');
             $table->string('routing_no', 150)->nullable()->index()->comment('Bank');

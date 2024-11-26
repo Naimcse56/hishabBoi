@@ -13,6 +13,13 @@
     @endif
     <select {{$attributes->class(['form-control'])}} id="{{ $name }}" name="{{$name}}" aria-invalid="false">
         <option selected="" value="" disabled>{{$disableOptionText}}</option>
+        @foreach($options as $option)
+        <option value="{{ gv($option, 'id') ?: '' }}" 
+                {{ gv($option, 'id') === null || gv($option, 'id') === '' ? 'disabled' : '' }} 
+                {{ old($name) == gv($option, 'id') ? '' : ($value == gv($option, 'id') ? 'selected' : '') }}>
+            {{ gv($option, 'name') }}
+        </option>
+    @endforeach
     </select>
     @error($name)
         <div class="valid-feedback">{{$message}}</div>

@@ -70,17 +70,12 @@ class LedgerController extends Controller
     {
         try {
             DB::beginTransaction();
-            $item = $this->ledgerInterface->createAccount($request->except("_token"));
+            $item = $this->ledgerInterface->create($request->except("_token"));
             DB::commit();
-            if ($request->ajax()) {
-                return response()->json(["message" => $item->name.' Added Successfully', "ledger" => $item , "row_count" => $request->row_count, "class_name" => $request->class_name], 200);
-            }
-            Toastr::success($item->name.' Added Successfully');
-            return redirect()->route('ledger.create');
+            return redirect()->route('ledger.create')->with('success', $item->name.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            Toastr::error($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('success', $e->getMessage());
         }
     }
 
@@ -117,14 +112,13 @@ class LedgerController extends Controller
     {
         try {
             DB::beginTransaction();
-            $item = $this->ledgerInterface->updateAccount($request->except("_token"),decrypt($id));
+            $id = (int) decrypt($id);
+            $item = $this->ledgerInterface->update($id, $request->except("_token"));
             DB::commit();
-            Toastr::success($item->name.' Updated Successfully');
-            return redirect()->route('ledger.index');
+            return redirect()->route('ledger.index')->with('success', $item->name.' Updated Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            Toastr::error($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('success', $e->getMessage());
         }
     }
 
@@ -134,17 +128,10 @@ class LedgerController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->ledgerInterface->deleteAccount($request->id);
-            if ($response == "done") {
-                Toastr::success('Deleted Successfully');
-            }
-            if ($response == "failed") {
-                Toastr::warning('Transactions are existing for this Account. So Delete can not be done.');
-            }
-            return redirect()->back();
+            $response = $this->ledgerInterface->deleteById($request->id);
+            return response()->json(['success' => true]);
         } catch (\Exception $e) {
-            Toastr::error($e->getMessage());
-            return redirect()->back();
+            return response()->json(['error' => $e->getMessage()]);
         }
     }
 

@@ -6,24 +6,24 @@ Chart of Accounts
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between">
         <div><h4 class="mt-4">New Ledger Account</h4></div>
-        <div><a href="{{route('ledger.create')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> Add New Ledger</a></div>
+        <div><a href="{{route('ledger.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-list"></i> List</a></div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('ledger.store')}}">
+                    <form method="POST" enctype="multipart/form-data" action="{{route('ledger.store')}}">
                         @csrf
                         <div class="row">
                             <x-common.server-side-select :required="true" column=4 name="parent_id" id="parent_id" class="parent_id" disableOptionText="Select Parent" label="Parent Account"></x-common.server-side-select>
                             <x-common.input :required="true" column=4 id="name" name="name" label="Account Head" placeholder="Account Head" :value="old('name')"></x-common.input>
                             <x-common.input :required="true" column=4 id="code" name="code" label="Account Code" placeholder="Account Code" :value="old('code')"></x-common.input>
-                            <x-common.radio :required="true" column=4 id="acc_type" name="acc_type" class="acc_type" label="Ledger Type" placeholder="Ledger Type" :value="'others'" :options="[
+                            <x-common.radio :required="true" column=4 name="acc_type" class="acc_type" label="Ledger Type" placeholder="Ledger Type" :value="'others'" :options="[
                                 ['id' => 'cash', 'name' => 'Cash'],
                                 ['id' => 'bank', 'name' => 'Bank'],
                                 ['id' => 'others', 'name' => 'Others']
                             ]"></x-common.radio>
-                            <x-common.radio :required="true" column=4 id="is_active" name="is_active" class="is_active" label="Status" placeholder="Status" :value="1" :options="[
+                            <x-common.radio :required="true" column=4 name="is_active" class="is_active" label="Status" placeholder="Status" :value="1" :options="[
                                 ['id' => 1, 'name' => 'Active'],
                                 ['id' => 0, 'name' => 'Inactive']
                             ]"></x-common.radio>
@@ -34,95 +34,18 @@ Chart of Accounts
                                 <fieldset class="the-fieldset mt-2">
                                     <legend class="the-legend">Bank Information</legend>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="bank_ac_name">Bank Account Name</label>
-                                            <input id="bank_ac_name" name="bank_ac_name" class="form-control" placeholder="Account Name" type="text">
-                                            <span class="text-danger" id="bank_ac_name_error"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="ac_no">Bank Account No</label>
-                                            <input id="ac_no" name="ac_no" class="form-control" placeholder="Account Code" type="text">
-                                            <span class="text-danger" id="ac_no_error"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="routing_no">Routing No</label>
-                                            <input id="routing_no" name="routing_no" class="form-control" placeholder="Routing No" type="text">
-                                            <span class="text-danger" id="routing_no_error"></span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label mt-2" for="swift_code">Swift Code</label>
-                                            <input id="swift_code" name="swift_code" class="form-control" placeholder="Swift Code" type="text">
-                                            <span class="text-danger" id="swift_code_error"></span>
-                                        </div>
-                                        <div class="col-md-4 mt-2">
-                                            <label class="form-label" for="branch_code">Branch Code</label>
-                                            <input id="branch_code" name="branch_code" class="form-control" placeholder="Branch Code" type="text">
-                                            <span class="text-danger" id="branch_code_error"></span>
-                                        </div>
-                                        <div class="col-md-4 mt-2">
-                                            <label class="form-label" for="bank_address">Bank Address</label>
-                                            <input id="bank_address" name="bank_address" class="form-control" placeholder="Bank Address" type="text">
-                                            <span class="text-danger" id="bank_address_error"></span>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="row">                            
-                            <div class="col-md-12 general_config_div">
-                                <fieldset class="the-fieldset mt-5">
-                                    <legend class="the-legend">Balance Sheet & Income Statement Configuration</legend>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="">Display in Balance Sheet <span class="text-danger">*</span></label>
-                                            <div class="">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="view_in_bs" value="1">
-                                                    <label class="form-check-label" for="view_in_bs">Yes</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="view_in_bs" value="0" checked>
-                                                    <label class="form-check-label" for="view_in_bs">No</label>
-                                                </div>
-                                            </div>
-                                            <span class="text-danger" id="is_active_error">{{$errors->first('view_in_bs')}}</span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="">Display in Income Statement <span class="text-danger">*</span></label>
-                                            <div class="">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="view_in_is" value="1">
-                                                    <label class="form-check-label" for="view_in_is">Yes</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="view_in_is" value="0" checked>
-                                                    <label class="form-check-label" for="view_in_is">No</label>
-                                                </div>
-                                            </div>
-                                            <span class="text-danger" id="is_active_error">{{$errors->first('view_in_is')}}</span>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label" for="">Display in Trial Balance <span class="text-danger">*</span></label>
-                                            <div class="">
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="view_in_trial" value="1">
-                                                    <label class="form-check-label" for="view_in_trial">Yes</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="view_in_trial" value="0" checked>
-                                                    <label class="form-check-label" for="view_in_trial">No</label>
-                                                </div>
-                                            </div>
-                                            <span class="text-danger" id="is_active_error">{{$errors->first('view_in_trial')}}</span>
-                                        </div>
+                                        <x-common.input :required="true" column=4 id="bank_ac_name" name="bank_ac_name" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_ac_name')"></x-common.input>
+                                        <x-common.input :required="true" column=4 id="ac_no" name="ac_no" label="Bank Account No" placeholder="Bank Account No" :value="old('ac_no')"></x-common.input>
+                                        <x-common.input :required="true" column=4 id="routing_no" name="routing_no" label="Routing No" placeholder="Routing No" :value="old('routing_no')"></x-common.input>
+                                        <x-common.input :required="true" column=4 id="swift_code" name="swift_code" label="Swift Code" placeholder="Swift Code" :value="old('swift_code')"></x-common.input>
+                                        <x-common.input :required="true" column=4 id="branch_code" name="branch_code" label="Branch Code" placeholder="Branch Code" :value="old('branch_code')"></x-common.input>
+                                        <x-common.input :required="true" column=4 id="bank_address" name="bank_address" label="Bank Address" placeholder="Bank Address" :value="old('bank_address')"></x-common.input>
                                     </div>
                                 </fieldset>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 text-center mt-4">
-                                <button type="submit" class="btn btn-primary save-btn "><i class="bx bx-check-double"></i>Save</button>
-                            </div>
+                            <x-common.button column=12 type="submit" id="update_btn" class="btn-primary btn-120" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                         </div>
                     </form>
                 </div>
@@ -144,9 +67,13 @@ Chart of Accounts
                     }
                 });
 
-                $(".as_sub_category").unbind().click(function () {
-                    $(".parent_chartAccount").toggle();
-                    $("#account_type").toggle();
+                $('input[type="radio"][name="acc_type"]').on('change', function() {
+                    var selectedValue = $('input[type="radio"][name="acc_type"]:checked').val();                
+                    if (selectedValue == "bank") {
+                        $('.ac_no_div').removeClass('d-none')
+                    } else {
+                        $('.ac_no_div').addClass('d-none')
+                    }
                 });
             });
 
@@ -239,16 +166,6 @@ Chart of Accounts
                     }
                 });
             }
-
-            $(document).on('change', '.acc_type', function(e){
-                console.log($(this));
-                
-                if ($(this).val() == "bank") {
-                    $('.ac_no_div').removeClass('d-none')
-                } else {
-                    $('.ac_no_div').addClass('d-none')
-                }
-            });
 
         })(jQuery);
     </script>

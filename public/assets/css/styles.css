@@ -11255,3 +11255,13 @@ body {
 .select2-dropdown {
   z-index: 0;
 }
+.the-legend {
+    border: 1px solid #9b9595;
+    float: none;
+    font-size: 1rem;
+    padding: 0.375rem 0.75rem;
+}
+.the-fieldset {
+    border: 1px solid #9b9595;
+    padding: 10px;
+}
