@@ -11277,3 +11277,12 @@ body {
   font-size: 1.125em !important;
   font-weight: 500 !important;
 }
+.error-title {
+  font-size: 140px;
+  line-height: 140px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.bg-error {
+  background-color: #1e2125;
+}
