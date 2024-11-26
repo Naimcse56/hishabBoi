@@ -55,14 +55,6 @@
                                     <td>{{$ledger->acc_type}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Is Cost Center</td>
-                                    <td>{{$ledger->is_cost_center  == 1 ? "Yes" : "No"}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Description</td>
-                                    <td>{{$ledger->description}}</td>
-                                </tr>
-                                <tr>
                                     <td>Balance</td>
                                     <td>{{currencySymbol($ledger->BalanceAmount)}}</td>
                                 </tr>
