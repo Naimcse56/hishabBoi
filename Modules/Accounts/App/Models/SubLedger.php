@@ -20,9 +20,9 @@ class SubLedger extends Model
         //return SubLedgerFactory::new();
     }
 
-    public function member_type()
+    public function sub_ledger_type()
     {
-        return $this->belongsTo(MemberType::class)->withDefault(['name'=>'N/A']);
+        return $this->belongsTo(SubLedgerType::class,'sub_ledger_type_id','id')->withDefault(['name'=>'N/A']);
     }
 
     public function ledger()

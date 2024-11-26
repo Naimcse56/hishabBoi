@@ -14,7 +14,7 @@ class SubLedgerRepository implements SubLedgerRepositoryInterface
     public function listForDataTable($type)
     {
         if (auth()->user()->employee || auth()->id() == 1) {
-            return SubLedger::with(['member_type:id,name'])->where('branch_id',app('branch_info')['current_branch_id'])->where($type,'>',0)->orderBy('id','asc');
+            return SubLedger::with(['sub_ledger_type:id,name'])->where('branch_id',app('branch_info')['current_branch_id'])->where($type,'>',0)->orderBy('id','asc');
         } else {
             abort(404);
         }
@@ -180,7 +180,7 @@ class SubLedgerRepository implements SubLedgerRepositoryInterface
             $items = $items->whereLike(['bill_no', 'bill_date'], $search);
         }
         if($type == "due_payable") {
-            $items = $items->with(['sub_ledger:id,name,member_type_id','sub_ledger.member_type:id,name','vouchers_sales_purchases:id,accounting_bill_info_id,date,narration,amount,type','vouchers_payments:id,type,accounting_bill_info_id,date,narration,amount'])->where('type','payment')
+            $items = $items->with(['sub_ledger:id,name,sub_ledger_type_id','sub_ledger.sub_ledger_type:id,name','vouchers_sales_purchases:id,accounting_bill_info_id,date,narration,amount,type','vouchers_payments:id,type,accounting_bill_info_id,date,narration,amount'])->where('type','payment')
                             ->paginate(40)
                             ->filter(function ($bill) {
                                 $purchaseTotal = $bill->vouchers_sales_purchases->where('type', 'purchase')->sum('amount');

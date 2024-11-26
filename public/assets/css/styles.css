@@ -11265,9 +11265,6 @@ body {
     border: 1px solid #9b9595;
     padding: 10px;
 }
-.swal2-show {
-  background-color: #ffe9e9;
-}
 .swal2-warning {
   border-color: #f10909 !important;
   color: #f10909 !important;
@@ -11285,4 +11282,7 @@ body {
 }
 .bg-error {
   background-color: #1e2125;
+}
+.modal-title {
+  color: #fff;
 }

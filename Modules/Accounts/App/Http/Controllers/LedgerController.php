@@ -70,7 +70,7 @@ class LedgerController extends Controller
     {
         try {
             DB::beginTransaction();
-            $item = $this->ledgerInterface->create($request->except("_token"));
+            $item = $this->ledgerInterface->create($request->validated());
             DB::commit();
             return redirect()->route('ledger.create')->with('success', $item->name.' Added Successfully');
         } catch (\Exception $e) {
@@ -113,7 +113,7 @@ class LedgerController extends Controller
         try {
             DB::beginTransaction();
             $id = (int) decrypt($id);
-            $item = $this->ledgerInterface->update($id, $request->except("_token"));
+            $item = $this->ledgerInterface->update($id, $request->validated());
             DB::commit();
             return redirect()->route('ledger.index')->with('success', $item->name.' Updated Successfully');
         } catch (\Exception $e) {

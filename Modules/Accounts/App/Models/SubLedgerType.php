@@ -4,18 +4,18 @@ namespace Modules\Accounts\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Accounts\Database\factories\MemberTypeFactory;
+use Modules\Accounts\Database\factories\SubLedgerTypeFactory;
 
-class MemberType extends Model
+class SubLedgerType extends Model
 {
     use HasFactory;
 
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['id','name','branch_id','is_for'];
+    protected $fillable = ['name','is_for'];
     
-    protected static function newFactory(): MemberTypeFactory
+    protected static function newFactory(): SubLedgerTypeFactory
     {
         //return MemberTypeFactory::new();
     }

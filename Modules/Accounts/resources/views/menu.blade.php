@@ -12,7 +12,7 @@
         <div class="collapse" id="head_child" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" href="{{route('ledger.index')}}">Ledger</a>
-                <a class="nav-link" href="#">Party Type</a>
+                <a class="nav-link" href="{{route('subledger-type.index')}}">Party Type</a>
                 <a class="nav-link" href="#">Client</a>
                 <a class="nav-link" href="#">Vendor</a>
                 <a class="nav-link" href="#">Staff</a>
