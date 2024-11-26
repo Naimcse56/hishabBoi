@@ -71,8 +71,6 @@ Chart of Accounts
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                let selected_parent_id = $('#selected_parent_id').val();
-                parentChartAccountEdit(null, selected_parent_id, null);
             });
 
             $(document).on('change', '#parent_id', function(e) {
@@ -167,10 +165,6 @@ Chart of Accounts
                 });
             }
 
-            $(document).on('click', '.as_sub_category', function () {
-                $(".parent_chartAccountEdit").toggle();
-            });
-
             $(document).on('click', '.acc_type', function(e){
                 if ($(this).val() == "bank") {
                     $('.ac_no_div').removeClass('d-none')
@@ -178,43 +172,6 @@ Chart of Accounts
                     $('.ac_no_div').addClass('d-none')
                 }
             });
-
-            function parentChartAccountEdit(type = null, selected = null, editItem = null) {
-                var accoutList = null;
-                $.ajax({
-                    url: APP_URL + "/accountings/ledger-list-cost-center",
-                    type: "GET",
-                    dataType: "JSON",
-                    success: function (response) {
-                        if (type) {
-                            accoutList = response.filter(item => item.type == editItem)
-                            $("#" + type).html("");
-                        } else {
-                            accoutList = response;
-                            $("#parent_chart_account_list_edit").html("");
-                        }
-                        let parent_chartAccount = '';
-                        parent_chartAccount += `<select name="parent_id" class="form-select main_select_2 mb-15 parent_chart_account_list_edit mt-2">`;
-                        $.each(accoutList, function (key, item) {
-                            if (selected && selected == item.id) {
-                                parent_chartAccount += `<option selected value="${item.id}">${item.name}</option>`;
-                            } else {
-                                parent_chartAccount += `<option value="${item.id}">${item.name}</option>`;
-                            }
-                        });
-                        parent_chartAccount += `<select>`;
-                        if (type) {
-                            $("#" + type).html(parent_chartAccount);
-                        } else {
-                            $("#parent_chart_account_list_edit").html(parent_chartAccount);
-                        }
-                        $(".main_select_2").select2();
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            }
 
         })(jQuery);
     </script>

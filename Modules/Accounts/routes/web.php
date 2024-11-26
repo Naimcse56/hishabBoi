@@ -27,7 +27,6 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('ledger.delete');
         Route::get('/ledger/transactional-account-list-ajax', 'transactional_list_for_select_ajax')->name('ledger.transactional_list_for_select');
         Route::get('/ledger-list', 'list')->name('leadger.list_all');
-        Route::get('/ledger-list-cost-center', 'cost_center')->name('leadger.cost_center');
         Route::post('/ledger/code-checker', 'code_checker')->name('ledger.code_checker');
     });
 });

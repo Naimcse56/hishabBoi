@@ -84,10 +84,11 @@ class BaseRepository implements BaseRepositoryInterface
      * @param array $payload
      * @return bool
      */
-    public function update(int $modelId, array $payload): bool
+    public function update(int $modelId, array $payload): ?Model
     {
         $model = $this->findById($modelId);
-        return $model->update($payload);
+        $model->update($payload);
+        return $model;
     }
 
     /**

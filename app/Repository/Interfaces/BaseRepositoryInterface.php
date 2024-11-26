@@ -70,7 +70,7 @@ interface BaseRepositoryInterface
      * @param array $payload
      * @return bool
      */
-    public function update(int $modelId, array $payload) : bool;
+    public function update(int $modelId, array $payload) : ?Model;
 
     /**
      * Delete model by id

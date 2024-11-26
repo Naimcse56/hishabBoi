@@ -22,8 +22,7 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
             return $this->model::with($relational_data)
                     ->where('parent_id',0)
                     ->orderBy('type','asc')
-                    ->orderBy('id','desc')
-                    
+                    ->orderBy('id','desc')                    
                     ->paginate(20, $selected_data);
         } else {
             abort(404);
@@ -81,7 +80,6 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
                 $response[]  =[
                     'id'    => $item->id,
                     'text'  => $item->name.$ac_no
-                    // 'text'  => $item->name.$ac_no.' > Balance: '.currencySymbol(abs($item->BalanceAmount))
                 ];
             }
         } else {
@@ -95,7 +93,6 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
                     $response[]  =[
                         'id'    => $item->id,
                         'text'  => $item->name.$ac_no
-                        // 'text'  => $item->name.$ac_no.' > Balance: '.currencySymbol(abs($item->BalanceAmount))
                     ];
                 }
             }

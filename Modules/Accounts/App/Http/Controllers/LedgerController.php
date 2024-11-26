@@ -75,7 +75,7 @@ class LedgerController extends Controller
             return redirect()->route('ledger.create')->with('success', $item->name.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('success', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
@@ -118,7 +118,7 @@ class LedgerController extends Controller
             return redirect()->route('ledger.index')->with('success', $item->name.' Updated Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('success', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
@@ -133,11 +133,6 @@ class LedgerController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
         }
-    }
-
-    public function cost_center()
-    {
-        return $this->ledgerInterface->cost_center();
     }
 
     public function list()

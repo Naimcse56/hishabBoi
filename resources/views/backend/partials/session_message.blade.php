@@ -32,7 +32,7 @@
 </div>
 @endif
 
-{{-- <script>
+<script>
     // Hide flash messages after 3 seconds
     setTimeout(function() {
         var alerts = document.querySelectorAll('.alert');
@@ -42,4 +42,4 @@
             alert.style.display = 'none'; // Remove from view
         });
     }, 3000); // Time in milliseconds (3000ms = 3 seconds)
-</script> --}}
+</script>
