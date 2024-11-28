@@ -45,6 +45,7 @@
   --bs-primary-rgb: 84, 75, 220;
   --bs-secondary-rgb: 187, 186, 206;
   --bs-success-rgb: 71, 183, 139;
+  --bs-success-light-rgb: 105, 228, 179;
   --bs-info-rgb: 43, 223, 229;
   --bs-warning-rgb: 250, 192, 56;
   --bs-danger-rgb: 255, 71, 71;
@@ -8158,6 +8159,11 @@ textarea.form-control-lg {
 .bg-success {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-success-light {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-success-light-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-info {

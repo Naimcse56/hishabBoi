@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-5">
             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
+                <div class="card-header bg-success-light"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}" class="text-start mb-3">
                         @csrf
@@ -40,7 +40,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="card-footer text-center py-3">
+                <div class="card-footer text-center py-3 bg-success-light">
                     <div class="small"><a href="{{ route('register') }}">Need an account? Sign up!</a></div>
                 </div>
             </div>
