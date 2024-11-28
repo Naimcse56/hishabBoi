@@ -13,9 +13,7 @@
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" href="{{route('ledger.index')}}">Ledger</a>
                 <a class="nav-link" href="{{route('subledger-type.index')}}">Party Type</a>
-                <a class="nav-link" href="#">Client</a>
-                <a class="nav-link" href="#">Vendor</a>
-                <a class="nav-link" href="#">Staff</a>
+                <a class="nav-link" href="{{route('sub-ledger.index')}}">Party</a>
                 <a class="nav-link" href="#">Work Order</a>
                 <a class="nav-link" href="#">W/O Sites</a>
             </nav>

@@ -40,4 +40,14 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/report', 'index_report')->name('subledger-type.index_report');
         Route::get('/report-preview', 'index_report_preview')->name('subledger-type.index_report_preview');
     });
+    Route::controller(SubLedgerController::class)->prefix('/party-accounts')->group(function () {
+        Route::get('/supplier-index', 'index')->name('sub-ledger.index');
+        Route::get('/create', 'create')->name('sub-ledger.create');
+        Route::post('/store', 'store')->name('sub-ledger.store');
+        Route::get('/edit/{id}', 'edit')->name('sub-ledger.edit');
+        Route::get('/show/{id}', 'show')->name('sub-ledger.show');
+        Route::post('/update/{id}', 'update')->name('sub-ledger.update');
+        Route::post('/delete', 'destroy')->name('sub-ledger.delete');
+        Route::get('/transactional-account-list-ajax', 'transactional_list_for_select_ajax')->name('sub-ledger.transactional_list_for_select');
+    });
 });

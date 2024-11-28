@@ -126,4 +126,16 @@ class SubLedger extends Model
             return $this->all_transactions()->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type', 'Cr')->sum('amount') - $this->all_transactions()->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('amount');
         }
     }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->created_by = auth()->user()->id ?? null;
+        });
+
+        static::updating(function ($model) {
+            $model->updated_by = auth()->user()->id ?? null;
+        });
+    }
 }
