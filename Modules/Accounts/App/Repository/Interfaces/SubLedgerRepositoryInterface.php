@@ -8,8 +8,5 @@ use App\Repository\Interfaces\BaseRepositoryInterface;
 
 interface SubLedgerRepositoryInterface extends BaseRepositoryInterface
 {
-    // Method Declare here
-    public function listForDataTable($type);
-
     public function transactionalLeadgerForSelect($search, $type, $branch_id, $page);
 }

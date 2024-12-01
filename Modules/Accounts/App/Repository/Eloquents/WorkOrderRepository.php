@@ -15,7 +15,7 @@ class WorkOrderRepository implements WorkOrderRepositoryInterface
     public function listForDataTable()
     {
         if (auth()->user()->employee || auth()->id() == 1) {
-            return WorkOrder::where('branch_id',app('branch_info')['current_branch_id'])->orderBy('id','desc');
+            return WorkOrder::orderBy('id','desc');
         } else {
             abort(404);
         }
@@ -24,7 +24,6 @@ class WorkOrderRepository implements WorkOrderRepositoryInterface
     {
         $data = Arr::add($data, "date", Carbon::createFromFormat('d/m/Y', $data["create_date"])->format('Y-m-d'));
         $data = Arr::add($data, "final_date", Carbon::createFromFormat('d/m/Y', $data["end_date"])->format('Y-m-d'));
-        $data = Arr::add($data, "branch_id", app('branch_info')['current_branch_id']);
         $work_order = WorkOrder::create($data);
         if (!empty($data['cost_type'])) {
             foreach ($data['cost_type'] as $key => $ledger_id) {
@@ -69,11 +68,11 @@ class WorkOrderRepository implements WorkOrderRepositoryInterface
         $order->delete();
     }
 
-    public function workOrderForSelect($search, $branch_id, $sub_ledger_id, $page)
+    public function workOrderForSelect($search, $sub_ledger_id, $page)
     {
         $branch_id = $branch_id ? $branch_id : app('branch_info')['current_branch_id'];
         $items = WorkOrder::query();
-        $items = $items->where('branch_id',$branch_id)->where('is_active',1);
+        $items = $items->where('is_active',1);
         if ($search != '') {
             $items = $items->whereLike(['order_name', 'order_no'], $search);
         }

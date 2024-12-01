@@ -9,7 +9,7 @@ use Modules\Accounts\Database\factories\WorkOrderFactory;
 class WorkOrder extends Model
 {
     use HasFactory;
-    protected $with = ['sub_ledger','work_order_estimation_costs','branch:id,name,location,logo_path'];
+    protected $with = ['sub_ledger','work_order_estimation_costs'];
     /**
      * The attributes that are mass assignable.
      */
@@ -38,5 +38,17 @@ class WorkOrder extends Model
     public function work_order_site_details()
     {
         return $this->hasMany(WorkOrderSiteDetail::class);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+            $model->created_by = auth()->user()->id ?? null;
+        });
+
+        static::updating(function ($model) {
+            $model->updated_by = auth()->user()->id ?? null;
+        });
     }
 }

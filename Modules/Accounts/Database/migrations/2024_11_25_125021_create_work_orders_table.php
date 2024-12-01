@@ -22,6 +22,8 @@ return new class extends Migration
             $table->double('order_value', 28,2)->default(0)->index()->comment('project value');
             $table->text('remarks')->nullable();
             $table->boolean("is_active")->default(1);
+            $table->foreignId('created_by')->nullable();
+            $table->foreignId('updated_by')->nullable();
             $table->timestamps();
         });
     }

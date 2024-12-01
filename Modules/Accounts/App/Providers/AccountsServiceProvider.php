@@ -11,6 +11,8 @@ use Modules\Accounts\App\Repository\Eloquents\LedgerRepository;
 use Modules\Accounts\App\Repository\Interfaces\LedgerRepositoryInterface;
 use Modules\Accounts\App\Repository\Eloquents\SubLedgerRepository;
 use Modules\Accounts\App\Repository\Interfaces\SubLedgerRepositoryInterface;
+use Modules\Accounts\App\Repository\Eloquents\WorkOrderRepository;
+use Modules\Accounts\App\Repository\Interfaces\WorkOrderRepositoryInterface;
 
 class AccountsServiceProvider extends ServiceProvider
 {
@@ -62,6 +64,7 @@ class AccountsServiceProvider extends ServiceProvider
         }
         $this->app->bind(LedgerRepositoryInterface::class, LedgerRepository::class);
         $this->app->bind(SubLedgerRepositoryInterface::class, SubLedgerRepository::class);
+        $this->app->bind(WorkOrderRepositoryInterface::class, WorkOrderRepository::class);
     }
 
     /**

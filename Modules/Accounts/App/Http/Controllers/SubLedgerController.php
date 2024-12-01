@@ -47,90 +47,6 @@ class SubLedgerController extends Controller
         }
         return view('accounts::sub_ledgers.index');
     }
-    
-    public function customer_index(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = $this->subLedgerInterface->listForDataTable('customer');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('balance', function($row){
-                        return currencySymbol($row->BalanceAmount);
-                    })
-                    ->editColumn('email', function($row){
-                        return '<a href="mailto:'.$row->email.'">'.$row->email.'</a>';
-                    })
-                    ->editColumn('nid', function($row){
-                        if ($row->nid) {
-                            return '<a href="'.asset($row->nid).'" download="'.str_replace(' ','-',$row->name.'-nid').'">Download</a>';
-                        } else {
-                            return 'N/A';
-                        }
-                    })
-                    ->editColumn('trade_licence', function($row){
-                        if ($row->trade_licence) {
-                            return '<a href="'.asset($row->trade_licence).'" download="'.str_replace(' ','-',$row->name.'-trade-license').'">Download</a>';
-                        } else {
-                            return 'N/A';
-                        }
-                    })
-                    ->addColumn('type', function($row){
-                        $type = 'Client';
-                        return $type;
-                    })
-                    ->addColumn('is_active', function($row){      
-                        return view('accounts::sub_ledgers.components.is_active', compact('row'));
-                    })
-                    ->addColumn('action', function($row){      
-                        return view('accounts::sub_ledgers.components.action', compact('row'));
-                    })
-                    ->rawColumns(['action','is_active','nid','email','trade_licence'])
-                    ->make(true);
-        }
-        return view('accounts::sub_ledgers.index');
-    }
-    
-    public function member_index(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = $this->subLedgerInterface->listForDataTable('member');
-            return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('balance', function($row){
-                        return currencySymbol($row->BalanceAmount);
-                    })
-                    ->editColumn('email', function($row){
-                        return '<a href="mailto:'.$row->email.'">'.$row->email.'</a>';
-                    })
-                    ->editColumn('nid', function($row){
-                        if ($row->nid) {
-                            return '<a href="'.asset($row->nid).'" download="'.str_replace(' ','-',$row->name.'-nid').'">Download</a>';
-                        } else {
-                            return 'N/A';
-                        }
-                    })
-                    ->editColumn('trade_licence', function($row){
-                        if ($row->trade_licence) {
-                            return '<a href="'.asset($row->trade_licence).'" download="'.str_replace(' ','-',$row->name.'-trade-license').'">Download</a>';
-                        } else {
-                            return 'N/A';
-                        }
-                    })
-                    ->addColumn('type', function($row){
-                        $type = 'Member';
-                        return $type;
-                    })
-                    ->addColumn('is_active', function($row){      
-                        return view('accounts::sub_ledgers.components.is_active', compact('row'));
-                    })
-                    ->addColumn('action', function($row){      
-                        return view('accounts::sub_ledgers.components.action', compact('row'));
-                    })
-                    ->rawColumns(['action','is_active','nid','email','trade_licence'])
-                    ->make(true);
-        }
-        return view('accounts::sub_ledgers.index');
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -206,7 +122,7 @@ class SubLedgerController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->subLedgerInterface->delete($request->id);
+            $response = $this->subLedgerInterface->deleteById($request->id);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

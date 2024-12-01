@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Accounts\App\Http\Controllers\AccountsController;
 use Modules\Accounts\App\Http\Controllers\LedgerController;
 use Modules\Accounts\App\Http\Controllers\SubLedgerTypeController;
+use Modules\Accounts\App\Http\Controllers\WorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,19 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('sub-ledger.update');
         Route::post('/delete', 'destroy')->name('sub-ledger.delete');
         Route::get('/transactional-account-list-ajax', 'transactional_list_for_select_ajax')->name('sub-ledger.transactional_list_for_select');
+    });
+    Route::controller(WorkOrderController::class)->prefix('/work-order')->group(function () {
+        Route::get('/index', 'index')->name('work-order.index');
+        Route::get('/create', 'create')->name('work-order.create');
+        Route::post('/store', 'store')->name('work-order.store');
+        Route::get('/edit/{id}', 'edit')->name('work-order.edit');
+        Route::get('/show/{id}', 'show')->name('work-order.show');
+        Route::post('/update/{id}', 'update')->name('work-order.update');
+        Route::post('/delete', 'destroy')->name('work-order.delete');
+        Route::get('/work-order-list-ajax', 'list_for_select_ajax')->name('work-order.list_for_select');
+        Route::get('/work-order-estimation-cost-row', 'get_row')->name('work-order.get_row');
+        Route::get('/work-order-profit-loss-report', 'profit_loss_report')->name('work-orders.pl_report');
+        Route::get('/work-order-balance-sheet-report', 'balance_sheet_report')->name('work-orders.balance_sheet_report');
+        Route::get('/receive-payment-report', 'receive_payment_report')->name('work-orders.receive_payment_report');
     });
 });

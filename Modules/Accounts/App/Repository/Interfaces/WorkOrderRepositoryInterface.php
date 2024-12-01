@@ -18,5 +18,5 @@ interface WorkOrderRepositoryInterface
 
     public function delete(int $id);
 
-    public function workOrderForSelect($search, $branch_id, $sub_ledger_id, $page);
+    public function workOrderForSelect($search, $sub_ledger_id, $page);
 }
