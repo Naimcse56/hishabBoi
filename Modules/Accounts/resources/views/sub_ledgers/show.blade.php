@@ -3,7 +3,7 @@
 <div class="modal fade" id="detail_info_modal" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-success-subtle">
+            <div class="modal-header bg-success">
                 <h5 class="modal-title">Party Account Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -37,7 +37,7 @@
                                     <td><a href="{{$ledger->email}}">{{$ledger->email}}</a></td>
                                 </tr>
                                 <tr>
-                                    <td>Account Code</td>
+                                    <td>Phone / Code</td>
                                     <td>{{$ledger->code}}</td>
                                 </tr>
                                 <tr>
@@ -47,22 +47,6 @@
                                 <tr>
                                     <td>TIN</td>
                                     <td>{{$ledger->tin}}</td>
-                                </tr>
-                                <tr>
-                                    <td>NID</td>
-                                    <td>
-                                        @if ($ledger->nid)
-                                            <a href="{{asset($ledger->nid)}}" download="{{str_replace(' ','-',$ledger->name.'-trade-license')}}">Download</a>
-                                        @endif
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Trade Licence</td>
-                                    <td>
-                                        @if ($ledger->trade_licence)
-                                            <a href="{{asset($ledger->trade_licence)}}" download="{{str_replace(' ','-',$ledger->name.'-trade-license')}}">Download</a>
-                                        @endif
-                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Is Active</td>

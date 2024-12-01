@@ -22,8 +22,6 @@ Party Accounts
                                 <th>Email</th>
                                 <th>Code</th>
                                 <th>TIN</th>
-                                <th>NID</th>
-                                <th>Trade License</th>
                                 <th>Is Active</th>
                                 <th width="10%">Action</th>
                             </tr>
@@ -63,13 +61,11 @@ Party Accounts
 					ajax: $('#current_route').val(),
 					columns: [
 						{data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-						{data: 'member_type.name', name: 'member_type.name'},
+						{data: 'sub_ledger_type.name', name: 'sub_ledger_type.name'},
 						{data: 'name', name: 'name'},
 						{data: 'email', name: 'email'},
 						{data: 'code', name: 'code'},
 						{data: 'tin', name: 'tin'},
-						{data: 'nid', name: 'nid'},
-						{data: 'trade_licence', name: 'trade_licence'},
 						{data: 'is_active', name: 'is_active'},
 						{data: 'action', name: 'action', orderable: false, searchable: false, printable:false},
 					],

@@ -19,7 +19,7 @@ Party Accounts
                             <x-common.input :required="true" column=4 id="name" name="name" label="Party Name" placeholder="Party Name" :value="old('name')"></x-common.input>
                             <x-common.input :required="true" column=4 id="code" name="code" label="Party Code / Mobile" placeholder="Party Code / Mobile" :value="old('code')"></x-common.input>
                             <x-common.input :required="false" column=4 id="email" name="email" label="Party Email" placeholder="Party Email" :value="old('email')"></x-common.input>
-                            <x-common.radio :required="true" column=4 name="acc_type" class="acc_type" label="Type" placeholder="Type" :value="'Client'" :options="[
+                            <x-common.radio :required="true" column=4 name="type" class="type" label="Type" placeholder="Type" :value="'Client'" :options="[
                                 ['id' => 'Client', 'name' => 'Client'],
                                 ['id' => 'Vendor', 'name' => 'Vendor'],
                                 ['id' => 'Staff', 'name' => 'Staff']

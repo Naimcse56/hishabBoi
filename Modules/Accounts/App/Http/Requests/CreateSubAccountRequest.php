@@ -13,11 +13,20 @@ class CreateSubAccountRequest extends FormRequest
     {
         return [
             "name" => "required",
-            "code" => "nullable",
-            // "code" => ['required', 'max:50', 'unique:sub_ledgers'],
-            'type' => 'required|array|min:1',
-            "type.*" => "string|in:Customer,Supplier,Member,LandOwner",
-            "is_active" => "required|in:0,1",
+            "code" => ['required', 'max:20', 'unique:sub_ledgers'],
+            "email" => 'nullable|email|unique:sub_ledgers,email',
+            "ledger_id" => "required|gt:0",
+            "is_active" => "nullable|in:0,1",
+            "bank_name" => "nullable",
+            "bank_ac_name" => "nullable",
+            "ac_no" => "nullable",
+            "routing_no" => "nullable",
+            "swift_code" => "nullable",
+            "branch_code" => "nullable",
+            "sub_ledger_type_id" => "nullable",
+            "type" => "required|in:Client,Vendor,Staff",
+            "tin" => "nullable",
+            "bin" => "nullable",
         ];
     }
 
@@ -34,5 +43,12 @@ class CreateSubAccountRequest extends FormRequest
         return [
             'type.in' => 'The Partner Type must be one of the following types: :values',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'is_active' => $this->request->get('is_active') ? 1 : 0,
+        ]);
     }
 }

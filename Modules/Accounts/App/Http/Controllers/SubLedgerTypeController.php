@@ -12,7 +12,6 @@ use Modules\Accounts\App\Models\SubLedger;
 use Modules\Accounts\App\Models\Transaction;
 use Modules\Configuration\App\Models\Branch;
 use Modules\Accounts\App\Repository\Eloquents\SubLedgerTypeRepository;
-use Brian2694\Toastr\Facades\Toastr;
 use DataTables;
 use Carbon\Carbon;
 

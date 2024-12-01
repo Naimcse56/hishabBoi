@@ -11,16 +11,15 @@ use Modules\Accounts\App\Repository\Interfaces\SubLedgerRepositoryInterface;
 use Modules\Accounts\App\Http\Requests\CreateSubAccountRequest;
 use Modules\Accounts\App\Http\Requests\UpdateSubAccountRequest;
 use Modules\Accounts\App\Models\SubLedgerType;
-use Brian2694\Toastr\Facades\Toastr;
 use DataTables;
 
 class SubLedgerController extends Controller
 {
-    private object $ledgerInterface;
+    private object $subLedgerInterface;
 
-    public function __construct(SubLedgerRepositoryInterface $ledgerInterface)
+    public function __construct(SubLedgerRepositoryInterface $subLedgerInterface)
     {
-        $this->ledgerInterface = $ledgerInterface;
+        $this->subLedgerInterface = $subLedgerInterface;
     }
     /**
      * Display a listing of the resource.
@@ -28,7 +27,7 @@ class SubLedgerController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->ledgerInterface->allDataTable();
+            $data = $this->subLedgerInterface->allDataTable([],['*'],['sub_ledger_type']);
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('balance', function($row){
@@ -36,24 +35,6 @@ class SubLedgerController extends Controller
                     })
                     ->editColumn('email', function($row){
                         return '<a href="mailto:'.$row->email.'">'.$row->email.'</a>';
-                    })
-                    ->editColumn('nid', function($row){
-                        if ($row->nid) {
-                            return '<a href="'.asset($row->nid).'" download="'.str_replace(' ','-',$row->name.'-nid').'">Download</a>';
-                        } else {
-                            return 'N/A';
-                        }
-                    })
-                    ->editColumn('trade_licence', function($row){
-                        if ($row->trade_licence) {
-                            return '<a href="'.asset($row->trade_licence).'" download="'.str_replace(' ','-',$row->name.'-trade-license').'">Download</a>';
-                        } else {
-                            return 'N/A';
-                        }
-                    })
-                    ->addColumn('type', function($row){
-                        $type = 'Supplier / Vendor;';
-                        return $type;
                     })
                     ->addColumn('is_active', function($row){      
                         return view('accounts::sub_ledgers.components.is_active', compact('row'));
@@ -70,7 +51,7 @@ class SubLedgerController extends Controller
     public function customer_index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->ledgerInterface->listForDataTable('customer');
+            $data = $this->subLedgerInterface->listForDataTable('customer');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('balance', function($row){
@@ -112,7 +93,7 @@ class SubLedgerController extends Controller
     public function member_index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->ledgerInterface->listForDataTable('member');
+            $data = $this->subLedgerInterface->listForDataTable('member');
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('balance', function($row){
@@ -163,32 +144,16 @@ class SubLedgerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateSubAccountRequest $request)
     {
         try {
-            $validated = $request->validate([
-                "name" => "required",
-                "code" => "nullable",
-                // "code" => ['required', 'max:50', 'unique:sub_ledgers'],
-                'type' => 'required|array|min:1',
-                "type.*" => "string|in:Customer,Supplier,Member,LandOwner",
-                "is_active" => "required|in:0,1",
-                'nid' => 'nullable|mimes:jpg,jpeg,png|max:1024',
-                'trade_licence' => 'nullable|mimes:jpg,jpeg,png|max:1024',
-            ]);
-            dd($validated);
             DB::beginTransaction();
-            $item = $this->ledgerInterface->create($request->except("_token"));
+            $item = $this->subLedgerInterface->create($request->validated());
             DB::commit();
-            if ($request->ajax()) {
-                return response()->json(["message" => 'Added Successfully'], 200);
-            }
-            Toastr::success($request->name.' Added Successfully');
-            return redirect()->back();
+            return redirect()->route('sub-ledger.index')->with('success', $request->name.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            Toastr::error($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
@@ -198,7 +163,7 @@ class SubLedgerController extends Controller
     public function show($id)
     {
         try {
-            $data['ledger'] = $this->ledgerInterface->findById(decrypt($id));
+            $data['ledger'] = $this->subLedgerInterface->findById(decrypt($id));
             return view('accounts::sub_ledgers.show', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -211,7 +176,8 @@ class SubLedgerController extends Controller
     public function edit($id)
     {
         try {
-            $data['item'] = $this->ledgerInterface->findById(decrypt($id));
+            $data['item'] = $this->subLedgerInterface->findById(decrypt($id));
+            $data['sub_ledger_types'] = SubLedgerType::select('id','name as name')->get();
             return view('accounts::sub_ledgers.edit', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -221,28 +187,16 @@ class SubLedgerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(UpdateSubAccountRequest $request, $id): RedirectResponse
     {
         try {
-            $validated = $request->validate([
-                "name" => "required",
-                "code" => "nullable",
-                'type' => 'required|array|min:1',
-                "type.*" => "string|in:Customer,Supplier,Member,LandOwner",
-                "is_active" => "required|in:0,1",
-                'nid' => 'nullable|mimes:jpg,jpeg,png|max:1024',
-                'trade_licence' => 'nullable|mimes:jpg,jpeg,png|max:1024',
-            ]);
-            dd($validated);
             DB::beginTransaction();
-            $item = $this->ledgerInterface->update($request->except("_token"),decrypt($id));
+            $item = $this->subLedgerInterface->update(decrypt($id), $request->validated());
             DB::commit();
-            Toastr::success('Updated Successfully');
-            return redirect()->back();
+            return redirect()->route('sub-ledger.index')->with('success', $request->name.' Updated Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            Toastr::error($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
@@ -252,7 +206,7 @@ class SubLedgerController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->ledgerInterface->delete($request->id);
+            $response = $this->subLedgerInterface->delete($request->id);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
@@ -261,7 +215,7 @@ class SubLedgerController extends Controller
 
     public function transactional_list_for_select_ajax(Request $request)
     {
-        $data = $this->ledgerInterface->transactionalLeadgerForSelect($request->search,$request->type, $request->branch_id,$request->page);
+        $data = $this->subLedgerInterface->transactionalLeadgerForSelect($request->search,$request->type, $request->branch_id,$request->page);
         return response()->json($data);
     }
 }

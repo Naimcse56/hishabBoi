@@ -26,3 +26,8 @@
         <div class="valid-feedback">{{$message}}</div>
     @enderror
 </div>
+@push('scripts')
+    <script>
+        $('.form-select').select2();
+    </script>
+@endpush

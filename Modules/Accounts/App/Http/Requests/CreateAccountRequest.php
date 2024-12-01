@@ -52,13 +52,14 @@ class CreateAccountRequest extends FormRequest
                 'level' => $parent_account ? ($parent_account->level + 1) : 1,
                 'parent_id' => $this->request->get('parent_id'),
                 'type' => $parent_account ? $parent_account->type : $this->request->get('type'),
+                'is_active' => $this->request->get('is_active') ? 1 : 0,
             ]);
         } else {
             $this->merge([
                 'level' => 1,
                 'parent_id' => $this->request->get('parent_id'),
+                'is_active' => $this->request->get('is_active') ? 1 : 0,
             ]);
         }
-
     }
 }
