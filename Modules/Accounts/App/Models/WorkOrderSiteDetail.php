@@ -13,6 +13,7 @@ class WorkOrderSiteDetail extends Model
     /**
      * The attributes that are mass assignable.
      */
+    protected $table = "work_order_sites";
     protected $guarded = ['id'];
     
     protected static function newFactory(): WorkOrderSiteDetailFactory

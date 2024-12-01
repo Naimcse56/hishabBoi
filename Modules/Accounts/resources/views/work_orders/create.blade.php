@@ -24,8 +24,8 @@ Work Order
                                     ['id' => 1, 'name' => 'Active'],
                                     ['id' => 0, 'name' => 'Inactive']
                                 ]"></x-common.radio>
-                                <x-common.date-picker label="Work Order Date" :required="true" column=4 name="component" placeholder="Work Order Date" value="" placeholder="dd/mm/yyyy" ></x-common.date-picker>
-                                <x-common.date-picker label="Work Order Close Date" :required="true" column=4 name="component" placeholder="Work Order Close Date" value="" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.date-picker label="Work Order Date" :required="true" column=4 name="create_date" placeholder="Work Order Date" value="" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.date-picker label="Work Order Close Date" :required="true" column=4 name="end_date" placeholder="Work Order Close Date" value="" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.text-area :required="false" column=12 name="remarks" label="Remarks" placeholder="Remarks..."></x-common.input>
                             </div>
                             <fieldset class="the-fieldset mt-4">
