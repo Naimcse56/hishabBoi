@@ -70,7 +70,6 @@ class WorkOrderRepository implements WorkOrderRepositoryInterface
 
     public function workOrderForSelect($search, $sub_ledger_id, $page)
     {
-        $branch_id = $branch_id ? $branch_id : app('branch_info')['current_branch_id'];
         $items = WorkOrder::query();
         $items = $items->where('is_active',1);
         if ($search != '') {

@@ -124,7 +124,7 @@ class WorkOrderController extends Controller
 
     public function list_for_select_ajax(Request $request)
     {
-        $data = $this->workOrderInterface->workOrderForSelect($request->search, $request->branch_id ? $request->branch_id : app('branch_info')['current_branch_id'], $request->sub_ledger_id, $request->page);
+        $data = $this->workOrderInterface->workOrderForSelect($request->search, $request->sub_ledger_id, $request->page);
         return response()->json($data);
     }
 

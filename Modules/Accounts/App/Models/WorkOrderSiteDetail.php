@@ -23,7 +23,7 @@ class WorkOrderSiteDetail extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class);
+        return $this->hasMany(Transaction::class,'work_order_site_id');
     }
 
     public function work_order()

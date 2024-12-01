@@ -5,6 +5,7 @@ use Modules\Accounts\App\Http\Controllers\AccountsController;
 use Modules\Accounts\App\Http\Controllers\LedgerController;
 use Modules\Accounts\App\Http\Controllers\SubLedgerTypeController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderController;
+use Modules\Accounts\App\Http\Controllers\WorkOrderSiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,5 +65,15 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/work-order-profit-loss-report', 'profit_loss_report')->name('work-orders.pl_report');
         Route::get('/work-order-balance-sheet-report', 'balance_sheet_report')->name('work-orders.balance_sheet_report');
         Route::get('/receive-payment-report', 'receive_payment_report')->name('work-orders.receive_payment_report');
+    });
+    Route::controller(WorkOrderSiteController::class)->prefix('/work-order-sites')->group(function () {
+        Route::get('/index', 'index')->name('work-order-sites.index');
+        Route::get('/create', 'create')->name('work-order-sites.create');
+        Route::post('/store', 'store')->name('work-order-sites.store');
+        Route::get('/edit/{id}', 'edit')->name('work-order-sites.edit');
+        Route::get('/show/{id}', 'show')->name('work-order-sites.show');
+        Route::post('/update/{id}', 'update')->name('work-order-sites.update');
+        Route::post('/delete', 'destroy')->name('work-order-sites.delete');
+        Route::get('/work-order-list-ajax', 'list_for_select_ajax')->name('work-order-sites.list_for_select');
     });
 });

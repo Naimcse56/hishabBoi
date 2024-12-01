@@ -15,7 +15,7 @@
                 <a class="nav-link" href="{{route('subledger-type.index')}}">Party Type</a>
                 <a class="nav-link" href="{{route('sub-ledger.index')}}">Party</a>
                 <a class="nav-link" href="{{route('work-order.index')}}">Work Order</a>
-                <a class="nav-link" href="#">W/O Sites</a>
+                <a class="nav-link" href="{{route('work-order-sites.index')}}">W/O Sites</a>
             </nav>
         </div>
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseJournal" aria-expanded="false" aria-controls="collapseJournal">

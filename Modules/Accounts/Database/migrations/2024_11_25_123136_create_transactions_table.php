@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->date('date')->default(date("Y-m-d"))->index();
             $table->unsignedBigInteger('voucher_id')->unsigned();
-            $table->unsignedBigInteger("work_order_id")->nullable();
-            $table->unsignedBigInteger('ledger_id')->unsigned();
+            $table->unsignedBigInteger("work_order_id")->default(0);
+            $table->unsignedBigInteger("work_order_site_id")->default(0);
+            $table->unsignedBigInteger('ledger_id')->default(0);
             $table->integer('sub_ledger_id')->default(0);
             $table->string('type',20)->nullable()->comment('dr / cr');
             $table->unsignedBigInteger("credit_period")->nullable()->comment('in days');
