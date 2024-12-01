@@ -15,9 +15,7 @@ class WorkOrderRequest extends FormRequest
             "sub_ledger_id" => "required|numeric|gt:0",
             "order_name" => "required",
             "order_no" => "required",
-            // "cost_amount" => "required|numeric|gt:0",
-            "is_active" => "required|in:0,1",
-            // "create_date" => "required",
+            "is_active" => "nullable|in:0,1",
             "remarks" => "nullable"
         ];
     }
@@ -35,5 +33,12 @@ class WorkOrderRequest extends FormRequest
         return [
             'cost_amount.gt' => 'Amount must be greater or equal 0.00',
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'is_active' => $this->request->get('is_active') ?? 0,
+        ]);
     }
 }
