@@ -26,7 +26,7 @@ Work Order
                                 ]"></x-common.radio>
                                 <x-common.date-picker label="Work Order Date" :required="true" column=4 name="create_date" placeholder="Work Order Date" value="" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.date-picker label="Work Order Close Date" :required="true" column=4 name="end_date" placeholder="Work Order Close Date" value="" placeholder="dd/mm/yyyy" ></x-common.date-picker>
-                                <x-common.text-area :required="false" column=12 name="remarks" label="Remarks" placeholder="Remarks..."></x-common.input>
+                                <x-common.text-area :required="false" column=12 name="remarks" label="Remarks" placeholder="Remarks..."></x-common.text-area>
                             </div>
                             <fieldset class="the-fieldset mt-4">
                                 <legend class="the-legend">Estimation Cost Information</legend>
@@ -53,9 +53,7 @@ Work Order
                                 </div>
                             </fieldset>
                             <div class="row">
-                                <div class="col-md-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-primary save-btn "><i class="bx bx-check-double"></i>Save</button>
-                                </div>
+                                <x-common.button column=12 type="submit" id="save-btn" class="btn-primary btn-120 save-btn" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                             </div>
                         </form>
                     </div>

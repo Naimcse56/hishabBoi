@@ -15,41 +15,17 @@ Work Order Site
                         <form method="POST" action="{{route('work-order-sites.update', encrypt($item->id))}}">
                             @csrf
                             <div class="row">
-                                <div class="col-md-6 mb-2">
-                                    <label class="form-label" for="Head Account">Work Order Name <span class="text-danger">*</span></label>
-                                    <select class="form-select work_order_id" name="work_order_id" required>
-                                        <option value="{{$item->work_order_id}}" selected>({{$item->work_order->order_no}}) {{$item->work_order->order_name}}</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="site_name" class="form-label">Site Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" id="site_name" name="site_name" placeholder="Site Name" value="{{$item->site_name}}" required>
-                                    <span class="text-danger" id="site_name_error"></span>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="form-label mt-2" for="site_location">Site Location</label>
-                                    <input id="site_location" name="site_location" class="form-control" placeholder="Site Location" type="text" value="{{$item->site_location}}">
-                                    <span class="text-danger" id="site_location_error"></span>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="form-label mt-2" for="est_budget">Est. Budget <span class="text-danger">*</span></label>
-                                    <input id="est_budget" name="est_budget" class="form-control" placeholder="Est. Budget" type="number" step="0.01" min="0" value="{{$item->est_budget}}" required>
-                                    <span class="text-danger" id="est_budget_error"></span>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label for="site_pm_name" class="form-label">Site Manager</label>
-                                    <input type="text" class="form-control" id="site_pm_name" name="site_pm_name" placeholder="Site Manager" value="{{$item->site_pm_name}}">
-                                    <span class="text-danger" id="site_pm_name_error"></span>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <label class="form-label">Remarks</label>
-                                    <textarea class="form-control" id="note" name="note" placeholder="Remarks ..." rows="3">{{$item->note}}</textarea>
-                                </div>
+                                <x-common.server-side-select :required="true" column=4 name="work_order_id" id="work_order_id" class="work_order_id" disableOptionText="Select Work Order" label="Work Order Name" :options="[
+                                    ['id' => $item->work_order_id, 'name' => $item->work_order->order_name]
+                                ]" :value="$item->work_order_id"></x-common.server-side-select>
+                                <x-common.input :required="true" column=4 id="site_name" name="site_name" label="Site Name" placeholder="Site Name" :value="old('site_name',$item->site_name)"></x-common.input>
+                                <x-common.input :required="false" column=4 id="site_location" name="site_location" label="Site Location" placeholder="Site Location" :value="old('site_location',$item->site_location)"></x-common.input>
+                                <x-common.input :required="false" column=4 id="est_budget" name="est_budget" label="Est. Budget" placeholder="Est. Budget" type="number" step="0.01" min="0" :value="old('est_budget',$item->est_budget)"></x-common.input>
+                                <x-common.input :required="false" column=4 id="site_pm_name" name="site_pm_name" label="Site Manager" placeholder="Site Manager" :value="old('site_pm_name',$item->site_pm_name)"></x-common.input>
+                                <x-common.text-area :required="false" column=12 name="note" label="Remarks" placeholder="Remarks..." :value="$item->note"></x-common.text-area>
                             </div>
                             <div class="row">
-                                <div class="col-md-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-primary"><i class="bx bx-check-double"></i>Save</button>
-                                </div>
+                                <x-common.button column=12 type="submit" id="update-btn" class="btn-primary btn-120 update-btn" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                             </div>
                         </form>
                     </div>

@@ -28,7 +28,7 @@ Work Order
                                 ]"></x-common.radio>
                                 <x-common.date-picker label="Work Order Date" :required="true" column=4 name="create_date" placeholder="Work Order Date" :value="date('d/m/Y', strtotime($item->date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.date-picker label="Work Order Close Date" :required="true" column=4 name="end_date" placeholder="Work Order Close Date" :value="date('d/m/Y', strtotime($item->final_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
-                                <x-common.text-area :required="false" column=12 name="remarks" label="Remarks" placeholder="Remarks..." :value="$item->remarks"></x-common.input>                                
+                                <x-common.text-area :required="false" column=12 name="remarks" label="Remarks" placeholder="Remarks..." :value="$item->remarks"></x-common.text-area>                                
                             </div>
                             
                             <fieldset class="the-fieldset mt-4">
@@ -60,9 +60,7 @@ Work Order
                                 </div>
                             </fieldset>
                             <div class="row">
-                                <div class="col-md-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-primary"><i class="bx bx-check-double"></i>Save</button>
-                                </div>
+                                <x-common.button column=12 type="submit" id="save-btn" class="btn-primary btn-120 save-btn" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                             </div>
                         </form>
                     </div>
