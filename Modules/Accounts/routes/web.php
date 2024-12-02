@@ -6,6 +6,7 @@ use Modules\Accounts\App\Http\Controllers\LedgerController;
 use Modules\Accounts\App\Http\Controllers\SubLedgerTypeController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderSiteController;
+use Modules\Accounts\App\Http\Controllers\CashPaymentJournalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,5 +76,16 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('work-order-sites.update');
         Route::post('/delete', 'destroy')->name('work-order-sites.delete');
         Route::get('/work-order-list-ajax', 'list_for_select_ajax')->name('work-order-sites.list_for_select');
+    });
+    Route::controller(CashPaymentJournalController::class)->prefix('/cash-payment-journal')->group(function () {
+        Route::get('/index', 'index')->name('multi-cash-payment.index');
+        Route::get('/create', 'create')->name('multi-cash-payment.create');
+        Route::post('/store', 'store')->name('multi-cash-payment.store');
+        Route::get('/edit/{id}', 'edit')->name('multi-cash-payment.edit');
+        Route::get('/show/{id}', 'show')->name('multi-cash-payment.show');
+        Route::post('/update/{id}', 'update')->name('multi-cash-payment.update');
+        Route::post('/delete', 'destroy')->name('multi-cash-payment.delete');
+        Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-cash-payment.add_new_line_cr');
+        Route::get('/print/{id}', 'print')->name('multi-cash-payment.print');
     });
 });

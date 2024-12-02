@@ -22,7 +22,6 @@ class VouchersRepository
                             ->where('is_approve', 0)
                             ->where('is_initial_checked',1)
                             ->whereNotIn('panel',['intercom_loan'])
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->when($amount > 0, function ($q) use ($amount) {
                                 return $q->where('amount',$amount);
                             })->orderBy('id','asc');
@@ -34,7 +33,7 @@ class VouchersRepository
     {
         
         if (auth()->user()->employee || auth()->id() == 1) {
-            return Voucher::where('is_approve','!=', 0)->whereIn('branch_id',[app('branch_info')['current_branch_id']])->orderBy('id','asc');
+            return Voucher::where('is_approve','!=', 0)->orderBy('id','asc');
         } else {
             abort(404);
         }
@@ -46,7 +45,6 @@ class VouchersRepository
             return Voucher::with(['transactions:id,voucher_id,ledger_id,sub_ledger_id,type','transactions.ledger:id,name','transactions.sub_ledger:id,name'])
                             ->where('is_initial_checked', 2)
                             ->whereNotIn('panel',['intercom_loan'])
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->orderBy('id','asc');
         } else {
             abort(404);
@@ -58,7 +56,6 @@ class VouchersRepository
         if (auth()->user()->employee || auth()->id() == 1) {
             return Voucher::with(['transactions:id,voucher_id,ledger_id,sub_ledger_id,type','transactions.ledger:id,name','transactions.sub_ledger:id,name'])
                             ->whereNotIn('panel',['intercom_loan'])
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->where('is_approve', 2)
                             ->orderBy('id','asc');
         } else {
@@ -72,7 +69,6 @@ class VouchersRepository
                             ->where('is_approve','!=', 1)
                             ->where('is_initial_checked','!=', 1)
                             ->whereNotIn('panel',['intercom_loan'])
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->when($amount > 0, function ($q) use ($amount) {
                                 return $q->where('amount',$amount);
                             })
@@ -90,7 +86,6 @@ class VouchersRepository
                             ->where('is_approve',1)
                             ->where('is_verified',0)
                             ->whereBetween('date',[Carbon::createFromFormat('d/m/Y', $start_date)->format('Y-m-d'), Carbon::createFromFormat('d/m/Y', $end_date)->format('Y-m-d')])
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->whereIn('type',['pay_bank','pay_cash','pay','rcv_bank','rcv_cash','rcv'])
                             ->when($type != "all", function ($q) use ($type) {
                                 return $q->whereIn('type',[$type]);
@@ -112,7 +107,6 @@ class VouchersRepository
                             ->whereHas('voucher_comments', function($q){
                                 $q->where('observe_type', 1);
                             })
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->orderBy('id','desc')
                             ->select('id','date','f_year','txn_id','type','amount','narration','is_verified','any_audit_ovservation');
         } else {
@@ -131,7 +125,6 @@ class VouchersRepository
                             ->whereHas('voucher_comments', function($q){
                                 $q->where('observe_type', 2);
                             })
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->orderBy('id','desc');
         } else {
             abort(404);
@@ -146,7 +139,6 @@ class VouchersRepository
                             ->where('is_verified',1)
                             ->where('is_final',0)
                             ->whereBetween('date',[Carbon::createFromFormat('d/m/Y', $start_date)->format('Y-m-d'), Carbon::createFromFormat('d/m/Y', $end_date)->format('Y-m-d')])
-                            ->whereIn('branch_id',[app('branch_info')['current_branch_id']])
                             ->whereIn('type',['pay_bank','pay_cash','pay','rcv_bank','rcv_cash','rcv'])
                             ->when($type != "all", function ($q) use ($type) {
                                 return $q->whereIn('type',[$type]);
@@ -264,7 +256,6 @@ class VouchersRepository
     public function listForSelect($search, $type)
     {
         $items = Voucher::query();
-        $items = $items->whereIn('branch_id',[app('branch_info')['current_branch_id']]);
         if ($search != '') {
             $items = $items->whereLike(['txn_id', 'date'], $search);
         } 
