@@ -15,6 +15,12 @@ Cash Voucher
                         <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('multi-cash-payment.update', encrypt($journal->id))}}">
                             @csrf
                             <div class="row">
+                                <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime($journal->date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person')"></x-common.input>
+                                <x-common.select :required="true" column=4 name="pay_or_rcv_type" class="pay_or_rcv_type" label="Type" placeholder="Type" :value="'Cash'" :options="[
+                                    ['id' => 'Cash', 'name' => 'Cash']
+                                ]"></x-common.select>
+                                <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..."></x-common.text-area>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label">Date <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="date" id="date" value="{{date('d/m/Y', strtotime($journal->date))}}" readonly>

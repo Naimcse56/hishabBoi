@@ -14,29 +14,13 @@ Cash Voucher
                     <div class="card-body">
                         <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('multi-cash-payment.store')}}">
                             @csrf
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="date" id="date" value="{{date('d/m/Y', strtotime(app('day_closing_info')->from_date))}}" readonly>
-                                    <span class="text-danger">{{$errors->first('date')}}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="Concern Person" class="form-label">Concern Person</label>
-                                    <input type="text" class="form-control" name="concern_person" placeholder="Concern Person">
-                                    <span class="text-danger">{{$errors->first('concern_person')}}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="">Type <span class="text-danger">*</span></label>
-                                    <select class="form-select main_select_2 pay_or_rcv_type" name="pay_or_rcv_type" id="pay_or_rcv_type" required>
-                                        <option value="Cash" selected>Cash</option>
-                                    </select>
-                                    <span class="text-danger" id="pay_or_rcv_type_error"></span>
-                                </div>
-                                <div class="col-md-8 mb-3">
-                                    <label for="Narration" class="form-label">Narration</label>
-                                    <textarea class="form-control" name="narration" placeholder="Narration ..." rows="2"></textarea>
-                                    <span class="text-danger"></span>
-                                </div> 
+                            <div class="row mb-2">
+                                <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person')"></x-common.input>
+                                <x-common.select :required="true" column=4 name="pay_or_rcv_type" class="pay_or_rcv_type" label="Type" placeholder="Type" :value="'Cash'" :options="[
+                                    ['id' => 'Cash', 'name' => 'Cash']
+                                ]"></x-common.select>
+                                <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..."></x-common.text-area>
                             </div>
                                 
                             <fieldset class="the-fieldset mb-4">
@@ -45,51 +29,14 @@ Cash Voucher
                                     <div class="row new_added_row_cr">                                    
                                         <div class="col-md-8">
                                             <div class="row">
-                                                <div class="col-md-4 mb-3">
-                                                    <label class="form-label" for="">Credit Accounts <span class="text-danger">*</span></label>
-                                                    <select class="form-select credit_account_id" name="credit_account_id[]" required>
-                                                        <option value="0">Select One</option>
-                                                    </select>
-                                                    <span class="text-danger" id="_error"></span>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label class="form-label">Party Accounts (Cr)</label>
-                                                    <select class="form-select credit_sub_account_id" name="credit_sub_account_id[]" required>
-                                                        <option value="0">Select One</option>
-                                                    </select>
-                                                    <span class="text-danger" id="credit_sub_account_id_error"></span>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label for="Narration" class="form-label">Amount <span class="text-danger">*</span></label>
-                                                    <input type="number" min="0" step="0.0000001" class="form-control credit_amount" name="credit_amount[]" placeholder="0" value="0" required>
-                                                    <span class="text-danger"></span>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label class="form-label" for="Credit Account">Debit Account <span class="text-danger">*</span></label>
-                                                    <select class="form-select debit_account_id" name="debit_account_id[]" required>
-                                                        <option value="0" selected>Select Debit Account</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label class="form-label" for="">Party Account (Dr)</label>
-                                                    <select class="form-select credit_sub_account_id" name="debit_sub_account_id[]" required>
-                                                        <option value="0">Select One</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-4 mb-3 work_order_div">
-                                                    <label class="form-label">Work Order <span class="text-danger">*</span></label>
-                                                    <select class="form-select work_order_id" name="work_order_id[]" required>
-                                                        <option value="0">Select One</option>
-                                                    </select>
-                                                    <span class="text-danger" id="work_order_id_error"></span>
-                                                </div>
-                                                <div class="col-md-4 mb-3">
-                                                    <label class="form-label">Work Order Site <span class="text-danger">(optional)</span></label>
-                                                    <select class="form-select work_order_site_detail_id" name="work_order_site_detail_id[]">
-                                                        <option value="0">Select One</option>
-                                                    </select>
-                                                    <span class="text-danger" id="work_order_site_detail_id_error"></span>
-                                                </div>
+                                                <x-common.server-side-select :required="true" column=4 name="credit_account_id[]" class="credit_account_id" disableOptionText="Select Credit Account" label="Credit Accounts"></x-common.server-side-select>
+                                                <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)"></x-common.server-side-select>
+                                                <x-common.input :required="true" column=4 name="credit_amount[]" type="number" step="0.01" label="Amount" placeholder="Amount"></x-common.input>
+                                                <x-common.server-side-select :required="true" column=4 name="debit_account_id[]" class="debit_account_id" disableOptionText="Select Debit Account" label="Debit Accounts"></x-common.server-side-select>
+                                                <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
+                                                <x-common.server-side-select :required="false" column=4 name="work_order_id[]" class="work_order_id" disableOptionText="Select Work Order" label="Work Order"></x-common.server-side-select>
+                                                <x-common.server-side-select :required="false" column=4 name="work_order_site_detail_id[]" class="work_order_site_detail_id" disableOptionText="Select Work Order Site" label="Work Order Site"></x-common.server-side-select>
+                                                
                                                 <div class="col-md-1 mb-3">
                                                     <div class="d-block">
                                                         <label class="form-label" for=""> Action </label>
@@ -102,11 +49,7 @@ Cash Voucher
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <label for="Narration" class="form-label">Narration</label>
-                                                    <textarea class="form-control" name="credit_narration[]" placeholder="Narration ..." rows="8"></textarea>
-                                                    <span class="text-danger"></span>
-                                                </div>
+                                                <x-common.text-area :required="false" column=12 name="credit_narration[]" label="Narration" placeholder="Narration..."></x-common.text-area>
                                             </div>
                                         </div><hr>
                                     </div>
@@ -118,17 +61,15 @@ Cash Voucher
                                     </div>
                                 </div>
                             </fieldset>
-                            <div class="row mb-4">
+                            <div class="row">
                                 <div class="col-md-12">
                                     <div class="ms-auto">
-                                        <a href="javascript:;" class="btn btn-sm btn-primary" id="add_new_line_cr">Add New Row (CR)</a>
+                                        <a href="javascript:;" class="btn btn-sm btn-success text-white" id="add_new_line_cr">Add New Row (CR)</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12 text-center">
-                                    <button type="submit" class="btn btn-primary save-btn "><i class="bx bx-check-double"></i>Save</button>
-                                </div>
+                                <x-common.button column=12 type="submit" id="save-btn" class="btn-primary btn-120 save-btn" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                             </div>
                         </form>
                     </div>

@@ -11,7 +11,7 @@
     @if($label)
     <label for="{{ $name }}" class="form-label">{{$label}} <span class='text-danger'>{{$required ? "*" : ''}} </span></label>
     @endif
-    <select {{$attributes->class(['form-control'])}} id="{{ $name }}" name="{{$name}}" aria-invalid="false">
+    <select {{$attributes->class(['form-control'])}} name="{{$name}}" aria-invalid="false">
         <option selected="" value="" disabled>{{$disableOptionText}}</option>
         @foreach($options as $option)
         <option value="{{ gv($option, 'id') ?: '' }}" 
