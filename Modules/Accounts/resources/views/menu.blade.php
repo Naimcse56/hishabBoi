@@ -25,7 +25,7 @@
         <div class="collapse" id="collapseJournal" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" href="{{route('multi-cash-payment.index')}}">Cash Payment</a>
-                <a class="nav-link" href="404.html">Bank Payment</a>
+                <a class="nav-link" href="{{route('multi-bank-payment.index')}}">Bank Payment</a>
             </nav>
         </div>
     </nav>

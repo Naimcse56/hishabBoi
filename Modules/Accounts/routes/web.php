@@ -7,6 +7,7 @@ use Modules\Accounts\App\Http\Controllers\SubLedgerTypeController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderSiteController;
 use Modules\Accounts\App\Http\Controllers\CashPaymentJournalController;
+use Modules\Accounts\App\Http\Controllers\BankPaymentJournalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,5 +88,16 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('multi-cash-payment.delete');
         Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-cash-payment.add_new_line_cr');
         Route::get('/print/{id}', 'print')->name('multi-cash-payment.print');
+    });
+    Route::controller(BankPaymentJournalController::class)->prefix('/bank-payment-journal')->group(function () {
+        Route::get('/index', 'index')->name('multi-bank-payment.index');
+        Route::get('/create', 'create')->name('multi-bank-payment.create');
+        Route::post('/store', 'store')->name('multi-bank-payment.store');
+        Route::get('/edit/{id}', 'edit')->name('multi-bank-payment.edit');
+        Route::get('/show/{id}', 'show')->name('multi-bank-payment.show');
+        Route::post('/update/{id}', 'update')->name('multi-bank-payment.update');
+        Route::post('/delete', 'destroy')->name('multi-bank-payment.delete');
+        Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-bank-payment.add_new_line_cr');
+        Route::get('/print/{id}', 'print')->name('multi-bank-payment.print');
     });
 });
