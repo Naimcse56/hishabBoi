@@ -13,7 +13,7 @@ class SubLedgerTypeSeeder extends Seeder
      */
     public function run(): void
     {      
-      DB::table('ledgers')->insert(array (
+      DB::table('sub_ledger_types')->insert(array (
          0 => array(
             'is_for' => 1,
             'name' => 'Logistics & Supply-Payable',
