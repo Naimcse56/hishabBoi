@@ -4200,7 +4200,7 @@ textarea.form-control-lg {
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
   background-clip: border-box;
-  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  border: var(--bs-card-border-width) solid var(--bs-primary);
   border-radius: var(--bs-card-border-radius);
 }
 .card > hr {
@@ -10939,6 +10939,7 @@ body {
 }
 .sb-nav-fixed .sb-topnav {
   z-index: 1039;
+  border-bottom: 5px #3852cd solid;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;
