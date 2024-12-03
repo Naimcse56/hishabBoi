@@ -184,3 +184,24 @@
           toastr.error('Select Voucher First!');
       }    
   };
+
+  // Check when the page is loaded
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find all nav links that have the "active" class
+    const activeLinks = document.querySelectorAll('.nav-link.active');
+
+    // Iterate over each active link
+    activeLinks.forEach(function(link) {
+        let parentCollapse = link.closest('.collapse'); // Find the closest collapse parent
+        
+        // Loop through each parent collapse to open them all if necessary
+        while (parentCollapse) {
+            // Trigger the collapse to open
+            const bootstrapCollapse = new bootstrap.Collapse(parentCollapse, {
+                toggle: true
+            });
+            // Move to the next level up in the hierarchy
+            parentCollapse = parentCollapse.closest('.collapse');
+        }
+    });
+});
