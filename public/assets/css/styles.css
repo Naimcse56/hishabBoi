@@ -2424,7 +2424,7 @@ textarea.form-control-lg {
 .form-floating > .form-control-plaintext,
 .form-floating > .form-select,
 .form-floating > .datatable-selector {
-  height: calc(3.5rem + 2px);
+
   line-height: 1.25;
 }
 .form-floating > label {
@@ -11299,4 +11299,30 @@ body {
 }
 .modal-title {
   color: #fff;
+}
+.bg-custom{
+    background: url('../images/home-bg@2x.png') no-repeat center ;
+    background-size: cover;
+}
+.login-form{
+    max-width: 350px;
+    margin: auto;
+    background: #fff;
+    padding: 30px 45px 20px 45px;
+    border: 1px solid #f4f4f4;
+    -webkit-box-shadow: 0px 1px 3px #eaeaea;
+    box-shadow: 0px 1px 3px #eaeaea;
+    border-radius: 4px;
+}
+.login-title{
+    margin-bottom: 45px;
+    margin-top: 10px;
+}
+.btn-custom{
+    background: #1E88E5;
+    color: #fff;
+}
+.btn-custom:hover{
+    background: #0277BD;
+    color: #fff;
 }
