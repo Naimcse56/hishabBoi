@@ -212,23 +212,22 @@ class CashPaymentJournalController extends Controller
         $is_invoiced = 0;
         $total_debit_amount = 0;
         $referable_type = null;
-        $referable_id = 0;        
-        
+        $referable_id = 0;
         foreach ($request->credit_amount as $key => $credit_amount) {
             $total_debit_amount += $credit_amount;
             if ($credit_amount > 0 && $request->credit_account_id[$key] > 0 && $request->debit_account_id[$key] > 0) {
                 $credit_amounts[] = $request->credit_amount[$key];
                 $credit_account_id[] = $request->credit_account_id[$key];
-                $credit_partner_id[] = $request->credit_sub_account_id[$key];
-                $credit_work_order_id[] = $request->work_order_id[$key];
-                $credit_work_order_site_detail_id[] = $request->work_order_site_detail_id[$key];
+                $credit_partner_id[] = isset($request->credit_sub_account_id[$key]) ? $request->credit_sub_account_id[$key] : 0;
+                $credit_work_order_id[] = isset($request->work_order_id[$key]) ? $request->work_order_id[$key] : 0;
+                $credit_work_order_site_detail_id[] = isset($request->work_order_site_detail_id[$key]) ? $request->work_order_site_detail_id[$key] : 0;
                 $credit_narration[] = $request->credit_narration[$key];
 
                 $debit_amounts[] = $credit_amount;
                 $debit_account_id[] = $request->debit_account_id[$key];
-                $debit_partner_id[] = $request->debit_sub_account_id[$key];
-                $debit_work_order_id[] = $request->work_order_id[$key];
-                $debit_work_order_site_detail_id[] = $request->work_order_site_detail_id[$key];
+                $debit_partner_id[] = isset($request->debit_sub_account_id[$key]) ? $request->debit_sub_account_id[$key] : 0;
+                $debit_work_order_id[] = isset($request->work_order_id[$key]) ? $request->work_order_id[$key] : 0;
+                $debit_work_order_site_detail_id[] = isset($request->work_order_site_detail_id[$key]) ? $request->work_order_site_detail_id[$key] : 0;
                 $debit_narration[] = $request->credit_narration[$key];
             }
         }

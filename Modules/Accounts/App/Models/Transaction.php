@@ -71,6 +71,6 @@ class Transaction extends Model
 
     public function work_order_site_detail()
     {
-        return $this->belongsTo(WorkOrderSiteDetail::class)->withDefault(['site_name'=>'']);
+        return $this->belongsTo(WorkOrderSiteDetail::class,'work_order_site_id')->withDefault(['site_name'=>'']);
     }
 }

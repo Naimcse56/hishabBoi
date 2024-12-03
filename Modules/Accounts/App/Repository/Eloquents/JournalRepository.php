@@ -77,7 +77,7 @@ class JournalRepository implements JournalRepositoryInterface
             $transactionEntry = Transaction::create([
                 'voucher_id' => $Voucher->id,
                 'work_order_id' => $transaction['work_order_id'],
-                'work_order_site_detail_id' => $transaction['work_order_site_detail_id'],
+                'work_order_site_id' => $transaction['work_order_site_detail_id'],
                 'ledger_id' => $transaction['ledger_id'],
                 'sub_ledger_id' => $transaction['sub_ledger_id'],
                 'narration' => $transaction['narration'],
@@ -109,7 +109,6 @@ class JournalRepository implements JournalRepositoryInterface
         if ($Voucher->is_approve == 1) {
             return $Voucher->load('transactions');
         }
-        
         $Voucher->update([
             'amount' => $data['amount'],
             'date' => $data['date'],
@@ -141,7 +140,7 @@ class JournalRepository implements JournalRepositoryInterface
             $transactionEntry = Transaction::create([
                 'voucher_id' => $Voucher->id,
                 'work_order_id' => $transaction['work_order_id'],
-                'work_order_site_detail_id' => $transaction['work_order_site_detail_id'],
+                'work_order_site_id' => $transaction['work_order_site_detail_id'],
                 'ledger_id' => $transaction['ledger_id'],
                 'sub_ledger_id' => $transaction['sub_ledger_id'],
                 'narration' => $transaction['narration'],
