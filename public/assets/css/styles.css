@@ -11173,7 +11173,6 @@ body {
   border-collapse: collapse;
 }
 
-.datatable-table > tbody > tr > td,
 .datatable-table > tbody > tr > th,
 .datatable-table > tfoot > tr > td,
 .datatable-table > tfoot > tr > th,
@@ -11182,6 +11181,11 @@ body {
   vertical-align: top;
   padding: 0.5rem 0.5rem;
   font-size: 0.9rem;
+}
+.datatable-table > tbody > tr > td {
+  vertical-align: middle;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.85rem;
 }
 
 .datatable-table > thead > tr > th {
