@@ -3,94 +3,48 @@
 General Journal Edit
 @endsection
 @section('content')
-        <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Accounts</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('journal.index')}}"><i class="bx bx-line-chart-down"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">General Journal Information Update</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="ms-auto">
-                <a href="{{route('journal.index')}}" class="btn btn-primary"><i class="lni lni-list"></i></a>
-            </div>
+    <div class="container-fluid px-4">
+        <div class="d-flex justify-content-between">
+            <div><h4 class="mt-4">Edit General Journal</h4></div>
+            <div><a href="{{route('journal.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
         </div>
-        <!--end breadcrumb-->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="journal_update_form" method="POST" enctype="multipart/form-data">
+                        <form class="journal_update_form" method="POST">
                             <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="">Branch <span class="text-danger">*</span></label>
-                                    <select class="form-select main_select_2 branch_id" name="branch_id" id="branch_id" required>
-                                        <option value="{{$journal->branch_id}}" selected>{{$journal->branch->name}}</option>
-                                    </select>
-                                    <span class="text-danger" id="branch_id_error"></span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control date" name="date" id="date" value="{{ date('d/m/Y', strtotime($journal->date)) }}">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="Concern Person" class="form-label">Concern Person</label>
-                                    <input type="text" class="form-control" name="concern_person" placeholder="Concern Person" value="{{$journal->concern_person}}">
-                                    <span class="text-danger">{{$errors->first('concern_person')}}</span>
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="formFileSm" class="form-label">Attachment <small class="text-danger">(1 MB max)</small></label>
-                                    <input class="form-control form-control" id="attachment" type="file" name="attachment" accept="image/*,.pdf">
-                                </div>
-                                <div class="col-md-8 mb-3">
-                                    <label class="form-label">Narration</label>
-                                    <textarea class="form-control" id="narration" name="narration_voucher" placeholder="Narration ..." rows="3">{{$journal->narration}}</textarea>
-                                </div>
+                                <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime($journal->date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person', $journal->concern_person)"></x-common.input>
+                                <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..." :value="$journal->narration"></x-common.text-area>
                             </div>
                             <input type="hidden" id="rowId" value="{{$journal->id}}">
                             <fieldset class="the-fieldset">
                                 <legend class="the-legend">Journal Details Information</legend>
                                 <div class="entry_row_div">
                                     @foreach ($journal->transactions as $key => $transaction)
-                                        <div class="row new_added_row">                                    
-                                            <div class="col-md-4 mb-3">
-                                                <label class="form-label" for="">Ledger Accounts <span class="text-danger">*</span></label>
-                                                <select class="form-select account_id" name="account_id[]" data-row="{{ $key+1 }}" required>
-                                                    <option value="{{$transaction->ledger_id}}" selected>{{$transaction->ledger->code}} ({{$transaction->ledger->name}})</option>
-                                                </select>
-                                                <span class="text-danger" id="_error"></span>
-                                            </div>                                   
-                                            <div class="col-md-3 mb-3">
-                                                <label class="form-label" for="">Party Accounts <span class="text-danger">*</span></label>
-                                                <select class="form-select sub_account_id" name="sub_account_id[]" required>
-                                                    @if ($transaction->sub_ledger_id > 0)
-                                                        <option value="{{$transaction->sub_ledger_id}}" selected>{{$transaction->sub_ledger->code}} ({{$transaction->sub_ledger->name}})</option>
-                                                    @else
-                                                        <option value="0">Select One</option>
-                                                    @endif
-                                                </select>
-                                                <span class="text-danger" id="_error"></span>
-                                            </div>
-                                            <div class="col-md-2 mb-3">
-                                                <label for="Narration" class="form-label">Debit <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.0000001" class="form-control debit_amount" name="debit_amount[]" placeholder="0" value="{{ ($transaction->type == "Dr") ? $transaction->amount : 0}}" required>
-                                                <span class="text-danger"></span>
-                                            </div>
-                                            <div class="col-md-2 mb-3">
-                                                <label for="Narration" class="form-label">Credit <span class="text-danger">*</span></label>
-                                                <input type="number" min="0" step="0.0000001" class="form-control credit_amount" name="credit_amount[]" placeholder="0" value="{{ ($transaction->type == "Cr") ? $transaction->amount : 0}}" required>
-                                                <span class="text-danger"></span>
-                                            </div>
+                                        <div class="row new_added_row">
+                                            <x-common.server-side-select :required="true" column=4 name="account_id[]" class="account_id" disableOptionText="Select Ledger Account" label="Ledger Accounts" :options="[
+                                                        ['id' => $transaction->ledger_id, 'name' => $transaction->ledger->code.'('.$transaction->ledger->name.')']
+                                                    ]" :value="$transaction->ledger_id"></x-common.server-side-select>
+                                            <x-common.server-side-select :required="false" column=3 name="sub_account_id[]" class="sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)" :options="[
+                                                        ['id' => $transaction->sub_ledger_id, 'name' => $transaction->sub_ledger->name]
+                                                    ]" :value="$transaction->sub_ledger_id"></x-common.server-side-select>
+                                            @if($transaction->type == "Dr")
+                                                <x-common.input :required="true" column=2 name="debit_amount[]" class="debit_amount" type="number" step="0.01" label="Debit Amount" placeholder="Amount" :value="$transaction->amount"></x-common.input>
+                                            @else
+                                                <x-common.input :required="true" column=2 name="debit_amount[]" class="debit_amount" type="number" step="0.01" label="Debit Amount" placeholder="Amount" :value="'0'"></x-common.input>
+                                            @endif
+                                            @if($transaction->type == "Cr")
+                                                <x-common.input :required="true" column=2 name="credit_amount[]" class="credit_amount" type="number" step="0.01" label="Debit Amount" placeholder="Amount" :value="$transaction->amount"></x-common.input>
+                                            @else
+                                                <x-common.input :required="true" column=2 name="credit_amount[]" class="credit_amount" type="number" step="0.01" label="Debit Amount" placeholder="Amount" :value="'0'"></x-common.input>
+                                            @endif
                                             <div class="col-md-1 mb-3">
                                                 <div class="d-block">
                                                     <label class="form-label" for=""> Action </label>
                                                     <div>
-                                                        <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="bx bx-trash"></i></a>
+                                                        <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,14 +70,12 @@ General Journal Edit
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="ms-auto">
-                                        <a href="javascript:;" class="btn btn-sm btn-primary" id="add_new_line">Add New Row</a>
+                                        <a href="javascript:;" class="btn btn-sm btn-success" id="add_new_line">Add New Row</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-12 text-center mt-4">
-                                    <button type="submit" class="btn btn-primary save-btn "><i class="bx bx-check-double"></i>Save</button>
-                                </div>
+                                <x-common.button column=12 type="submit" id="save-btn" class="btn-primary btn-120 save-btn" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                             </div>
                         </form>
                     </div>
@@ -134,7 +86,7 @@ General Journal Edit
         <input type="hidden" value="{{route('ledger.transactional_list_for_select')}}" id="ledger_list_select_option">
         <input type="hidden" value="{{ route("journal.add_new_line") }}" id="add_new_entry">
         <input type="hidden" value="{{route('journal.update', encrypt($journal->id))}}" id="journal_update_url">
-
+    </div>
 @endsection
 @push('scripts')
     <script>

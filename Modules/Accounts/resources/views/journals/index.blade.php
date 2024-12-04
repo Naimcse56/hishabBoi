@@ -3,25 +3,11 @@
 General Journal List
 @endsection
 @section('content')
-        <!--breadcrumb-->
-        <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Accounts</div>
-            <div class="ps-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 p-0">
-                        <li class="breadcrumb-item">
-                            <a href="{{route('journal.index')}}"><i class="bx bx-line-chart-down"></i></a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">General Journal List</li>
-                    </ol>
-                </nav>
-            </div>
-            
-            <div class="ms-auto">
-                <a href="{{route('journal.create')}}" class="btn btn-primary"><i class="bx bx-plus"></i>Add New</a>
-            </div>
+    <div class="container-fluid px-4">
+        <div class="d-flex justify-content-between">
+            <div><h4 class="mt-4">General Journal List</h4></div>
+            <div><a href="{{route('journal.create')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> Add New</a></div>
         </div>
-        <!--end breadcrumb-->
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -48,7 +34,7 @@ General Journal List
             </div>
         </div>
         <div id="ajaxDiv"></div>
-
+    </div>
 @endsection
 @push('scripts')
     <script>
@@ -74,25 +60,6 @@ General Journal List
                     lengthChange: true,
                 } );
                 $.fn.dataTable.ext.errMode = () => alert('Error while loading the table data. Please refresh');
-                
-				// $('#dataTable').DataTable({
-				// 	processing: true,
-				// 	serverSide: true,
-				// 	ajax: "{{ route('journal.index') }}",
-                //     dom:'lBfrtip',
-				// 	columns: [
-				// 		{data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-				// 		{data: 'date', name: 'date'},
-				// 		{data: 'txn_id', name: 'txn_id'},
-				// 		{data: 'narration', name: 'narration'},
-				// 		{data: 'amount', name: 'amount'},
-				// 		{data: 'action', name: 'action', orderable: false, searchable: false},
-				// 	],
-                //     responsive: false,
-                //     lengthChange: false,
-                //     buttons: [ 'copy', 'excel', 'pdf', 'print']
-				// }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
-
             });
             $(document).on('click','.detail_info', function(){
                 $('.detail_info').addClass('disabled');

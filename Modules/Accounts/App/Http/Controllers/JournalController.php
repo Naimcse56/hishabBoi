@@ -61,11 +61,7 @@ class JournalController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'branch_id' => 'required|numeric|gt:0',
             'attachment' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf|max:1024',
-        ],
-        [
-            'branch_id.gt' => 'Please Select A Branch',
         ]);
         $total_debit_amount = 0;
         $total_credit_amount = 0;
@@ -74,10 +70,9 @@ class JournalController extends Controller
                 $total_debit_amount += $debit_amount;
                 $debit_amounts[] = $debit_amount;
                 $debit_account_id[] = $request->account_id[$key];
-                $debit_sub_concern_id[] = $request->sub_concern_id;
-                $debit_partner_id[] = $request->sub_account_id[$key];
+                $debit_partner_id[] = isset($request->sub_account_id[$key]) ? $request->sub_account_id[$key] : 0;
                 $debit_work_order_id[] = 0;
-                $debit_narration[] = $request->narration_voucher;
+                $debit_narration[] = $request->narration;
             }
         }
         foreach ($request->credit_amount as $m => $credit_amount) {
@@ -85,10 +80,9 @@ class JournalController extends Controller
                 $total_credit_amount += $credit_amount;
                 $credit_amounts[] = $credit_amount;
                 $credit_account_id[] = $request->account_id[$m];
-                $credit_sub_concern_id[] = $request->sub_concern_id;
-                $credit_partner_id[] = $request->sub_account_id[$m];
+                $credit_partner_id[] = isset($request->sub_account_id[$m]) ? $request->sub_account_id[$m] : 0;
                 $credit_work_order_id[] = 0;
-                $credit_narration[] = $request->narration_voucher;
+                $credit_narration[] = $request->narration;
                 if (in_array($request->account_id[$m],$debit_account_id)) {
                     return response()->json(["message_warning" => "Same Account Entered Dr and Cr side"]);
                 }
@@ -119,9 +113,7 @@ class JournalController extends Controller
                     'credit_work_order_id'=> $credit_work_order_id,
                     'credit_account_amount'=> $credit_amounts,
                     'credit_narration'=> $credit_narration,
-                    'credit_sub_concern_id'=> $credit_sub_concern_id,
-                    'sub_concern_id'=> $request->sub_concern_id,
-                    'narration_voucher'=> $request->narration_voucher,
+                    'narration_voucher'=> $request->narration,
                     'referable_type'=> $referable_type,
                     'referable_id'=> $referable_id,
                     'is_invoiced'=> $is_invoiced,
@@ -132,7 +124,6 @@ class JournalController extends Controller
                     'debit_sub_account_id'=> $debit_partner_id,
                     'debit_work_order_id'=> $debit_work_order_id,
                     'debit_account_amount'=> $debit_amounts,
-                    'debit_sub_concern_id'=> $debit_sub_concern_id,
                     'debit_narration'=> $debit_narration,
                     'is_approve' => 0,
                     'attachment' => $request->hasFile('attachment') ? $path_attachment : null
@@ -195,11 +186,7 @@ class JournalController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'branch_id' => 'required|numeric|gt:0',
             'attachment' => 'nullable|file|mimes:jpg,jpeg,png,gif,pdf|max:1024',
-        ],
-        [
-            'branch_id.gt' => 'Please Select A Branch',
         ]);
         $total_debit_amount = 0;
         $total_credit_amount = 0;
@@ -208,10 +195,9 @@ class JournalController extends Controller
                 $total_debit_amount += $debit_amount;
                 $debit_amounts[] = $debit_amount;
                 $debit_account_id[] = $request->account_id[$key];
-                $debit_sub_concern_id[] = $request->sub_concern_id;
-                $debit_partner_id[] = $request->sub_account_id[$key];
+                $debit_partner_id[] = isset($request->sub_account_id[$key]) ? $request->sub_account_id[$key] : 0;
                 $debit_work_order_id[] = 0;
-                $debit_narration[] = $request->narration_voucher;
+                $debit_narration[] = $request->narration;
             }
         }
         foreach ($request->credit_amount as $m => $credit_amount) {
@@ -219,10 +205,9 @@ class JournalController extends Controller
                 $total_credit_amount += $credit_amount;
                 $credit_amounts[] = $credit_amount;
                 $credit_account_id[] = $request->account_id[$m];
-                $credit_sub_concern_id[] = $request->sub_concern_id;
-                $credit_partner_id[] = $request->sub_account_id[$m];
+                $credit_partner_id[] = isset($request->sub_account_id[$m]) ? $request->sub_account_id[$m] : 0;
                 $credit_work_order_id[] = 0;
-                $credit_narration[] = $request->narration_voucher;
+                $credit_narration[] = $request->narration;
                 if (in_array($request->account_id[$m],$debit_account_id)) {
                     return response()->json(["message_warning" => "Same Account Entered Dr and Cr side"]);
                 }
@@ -254,9 +239,7 @@ class JournalController extends Controller
                     'credit_work_order_id'=> $credit_work_order_id,
                     'credit_account_amount'=> $credit_amounts,
                     'credit_narration'=> $credit_narration,
-                    'credit_sub_concern_id'=> $credit_sub_concern_id,
-                    'sub_concern_id'=> $request->sub_concern_id,
-                    'narration_voucher'=> $request->narration_voucher,
+                    'narration_voucher'=> $request->narration,
                     'referable_type'=> $referable_type,
                     'referable_id'=> $referable_id,
                     'is_invoiced'=> $is_invoiced,
@@ -266,7 +249,6 @@ class JournalController extends Controller
                     'debit_sub_account_id'=> $debit_partner_id,
                     'debit_work_order_id'=> $debit_work_order_id,
                     'debit_account_amount'=> $debit_amounts,
-                    'debit_sub_concern_id'=> $debit_sub_concern_id,
                     'debit_narration'=> $debit_narration,
                     'is_approve' => 0,
                     'attachment' => $request->hasFile('attachment') ? $path_attachment : null
@@ -334,7 +316,7 @@ class JournalController extends Controller
                     <div class="col-md-1 mb-3">
                         <div class="d-block">
                             <div>
-                                <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="bx bx-trash"></i></a>
+                                <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="fa fa-trash"></i></a>
                             </div>
                         </div>
                     </div></div>';
