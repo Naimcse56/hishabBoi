@@ -17,7 +17,7 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 
 </head>
-<body class="bg-success">
+<body class="bg-custom">
     <!-- Begin page -->
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
