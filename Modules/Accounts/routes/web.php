@@ -10,6 +10,7 @@ use Modules\Accounts\App\Http\Controllers\CashPaymentJournalController;
 use Modules\Accounts\App\Http\Controllers\BankPaymentJournalController;
 use Modules\Accounts\App\Http\Controllers\CashReceiveJournalController;
 use Modules\Accounts\App\Http\Controllers\BankReceiveJournalController;
+use Modules\Accounts\App\Http\Controllers\JournalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -123,5 +124,16 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('multi-bank-receive.delete');
         Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-bank-receive.add_new_line_cr');
         Route::get('/print/{id}', 'print')->name('multi-bank-receive.print');
+    });
+    Route::controller(JournalController::class)->prefix('/general-journal')->group(function () {
+        Route::get('/index', 'index')->name('journal.index');
+        Route::get('/create', 'create')->name('journal.create');
+        Route::post('/store', 'store')->name('journal.store');
+        Route::get('/edit/{id}', 'edit')->name('journal.edit');
+        Route::get('/show/{id}', 'show')->name('journal.show');
+        Route::post('/update/{id}', 'update')->name('journal.update');
+        Route::post('/delete', 'destroy')->name('journal.delete');
+        Route::get('/add-new-row-entry', 'add_new_line')->name('journal.add_new_line');
+        Route::get('/print/{id}', 'print')->name('journal.print');
     });
 });
