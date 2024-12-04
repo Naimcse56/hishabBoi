@@ -73,7 +73,7 @@ class BankPaymentJournalController extends Controller
                 $credit_partner_id[] = isset($request->credit_sub_account_id[$key]) ? $request->credit_sub_account_id[$key] : 0;
                 $credit_work_order_id[] = isset($request->work_order_id[$key]) ? $request->work_order_id[$key] : 0;
                 $credit_work_order_site_detail_id[] = isset($request->work_order_site_detail_id[$key]) ? $request->work_order_site_detail_id[$key] : 0;
-                $credit_narration[] = $request->credit_narration[$key];
+                $credit_narration[] = isset($request->credit_narration[$key]) ? $request->credit_narration[$key] : null;
                 $credit_bank_name[] = isset($request->bank_name[$key]) ? $request->bank_name[$key] : null;
                 $credit_bank_ac_name[] = isset($request->bank_account_name[$key]) ? $request->bank_account_name[$key] : null;
                 $credit_check_no[] = isset($request->check_no[$key]) ? $request->check_no[$key] : null;
@@ -85,7 +85,7 @@ class BankPaymentJournalController extends Controller
                 $debit_partner_id[] = isset($request->debit_sub_account_id[$key]) ? $request->debit_sub_account_id[$key] : 0;
                 $debit_work_order_id[] = isset($request->work_order_id[$key]) ? $request->work_order_id[$key] : 0;
                 $debit_work_order_site_detail_id[] = isset($request->work_order_site_detail_id[$key]) ? $request->work_order_site_detail_id[$key] : 0;
-                $debit_narration[] = $request->credit_narration[$key];
+                $debit_narration[] = isset($request->credit_narration[$key]) ? $request->credit_narration[$key] : null;
                 $debit_bank_name[] = null;
                 $debit_bank_ac_name[] = null;
                 $debit_check_no[] = null;
@@ -245,7 +245,7 @@ class BankPaymentJournalController extends Controller
                 $credit_partner_id[] = isset($request->credit_sub_account_id[$key]) ? $request->credit_sub_account_id[$key] : 0;
                 $credit_work_order_id[] = isset($request->work_order_id[$key]) ? $request->work_order_id[$key] : 0;
                 $credit_work_order_site_detail_id[] = isset($request->work_order_site_detail_id[$key]) ? $request->work_order_site_detail_id[$key] : 0;
-                $credit_narration[] = $request->credit_narration[$key];
+                $credit_narration[] = isset($request->credit_narration[$key]) ? $request->credit_narration[$key] : null;
                 $credit_bank_name[] = isset($request->bank_name[$key]) ? $request->bank_name[$key] : null;
                 $credit_bank_ac_name[] = isset($request->bank_account_name[$key]) ? $request->bank_account_name[$key] : null;
                 $credit_check_no[] = isset($request->check_no[$key]) ? $request->check_no[$key] : null;
@@ -257,7 +257,7 @@ class BankPaymentJournalController extends Controller
                 $debit_partner_id[] = isset($request->debit_sub_account_id[$key]) ? $request->debit_sub_account_id[$key] : 0;
                 $debit_work_order_id[] = isset($request->work_order_id[$key]) ? $request->work_order_id[$key] : 0;
                 $debit_work_order_site_detail_id[] = isset($request->work_order_site_detail_id[$key]) ? $request->work_order_site_detail_id[$key] : 0;
-                $debit_narration[] = $request->credit_narration[$key];
+                $debit_narration[] = isset($request->credit_narration[$key]) ? $request->credit_narration[$key] : null;
                 $debit_bank_name[] = null;
                 $debit_bank_ac_name[] = null;
                 $debit_check_no[] = null;

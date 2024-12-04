@@ -37,14 +37,14 @@ Bank Voucher
                                                     <x-common.server-side-select :required="true" column=4 name="credit_account_id[]" class="credit_account_id" disableOptionText="Select Debit Account" label="Debit Accounts" :options="[
                                                         ['id' => $trans_account['cr_account_id'], 'name' => $trans_account['cr_account_name']]
                                                     ]" :value="$trans_account['cr_account_id']"></x-common.server-side-select>
-                                                    <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)" :options="[
+                                                    <x-common.server-side-select :required="false" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)" :options="[
                                                         ['id' => $trans_account['cr_party_account_id'], 'name' => $trans_account['cr_party_account_name']]
                                                     ]" :value="$trans_account['cr_party_account_id']"></x-common.server-side-select>
                                                     <x-common.input :required="true" column=4 name="credit_amount[]" type="number" step="0.01" label="Amount" placeholder="Amount" :value="$trans_account['amount']"></x-common.input>
                                                     <x-common.server-side-select :required="true" column=4 name="debit_account_id[]" class="debit_account_id" disableOptionText="Select Credit Account" label="Credit Accounts" :options="[
                                                         ['id' => $trans_account['dr_account_id'], 'name' => $trans_account['dr_account_name']]
                                                     ]" :value="$trans_account['dr_account_id']"></x-common.server-side-select>
-                                                    <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)" :options="[
+                                                    <x-common.server-side-select :required="false" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)" :options="[
                                                         ['id' => $trans_account['dr_party_account_id'], 'name' => $trans_account['dr_party_account_name']]
                                                     ]" :value="$trans_account['dr_party_account_id']"></x-common.server-side-select>
                                                     <x-common.server-side-select :required="false" column=4 name="work_order_id[]" class="work_order_id" disableOptionText="Select Work Order" label="Work Order" :options="[
