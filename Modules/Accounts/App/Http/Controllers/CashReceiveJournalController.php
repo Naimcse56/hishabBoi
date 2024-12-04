@@ -92,15 +92,15 @@ class CashReceiveJournalController extends Controller
             $item = $this->journalRepositoryInterface->create([
                 'type' => $type,
                 'amount'=> $total_amount,
-                'date'=> date('Y-m-d'),
+                'date'=> app('day_closing_info')->from_date,
                 'account_type'=>$request->account_type,
                 'concern_person'=>$request->concern_person,
-                'credit_account_id'=> $credit_account_id,
-                'credit_sub_account_id'=> $credit_partner_id,
-                'credit_work_order_id'=> $credit_work_order_id,
-                'credit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
-                'credit_account_amount'=> $credit_amounts,
-                'credit_narration'=> $credit_narration,
+                'credit_account_id'=> $debit_account_id,
+                'credit_sub_account_id'=> $debit_partner_id,
+                'credit_work_order_id'=> $debit_work_order_id,
+                'credit_work_order_site_detail_id'=> $debit_work_order_site_detail_id,
+                'credit_account_amount'=> $debit_amounts,
+                'credit_narration'=> $debit_narration,
                 'narration_voucher'=> $request->narration,
                 'pay_or_rcv_type'=> $request->pay_or_rcv_type,
                 'referable_type'=> $referable_type,
@@ -110,12 +110,12 @@ class CashReceiveJournalController extends Controller
                 'is_manual_entry'=> 1,
                 'credit_period'=> $request->credit_period,
 
-                'debit_account_id'=> $debit_account_id,
-                'debit_sub_account_id'=> $debit_partner_id,
-                'debit_work_order_id'=> $debit_work_order_id,
-                'debit_work_order_site_detail_id'=> $debit_work_order_site_detail_id,
-                'debit_account_amount'=> $debit_amounts,
-                'debit_narration'=> $debit_narration,
+                'debit_account_id'=> $credit_account_id,
+                'debit_sub_account_id'=> $credit_partner_id,
+                'debit_work_order_id'=> $credit_work_order_id,
+                'debit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
+                'debit_account_amount'=> $credit_amounts,
+                'debit_narration'=> $credit_narration,
                 'is_approve' => 0,
                 'attachment' => $request->hasFile('attachment') ? $path_attachment : null
             ]);
@@ -162,7 +162,7 @@ class CashReceiveJournalController extends Controller
     private function getDataFormat($transactions)
     {
         $tr_data = array();
-        foreach ($transactions->where('type','Dr') as $key => $transaction) {
+        foreach ($transactions->where('type','Cr') as $key => $transaction) {
             $new_data['dr_account_id'] = $transaction->ledger_id;
             $new_data['dr_account_name'] = $transaction->ledger->name;
             $new_data['dr_account_code'] = $transaction->ledger->code;
@@ -183,7 +183,7 @@ class CashReceiveJournalController extends Controller
             array_push($tr_data, $new_data);
         }
         $i = 0;
-        foreach ($transactions->where('type','Cr') as $m => $credit) {
+        foreach ($transactions->where('type','Dr') as $m => $credit) {
             $tr_data[$i]['cr_account_id'] = $credit->ledger->id;
             $tr_data[$i]['cr_account_name'] = $credit->ledger->name;
             $tr_data[$i]['cr_account_code'] = $credit->ledger->code;
@@ -239,15 +239,15 @@ class CashReceiveJournalController extends Controller
             $item = $this->journalRepositoryInterface->update([
                 'type' => $type,
                 'amount'=> $total_amount,
-                'date'=> date('Y-m-d'),
+                'date'=> app('day_closing_info')->from_date,
                 'account_type'=>$request->account_type,
                 'concern_person'=>$request->concern_person,
-                'credit_account_id'=> $credit_account_id,
-                'credit_sub_account_id'=> $credit_partner_id,
-                'credit_work_order_id'=> $credit_work_order_id,
-                'credit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
-                'credit_account_amount'=> $credit_amounts,
-                'credit_narration'=> $credit_narration,
+                'credit_account_id'=> $debit_account_id,
+                'credit_sub_account_id'=> $debit_partner_id,
+                'credit_work_order_id'=> $debit_work_order_id,
+                'credit_work_order_site_detail_id'=> $debit_work_order_site_detail_id,
+                'credit_account_amount'=> $debit_amounts,
+                'credit_narration'=> $debit_narration,
                 'narration_voucher'=> $request->narration,
                 'pay_or_rcv_type'=> $request->pay_or_rcv_type,
                 'referable_type'=> $referable_type,
@@ -256,12 +256,12 @@ class CashReceiveJournalController extends Controller
                 'is_manual_entry'=> 1,
                 'credit_period'=> $request->credit_period,
 
-                'debit_account_id'=> $debit_account_id,
-                'debit_sub_account_id'=> $debit_partner_id,
-                'debit_work_order_id'=> $debit_work_order_id,
-                'debit_work_order_site_detail_id'=> $debit_work_order_site_detail_id,
-                'debit_account_amount'=> $debit_amounts,
-                'debit_narration'=> $debit_narration,
+                'debit_account_id'=> $credit_account_id,
+                'debit_sub_account_id'=> $credit_partner_id,
+                'debit_work_order_id'=> $credit_work_order_id,
+                'debit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
+                'debit_account_amount'=> $credit_amounts,
+                'debit_narration'=> $credit_narration,
                 'is_approve' => 0,
                 'attachment' => $request->hasFile('attachment') ? $path_attachment : null
             ], decrypt($id));

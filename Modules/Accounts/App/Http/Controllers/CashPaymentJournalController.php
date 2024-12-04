@@ -92,7 +92,7 @@ class CashPaymentJournalController extends Controller
             $item = $this->journalRepositoryInterface->create([
                 'type' => $type,
                 'amount'=> $total_amount,
-                'date'=> date('Y-m-d'),
+                'date'=> app('day_closing_info')->from_date,
                 'account_type'=>$request->account_type,
                 'concern_person'=>$request->concern_person,
                 'credit_account_id'=> $credit_account_id,
@@ -239,7 +239,7 @@ class CashPaymentJournalController extends Controller
             $item = $this->journalRepositoryInterface->update([
                 'type' => $type,
                 'amount'=> $total_amount,
-                'date'=> date('Y-m-d'),
+                'date'=> app('day_closing_info')->from_date,
                 'account_type'=>$request->account_type,
                 'concern_person'=>$request->concern_person,
                 'credit_account_id'=> $credit_account_id,
