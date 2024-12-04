@@ -2,7 +2,35 @@
     // "use strict";
     $(".datepicker").flatpickr({dateFormat: "d/m/Y"});
 
+    $(document).ready(function() {
+        function updateTime() {
+            // Get current time
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';  // Determine AM or PM
+            
+            // Convert 24-hour format to 12-hour format
+            hours = hours % 12;  // Convert to 12-hour format
+            hours = hours ? hours : 12;  // Adjust for midnight (0 becomes 12)
+            minutes = (minutes < 10) ? '0' + minutes : minutes;  // Add leading zero if needed
+            seconds = (seconds < 10) ? '0' + seconds : seconds;  // Add leading zero if needed
 
+            // Format time as HH:MM:SS AM/PM
+            var timeString = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+            // Update the live-time div with the current time
+            $('#live-time').text(timeString);
+        }
+
+        // Update time every second (1000 milliseconds)
+        setInterval(updateTime, 1000);
+        
+        // Call the function once to display the time immediately on page load
+        updateTime();
+    });
+    
     function textEditor(selector, height = 400) {
       if (!$().summernote) {
           console.warn('summernote is not loaded');
@@ -156,3 +184,24 @@
           toastr.error('Select Voucher First!');
       }    
   };
+
+  // Check when the page is loaded
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find all nav links that have the "active" class
+    const activeLinks = document.querySelectorAll('.nav-link.active');
+
+    // Iterate over each active link
+    activeLinks.forEach(function(link) {
+        let parentCollapse = link.closest('.collapse'); // Find the closest collapse parent
+        
+        // Loop through each parent collapse to open them all if necessary
+        while (parentCollapse) {
+            // Trigger the collapse to open
+            const bootstrapCollapse = new bootstrap.Collapse(parentCollapse, {
+                toggle: true
+            });
+            // Move to the next level up in the hierarchy
+            parentCollapse = parentCollapse.closest('.collapse');
+        }
+    });
+});

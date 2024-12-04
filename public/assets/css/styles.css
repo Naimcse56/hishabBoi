@@ -149,10 +149,12 @@ h3, .h3 {
 
 h4, .h4 {
   font-size: calc(1.275rem + 0.3vw);
+  color: #3852cd;
 }
 @media (min-width: 1200px) {
   h4, .h4 {
     font-size: 1.5rem;
+    color: #3852cd;
   }
 }
 
@@ -3818,6 +3820,11 @@ textarea.form-control-lg {
   position: static;
 }
 
+.nav-link.active {
+  color: var(--bs-navbar-active-color);
+  background-color: var(--bs-secondary);
+}
+
 .navbar-text {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -4193,7 +4200,7 @@ textarea.form-control-lg {
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
   background-clip: border-box;
-  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  border: var(--bs-card-border-width) solid var(--bs-primary);
   border-radius: var(--bs-card-border-radius);
 }
 .card > hr {
@@ -10932,6 +10939,7 @@ body {
 }
 .sb-nav-fixed .sb-topnav {
   z-index: 1039;
+  border-bottom: 5px #3852cd solid;
 }
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;
@@ -11041,7 +11049,7 @@ body {
   color: rgba(255, 255, 255, 0.25);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 87%);
 }
 .sb-sidenav-dark .sb-sidenav-menu .nav-link .sb-nav-link-icon {
   color: rgba(255, 255, 255, 0.25);
@@ -11171,7 +11179,6 @@ body {
   border-collapse: collapse;
 }
 
-.datatable-table > tbody > tr > td,
 .datatable-table > tbody > tr > th,
 .datatable-table > tfoot > tr > td,
 .datatable-table > tfoot > tr > th,
@@ -11180,6 +11187,11 @@ body {
   vertical-align: top;
   padding: 0.5rem 0.5rem;
   font-size: 0.9rem;
+}
+.datatable-table > tbody > tr > td {
+  vertical-align: middle;
+  padding: 0.5rem 0.5rem;
+  font-size: 0.85rem;
 }
 
 .datatable-table > thead > tr > th {
@@ -11326,3 +11338,4 @@ body {
     background: #0277BD;
     color: #fff;
 }
+

@@ -16,7 +16,7 @@ class DayCloseSeeder extends Seeder
      */
     public function run(): void
     {
-      $fiscalYear = FiscalYear::create(['from_date' => now(),'year'=>'23-24']);
+      $fiscalYear = FiscalYear::create(['from_date' => now(),'year'=>'24-25']);
       $dayCloseFiscalYear = DayCloseFiscalYear::create(['fiscal_year_id' => $fiscalYear->id, 'from_date' => now()]);
     }
 }

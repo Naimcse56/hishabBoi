@@ -63,7 +63,12 @@
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/dataTables.bootstrap5.min.js')}}"></script>
-
+    <script>
+        $(document).ready(function() {
+            var serverTime = new Date("{{ now() }}");
+            // Use serverTime for additional logic if needed
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>
