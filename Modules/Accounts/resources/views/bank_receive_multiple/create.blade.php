@@ -1,39 +1,43 @@
 @extends('layouts.admin_app')
 @section('title')
-Cash Voucher
+Bank Voucher
 @endsection
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
-            <div><h4 class="mt-4">New Entry Cash Voucher</h4></div>
-            <div><a href="{{route('multi-cash-payment.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
+            <div><h4 class="mt-4">New Entry Bank Receive Voucher</h4></div>
+            <div><a href="{{route('multi-bank-receive.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('multi-cash-payment.store')}}">
+                        <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('multi-bank-receive.store')}}">
                             @csrf
                             <div class="row mb-2">
                                 <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person')"></x-common.input>
-                                <x-common.select :required="true" column=4 name="pay_or_rcv_type" class="pay_or_rcv_type" label="Type" placeholder="Type" :value="'Cash'" :options="[
-                                    ['id' => 'Cash', 'name' => 'Cash']
+                                <x-common.select :required="true" column=4 name="pay_or_rcv_type" class="pay_or_rcv_type" label="Type" placeholder="Type" :value="'Fund Transfer'" :options="[
+                                    ['id' => 'Cheque', 'name' => 'Cheque'],
+                                    ['id' => 'BFTN/EFTN', 'name' => 'BFTN/EFTN'],
+                                    ['id' => 'RTGS', 'name' => 'RTGS'],
+                                    ['id' => 'Fund Transfer', 'name' => 'Fund Transfer'],
+                                    ['id' => 'L/C', 'name' => 'L/C']
                                 ]"></x-common.select>
                                 <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..."></x-common.text-area>
                             </div>
                                 
                             <fieldset class="the-fieldset mb-4">
-                                <legend class="the-legend fw-bold bg-danger-subtle">Payment Information</legend>
+                                <legend class="the-legend fw-bold bg-danger-subtle">Receive Information</legend>
                                 <div class="entry_row_div_cr">
                                     <div class="row new_added_row_cr">                                    
                                         <div class="col-md-8">
                                             <div class="row">
-                                                <x-common.server-side-select :required="true" column=4 name="credit_account_id[]" class="credit_account_id" disableOptionText="Select Credit Account" label="Credit Accounts"></x-common.server-side-select>
-                                                <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)"></x-common.server-side-select>
-                                                <x-common.input :required="true" column=4 name="credit_amount[]" type="number" step="0.01" label="Amount" placeholder="Amount"></x-common.input>
-                                                <x-common.server-side-select :required="true" column=4 name="debit_account_id[]" class="debit_account_id" disableOptionText="Select Debit Account" label="Debit Accounts"></x-common.server-side-select>
+                                                <x-common.server-side-select :required="true" column=4 name="credit_account_id[]" class="credit_account_id" disableOptionText="Select Debit Account" label="Debit Accounts"></x-common.server-side-select>
                                                 <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
+                                                <x-common.input :required="true" column=4 name="credit_amount[]" type="number" step="0.01" label="Amount" placeholder="Amount"></x-common.input>
+                                                <x-common.server-side-select :required="true" column=4 name="debit_account_id[]" class="debit_account_id" disableOptionText="Select Credit Account" label="Credit Accounts"></x-common.server-side-select>
+                                                <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)"></x-common.server-side-select>
                                                 <x-common.server-side-select :required="false" column=4 name="work_order_id[]" class="work_order_id" disableOptionText="Select Work Order" label="Work Order"></x-common.server-side-select>
                                                 <x-common.server-side-select :required="false" column=4 name="work_order_site_detail_id[]" class="work_order_site_detail_id" disableOptionText="Select Work Order Site" label="Work Order Site"></x-common.server-side-select>
                                                 
@@ -44,6 +48,17 @@ Cash Voucher
                                                             <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row_cr"><i class="fa fa-trash"></i></a>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <fieldset class="the-fieldset mt-2">
+                                                        <legend class="the-legend">Bank Information (optional)</legend>
+                                                        <div class="row">
+                                                            <x-common.input :required="false" column=4 id="bank_name" name="bank_name[]" label="Bank Name" placeholder="Bank Name" :value="old('bank_name')"></x-common.input>
+                                                            <x-common.input :required="false" column=4 id="bank_account_name" name="bank_account_name[]" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_account_name')"></x-common.input>
+                                                            <x-common.input :required="false" column=4 id="check_no" name="check_no[]" label="Cheque No" placeholder="Cheque No" :value="old('check_no')"></x-common.input>
+                                                            <x-common.date-picker label="Check Maturity Date" :required="false" column=4 name="check_mature_date[]" placeholder="Check Maturity Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                                        </div>
+                                                    </fieldset>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,7 +103,7 @@ Cash Voucher
             $(document).on('click', '#add_new_line_cr', function(e){
                 e.preventDefault();
                 $.ajax({
-                    url: '{{route('multi-cash-payment.add_new_line_cr')}}',
+                    url: '{{route('multi-bank-receive.add_new_line_cr')}}',
                     type: "GET",
                     dataType: "JSON",
                     success: function (response) {
@@ -98,6 +113,7 @@ Cash Voucher
                         getWorkOrderList();
                         getWorkOrderSiteList();
                         getDebitAccount();
+                        $(".datepicker").flatpickr({dateFormat: "d/m/Y"});
                     },
                     error: function (error) {
                         console.log(error);
@@ -169,7 +185,7 @@ Cash Voucher
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
-                                    type: "cash",
+                                    type: "bank",
                                 }
                                 return query;
                         },

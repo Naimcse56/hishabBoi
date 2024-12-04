@@ -1,46 +1,50 @@
 @extends('layouts.admin_app')
 @section('title')
-Cash Voucher
+Bank Voucher
 @endsection
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
-            <div><h4 class="mt-4">Edit Cash Voucher</h4></div>
-            <div><a href="{{route('multi-cash-payment.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
+            <div><h4 class="mt-4">Edit Bank Receive Voucher</h4></div>
+            <div><a href="{{route('multi-bank-receive.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('multi-cash-payment.update', encrypt($journal->id))}}">
+                        <form class="journal_create_form" method="POST" enctype="multipart/form-data" action="{{route('multi-bank-receive.update', encrypt($journal->id))}}">
                             @csrf
                             <div class="row">
                                 <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime($journal->date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person', $journal->concern_person)"></x-common.input>
                                 <x-common.select :required="true" column=4 name="pay_or_rcv_type" class="pay_or_rcv_type" label="Type" placeholder="Type" :value="$journal->pay_or_rcv_type" :options="[
-                                    ['id' => 'Cash', 'name' => 'Cash']
+                                    ['id' => 'Cheque', 'name' => 'Cheque'],
+                                    ['id' => 'BFTN/EFTN', 'name' => 'BFTN/EFTN'],
+                                    ['id' => 'RTGS', 'name' => 'RTGS'],
+                                    ['id' => 'Fund Transfer', 'name' => 'Fund Transfer'],
+                                    ['id' => 'L/C', 'name' => 'L/C']
                                 ]"></x-common.select>
                                 <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..." :value="$journal->narration"></x-common.text-area>
                             </div>
                             <div class="sales-voucher mb-4">
                                 <fieldset class="the-fieldset mb-4">
-                                    <legend class="the-legend fw-bold bg-danger-subtle">Payment Information</legend>
+                                    <legend class="the-legend fw-bold bg-danger-subtle">Receive Information</legend>
                                     <div class="entry_row_div_cr">
                                         @foreach ($transactions as $trans_account)
                                         <div class="row new_added_row_cr">                                    
                                             <div class="col-md-8">
                                                 <div class="row">
-                                                    <x-common.server-side-select :required="true" column=4 name="credit_account_id[]" class="credit_account_id" disableOptionText="Select Credit Account" label="Credit Accounts" :options="[
+                                                    <x-common.server-side-select :required="true" column=4 name="credit_account_id[]" class="credit_account_id" disableOptionText="Select Debit Account" label="Debit Accounts" :options="[
                                                         ['id' => $trans_account['cr_account_id'], 'name' => $trans_account['cr_account_name']]
                                                     ]" :value="$trans_account['cr_account_id']"></x-common.server-side-select>
-                                                    <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)" :options="[
+                                                    <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)" :options="[
                                                         ['id' => $trans_account['cr_party_account_id'], 'name' => $trans_account['cr_party_account_name']]
                                                     ]" :value="$trans_account['cr_party_account_id']"></x-common.server-side-select>
                                                     <x-common.input :required="true" column=4 name="credit_amount[]" type="number" step="0.01" label="Amount" placeholder="Amount" :value="$trans_account['amount']"></x-common.input>
-                                                    <x-common.server-side-select :required="true" column=4 name="debit_account_id[]" class="debit_account_id" disableOptionText="Select Debit Account" label="Debit Accounts" :options="[
+                                                    <x-common.server-side-select :required="true" column=4 name="debit_account_id[]" class="debit_account_id" disableOptionText="Select Credit Account" label="Credit Accounts" :options="[
                                                         ['id' => $trans_account['dr_account_id'], 'name' => $trans_account['dr_account_name']]
                                                     ]" :value="$trans_account['dr_account_id']"></x-common.server-side-select>
-                                                    <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)" :options="[
+                                                    <x-common.server-side-select :required="true" column=4 name="credit_sub_account_id[]" class="credit_sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Cr)" :options="[
                                                         ['id' => $trans_account['dr_party_account_id'], 'name' => $trans_account['dr_party_account_name']]
                                                     ]" :value="$trans_account['dr_party_account_id']"></x-common.server-side-select>
                                                     <x-common.server-side-select :required="false" column=4 name="work_order_id[]" class="work_order_id" disableOptionText="Select Work Order" label="Work Order" :options="[
@@ -58,6 +62,17 @@ Cash Voucher
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-12 mb-3">
+                                                    <fieldset class="the-fieldset mt-2">
+                                                        <legend class="the-legend">Bank Information (optional)</legend>
+                                                        <div class="row">
+                                                            <x-common.input :required="false" column=4 id="bank_name" name="bank_name[]" label="Bank Name" placeholder="Bank Name" :value="$trans_account['bank_name']"></x-common.input>
+                                                            <x-common.input :required="false" column=4 id="bank_account_name" name="bank_account_name[]" label="Bank Account Name" placeholder="Bank Account Name" :value="$trans_account['bank_account_name']"></x-common.input>
+                                                            <x-common.input :required="false" column=4 id="check_no" name="check_no[]" label="Cheque No" placeholder="Cheque No" :value="$trans_account['check_no']"></x-common.input>
+                                                            <x-common.date-picker label="Check Maturity Date" :required="false" column=4 name="check_mature_date[]" placeholder="Check Maturity Date" :value="date('d/m/Y', strtotime($trans_account['check_mature_date']))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                                        </div>
+                                                    </fieldset>
                                                 </div>
                                             </div>
                                             <div class="col-md-4 mb-3">
@@ -103,7 +118,7 @@ Cash Voucher
             $(document).on('click', '#add_new_line_cr', function(e){
                 e.preventDefault();
                 $.ajax({
-                    url: '{{route('multi-cash-payment.add_new_line_cr')}}',
+                    url: '{{route('multi-bank-receive.add_new_line_cr')}}',
                     type: "GET",
                     dataType: "JSON",
                     success: function (response) {
@@ -176,7 +191,7 @@ Cash Voucher
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
-                                    type: "cash",
+                                    type: "bank",
                                 }
                                 return query;
                         },

@@ -15,6 +15,258 @@ class LedgerSeeder extends Seeder
     {      
         DB::table('ledgers')->insert(array (
          0 => array(
+            'name' => 'Assets',
+            'code' => 'A1001',
+            'type' => 1,
+            'parent_id' => 0,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         1 => array(
+            'name' => 'Non-Current Assets',
+            'code' => 'A1002',
+            'type' => 1,
+            'parent_id' => 1,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         2 => array(
+            'name' => 'Current Asset',
+            'code' => 'A1003',
+            'type' => 1,
+            'parent_id' => 1,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         3 => array(
+            'name' => 'Bank Balance',
+            'code' => 'A1004',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'bank',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         4 => array(
+            'name' => 'Cash Balance',
+            'code' => 'A1005',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'cash',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         5 => array(
+            'name' => 'Accounts Receivable AC',
+            'code' => 'A1006',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         6 => array(
+            'name' => 'Inter-Company Current Account',
+            'code' => 'A1008',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         7 => array(
+            'name' => 'Liabilities',
+            'code' => 'L2001',
+            'type' => 2,
+            'parent_id' => 0,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         8 => array(
+            'name' => 'Authorized Capital',
+            'code' => 'E5004',
+            'type' => 5,
+            'parent_id' => 30,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         9 => array(
+            'name' => 'Capital Account',
+            'code' => 'L2002',
+            'type' => 2,
+            'parent_id' => 10,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         10 => array(
+            'name' => 'Current Liabilities',
+            'code' => 'L2003',
+            'type' => 2,
+            'parent_id' => 9,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         11 => array(
+            'name' => 'Company Tax Liabilities',
+            'code' => 'L2004',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         12 => array(
+            'name' => 'Tax Payable',
+            'code' => 'L2005',
+            'type' => 2,
+            'parent_id' => 13,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         13 => array(
+            'name' => 'Accounts Payable AC',
+            'code' => 'L2006',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         14 => array(
+            'name' => 'Expenses',
+            'code' => 'E3001',
+            'type' => 3,
+            'parent_id' => 0,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         15 => array(
+            'name' => 'Others Cost Expenses',
+            'code' => 'E3003',
+            'type' => 3,
+            'parent_id' => 16,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         16 => array(
+            'name' => 'Administrative & Operation Expenses',
+            'code' => 'E3004',
+            'type' => 3,
+            'parent_id' => 16,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         17 => array(
+            'name' => 'TAX Expenses',
+            'code' => 'E3005',
+            'type' => 3,
+            'parent_id' => 16,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         18 => array(
+            'name' => 'Company Income TAX',
+            'code' => 'E3006',
+            'type' => 3,
+            'parent_id' => 20,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         19 => array(
+            'name' => 'Salary Expenses',
+            'code' => 'E3008',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         20 => array(
+            'name' => 'Revenue',
+            'code' => 'I4001',
+            'type' => 4,
+            'parent_id' => 0,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         21 => array(
             'name' => 'Sales from Construction Contract',
             'code' => 'I4002',
             'type' => 4,
@@ -26,7 +278,31 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         1 => array(
+         22 => array(
+            'name' => 'Non-Operating Income',
+            'code' => 'I4003',
+            'type' => 4,
+            'parent_id' => 24,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 1,
+            'view_in_trial' => 1,
+         ),
+         23 => array(
+            'name' => 'Financial Expenses',
+            'code' => 'E3046',
+            'type' => 3,
+            'parent_id' => 16,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         24 => array(
             'name' => 'Sales From Water Engineering Projects',
             'code' => 'I4005',
             'type' => 4,
@@ -38,7 +314,307 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         2 => array(
+         25 => array(
+            'name' => 'Equities',
+            'code' => 'E5001',
+            'type' => 5,
+            'parent_id' => 0,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         26 => array(
+            'name' => 'Shareholder\'s Equity',
+            'code' => 'E5002',
+            'type' => 5,
+            'parent_id' => 30,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         27 => array(
+            'name' => 'Share Capital',
+            'code' => 'E5003',
+            'type' => 5,
+            'parent_id' => 31,
+            'level' => 1,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         28 => array(
+            'name' => 'Conveyance Bill',
+            'code' => 'E3047',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         29 => array(
+            'name' => 'Printing and Stationary',
+            'code' => 'E3048',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         30 => array(
+            'name' => 'Allowance',
+            'code' => 'E3049',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         31 => array(
+            'name' => 'VAT on Office Rent Payable',
+            'code' => 'L2057',
+            'type' => 3,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         32 => array(
+            'name' => 'Entertainment bill',
+            'code' => 'E3052',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         33 => array(
+            'name' => 'Medical and Treatment',
+            'code' => 'E3053',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         34 => array(
+            'name' => 'Electricity Bill',
+            'code' => 'E3054',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         35 => array(
+            'name' => 'Wasa Bill',
+            'code' => 'E3055',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         36 => array(
+            'name' => 'Electrical and Computer Accessories',
+            'code' => 'E3056',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         37 => array(
+            'name' => 'Office Maintenance',
+            'code' => 'E3057',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         38 => array(
+            'name' => 'Repair and Maintenance',
+            'code' => 'E3058',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         39 => array(
+            'name' => 'Car & Vehicles Maintenace',
+            'code' => 'E3059',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         40 => array(
+            'name' => 'Postage & Courier',
+            'code' => 'E3060',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         41 => array(
+            'name' => 'Telephone & Mobile Bill',
+            'code' => 'E3061',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         42 => array(
+            'name' => 'Tours & Travel Expense',
+            'code' => 'E3062',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         43 => array(
+            'name' => 'Internet Bill',
+            'code' => 'E3063',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         44 => array(
+            'name' => 'Audit Fee',
+            'code' => 'E3064',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         45 => array(
+            'name' => 'Job Advertisment',
+            'code' => 'E3066',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         46 => array(
+            'name' => 'Event Management',
+            'code' => 'E3067',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         47 => array(
+            'name' => 'Fuel Bill',
+            'code' => 'E3068',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         48 => array(
+            'name' => 'Bank Interest',
+            'code' => 'E3069',
+            'type' => 3,
+            'parent_id' => 28,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         49 => array(
+            'name' => 'Legal, Professional & Membership Fee',
+            'code' => 'E3070',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         50 => array(
             'name' => 'Materials and product cost',
             'code' => 'E3071',
             'type' => 3,
@@ -50,7 +626,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         3 => array(
+         51 => array(
             'name' => 'Subcontractor Cost',
             'code' => 'E3072',
             'type' => 3,
@@ -62,7 +638,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         4 => array(
+         52 => array(
             'name' => 'Project Repair & Maintenace Cost',
             'code' => 'E3073',
             'type' => 3,
@@ -74,7 +650,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         5 => array(
+         53 => array(
             'name' => 'Miscellaneous Expenses for Projects',
             'code' => 'E3074',
             'type' => 3,
@@ -86,7 +662,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         6 => array(
+         54 => array(
             'name' => 'Authority Cost',
             'code' => 'E3075',
             'type' => 3,
@@ -98,7 +674,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         7 => array(
+         55 => array(
             'name' => 'Media Cost',
             'code' => 'E3076',
             'type' => 3,
@@ -110,7 +686,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         8 => array(
+         56 => array(
             'name' => 'AG Cost',
             'code' => 'E3077',
             'type' => 3,
@@ -122,7 +698,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         9 => array(
+         57 => array(
             'name' => 'Bill PC',
             'code' => 'E3078',
             'type' => 3,
@@ -134,7 +710,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         10 => array(
+         58 => array(
             'name' => 'JV Partner Cost',
             'code' => 'E3079',
             'type' => 3,
@@ -146,7 +722,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         11 => array(
+         59 => array(
             'name' => 'DPM Cost',
             'code' => 'E3080',
             'type' => 3,
@@ -158,7 +734,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         12 => array(
+         60 => array(
             'name' => 'Commission',
             'code' => 'E3081',
             'type' => 3,
@@ -170,7 +746,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         13 => array(
+         61 => array(
             'name' => 'Wages & Salary Projects',
             'code' => 'E3082',
             'type' => 3,
@@ -182,7 +758,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         14 => array(
+         62 => array(
             'name' => 'Earth Filling and Development Cost',
             'code' => 'E3083',
             'type' => 3,
@@ -194,7 +770,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         15 => array(
+         63 => array(
             'name' => 'Transportation Cost-W/O',
             'code' => 'E3084',
             'type' => 3,
@@ -206,7 +782,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         16 => array(
+         64 => array(
             'name' => 'Site Equipment Fuel Cost',
             'code' => 'E3085',
             'type' => 3,
@@ -218,7 +794,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         17 => array(
+         65 => array(
             'name' => 'Project Conveyance',
             'code' => 'E3086',
             'type' => 3,
@@ -230,7 +806,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         18 => array(
+         66 => array(
             'name' => 'Project Entertainment Bill',
             'code' => 'E3087',
             'type' => 3,
@@ -242,7 +818,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         19 => array(
+         67 => array(
             'name' => 'House Rent Projects',
             'code' => 'E3088',
             'type' => 3,
@@ -254,7 +830,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         20 => array(
+         68 => array(
             'name' => 'Project Utility Bill',
             'code' => 'E3089',
             'type' => 3,
@@ -266,7 +842,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         21 => array(
+         69 => array(
             'name' => 'BG,PG & APG Charge',
             'code' => 'E3090',
             'type' => 3,
@@ -278,7 +854,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         22 => array(
+         70 => array(
             'name' => 'Insurance Cost for Projects',
             'code' => 'E3091',
             'type' => 3,
@@ -290,7 +866,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         23 => array(
+         71 => array(
             'name' => 'Others Cost for Projects',
             'code' => 'E3092',
             'type' => 3,
@@ -302,7 +878,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         24 => array(
+         72 => array(
             'name' => 'Financial Cost -Projects',
             'code' => 'E3097',
             'type' => 3,
@@ -314,7 +890,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         25 => array(
+         73 => array(
             'name' => 'Retail Sales from Water Engineering Dept.',
             'code' => 'I4006',
             'type' => 4,
@@ -326,7 +902,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         26 => array(
+         74 => array(
             'name' => 'Revenue From Service Charge-WED',
             'code' => 'I4007',
             'type' => 4,
@@ -338,7 +914,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         27 => array(
+         75 => array(
             'name' => 'Revenue from Consultancy Service-D&D',
             'code' => 'I4008',
             'type' => 4,
@@ -350,7 +926,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         28 => array(
+         76 => array(
             'name' => 'VAT on Sales',
             'code' => 'E3098',
             'type' => 3,
@@ -362,7 +938,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         29 => array(
+         77 => array(
             'name' => 'AIT on Sales',
             'code' => 'E3099',
             'type' => 3,
@@ -374,7 +950,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         30 => array(
+         78 => array(
             'name' => 'Administrative & Overhead Cost-Project',
             'code' => 'E3103',
             'type' => 3,
@@ -386,7 +962,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         31 => array(
+         79 => array(
             'name' => 'Cost of Execution of Contract',
             'code' => 'E3104',
             'type' => 3,
@@ -398,7 +974,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 1,
             'view_in_trial' => 1,
          ),
-         32 => array(
+         80 => array(
             'name' => 'Property Plant & Equipment',
             'code' => 'A1009',
             'type' => 1,
@@ -410,7 +986,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         33 => array(
+         81 => array(
             'name' => 'Global Islami Bank PLC',
             'code' => 'A1010',
             'type' => 1,
@@ -422,7 +998,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         34 => array(
+         82 => array(
             'name' => 'Jamuna Bank PLC',
             'code' => 'A1011',
             'type' => 1,
@@ -434,7 +1010,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         35 => array(
+         83 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1012',
             'type' => 1,
@@ -446,7 +1022,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         36 => array(
+         84 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1013',
             'type' => 1,
@@ -458,7 +1034,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         37 => array(
+         85 => array(
             'name' => 'First Security Islami Bank PLC',
             'code' => 'A1014',
             'type' => 1,
@@ -470,7 +1046,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         38 => array(
+         86 => array(
             'name' => 'NCC Bank PLC',
             'code' => 'A1015',
             'type' => 1,
@@ -482,7 +1058,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         39 => array(
+         87 => array(
             'name' => 'Jamuna Bank PLC',
             'code' => 'A1016',
             'type' => 1,
@@ -494,7 +1070,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         40 => array(
+         88 => array(
             'name' => 'Jamuna Bank PLC',
             'code' => 'A1022',
             'type' => 1,
@@ -506,7 +1082,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         41 => array(
+         89 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1024',
             'type' => 1,
@@ -518,7 +1094,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         42 => array(
+         90 => array(
             'name' => 'Jamuna Bank PLC',
             'code' => 'A1026',
             'type' => 1,
@@ -530,7 +1106,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         43 => array(
+         91 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1027',
             'type' => 1,
@@ -542,7 +1118,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         44 => array(
+         92 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1029',
             'type' => 1,
@@ -554,7 +1130,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         45 => array(
+         93 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1031',
             'type' => 1,
@@ -566,7 +1142,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         46 => array(
+         94 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1032',
             'type' => 1,
@@ -578,7 +1154,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         47 => array(
+         95 => array(
             'name' => 'Jamuna Bank PLC',
             'code' => 'A1033',
             'type' => 1,
@@ -590,7 +1166,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         48 => array(
+         96 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1034',
             'type' => 1,
@@ -602,7 +1178,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         49 => array(
+         97 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1035',
             'type' => 1,
@@ -614,7 +1190,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         50 => array(
+         98 => array(
             'name' => 'Prime Bank PLC',
             'code' => 'A1036',
             'type' => 1,
@@ -626,7 +1202,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         51 => array(
+         99 => array(
             'name' => 'First Security Islami Bank PLC',
             'code' => 'A1037',
             'type' => 1,
@@ -638,7 +1214,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         52 => array(
+         100 => array(
             'name' => 'Non-Current Liabilities',
             'code' => 'L2007',
             'type' => 2,
@@ -650,7 +1226,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         53 => array(
+         101 => array(
             'name' => 'Work Order Loan',
             'code' => 'L2008',
             'type' => 2,
@@ -662,7 +1238,115 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         54 => array(
+         102 => array(
+            'name' => 'Advance against Office Rent',
+            'code' => 'A1038',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         103 => array(
+            'name' => 'Tender Security & Margin',
+            'code' => 'A1040',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         104 => array(
+            'name' => 'Advance against Salary',
+            'code' => 'A1041',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         105 => array(
+            'name' => 'Advance, Prepayments & IOU',
+            'code' => 'A1043',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         106 => array(
+            'name' => 'Cash in Hand',
+            'code' => 'A1044',
+            'type' => 1,
+            'parent_id' => 5,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'cash',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         107 => array(
+            'name' => 'Petty Cash Balance',
+            'code' => 'A1045',
+            'type' => 1,
+            'parent_id' => 5,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'cash',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         108 => array(
+            'name' => 'Renewal & Registration',
+            'code' => 'E3114',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         109 => array(
+            'name' => 'Bank Charge',
+            'code' => 'E3117',
+            'type' => 3,
+            'parent_id' => 28,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         110 => array(
+            'name' => 'Income from Bank Interest',
+            'code' => 'I4014',
+            'type' => 4,
+            'parent_id' => 26,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         111 => array(
             'name' => 'Land & Land Development',
             'code' => 'A1048',
             'type' => 1,
@@ -674,7 +1358,67 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         55 => array(
+         112 => array(
+            'name' => 'Car & Vehicles',
+            'code' => 'A1049',
+            'type' => 1,
+            'parent_id' => 2,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         113 => array(
+            'name' => 'Office Equipment',
+            'code' => 'A1050',
+            'type' => 1,
+            'parent_id' => 2,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         114 => array(
+            'name' => 'Computer, Laptop, Printer, Scanner & IT Equipment',
+            'code' => 'A1051',
+            'type' => 1,
+            'parent_id' => 2,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         115 => array(
+            'name' => 'FDR Investment',
+            'code' => 'A1052',
+            'type' => 1,
+            'parent_id' => 2,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         116 => array(
+            'name' => 'Parking & Toll',
+            'code' => 'E3139',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         117 => array(
             'name' => 'Trust Bank Ltd',
             'code' => 'A1076',
             'type' => 1,
@@ -686,7 +1430,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         56 => array(
+         118 => array(
             'name' => 'Jamuna Bank PLC',
             'code' => 'A1078',
             'type' => 1,
@@ -698,7 +1442,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         57 => array(
+         119 => array(
+            'name' => 'Non-Current Liabilities',
+            'code' => 'L2009',
+            'type' => 2,
+            'parent_id' => 9,
+            'level' => 2,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         120 => array(
             'name' => 'OD/SOD Loan',
             'code' => 'L2024',
             'type' => 2,
@@ -710,7 +1466,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         58 => array(
+         121 => array(
             'name' => 'TBL-OD-00550136000035',
             'code' => 'L2025',
             'type' => 2,
@@ -722,7 +1478,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         59 => array(
+         122 => array(
+            'name' => 'Drivers Overtime',
+            'code' => 'E3141',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         123 => array(
             'name' => 'Work Order Loan',
             'code' => 'L2026',
             'type' => 2,
@@ -734,7 +1502,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         60 => array(
+         124 => array(
             'name' => 'TBL-WO-SSP-Starpath-SIMEC Ltd (JV)-00550135000117',
             'code' => 'L2027',
             'type' => 2,
@@ -746,7 +1514,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         61 => array(
+         125 => array(
             'name' => 'TBL-WO-SSP-Starpath-SIMEC Ltd (JV)-00550135000260',
             'code' => 'L2028',
             'type' => 2,
@@ -758,7 +1526,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         62 => array(
+         126 => array(
             'name' => 'TBL-WO-Diesel Plant Ltd-Sirajgong-0055-0135000313',
             'code' => 'L2029',
             'type' => 2,
@@ -770,7 +1538,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         63 => array(
+         127 => array(
             'name' => 'TBL-WO-Diesel Plant Ltd-Manikgang-0055-0135000322',
             'code' => 'L2030',
             'type' => 2,
@@ -782,7 +1550,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         64 => array(
+         128 => array(
             'name' => 'TBL-WO-Diesel Plant Ltd- Kushtia-0055-0135000395',
             'code' => 'L2031',
             'type' => 2,
@@ -794,7 +1562,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         65 => array(
+         129 => array(
             'name' => 'TBL-WO-GCC-00550135000331',
             'code' => 'L2032',
             'type' => 2,
@@ -806,7 +1574,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         66 => array(
+         130 => array(
             'name' => 'TBL-WO-GCC-00550135000340',
             'code' => 'L2033',
             'type' => 2,
@@ -818,7 +1586,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         67 => array(
+         131 => array(
             'name' => 'TBL-WO-DSCC-Sapna Construction Ltd-SIMEC Engineers Ltd (JV)-0055-0135000359',
             'code' => 'L2034',
             'type' => 2,
@@ -830,7 +1598,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         68 => array(
+         132 => array(
             'name' => 'TBL-WO-DLS-M/S Sapna Construction-Simec Engineers Ltd (JV)-0055-0135000377',
             'code' => 'L2035',
             'type' => 2,
@@ -842,7 +1610,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         69 => array(
+         133 => array(
             'name' => 'TBL-WO-DLS-M/S Sapna Construction-Simec Engineers Ltd (JV)-0055-0135000386',
             'code' => 'L2036',
             'type' => 2,
@@ -854,7 +1622,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         70 => array(
+         134 => array(
             'name' => 'TBL-WO-MCC-M/S Zaman Enterprise-Simec Eng.Ltd-J Enterprise JV-00550135000368',
             'code' => 'L2037',
             'type' => 2,
@@ -866,7 +1634,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         71 => array(
+         135 => array(
             'name' => 'TBL-WO-Sheikh Kamal IT (Patuakhali)-Desh Unnayan-Simec Engineers JV-00550135000402',
             'code' => 'L2038',
             'type' => 2,
@@ -878,7 +1646,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         72 => array(
+         136 => array(
             'name' => 'JBL-WO-DSCC-SIMEC Engineers Ltd.- MMEC JV-5130000012785',
             'code' => 'L2039',
             'type' => 2,
@@ -890,7 +1658,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         73 => array(
+         137 => array(
             'name' => 'JBL-WO-BWDB Satkhira-SIMEC -Rahman JV-5130000013427',
             'code' => 'L2040',
             'type' => 2,
@@ -902,7 +1670,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         74 => array(
+         138 => array(
             'name' => 'JBL-WO-DW & CE ARMY (Cumilla Cantt.)-5130000013824',
             'code' => 'L2041',
             'type' => 2,
@@ -914,7 +1682,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         75 => array(
+         139 => array(
             'name' => 'JBL-SOD-5008000013953',
             'code' => 'L2042',
             'type' => 2,
@@ -926,7 +1694,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         76 => array(
+         140 => array(
             'name' => 'Lease Finance',
             'code' => 'L2043',
             'type' => 2,
@@ -938,7 +1706,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         77 => array(
+         141 => array(
             'name' => 'JBL-Lease Finance(Car Loan) -5205000015966',
             'code' => 'L2044',
             'type' => 2,
@@ -950,7 +1718,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         78 => array(
+         142 => array(
             'name' => 'Rebar Purchase',
             'code' => 'E3145',
             'type' => 3,
@@ -962,7 +1730,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         79 => array(
+         143 => array(
             'name' => 'Cement Purchase',
             'code' => 'E3146',
             'type' => 3,
@@ -974,7 +1742,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         80 => array(
+         144 => array(
             'name' => 'Stone & Stone Chips Purchase',
             'code' => 'E3147',
             'type' => 3,
@@ -986,7 +1754,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         81 => array(
+         145 => array(
             'name' => 'Bricks & Bricks Chips Purchase',
             'code' => 'E3148',
             'type' => 3,
@@ -998,7 +1766,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         82 => array(
+         146 => array(
             'name' => 'Others Projects Materials Purchase',
             'code' => 'E3149',
             'type' => 3,
@@ -1010,7 +1778,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         83 => array(
+         147 => array(
             'name' => 'Sand Purchase',
             'code' => 'E3150',
             'type' => 3,
@@ -1022,7 +1790,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         84 => array(
+         148 => array(
             'name' => 'JBL-FDR-2301000822690',
             'code' => 'A1081',
             'type' => 1,
@@ -1034,7 +1802,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         85 => array(
+         149 => array(
             'name' => 'JBL-FDR-2301000822703',
             'code' => 'A1082',
             'type' => 1,
@@ -1046,7 +1814,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         86 => array(
+         150 => array(
             'name' => 'JBL-FDR-2301000822689',
             'code' => 'A1083',
             'type' => 1,
@@ -1058,7 +1826,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         87 => array(
+         151 => array(
             'name' => 'JBL-FDR-2301000822678',
             'code' => 'A1084',
             'type' => 1,
@@ -1070,7 +1838,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         88 => array(
+         152 => array(
             'name' => 'TBL-FDR-7017-0331211896',
             'code' => 'A1085',
             'type' => 1,
@@ -1082,7 +1850,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         89 => array(
+         153 => array(
             'name' => 'TBL-FDR-7017-0331208113',
             'code' => 'A1086',
             'type' => 1,
@@ -1094,7 +1862,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         90 => array(
+         154 => array(
             'name' => 'TBL-FDR-0055-0330025285',
             'code' => 'A1087',
             'type' => 1,
@@ -1106,7 +1874,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         91 => array(
+         155 => array(
             'name' => 'TBL-FRD-0055-0330025294',
             'code' => 'A1088',
             'type' => 1,
@@ -1118,7 +1886,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         92 => array(
+         156 => array(
             'name' => 'TBL-FDR-0055-0330021565',
             'code' => 'A1089',
             'type' => 1,
@@ -1130,7 +1898,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         93 => array(
+         157 => array(
             'name' => 'TBL-FDR-0055-0330021609',
             'code' => 'A1090',
             'type' => 1,
@@ -1142,7 +1910,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         94 => array(
+         158 => array(
             'name' => 'TBL-FDR-0055-0330021154',
             'code' => 'A1091',
             'type' => 1,
@@ -1154,7 +1922,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         95 => array(
+         159 => array(
             'name' => 'FSIBL-FDR-015824400000969',
             'code' => 'A1105',
             'type' => 1,
@@ -1166,7 +1934,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         96 => array(
+         160 => array(
             'name' => 'Bank Guarantee Margin',
             'code' => 'A1111',
             'type' => 1,
@@ -1178,7 +1946,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         97 => array(
+         161 => array(
             'name' => 'TBL-Bank Guarantee Margin',
             'code' => 'A1112',
             'type' => 1,
@@ -1190,7 +1958,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         98 => array(
+         162 => array(
             'name' => 'NCC-Bank Guarantee Margin',
             'code' => 'A1113',
             'type' => 1,
@@ -1202,7 +1970,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         99 => array(
+         163 => array(
             'name' => 'JBL-Bank Guarantee Margin',
             'code' => 'A1117',
             'type' => 1,
@@ -1214,7 +1982,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         100 => array(
+         164 => array(
+            'name' => 'Security Guard & Service Charge',
+            'code' => 'E3161',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         165 => array(
             'name' => 'TBL-Pay Order Margin',
             'code' => 'A1120',
             'type' => 1,
@@ -1226,7 +2006,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         101 => array(
+         166 => array(
+            'name' => 'Tender Earnest Money',
+            'code' => 'A1121',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         167 => array(
             'name' => 'TBL-Tender Earnest Money',
             'code' => 'A1122',
             'type' => 1,
@@ -1238,7 +2030,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         102 => array(
+         168 => array(
             'name' => 'JBL-Tender Earnest Money',
             'code' => 'A1123',
             'type' => 1,
@@ -1250,7 +2042,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         103 => array(
+         169 => array(
+            'name' => 'Staff Lunch Bill',
+            'code' => 'E3171',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         170 => array(
             'name' => 'Electrical Items & Accessories for Project',
             'code' => 'E3172',
             'type' => 3,
@@ -1262,7 +2066,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         104 => array(
+         171 => array(
             'name' => 'Furniture & Fixture',
             'code' => 'A1124',
             'type' => 1,
@@ -1274,7 +2078,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 1,
             'view_in_trial' => 1,
          ),
-         105 => array(
+         172 => array(
             'name' => 'Labor Bill-Projects',
             'code' => 'E3177',
             'type' => 3,
@@ -1286,7 +2090,43 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         106 => array(
+         173 => array(
+            'name' => 'VAT Payable',
+            'code' => 'L2049',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         174 => array(
+            'name' => 'TBL-Tender Earnest Money',
+            'code' => 'A1126',
+            'type' => 1,
+            'parent_id' => 359,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         175 => array(
+            'name' => 'Prime Bank-Tender Earnest Money',
+            'code' => 'A1127',
+            'type' => 1,
+            'parent_id' => 359,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         176 => array(
             'name' => 'FSIBL-Tender Earnest Money',
             'code' => 'A1130',
             'type' => 1,
@@ -1298,7 +2138,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         107 => array(
+         177 => array(
             'name' => 'GIB-Tender Earnest Money',
             'code' => 'A1131',
             'type' => 1,
@@ -1310,7 +2150,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         108 => array(
+         178 => array(
             'name' => 'Projects Others Income',
             'code' => 'I4061',
             'type' => 4,
@@ -1322,7 +2162,31 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         109 => array(
+         179 => array(
+            'name' => 'Subscription Payable',
+            'code' => 'L2053',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         180 => array(
+            'name' => 'Lunch Bill Payable',
+            'code' => 'L2054',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         181 => array(
             'name' => 'Installation Cost for Project',
             'code' => 'E3184',
             'type' => 3,
@@ -1334,7 +2198,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         110 => array(
+         182 => array(
             'name' => 'Miscellaneous Expense',
             'code' => 'E3185',
             'type' => 3,
@@ -1346,7 +2210,43 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         111 => array(
+         183 => array(
+            'name' => 'Donation Payable',
+            'code' => 'L2056',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         184 => array(
+            'name' => 'Others Income',
+            'code' => 'I4065',
+            'type' => 4,
+            'parent_id' => 26,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         185 => array(
+            'name' => 'Advance to Others',
+            'code' => 'A1134',
+            'type' => 1,
+            'parent_id' => 3,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 1,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         186 => array(
             'name' => 'Mobilization Receivable',
             'code' => 'A1135',
             'type' => 1,
@@ -1358,7 +2258,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         112 => array(
+         187 => array(
             'name' => 'Labor Bill',
             'code' => 'E3188',
             'type' => 3,
@@ -1370,7 +2270,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         113 => array(
+         188 => array(
+            'name' => 'Office Decoration & Renovation Cost',
+            'code' => 'E3189',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         189 => array(
             'name' => 'Transportation Cost',
             'code' => 'E3190',
             'type' => 3,
@@ -1382,7 +2294,31 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         114 => array(
+         190 => array(
+            'name' => 'Suspense A/C',
+            'code' => 'L2064',
+            'type' => 1,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         191 => array(
+            'name' => 'Others Advance',
+            'code' => 'A1137',
+            'type' => 1,
+            'parent_id' => 414,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         192 => array(
             'name' => 'Office Rent-Site',
             'code' => 'E3200',
             'type' => 3,
@@ -1394,7 +2330,19 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         115 => array(
+         193 => array(
+            'name' => 'Token',
+            'code' => 'A1140',
+            'type' => 1,
+            'parent_id' => 433,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         194 => array(
             'name' => 'Gift & Tips',
             'code' => 'E3218',
             'type' => 3,
@@ -1406,7 +2354,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         116 => array(
+         195 => array(
             'name' => 'Expenses for Chairman Sir',
             'code' => 'E3221',
             'type' => 3,
@@ -1418,7 +2366,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         117 => array(
+         196 => array(
             'name' => 'Miscellaneous - MD Sir',
             'code' => 'E3222',
             'type' => 3,
@@ -1430,7 +2378,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         118 => array(
+         197 => array(
             'name' => 'Expenses for VC Madam',
             'code' => 'E3223',
             'type' => 3,
@@ -1442,7 +2390,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         119 => array(
+         198 => array(
             'name' => 'Miscellaneous - VC Madam',
             'code' => 'E3224',
             'type' => 3,
@@ -1454,7 +2402,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         120 => array(
+         199 => array(
             'name' => 'Project Rebar, Cylinder & Others Test Cost',
             'code' => 'E3225',
             'type' => 3,
@@ -1466,7 +2414,67 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         121 => array(
+         200 => array(
+            'name' => 'IT, Software & Website Maintainance Cost',
+            'code' => 'E3231',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         201 => array(
+            'name' => 'Founders Day Event Cost',
+            'code' => 'E3233',
+            'type' => 3,
+            'parent_id' => 53,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         202 => array(
+            'name' => 'Blessings Day Event Cost',
+            'code' => 'E3234',
+            'type' => 3,
+            'parent_id' => 53,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         203 => array(
+            'name' => 'Simec Day Event Cost',
+            'code' => 'E3235',
+            'type' => 3,
+            'parent_id' => 53,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         204 => array(
+            'name' => 'Others Event Cost',
+            'code' => 'E3236',
+            'type' => 3,
+            'parent_id' => 53,
+            'level' => 4,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         205 => array(
             'name' => 'Others Administrative & Overhead Cost for Project',
             'code' => 'E3238',
             'type' => 3,
@@ -1478,7 +2486,31 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         122 => array(
+         206 => array(
+            'name' => 'Security Money-payable-Vendors',
+            'code' => 'L2063',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         207 => array(
+            'name' => 'Land Tax',
+            'code' => 'E3239',
+            'type' => 3,
+            'parent_id' => 20,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         208 => array(
             'name' => 'Office Rent',
             'code' => 'E3241',
             'type' => 3,
@@ -1490,7 +2522,43 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         123 => array(
+         209 => array(
+            'name' => 'TDS on Salary',
+            'code' => 'L2065',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         210 => array(
+            'name' => 'Driver Entertainment Bill',
+            'code' => 'E3249',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         211 => array(
+            'name' => 'Festival Bonus',
+            'code' => 'E3250',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         212 => array(
             'name' => 'CSR Activities & Donation',
             'code' => 'E3252',
             'type' => 3,
@@ -1502,7 +2570,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 1,
          ),
-         124 => array(
+         213 => array(
             'name' => 'Uniform & Cloths',
             'code' => 'E3254',
             'type' => 3,
@@ -1514,7 +2582,31 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
             'view_in_trial' => 0,
          ),
-         125 => array(
+         214 => array(
+            'name' => 'Honorarium',
+            'code' => 'E3260',
+            'type' => 3,
+            'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 1,
+         ),
+         215 => array(
+            'name' => 'Salary Payable',
+            'code' => 'L2068',
+            'type' => 2,
+            'parent_id' => 12,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+            'view_in_trial' => 0,
+         ),
+         216 => array(
             'name' => 'Advertising & Promotional Expenses',
             'code' => 'E3269',
             'type' => 3,

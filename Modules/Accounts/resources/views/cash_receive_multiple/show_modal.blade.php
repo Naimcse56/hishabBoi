@@ -125,7 +125,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{route('multi-bank-payment.print',encrypt($journal->id))}}" class="btn btn-primary" target="_blank"><i class="bx bx-printer"></i> Print</a>
+                <a href="{{route('multi-cash-receive.print',encrypt($journal->id))}}" class="btn btn-primary" target="_blank"><i class="bx bx-printer"></i> Print</a>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

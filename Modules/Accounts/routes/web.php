@@ -8,6 +8,8 @@ use Modules\Accounts\App\Http\Controllers\WorkOrderController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderSiteController;
 use Modules\Accounts\App\Http\Controllers\CashPaymentJournalController;
 use Modules\Accounts\App\Http\Controllers\BankPaymentJournalController;
+use Modules\Accounts\App\Http\Controllers\CashReceiveJournalController;
+use Modules\Accounts\App\Http\Controllers\BankReceiveJournalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,5 +101,27 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('multi-bank-payment.delete');
         Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-bank-payment.add_new_line_cr');
         Route::get('/print/{id}', 'print')->name('multi-bank-payment.print');
+    });
+    Route::controller(CashReceiveJournalController::class)->prefix('/cash-receive-journal')->group(function () {
+        Route::get('/index', 'index')->name('multi-cash-receive.index');
+        Route::get('/create', 'create')->name('multi-cash-receive.create');
+        Route::post('/store', 'store')->name('multi-cash-receive.store');
+        Route::get('/edit/{id}', 'edit')->name('multi-cash-receive.edit');
+        Route::get('/show/{id}', 'show')->name('multi-cash-receive.show');
+        Route::post('/update/{id}', 'update')->name('multi-cash-receive.update');
+        Route::post('/delete', 'destroy')->name('multi-cash-receive.delete');
+        Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-cash-receive.add_new_line_cr');
+        Route::get('/print/{id}', 'print')->name('multi-cash-receive.print');
+    });
+    Route::controller(BankReceiveJournalController::class)->prefix('/bank-receive-journal')->group(function () {
+        Route::get('/index', 'index')->name('multi-bank-receive.index');
+        Route::get('/create', 'create')->name('multi-bank-receive.create');
+        Route::post('/store', 'store')->name('multi-bank-receive.store');
+        Route::get('/edit/{id}', 'edit')->name('multi-bank-receive.edit');
+        Route::get('/show/{id}', 'show')->name('multi-bank-receive.show');
+        Route::post('/update/{id}', 'update')->name('multi-bank-receive.update');
+        Route::post('/delete', 'destroy')->name('multi-bank-receive.delete');
+        Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-bank-receive.add_new_line_cr');
+        Route::get('/print/{id}', 'print')->name('multi-bank-receive.print');
     });
 });

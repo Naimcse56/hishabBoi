@@ -169,7 +169,6 @@ Bank Voucher
                                     search: params.term,
                                     page: params.page || 1,
                                     type: "transactional",
-                                    account_type: 4,
                                 }
                                 return query;
                         },
