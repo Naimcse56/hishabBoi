@@ -120,7 +120,7 @@
                         @if ($journal->updated_by != null)
                         <p class="mb-0">Updator :<span>{{$journal->updator->name}}</span></p>
                         @endif
-                        {{-- <p class="mb-0">MAC Address :<span>{{ $journal->mac_address }}</span></p> --}}
+                        <p class="mb-0">MAC Address :<span>{{ $journal->mac_address }}</span>
                     </div>
                 </div>
             </div>

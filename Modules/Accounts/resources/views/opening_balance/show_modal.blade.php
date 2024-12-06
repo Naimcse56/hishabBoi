@@ -3,18 +3,18 @@
 <div class="modal fade" id="detail_info_modal" tabindex="-1" style="display: none;" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header bg-success">
+            <div class="modal-header bg-success-subtle">
                 <h5 class="modal-title">Details : {{$journal->TypeName}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5 pt-0 pb-0">
                 <div class="row mb-0">
-                    {{-- <div style="text-align: center; font-size: 30px; font-weight: 300;">
-                        <img src="{{asset($journal->branch->logo_path)}}" style="width: 120px;" alt="{{$journal->branch->name}}">
-                    </div>
+                    <div style="text-align: center; font-size: 30px; font-weight: 300;">
+        <img src="{{asset($journal->branch->logo_path)}}" style="width: 120px;" alt="{{$journal->branch->name}}">
+    </div>
                     <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->branch->location}} </div>
-                    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->sub_concern->name}} </div> --}}
-                    <div style="text-align: center; font-size: 14px; font-weight: 300;"> VOUCHER ({{ $journal->TypeDetails }}) </div>
+                    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->sub_concern->name}} </div>
+                    <div style="text-align: center; font-size: 14px; font-weight: 300;"> VOUCHER RECEIPT ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
                 <div class="row" style="margin-top: 0px;">
@@ -23,10 +23,16 @@
                       <p class="mb-0">Date. :<span>{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
                       <p class="mb-0">Voucher No : <span>{{$journal->TypeName}}</span></p>
                    </div>
-                </div>
-                <div class="row">
+                    @if ($journal->accounting_bill_info->bill_no != null)
                     <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
-                        <p class="mb-0">Concern Person : <span>{{$journal->concern_person}}</span></p>
+                        <p class="mb-0">Bill No :<span>{{$journal->accounting_bill_info->bill_no}}</span></p>
+                        <p class="mb-0">Bill Date :<span>{{$journal->accounting_bill_info->bill_date}}</span></p>
+                    </div>
+                    @endif
+                    <div class="row">
+                        <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
+                            <p class="mb-0">Concern Person : <span>{{$journal->concern_person}}</span></p>
+                        </div>
                     </div>
                 </div>
                 @if ($journal->is_approve == 2)
@@ -73,22 +79,16 @@
                                            <td>
                                                {{ $item->sub_ledger->name }}
                                                @if ($item->work_order_id)
-                                                   <p class="mb-0 font-13">Work Order : {{ $item->work_order->order_name }}</p>
-                                                   <p class="mb-0 font-13">Work Order No : {{ $item->work_order->order_no }}</p>
-                                                   <p class="mb-0 font-13">Work Order Site : {{ $item->work_order_site_detail->site_name }}</p>
-                                               @endif
-                                               @if ($item->land_project_id)
-                                                   <p class="mb-0 font-13">Land Project : {{ $item->land_project->order_name }}</p>
-                                                   <p class="mb-0 font-13">Land Requisition No : {{ $item->land_project->requisition_no }}</p>
+                                                <p class="mb-0 font-13">Client : {{ $item->work_order->sub_ledger->name }}</p>
+                                                <p class="mb-0 font-13">Work Order : {{ $item->work_order->order_name }}</p>
+                                                <p class="mb-0 font-13">Work Order No : {{ $item->work_order->order_no }}</p>
+                                                <p class="mb-0 font-13">Work Order Site : {{ $item->work_order_site_detail->site_name }}</p>
                                                @endif
                                                @if ($item->check_no || $item->bank_name || $item->bank_account_name)
                                                    <p class="mb-0 font-13">Bank Name : {{$item->bank_name}}</p>
                                                    <p class="mb-0 font-13">Bank Account Name : {{$item->bank_account_name}}</p>
                                                    <p class="mb-0 font-13">Cheque No : {{$item->check_no}}</p>
                                                    <p class="mb-0 font-13">Cheque Maturity Date : {{$item->check_mature_date}}</p>
-                                               @endif
-                                               @if ($item->narration && $journal->panel == "cash_payment_multiple")
-                                                <p class="mb-0 font-13">Purpose : {{$item->narration}}</p>
                                                @endif
                                            </td>
                                            <td>
@@ -114,18 +114,15 @@
                    </div>
                    <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
                         <p class="mb-0">Creator :<span>{{$journal->creator->name}}</span></p>
-                        @if ($journal->attachment)
-                            <a href="{{asset($journal->attachment)}}" class="fw-bold" download="{{str_replace(' ','-',$journal->TypeName.'-attachment')}}"><i class="bx bx-download"></i> Attachment <i class="bx bx-download"></i></a>
-                        @endif
                         @if ($journal->updated_by != null)
                         <p class="mb-0">Updator :<span>{{$journal->updator->name}}</span></p>
                         @endif
-                        <p class="mb-0">MAC Address :<span>{{ $journal->mac_address }}</span>
+                        {{-- <p class="mb-0">MAC Address :<span>{{ $journal->mac_address }}</span></p> --}}
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{route('multi-bank-payment.print',encrypt($journal->id))}}" class="btn btn-primary" target="_blank"><i class="bx bx-printer"></i> Print</a>
+                <a href="{{route('opening-balance.print',encrypt($journal->id))}}" class="btn btn-primary" target="_blank"><i class="bx bx-printer"></i> Print</a>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
             </div>
         </div>

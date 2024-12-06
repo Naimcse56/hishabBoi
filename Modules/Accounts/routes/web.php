@@ -11,6 +11,7 @@ use Modules\Accounts\App\Http\Controllers\BankPaymentJournalController;
 use Modules\Accounts\App\Http\Controllers\CashReceiveJournalController;
 use Modules\Accounts\App\Http\Controllers\BankReceiveJournalController;
 use Modules\Accounts\App\Http\Controllers\JournalController;
+use Modules\Accounts\App\Http\Controllers\OpeningBalanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -135,5 +136,16 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('journal.delete');
         Route::get('/add-new-row-entry', 'add_new_line')->name('journal.add_new_line');
         Route::get('/print/{id}', 'print')->name('journal.print');
+    });
+    Route::controller(OpeningBalanceController::class)->prefix('/opening-balance')->group(function () {
+        Route::get('/index', 'index')->name('opening-balance.index');
+        Route::get('/create', 'create')->name('opening-balance.create');
+        Route::post('/store', 'store')->name('opening-balance.store');
+        Route::get('/edit/{id}', 'edit')->name('opening-balance.edit');
+        Route::get('/show/{id}', 'show')->name('opening-balance.show');
+        Route::post('/update/{id}', 'update')->name('opening-balance.update');
+        Route::post('/delete', 'destroy')->name('opening-balance.delete');
+        Route::get('/add-new-row-entry', 'add_new_line')->name('opening-balance.add_new_line');
+        Route::get('/print/{id}', 'print')->name('opening-balance.print');
     });
 });
