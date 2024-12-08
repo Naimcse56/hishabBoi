@@ -259,7 +259,6 @@ General Journal Edit
                                     search: params.term,
                                     page: params.page || 1,
                                     type: "transactional",
-                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },
@@ -282,7 +281,6 @@ General Journal Edit
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
-                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },

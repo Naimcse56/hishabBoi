@@ -246,7 +246,6 @@
                                     search: params.term,
                                     page: params.page || 1,
                                     type: "transactional",
-                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },
@@ -269,7 +268,6 @@
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
-                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },

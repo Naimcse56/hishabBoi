@@ -12,7 +12,7 @@ interface LedgerRepositoryInterface extends BaseRepositoryInterface
 
     public function parentNullAccountList($relational_data = [], $selected_data = ['*']);
 
-    public function transactionalLeadgerForSelect($search, $type, $branch_id, $account_type, $view, $page);
+    public function transactionalLeadgerForSelect($search, $type, $account_type, $view, $page);
 
     public function codeChecker($code,$parent_id,$purpose, $id);
 }

@@ -142,11 +142,11 @@ class SubLedgerTypeController extends Controller
         }
         if ($request->type > 0) {
             $sub_ledger_ids = $sub_ledger_ids->whereIn('sub_ledger_type_id',[$request->type]);
-            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',[$request->type])->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id','branch_id']);
+            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',[$request->type])->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id']);
         } else {
             $type_ids = SubLedgerType::where('is_for', $is_for)->get()->pluck(['id'])->toArray();
             $sub_ledger_ids = $sub_ledger_ids->whereIn('sub_ledger_type_id',$type_ids);
-            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',$type_ids)->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id','branch_id']);
+            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',$type_ids)->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id']);
         }
         if ($request->party_id > 0) {
             $sub_ledger_ids = $sub_ledger_ids->where('id',$request->party_id);
@@ -160,7 +160,6 @@ class SubLedgerTypeController extends Controller
             $ledger_id = isset($default_ledger) && $default_ledger ? $default_ledger->id : $ledger->id;
         }
         
-        $branch_id = app('branch_info')['current_branch_id'];
         $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
         $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
         
@@ -173,7 +172,6 @@ class SubLedgerTypeController extends Controller
                 $op_data['sub_ledger_type'] = $mem->sub_ledger_type->name;
                 $op_data['member_id'] = $mem->id;
                 $op_data['name'] = $mem->name;
-                $op_data['branch_id'] = $mem->branch_id;
                 $op_data['current_dr'] = $mem->DebitBalanceAmountBetweenDateByLedger($start_date, $end_date, $ledger_id);
                 $op_data['current_cr'] = $mem->CreditBalanceAmountBetweenDateByLedger($start_date, $end_date, $ledger_id);
                 $op_data['opening_amount'] = $mem->BalanceAmountTillDateByTypeByLedger($start_date, $party_type, $ledger_id);
@@ -208,11 +206,11 @@ class SubLedgerTypeController extends Controller
         }
         if ($request->type > 0) {
             $sub_ledger_ids = $sub_ledger_ids->whereIn('sub_ledger_type_id',[$request->type]);
-            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',[$request->type])->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id','branch_id']);
+            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',[$request->type])->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id']);
         } else {
             $type_ids = SubLedgerType::where('is_for', $is_for)->get()->pluck(['id'])->toArray();
             $sub_ledger_ids = $sub_ledger_ids->whereIn('sub_ledger_type_id',$type_ids);
-            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',$type_ids)->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id','branch_id']);
+            $members = $sub_ledger_ids->where($party_type, '>', 0)->whereIn('sub_ledger_type_id',$type_ids)->with(['transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','sub_ledger_type:id,name'])->get(['id','name','sub_ledger_type_id','member','ledger_id']);
         }
         if ($request->party_id > 0) {
             $sub_ledger_ids = $sub_ledger_ids->where('id',$request->party_id);
@@ -226,10 +224,8 @@ class SubLedgerTypeController extends Controller
             $ledger_id = isset($default_ledger) && $default_ledger ? $default_ledger->id : $ledger->id;
         }
         
-        $branch_id = app('branch_info')['current_branch_id'];
         $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
         $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
-        $data['filtered_branch'] = Branch::find($branch_id,['id','name','location','logo_path']);
         
         $data['dateFrom'] = $start_date;
         $data['dateTo'] = $end_date;
@@ -240,7 +236,6 @@ class SubLedgerTypeController extends Controller
                 $op_data['sub_ledger_type'] = $mem->sub_ledger_type->name;
                 $op_data['member_id'] = $mem->id;
                 $op_data['name'] = $mem->name;
-                $op_data['branch_id'] = $mem->branch_id;
                 $op_data['current_dr'] = $mem->DebitBalanceAmountBetweenDateByLedger($start_date, $end_date, $ledger_id) + $mem->NonApprovedDebitBalanceAmountBetweenDateByLedger($start_date, $end_date, $ledger_id);
                 $op_data['current_cr'] = $mem->CreditBalanceAmountBetweenDateByLedger($start_date, $end_date, $ledger_id) + $mem->NonApprovedCreditBalanceAmountBetweenDateByLedger($start_date, $end_date, $ledger_id);
                 $op_data['opening_amount'] = $mem->BalanceAmountTillDateByTypeByLedger($start_date, $party_type, $ledger_id) + $mem->NonApprovedBalanceAmountTillDateByTypeByLedger($start_date, $party_type, $ledger_id);

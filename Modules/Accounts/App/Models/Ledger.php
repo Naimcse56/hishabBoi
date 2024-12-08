@@ -22,7 +22,7 @@ class Ledger extends Model
 
     public function categories()
     {
-        return $this->hasMany(Ledger::class, "parent_id", "id")->with(['categories:id,parent_id,name,code,type,acc_type,is_cost_center,view_in_trial,view_in_bs,view_in_is,level','ledger_balances:id,ledger_id,branch_id,date,debit,credit,sub_concern_id','categories.parent:id,name,code','pending_transactions:id,ledger_id,branch_id,date,type,amount,is_approve,sub_concern_id']);
+        return $this->hasMany(Ledger::class, "parent_id", "id")->with(['categories:id,parent_id,name,code,type,acc_type,is_cost_center,view_in_trial,view_in_bs,view_in_is,level','ledger_balances:id,ledger_id,date,debit,credit,sub_concern_id','categories.parent:id,name,code','pending_transactions:id,ledger_id,date,type,amount,is_approve,sub_concern_id']);
     }
 
     public function parent()

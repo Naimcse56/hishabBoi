@@ -92,7 +92,6 @@ Work Order
                                     search: params.term,
                                     page: params.page || 1,
                                     type: 'customer',
-                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },
@@ -115,7 +114,6 @@ Work Order
                                     page: params.page || 1,
                                     type: "expense",
                                     account_type: 3,
-                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },

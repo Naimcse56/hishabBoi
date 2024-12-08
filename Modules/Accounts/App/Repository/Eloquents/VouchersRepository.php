@@ -178,7 +178,7 @@ class VouchersRepository
     // Voucher Checking and approval From here
     public function approveStatus($id)
     {
-        $voucher = Voucher::with(['transactions:id,amount,type,ledger_id,sub_ledger_id,branch_id,voucher_id,work_order_id,sub_concern_id,check_no,accounting_additional_information_id','transactions.work_order','transactions.ledger:id,type','transactions.cheque_detail'])->findOrFail($id);
+        $voucher = Voucher::with(['transactions:id,amount,type,ledger_id,sub_ledger_id,voucher_id,work_order_id,sub_concern_id,check_no,accounting_additional_information_id','transactions.work_order','transactions.ledger:id,type','transactions.cheque_detail'])->findOrFail($id);
         if ($voucher->is_approve != 1) {
             $voucher->transactions()->update(['is_approve' => 1]);
             foreach ($voucher->transactions()->where('check_no', '!=', null)->get() as $transaction) {
@@ -205,7 +205,7 @@ class VouchersRepository
 
     public function deleteApproved($id)
     {
-        $voucher = Voucher::with(['transactions:id,amount,type,ledger_id,sub_ledger_id,branch_id,voucher_id,work_order_id,sub_concern_id','transactions.work_order','transactions.ledger:id,type'])->findOrFail($id);
+        $voucher = Voucher::with(['transactions:id,amount,type,ledger_id,sub_ledger_id,voucher_id,work_order_id,sub_concern_id','transactions.work_order','transactions.ledger:id,type'])->findOrFail($id);
         if ($voucher->is_approve == 1) {
             if ($voucher->work_order_id > 0 && !in_array($voucher->type, ['sales','purchase'])) {
                 $work_order = $voucher->work_order;
@@ -220,9 +220,9 @@ class VouchersRepository
                 $dr_amount = $transaction->type == "Dr" ? $transaction->amount : 0;
                 $cr_amount = $transaction->type == "Cr" ? $transaction->amount : 0;
                 if ($transaction->sub_concern_id > 0) {
-                    $balance = LedgerBalance::where('date', $voucher->date)->where('branch_id', $transaction->branch_id)->where('sub_concern_id', $transaction->sub_concern_id)->where('ledger_id', $transaction->ledger_id)->where('is_closed', 0)->first();
+                    $balance = LedgerBalance::where('date', $voucher->date)->where('sub_concern_id', $transaction->sub_concern_id)->where('ledger_id', $transaction->ledger_id)->where('is_closed', 0)->first();
                 } else {
-                    $balance = LedgerBalance::where('date', $voucher->date)->where('branch_id', $transaction->branch_id)->where('ledger_id', $transaction->ledger_id)->where('is_closed', 0)->first();
+                    $balance = LedgerBalance::where('date', $voucher->date)->where('ledger_id', $transaction->ledger_id)->where('is_closed', 0)->first();
                 }
                 if ($balance) {
                     $balance->update([
@@ -231,7 +231,7 @@ class VouchersRepository
                     ]);
                 } 
                 if ($transaction->sub_ledger_id > 0) {
-                    $party_balance = SubLedgerBalance::where('date', $voucher->date)->where('branch_id', $transaction->branch_id)->where('sub_ledger_id', $transaction->sub_ledger_id)->first();
+                    $party_balance = SubLedgerBalance::where('date', $voucher->date)->where('sub_ledger_id', $transaction->sub_ledger_id)->first();
                     if ($party_balance) {
                         $party_balance->update([
                             'debit'=> $transaction->type == "Dr" ? $party_balance->debit - $dr_amount : $party_balance->debit,

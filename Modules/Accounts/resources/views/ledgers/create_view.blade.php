@@ -91,7 +91,6 @@ Chart of Accounts
                             var query = {
                                 search: params.term,
                                 page: params.page || 1,
-                                branch_id: $(".branch_id").val(),
                                 view: 'ledger'
                             }
                             return query;

@@ -143,7 +143,7 @@ class LedgerController extends Controller
 
     public function transactional_list_for_select_ajax(Request $request)
     {
-        $data = $this->ledgerInterface->transactionalLeadgerForSelect($request->search, $request->type, $request->branch_id, $request->account_type, $request->view, $request->page);
+        $data = $this->ledgerInterface->transactionalLeadgerForSelect($request->search, $request->type, $request->account_type, $request->view, $request->page);
         return response()->json($data);
     }
 

@@ -29,7 +29,7 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
         }      
     }
 
-    public function transactionalLeadgerForSelect($search, $type, $branch_id, $account_type, $view, $page)
+    public function transactionalLeadgerForSelect($search, $type, $account_type, $view, $page)
     {
         $items = $this->model::query();
         $items = $items->where('is_active',1);

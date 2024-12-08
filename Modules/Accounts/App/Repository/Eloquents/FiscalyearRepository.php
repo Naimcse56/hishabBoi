@@ -46,7 +46,7 @@ class FiscalyearRepository
         return true;
     }
 
-    public function listForSelect($search, $type, $branch_id)
+    public function listForSelect($search, $type)
     {
         $items = FiscalYear::query();
         if ($search != '') {

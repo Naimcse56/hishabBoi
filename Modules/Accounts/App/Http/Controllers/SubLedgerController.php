@@ -131,7 +131,7 @@ class SubLedgerController extends Controller
 
     public function transactional_list_for_select_ajax(Request $request)
     {
-        $data = $this->subLedgerInterface->transactionalLeadgerForSelect($request->search,$request->type, $request->branch_id,$request->page);
+        $data = $this->subLedgerInterface->transactionalLeadgerForSelect($request->search,$request->type,$request->page);
         return response()->json($data);
     }
 }
