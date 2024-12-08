@@ -148,4 +148,8 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/add-new-row-entry', 'add_new_line')->name('opening-balance.add_new_line');
         Route::get('/print/{id}', 'print')->name('opening-balance.print');
     });
+    Route::controller(AccountsController::class)->prefix('configuration')->group(function () {
+        Route::get('/report', 'report_config')->name('accountings.report_config');
+        Route::post('/general-store', 'general_config_store')->name('accountings.general_config_store');
+    });
 });
