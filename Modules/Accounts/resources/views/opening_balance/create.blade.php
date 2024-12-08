@@ -13,49 +13,20 @@ Opening Balance Entry
                 <div class="card">
                     <div class="card-body">
                         <form class="journal_create_form" method="POST" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-md-4 mb-3">
-                                    <label class="form-label">Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control date" name="date" id="date" value="{{date('d/m/Y')}}">
-                                </div>
-                                <div class="col-md-4 mb-3">
-                                    <label for="Concern Person" class="form-label">Concern Person</label>
-                                    <input type="text" class="form-control" name="concern_person" placeholder="Concern Person">
-                                    <span class="text-danger">{{$errors->first('concern_person')}}</span>
-                                </div>
-                                <div class="col-md-8 mb-3">
-                                    <label class="form-label">Narration</label>
-                                    <textarea class="form-control" id="narration" name="narration_voucher" placeholder="Narration ..." rows="2"></textarea>
-                                </div>
+                            <div class="row mb-2">
+                                <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person')"></x-common.input>
+                                <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..."></x-common.text-area>
                             </div>
                             <fieldset class="the-fieldset">
                                 <legend class="the-legend">Journal Details Information</legend>
                                 <div class="entry_row_div">
-                                    <div class="row new_added_row">                                    
-                                        <div class="col-md-4 mb-3">
-                                            <label class="form-label" for="">Ledger Accounts <span class="text-danger">*</span></label>
-                                            <select class="form-select account_id" name="account_id[]" required>
-                                                <option value="0">Select One</option>
-                                            </select>
-                                            <span class="text-danger" id="_error"></span>
-                                        </div>                                   
-                                        <div class="col-md-3 mb-3">
-                                            <label class="form-label" for="">Party Accounts <span class="text-danger">*</span></label>
-                                            <select class="form-select sub_account_id" name="sub_account_id[]" required>
-                                                <option value="0">Select One</option>
-                                            </select>
-                                            <span class="text-danger" id="_error"></span>
-                                        </div>
-                                        <div class="col-md-2 mb-3">
-                                            <label for="Narration" class="form-label">Debit <span class="text-danger">*</span></label>
-                                            <input type="number" min="0" step="0.0000001" class="form-control debit_amount" name="debit_amount[]" placeholder="0" value="0" required>
-                                            <span class="text-danger"></span>
-                                        </div>
-                                        <div class="col-md-2 mb-3">
-                                            <label for="Narration" class="form-label">Credit <span class="text-danger">*</span></label>
-                                            <input type="number" min="0" step="0.0000001" class="form-control credit_amount" name="credit_amount[]" placeholder="0" value="0" required>
-                                            <span class="text-danger"></span>
-                                        </div>
+                                    <div class="row new_added_row">  
+                                        <x-common.server-side-select :required="true" column=4 name="account_id[]" class="account_id" disableOptionText="Select Ledger Account" label="Ledger Accounts"></x-common.server-side-select>
+                                        <x-common.server-side-select :required="false" column=3 name="sub_account_id[]" class="sub_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
+                                        <x-common.input :required="true" column=2 name="debit_amount[]" class="debit_amount" type="number" step="0.01" label="Debit Amount" placeholder="Amount" :value="'0'"></x-common.input>                              
+                                        <x-common.input :required="true" column=2 name="credit_amount[]" class="credit_amount" type="number" step="0.01" label="Credit Amount" placeholder="Amount" :value="'0'"></x-common.input>                              
+                                         
                                         <div class="col-md-1 mb-3">
                                             <div class="d-block">
                                                 <label class="form-label" for=""> Action </label>
@@ -159,7 +130,6 @@ Opening Balance Entry
             });
 
             $(document).on('submit', '.journal_create_form', function(event){
-
                 event.preventDefault();
                 go_for_form_submit();
             });

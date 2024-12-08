@@ -19,7 +19,7 @@
                 
                 <div class="row" style="margin-top: 0px;">
                    <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
-                      {{-- <p class="mb-0">SSID : <span>{{$journal->id}}</span></p> --}}
+                      
                       <p class="mb-0">Date. :<span>{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
                       <p class="mb-0">Voucher No : <span>{{$journal->TypeName}}</span></p>
                    </div>

@@ -8,14 +8,6 @@ Voucher Print
     $credit_info = $journal->transactions()->where('type','Cr')->first();
 @endphp
 
-<div class="row mb-3">
-    <div style="text-align: center; font-size: 30px; font-weight: 300;">
-        <img src="{{asset($journal->branch->logo_path)}}" style="width: 120px;" alt="{{$journal->branch->name}}">
-    </div>
-    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->branch->location}} </div>
-    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->sub_concern->name}} </div>
-</div>
-
 <div class="row" style="margin-top: 5px;">
     <div class="col-4" style="font-size: 14px;">
           <p class="mb-0" style="border: 1px solid #000; padding: 5px;">TK. = {{number_format($journal->amount, 2)}}</p>

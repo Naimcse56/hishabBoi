@@ -78,10 +78,9 @@ class OpeningBalanceController extends Controller
                 $total_debit_amount += $debit_amount;
                 $debit_amounts[] = $debit_amount;
                 $debit_account_id[] = $request->account_id[$key];
-                $debit_sub_concern_id[] = $request->sub_concern_id;
-                $debit_partner_id[] = $request->sub_account_id[$key];
+                $debit_partner_id[] = isset($request->sub_account_id[$key]) ? $request->sub_account_id[$key] : 0;
                 $debit_work_order_id[] = 0;
-                $debit_narration[] = $request->narration_voucher;
+                $debit_narration[] = $request->narration;
             }
         }
         foreach ($request->credit_amount as $m => $credit_amount) {
@@ -89,10 +88,9 @@ class OpeningBalanceController extends Controller
                 $total_credit_amount += $credit_amount;
                 $credit_amounts[] = $credit_amount;
                 $credit_account_id[] = $request->account_id[$m];
-                $credit_sub_concern_id[] = $request->sub_concern_id;
-                $credit_partner_id[] = $request->sub_account_id[$m];
+                $credit_partner_id[] = $isset($request->sub_account_id[$m]) ? $request->sub_account_id[$m] : 0;
                 $credit_work_order_id[] = 0;
-                $credit_narration[] = $request->narration_voucher;
+                $credit_narration[] = $request->narration;
             }
         }
         $is_invoiced = 0;
@@ -113,9 +111,8 @@ class OpeningBalanceController extends Controller
                 'credit_work_order_id'=> $credit_work_order_id,
                 'credit_account_amount'=> $credit_amounts,
                 'credit_narration'=> $credit_narration,
-                'credit_sub_concern_id'=> isset($credit_sub_concern_id) ? $credit_sub_concern_id : 0,
                 'sub_concern_id'=> $request->sub_concern_id,
-                'narration_voucher'=> $request->narration_voucher,
+                'narration_voucher'=> $request->narration,
                 'referable_type'=> $referable_type,
                 'referable_id'=> $referable_id,
                 'is_invoiced'=> $is_invoiced,
@@ -127,7 +124,6 @@ class OpeningBalanceController extends Controller
                 'debit_sub_account_id'=> $debit_partner_id,
                 'debit_work_order_id'=> $debit_work_order_id,
                 'debit_account_amount'=> $debit_amounts,
-                'debit_sub_concern_id'=> isset($debit_sub_concern_id) ? $debit_sub_concern_id : 0,
                 'debit_narration'=> $debit_narration,
                 'is_approve' => 0,
             ]);
@@ -205,10 +201,9 @@ class OpeningBalanceController extends Controller
                 $total_debit_amount += $debit_amount;
                 $debit_amounts[] = $debit_amount;
                 $debit_account_id[] = $request->account_id[$key];
-                $debit_sub_concern_id[] = $request->sub_concern_id;
-                $debit_partner_id[] = $request->sub_account_id[$key];
+                $debit_partner_id[] = isset($request->sub_account_id[$key]) ? $request->sub_account_id[$key] : 0;
                 $debit_work_order_id[] = 0;
-                $debit_narration[] = $request->narration_voucher;
+                $debit_narration[] = $request->narration;
             }
         }
         foreach ($request->credit_amount as $m => $credit_amount) {
@@ -216,10 +211,9 @@ class OpeningBalanceController extends Controller
                 $total_credit_amount += $credit_amount;
                 $credit_amounts[] = $credit_amount;
                 $credit_account_id[] = $request->account_id[$m];
-                $credit_sub_concern_id[] = $request->sub_concern_id;
-                $credit_partner_id[] = $request->sub_account_id[$m];
+                $credit_partner_id[] = $isset($request->sub_account_id[$m]) ? $request->sub_account_id[$m] : 0;
                 $credit_work_order_id[] = 0;
-                $credit_narration[] = $request->narration_voucher;
+                $credit_narration[] = $request->narration;
             }
         }
         
@@ -241,9 +235,8 @@ class OpeningBalanceController extends Controller
                 'credit_work_order_id'=> $credit_work_order_id,
                 'credit_account_amount'=> $credit_amounts,
                 'credit_narration'=> $credit_narration,
-                'credit_sub_concern_id'=> isset($credit_sub_concern_id) ? $credit_sub_concern_id : 0,
                 'sub_concern_id'=> $request->sub_concern_id,
-                'narration_voucher'=> $request->narration_voucher,
+                'narration_voucher'=> $request->narration,
                 'referable_type'=> $referable_type,
                 'referable_id'=> $referable_id,
                 'is_invoiced'=> $is_invoiced,
@@ -254,7 +247,6 @@ class OpeningBalanceController extends Controller
                 'debit_sub_account_id'=> $debit_partner_id,
                 'debit_work_order_id'=> $debit_work_order_id,
                 'debit_account_amount'=> $debit_amounts,
-                'debit_sub_concern_id'=> isset($debit_sub_concern_id) ? $debit_sub_concern_id : 0,
                 'debit_narration'=> $debit_narration,
                 'is_approve' => 0,
             ], decrypt($id));

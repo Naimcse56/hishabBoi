@@ -60,24 +60,6 @@ Opening Balance List
                     lengthChange: true,
                 } );
                 $.fn.dataTable.ext.errMode = () => alert('Error while loading the table data. Please refresh');
-                
-				// $('#dataTable').DataTable({
-				// 	processing: true,
-				// 	serverSide: true,
-				// 	ajax: "{{ route('opening-balance.index') }}",
-                //     dom:'lBfrtip',
-				// 	columns: [
-				// 		{data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-				// 		{data: 'date', name: 'date'},
-				// 		{data: 'txn_id', name: 'txn_id'},
-				// 		{data: 'narration', name: 'narration'},
-				// 		{data: 'amount', name: 'amount'},
-				// 		{data: 'action', name: 'action', orderable: false, searchable: false},
-				// 	],
-                //     responsive: false,
-                //     lengthChange: false,
-                //     buttons: [ 'copy', 'excel', 'pdf', 'print']
-				// }).buttons().container().appendTo('#dataTable_wrapper .col-md-6:eq(0)');
 
             });
             $(document).on('click','.detail_info', function(){
