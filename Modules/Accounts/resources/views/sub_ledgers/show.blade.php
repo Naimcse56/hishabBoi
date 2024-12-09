@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-success">
-                <h5 class="modal-title">Party Account Information</h5>
+                <h5 class="modal-title">{{$ledger->type}} Account Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -14,19 +14,7 @@
                             <tbody>
                                 <tr>
                                     <td width="30%">Head Account</td>
-                                    <td>
-                                        @if ($ledger->supplier > 0)
-                                            {{$ledger->supplier_info->name}}
-                                        @elseif ($ledger->customer > 0)  
-                                            {{$ledger->customer_info->name}}
-                                        @elseif ($ledger->member > 0)
-                                            {{$ledger->member_info->name}}
-                                        @elseif ($ledger->land_owner > 0)
-                                            {{$ledger->land_owner_info->name}}
-                                        @else
-                                            {{$ledger->ledger->name}}
-                                        @endif
-                                    </td>
+                                    <td>{{$ledger->ledger->name}}</td>
                                 </tr>
                                 <tr>
                                     <td>Party Name</td>

@@ -17,7 +17,7 @@ Party Accounts
                         <thead>
                             <tr>
                                 <th width="4%">#</th>
-                                <th>Type</th>
+                                <th>Party Type</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Code</th>

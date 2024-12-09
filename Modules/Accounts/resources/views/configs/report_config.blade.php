@@ -11,7 +11,7 @@ Configuration
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('accountings.general_config_store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('accountings.general-config-store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <fieldset class="the-fieldset mt-2">
                                 <legend class="the-legend">Income Statement Section</legend>

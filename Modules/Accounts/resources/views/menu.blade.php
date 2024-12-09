@@ -38,8 +38,8 @@
         </a>
         <div class="collapse" id="collapseAccountingConfig" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link @if (Route::is('accountings.report_config')) active @endif" href="{{route('accountings.report_config')}}">Report</a>
-                <a class="nav-link @if (Route::is('multi-bank-payment.*')) active @endif" href="{{route('multi-bank-payment.index')}}">Day Close</a>
+                <a class="nav-link @if (Route::is('accountings.report-config')) active @endif" href="{{route('accountings.report-config')}}">Report</a>
+                <a class="nav-link @if (Route::is('accountings.day_closing_list')) active @endif" href="{{route('accountings.day_closing_list')}}">Day Close</a>
                 <a class="nav-link @if (Route::is('multi-cash-receive.*')) active @endif" href="javascript">Fiscal Year</a>
             </nav>
         </div>

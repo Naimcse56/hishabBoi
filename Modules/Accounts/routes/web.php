@@ -12,6 +12,7 @@ use Modules\Accounts\App\Http\Controllers\CashReceiveJournalController;
 use Modules\Accounts\App\Http\Controllers\BankReceiveJournalController;
 use Modules\Accounts\App\Http\Controllers\JournalController;
 use Modules\Accounts\App\Http\Controllers\OpeningBalanceController;
+use Modules\Accounts\App\Http\Controllers\AccountsPeriodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -149,7 +150,13 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/print/{id}', 'print')->name('opening-balance.print');
     });
     Route::controller(AccountsController::class)->prefix('configuration')->group(function () {
-        Route::get('/report', 'report_config')->name('accountings.report_config');
-        Route::post('/general-store', 'general_config_store')->name('accountings.general_config_store');
+        Route::get('/report', 'report_config')->name('accountings.report-config');
+        Route::post('/general-store', 'general_config_store')->name('accountings.general-config-store');
+    });
+    Route::controller(AccountsPeriodController::class)->group(function () {
+        Route::get('/day-closing', 'day_closing_list')->name('accountings.day_closing_list');
+        Route::get('/day-closing-current-date', 'day_closing_current_date')->name('accountings.day_closing_current_date');
+        Route::post('/day-closing-now', 'day_closing_confirm')->name('accountings.day_closing_confirm');
+        Route::get('/day-closing-check/{id}', 'day_closing_check')->name('accountings.day_closing_check');
     });
 });

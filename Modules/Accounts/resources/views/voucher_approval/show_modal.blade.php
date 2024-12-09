@@ -9,11 +9,6 @@
             </div>
             <div class="modal-body p-5 pt-0 pb-0">
                 <div class="row mb-0">
-                    {{-- <div style="text-align: center; font-size: 30px; font-weight: 300;">
-                        <img src="{{asset($journal->branch->logo_path)}}" style="width: 120px;" alt="{{$journal->branch->name}}">
-                    </div>
-                    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->branch->location}} </div>
-                    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->sub_concern->name}} </div> --}}
                     <div style="text-align: center; font-size: 14px; font-weight: 300;"> VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 

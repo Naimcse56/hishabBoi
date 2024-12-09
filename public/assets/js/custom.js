@@ -56,7 +56,7 @@
           text: "You want to delete "+title,
           icon: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
+          confirmButtonColor: "#3852cd",
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, Delete it!"
       }).then((result) => {
@@ -94,7 +94,7 @@
           text: "You want to approve "+title,
           icon: "warning",
           showCancelButton: true,
-          confirmButtonColor: "#3085d6",
+          confirmButtonColor: "#3852cd",
           cancelButtonColor: "#d33",
           confirmButtonText: "Yes, Approve It!"
       }).then((result) => {
@@ -147,7 +147,7 @@
               text: "You want to "+approval+" "+title,
               icon: "warning",
               showCancelButton: true,
-              confirmButtonColor: "#3085d6",
+              confirmButtonColor: "#3852cd",
               cancelButtonColor: "#d33",
               confirmButtonText: "Yes!"
           }).then((result) => {
@@ -183,6 +183,46 @@
       } else {
           toastr.error('Select Voucher First!');
       }    
+  };
+  
+  const closeDayAccounting = function(title, route, id) {
+      Swal.fire({
+          title: "Are you sure?",
+          text: "Day Closing "+title,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3852cd",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Close it now!"
+      }).then((result) => {
+          if (result.isConfirmed) {
+              $.ajax({
+                  type: 'POST',
+                  url: route,
+                  data: {
+                      _token: APP_TOKEN,
+                      id: id,
+                  },
+                  success: function(response) {
+                      console.log(response);
+                      Swal.fire({
+                          title: "Success",
+                          text: response.message,
+                          icon: "success"
+                      }).then((result) => {
+                          // Check if the user clicked "OK"
+                          if (result.isConfirmed) {
+                              // Reload the page
+                              location.reload();
+                          }
+                      });
+                  },
+                  error: function(error) {
+                      console.error(error);
+                  }
+              });
+          }
+      });
   };
 
   // Check when the page is loaded
