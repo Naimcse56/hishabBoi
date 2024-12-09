@@ -86,7 +86,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="javascript:;" class="btn btn-sm btn-primary" id="add_new_line">Add New Row</a>
+                                    <a href="javascript:;" class="btn btn-sm btn-success" id="add_new_line">Add New Row</a>
                                 </div>
                             </div>
                             <div class="row">
