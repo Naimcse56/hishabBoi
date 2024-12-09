@@ -49,21 +49,21 @@
         </a>
         <div class="collapse" id="collapseReportsAccounting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link @if (0) active @endif" href="{{route('voucher.approval_index')}}">Cashbook</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Bankbook</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Ledger Report</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Party Report</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Party Summary</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Party Type</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Work Order Report</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Summary</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Profit Loss</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Asset and Liability</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Receipt & Payment</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Receipt & Payment Report</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Balance Sheet</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Trial Balance</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Income Statement</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Cashbook</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.bankbook')}}">Bankbook</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Ledger Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Summary</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Type</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Work Order Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Summary</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Profit Loss</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Asset and Liability</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Receipt & Payment</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Receipt & Payment Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Balance Sheet</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Trial Balance</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Income Statement</a>
             </nav>
         </div>
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccountingConfig" aria-expanded="false" aria-controls="collapseAccountingConfig">

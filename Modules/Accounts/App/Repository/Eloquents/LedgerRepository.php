@@ -50,8 +50,6 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
             $items = $items->where('type', 3);
         } elseif ($type == "income") {
             $items = $items->where('type', 4);
-        } elseif ($type == "cost_center") {
-            $items = $items->where('is_cost_center',1);
         } elseif ($type == "cash_other") {
             $items = $items->whereIn('acc_type',['cash','others']);
         } elseif ($type == "bank_other") {

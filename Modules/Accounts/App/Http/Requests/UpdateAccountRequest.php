@@ -41,7 +41,6 @@ class UpdateAccountRequest extends FormRequest
         return [
             'acc_type.in' => 'The Account Type must be one of the following types: :values',
             'acc_type.in' => 'The Account Type must be one of the following types: :values',
-            'is_cost_center.in' => 'The :attribute must be one of the following types: :values',
         ];
     }
 

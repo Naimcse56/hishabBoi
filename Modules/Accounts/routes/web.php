@@ -177,4 +177,8 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/multiple-approve-now', 'multiple_approve_now')->name('voucher.multiple_approve_now');
         Route::get('/accountant', 'rejected_by_accountant_index')->name('reject_by_accountant.index');
     });
+    Route::controller(AccountsController::class)->prefix('/reports')->group(function () {
+        Route::get('/cashbook', 'cashbook')->name('accountings.cashbook');
+        Route::get('/bankbook', 'bankbook')->name('accountings.bankbook');
+    });
 });
