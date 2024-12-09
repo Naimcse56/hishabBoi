@@ -33,14 +33,37 @@
                 <a class="nav-link @if (Route::is('opening-balance.*')) active @endif" href="{{route('opening-balance.index')}}">Opening Balance</a>
             </nav>
         </div>
-        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseApprovalConfig" aria-expanded="false" aria-controls="collapseApprovalConfig">
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseApprovalAccounting" aria-expanded="false" aria-controls="collapseApprovalAccounting">
             Approval
             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
-        <div class="collapse" id="collapseApprovalConfig" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+        <div class="collapse" id="collapseApprovalAccounting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link @if (Route::is('voucher.approval_index')) active @endif" href="{{route('voucher.approval_index')}}">Pending</a>
                 <a class="nav-link @if (Route::is('reject_by_accountant.index')) active @endif" href="{{route('reject_by_accountant.index')}}">Rejected</a>
+            </nav>
+        </div>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReportsAccounting" aria-expanded="false" aria-controls="collapseReportsAccounting">
+            Reports
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapseReportsAccounting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (0) active @endif" href="{{route('voucher.approval_index')}}">Cashbook</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Bankbook</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Ledger Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Party Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Party Summary</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Party Type</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Work Order Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Summary</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Profit Loss</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Asset and Liability</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">W/O Receipt & Payment</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Receipt & Payment Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Balance Sheet</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Trial Balance</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('reject_by_accountant.index')}}">Income Statement</a>
             </nav>
         </div>
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccountingConfig" aria-expanded="false" aria-controls="collapseAccountingConfig">
