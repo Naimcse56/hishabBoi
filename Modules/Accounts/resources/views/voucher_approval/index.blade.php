@@ -12,9 +12,7 @@ Vouchers Checking
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control amount" name="amount" id="amount" value="" placeholder="Search with Amount">
-                            </div>
+                            <x-common.input :required="false" column=12 id="amount" name="amount" label="Search with Amount" placeholder="Search with Amount" :value="old('amount')"></x-common.input>
                         </div>
                     </div>
                 </div>
@@ -71,7 +69,6 @@ Vouchers Checking
                 var table = $('#dataTable').DataTable( {
 					processing: true,
 					serverSide: true,
-					// ajax: "{{ route('voucher.approval_index') }}",
                     'ajax': {
                         url: "{{ route('voucher.approval_index') }}",
                         "data": function (d) {
