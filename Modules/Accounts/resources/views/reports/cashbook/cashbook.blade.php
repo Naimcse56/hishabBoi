@@ -7,8 +7,9 @@ Cash Book
         <div class="d-flex justify-content-between">
             <h4 class="mt-4">Cash Book</h4>
             <div>
-                <a href="javascript:;" class="btn btn-info filter_by"><i class="bx bx-filter-alt"></i></a>
-                <a href="{{strpos($_SERVER['REQUEST_URI'], '?') == true ? Illuminate\Support\Facades\Request::fullUrl().'&print=1' : Illuminate\Support\Facades\Request::fullUrl().'?print=1' }}" class="btn btn-warning" target="_blank"><i class="bx bx-printer"></i></a>
+                <a href="{{route('accountings.cashbook')}}" class="btn btn-sm btn-primary mt-4 filter_by"><i class="fa fa-hourglass"></i></a>
+                <a href="javascript:;" class="btn btn-sm btn-primary mt-4 filter_by"><i class="fa fa-filter"></i></a>
+                <a href="{{strpos($_SERVER['REQUEST_URI'], '?') == true ? Illuminate\Support\Facades\Request::fullUrl().'&print=1' : Illuminate\Support\Facades\Request::fullUrl().'?print=1' }}" class="btn btn-sm btn-primary mt-4" target="_blank"><i class="fa fa-print"></i></a>
             </div>
         </div>
         <div class="row">
@@ -17,47 +18,17 @@ Cash Book
                     <div class="card-body">
                         <form class="form" method="GET" action="{{route('accountings.cashbook')}}">
                             <div class="row">
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="">Select Cash Account <span class="text-danger">*</span></label>
-                                    <select class="form-select debit_account_id" name="bank_id" id="bank_id" required>
-                                        @isset($filtered_account)
-                                            <option value="{{$filtered_account->id}}">{{$filtered_account->name}}</option>
-                                        @else
-                                            <option value="0">Select An Account</option>
-                                        @endisset
-                                    </select>
-                                    <span class="text-danger" id="bank_id_error"></span>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">From Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control date" name="start_date" id="start_date" value="{{request('start_date') ? request('start_date') : date('d/m/Y', strtotime(app('day_closing_info')->from_date))}}">
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label">To Date <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control date" name="end_date" id="end_date" value="{{request('end_date') ? request('end_date') : date('d/m/Y')}}">
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="">Select Type <span class="text-danger">*</span></label>
-                                    <select class="form-select main_select_2" name="type" id="type" required>
-                                        <option value="member" @selected(request('type') == "member")>Member</option>
-                                        <option value="customer" @selected(request('type') == "customer")>Client</option>
-                                        <option value="supplier" @selected(request('type') == "supplier")>Supplier</option>
-                                    </select>
-                                    <span class="text-danger" id="account_id_error"></span>
-                                </div>
-                                <div class="col-md-3 mb-3">
-                                    <label class="form-label" for="">Select Party A/C</label>
-                                    <select class="form-select party_id" name="party_id" id="party_id" required>
-                                        @isset($party)
-                                            <option value="{{$party->id}}">{{$party->name}}</option>
-                                        @else
-                                            <option value="0">Select An Account</option>
-                                        @endisset
-                                    </select>
-                                    <span class="text-danger" id="party_id_error"></span>
-                                </div>
+                                <x-common.server-side-select :required="true" column=4 name="cash_account_id" class="bank_id" disableOptionText="Select Cash Account" label="Cash Accounts"></x-common.server-side-select>
+                                <x-common.date-picker label="From Date" :required="true" column=4 name="start_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.date-picker label="To Date" :required="true" column=4 name="end_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                <x-common.select :required="true" column=4 name="type" class="type" label="Type" placeholder="Type" :value="'Client'" :options="[
+                                ['id' => 'Client', 'name' => 'Client'],
+                                ['id' => 'Vendor', 'name' => 'Vendor'],
+                                ['id' => 'Staff', 'name' => 'Staff']
+                                ]"></x-common.select>
+                                <x-common.server-side-select :required="false" column=4 name="party_id" class="party_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
                                 <div class="col-md-12 mb-3">
-                                    <button type="submit" class="btn btn-primary"><i class="bx bx-search"></i>Search</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                                 </div>
                             </div>
                         </form>
