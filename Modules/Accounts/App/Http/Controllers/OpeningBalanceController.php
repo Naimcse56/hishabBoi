@@ -278,42 +278,4 @@ class OpeningBalanceController extends Controller
             return response()->json(['error' => $e->getMessage()]);
         }
     }
-
-    public function add_new_line()
-    {
-        $row_cash_flow = '';
-        $output = '';
-
-        $row_count = request()->get('row', 2);
-
-        $output = '<div class="row new_added_row">
-                    <div class="col-md-4 mb-3">
-                        <select class="form-select account_id" name="account_id[]" required>
-                            <option value="0">Select One</option>
-                        </select>
-                        <span class="text-danger" id="_error"></span>
-                    </div>                                   
-                    <div class="col-md-3 mb-3">
-                        <select class="form-select sub_account_id" name="sub_account_id[]" required>
-                            <option value="0">Select One</option>
-                        </select>
-                        <span class="text-danger" id="_error"></span>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <input type="number" min="0" step="0.0000001" class="form-control debit_amount" name="debit_amount[]" placeholder="0" value="0" required>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="col-md-2 mb-3">
-                        <input type="number" min="0" step="0.0000001" class="form-control credit_amount" name="credit_amount[]" placeholder="0" value="0" required>
-                        <span class="text-danger"></span>
-                    </div>
-                    <div class="col-md-1 mb-3">
-                        <div class="d-block">
-                            <div>
-                                <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="fa fa-trash"></i></a>
-                            </div>
-                        </div>
-                    </div></div>';
-        return response()->json($output);
-    }
 }

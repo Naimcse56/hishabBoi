@@ -1,24 +1,41 @@
 @extends('layouts.admin_app')
 @section('title')
-General Journal Edit
+    Journal Edit
 @endsection
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
-            <div><h4 class="mt-4">Edit General Journal</h4></div>
-            <div><a href="{{route('journal.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
+            <div><h4 class="mt-4">Edit W/O Journal</h4></div>
+            <div><a href="{{route('journal.work_order.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> List</a></div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="journal_update_form" method="POST">
+                        <form class="journal_update_form" method="POST" enctype="multipart/form-data">
                             <div class="row mb-2">
                                 <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime($journal->date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.input :required="false" column=4 id="concern_person" name="concern_person" label="Concern Person" placeholder="Concern Person" :value="old('concern_person', $journal->concern_person)"></x-common.input>
                                 <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..." :value="$journal->narration"></x-common.text-area>
                             </div>
                             <input type="hidden" id="rowId" value="{{$journal->id}}">
+                            @php
+                                $credit_account = $journal->transactions->first();
+                            @endphp
+                            <fieldset class="the-fieldset mb-2">
+                                <legend class="the-legend">Work Order Information</legend>
+                                <div class="row">
+                                    <x-common.server-side-select :required="true" column=4 name="customer_id" class="customer" disableOptionText="Select Client Account" label="Client Account" :options="[
+                                                ['id' => $credit_account->work_order->sub_ledger_id, 'name' => $credit_account->work_order->sub_ledger->name]
+                                            ]" :value="$credit_account->work_order->sub_ledger_id"></x-common.server-side-select>
+                                    <x-common.server-side-select :required="true" column=4 name="work_order_id" class="work_order_id" disableOptionText="Select Work Order" label="Work Order" :options="[
+                                                ['id' => $credit_account->work_order_id, 'name' => $credit_account->work_order->order_name]
+                                            ]" :value="$credit_account->work_order_id"></x-common.server-side-select>
+                                    <x-common.server-side-select :required="true" column=4 name="work_order_id" class="work_order_id" disableOptionText="Select Site" label="Work Order Site" :options="[
+                                                ['id' => $credit_account->work_order_site_detail_id, 'name' => $credit_account->work_order_site_detail->site_name]
+                                            ]" :value="$credit_account->work_order_site_detail_id"></x-common.server-side-select>
+                                </div>
+                            </fieldset>
                             <fieldset class="the-fieldset mb-2">
                                 <legend class="the-legend">Journal Details Information</legend>
                                 <div class="entry_row_div">
@@ -69,7 +86,7 @@ General Journal Edit
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="javascript:;" class="btn btn-sm btn-success" id="add_new_line">Add New Row</a>
+                                    <a href="javascript:;" class="btn btn-sm btn-primary" id="add_new_line">Add New Row</a>
                                 </div>
                             </div>
                             <div class="row">
@@ -83,7 +100,7 @@ General Journal Edit
         <div id="ajaxDiv"></div>
         <input type="hidden" value="{{route('ledger.transactional_list_for_select')}}" id="ledger_list_select_option">
         <input type="hidden" value="{{ route("journal.add_new_line") }}" id="add_new_entry">
-        <input type="hidden" value="{{route('journal.update', encrypt($journal->id))}}" id="journal_update_url">
+        <input type="hidden" value="{{route('journal.work_order.update', encrypt($journal->id))}}" id="journal_update_url">
     </div>
 @endsection
 @push('scripts')
@@ -95,7 +112,7 @@ General Journal Edit
             var inputTimeout;
 
             $(document).ready(function(){
-                
+                getCustomer();
                 getMainAccount();
                 getPartners();
             });
@@ -152,16 +169,19 @@ General Journal Edit
                     credit_amounts_sum = parseFloat(credit_amounts_sum) + parseFloat(credit_amounts[i]);
                 }
                 if (parseFloat(credit_amounts_sum) == parseFloat(debit_amounts_sum)) {
-                    go_for_form_submit(this);
+                    go_for_form_submit();
                 }
                 else {
                     toastr.error('Debit and credit mismatched')
                 }
             });
 
-            function go_for_form_submit(form){
+            function go_for_form_submit(){
                 let formElement = $('.journal_update_form').serializeArray()
-                let formData = new FormData(form);
+                let formData = new FormData();
+                formElement.forEach(element => {
+                    formData.append(element.name,element.value);
+                });
                 formData.append('_token',APP_TOKEN);
                 $.ajax({
                     url: $('#journal_update_url').val(),
@@ -257,6 +277,7 @@ General Journal Edit
                                     search: params.term,
                                     page: params.page || 1,
                                     type: "transactional",
+                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },
@@ -279,6 +300,74 @@ General Journal Edit
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
+                                    branch_id: $(".branch_id").val()
+                                }
+                                return query;
+                        },
+                        cache: false
+                    },
+                    escapeMarkup: function (m) {
+                        return m;
+                    }
+                });
+            }
+
+            $(".work_order_id").select2({
+                ajax: {
+                    url: '{{route('work-order.list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                branch_id: $(".branch_id").val(),
+                                sub_ledger_id: $(".customer").val()
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+
+            $(".work_order_site_detail_id").select2({
+                ajax: {
+                    url: '{{route('work-order-sites.list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                branch_id: $(".branch_id").val(),
+                                work_order_id: $(".work_order_id").val()
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            function getCustomer(){
+                $(".customer").select2({
+                    ajax: {
+                        url: "{{route('sub-ledger.transactional_list_for_select')}}",
+                        type: "get",
+                        dataType: 'json',
+                        delay: 250,
+                        data: function (params) {
+                                var query = {
+                                    search: params.term,
+                                    page: params.page || 1,
+                                    type: 'customer',
+                                    branch_id: $(".branch_id").val()
                                 }
                                 return query;
                         },

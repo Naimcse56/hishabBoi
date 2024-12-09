@@ -13,6 +13,7 @@ use Modules\Accounts\App\Http\Controllers\BankReceiveJournalController;
 use Modules\Accounts\App\Http\Controllers\JournalController;
 use Modules\Accounts\App\Http\Controllers\OpeningBalanceController;
 use Modules\Accounts\App\Http\Controllers\AccountsPeriodController;
+use Modules\Accounts\App\Http\Controllers\JournalWorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,7 +147,6 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/show/{id}', 'show')->name('opening-balance.show');
         Route::post('/update/{id}', 'update')->name('opening-balance.update');
         Route::post('/delete', 'destroy')->name('opening-balance.delete');
-        Route::get('/add-new-row-entry', 'add_new_line')->name('opening-balance.add_new_line');
         Route::get('/print/{id}', 'print')->name('opening-balance.print');
     });
     Route::controller(AccountsController::class)->prefix('configuration')->group(function () {
@@ -158,5 +158,15 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/day-closing-current-date', 'day_closing_current_date')->name('accountings.day_closing_current_date');
         Route::post('/day-closing-now', 'day_closing_confirm')->name('accountings.day_closing_confirm');
         Route::get('/day-closing-check/{id}', 'day_closing_check')->name('accountings.day_closing_check');
+    });
+    Route::controller(JournalWorkOrderController::class)->prefix('/journal/work-order-based')->group(function () {
+        Route::get('/index', 'index')->name('journal.work_order.index');
+        Route::get('/create', 'create')->name('journal.work_order.create');
+        Route::post('/store', 'store')->name('journal.work_order.store');
+        Route::get('/edit/{id}', 'edit')->name('journal.work_order.edit');
+        Route::get('/show/{id}', 'show')->name('journal.work_order.show');
+        Route::post('/update/{id}', 'update')->name('journal.work_order.update');
+        Route::post('/delete', 'destroy')->name('journal.work_order.delete');
+        Route::get('/print/{id}', 'print')->name('journal.work_order.print');
     });
 });
