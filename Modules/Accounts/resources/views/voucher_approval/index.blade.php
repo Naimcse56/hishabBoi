@@ -8,7 +8,7 @@ Vouchers Checking
             <h4 class="mt-4">Vouchers Checking List</h4>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -26,10 +26,10 @@ Vouchers Checking
                             <table id="dataTable" class="table table-striped table-bordered data-table" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>
                                         <th width="10%">TXN ID</th>
                                         <th width="60%">Details</th>
                                         <th>Status</th>
-                                        <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>
                                         <th>Rejection Comment</th>
                                         <th width="5%">Action</th>
                                     </tr>
@@ -81,11 +81,10 @@ Vouchers Checking
                         }
                     },
 					columns: [
-						// {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+						{data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
 						{data: 'txn_id', name: 'txn_id'},
 						{data: 'details', name: 'details'},
 						{data: 'status', name: 'status', searchable: false},
-						{data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
 						{data: 'comment', name: 'comment', searchable: false},
 						{data: 'action', name: 'action', orderable: false, searchable: false, printable:false},
 					],

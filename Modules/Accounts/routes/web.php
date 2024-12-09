@@ -169,4 +169,12 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('journal.work_order.delete');
         Route::get('/print/{id}', 'print')->name('journal.work_order.print');
     });
+    Route::controller(VouchersController::class)->prefix('/voucher-approval')->group(function () {
+        Route::get('/index', 'approval_index')->name('voucher.approval_index');
+        Route::get('/show/{id}', 'show')->name('voucher.show');
+        Route::post('/delete', 'destroy')->name('voucher.delete');
+        Route::post('/approve-now', 'approve_now')->name('voucher.approve_now');
+        Route::post('/multiple-approve-now', 'multiple_approve_now')->name('voucher.multiple_approve_now');
+        Route::get('/accountant', 'rejected_by_accountant_index')->name('reject_by_accountant.index');
+    });
 });

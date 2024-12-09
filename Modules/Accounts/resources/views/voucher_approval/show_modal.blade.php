@@ -3,7 +3,7 @@
 <div class="modal fade" id="voucher_info_modal" tabindex="-1" style="display: none;" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header bg-success-subtle">
+            <div class="modal-header bg-success">
                 <h5 class="modal-title">Details : {{$journal->TypeName}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

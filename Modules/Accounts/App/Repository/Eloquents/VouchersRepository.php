@@ -13,21 +13,33 @@ use Carbon\Carbon;
 
 class VouchersRepository
 {
-    public function listForApprovedDataTable()
+    public function listForDataTable($amount)
     {
         
+        if (auth()->user()->employee || auth()->id() == 1) {
+            return Voucher::with(['transactions','transactions.ledger:id,name,code','transactions.sub_ledger:id,name,code','transactions.work_order'])
+                            ->where('is_approve', 0)
+                            ->when($amount > 0, function ($q) use ($amount) {
+                                return $q->where('amount',$amount);
+                            })->orderBy('id','asc');
+        } else {
+            abort(404);
+        }
+    }
+
+    public function listForApprovedDataTable()
+    {
         if (auth()->user()->employee || auth()->id() == 1) {
             return Voucher::where('is_approve','!=', 0)->orderBy('id','asc');
         } else {
             abort(404);
         }
     }
+
     public function listForRejectedVoucherAccountant()
-    {
-        
+    {        
         if (auth()->user()->employee || auth()->id() == 1) {
             return Voucher::with(['transactions:id,voucher_id,ledger_id,sub_ledger_id,type','transactions.ledger:id,name','transactions.sub_ledger:id,name'])
-                            ->whereNotIn('panel',['intercom_loan'])
                             ->where('is_approve', 2)
                             ->orderBy('id','asc');
         } else {
