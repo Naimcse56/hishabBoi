@@ -56,9 +56,9 @@
                 <a class="nav-link @if (Route::is('accountings.sub_ledger_summary_report')) active @endif" href="{{route('accountings.sub_ledger_summary_report')}}">Party Summary</a>
                 <a class="nav-link @if (Route::is('accountings.work_order_report')) active @endif" href="{{route('accountings.work_order_report')}}">Work Order Report</a>
                 <a class="nav-link @if (Route::is('accountings.work_order_summary_report')) active @endif" href="{{route('accountings.work_order_summary_report')}}">W/O Summary</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Profit Loss</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Asset and Liability</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Receipt & Payment</a>
+                <a class="nav-link @if (Route::is('work-orders.pl_report')) active @endif" href="{{route('work-orders.pl_report')}}">W/O Profit Loss</a>
+                <a class="nav-link @if (Route::is('work-orders.balance_sheet_report')) active @endif" href="{{route('work-orders.balance_sheet_report')}}">W/O Asset and Liability</a>
+                <a class="nav-link @if (Route::is('work-orders.receive_payment_report')) active @endif" href="{{route('work-orders.receive_payment_report')}}">W/O Receipt & Payment</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Receipt & Payment Report</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Balance Sheet</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Trial Balance</a>

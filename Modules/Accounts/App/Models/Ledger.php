@@ -147,4 +147,21 @@ class Ledger extends Model
         return $this->transactions->where('type', 'Cr')->where('date' ,$fromDate)->sum('credit');
     }
 
+    public function TransactionBalanceAmountBetweenDate($fromDate, $toDate, $work_order_id = null)
+    {
+        if ($this->type == 1 || $this->type == 3) {
+            return $this->transactions->when($work_order_id != null, function ($q) use ($work_order_id) {
+                    return $q->where('work_order_id', $work_order_id);
+                })->whereBetween('date', array($fromDate, $toDate))->where('type', 'Dr')->sum('amount') - $this->transactions->when($work_order_id != null, function ($q) use ($work_order_id) {
+                    return $q->where('work_order_id', $work_order_id);
+                })->whereBetween('date', array($fromDate, $toDate))->where('type', 'Cr')->sum('amount');
+        } else {
+            return $this->transactions->when($work_order_id != null, function ($q) use ($work_order_id) {
+                    return $q->where('work_order_id', $work_order_id);
+                })->whereBetween('date', array($fromDate, $toDate))->where('type', 'Cr')->sum('amount') - $this->transactions->when($work_order_id != null, function ($q) use ($work_order_id) {
+                    return $q->where('work_order_id', $work_order_id);
+                })->whereBetween('date', array($fromDate, $toDate))->where('type', 'Dr')->sum('amount');
+        }
+    }
+
 }

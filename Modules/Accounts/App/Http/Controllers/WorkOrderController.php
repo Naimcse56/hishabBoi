@@ -165,7 +165,6 @@ class WorkOrderController extends Controller
         if ($request->work_order_id > 0) {
             $work_order_id = $request->work_order_id > 0 ? $request->work_order_id : null;
             $data['work_order'] = $this->workOrderInterface->findById($work_order_id);
-            $data['filtered_branch'] = $data['work_order']->branch;
             $ledgers = Ledger::with(['categories_base_on_transaction:id,parent_id,name,code,type,acc_type,view_in_bs,view_in_is,level'])->get(['id','name','code','parent_id','acc_type','view_in_bs','view_in_is','type','level']);
         
             $data['dateFrom'] = $start_date;
@@ -206,7 +205,6 @@ class WorkOrderController extends Controller
         if ($request->work_order_id > 0) {
             $work_order_id = $request->work_order_id > 0 ? $request->work_order_id : null;
             $data['work_order'] = $this->workOrderInterface->findById($work_order_id);
-            $data['filtered_branch'] = $data['work_order']->branch;
             $ledgers = Ledger::with(['categories_base_on_transaction:id,parent_id,name,code,type,acc_type,view_in_bs,view_in_is,level'])->whereNotIn('id',[app('account_configurations')['retail_earning_account']])->get(['id','name','code','parent_id','acc_type','view_in_bs','view_in_is','type','level']);
         
             $data['dateFrom'] = $start_date;
@@ -277,7 +275,6 @@ class WorkOrderController extends Controller
         if ($request->work_order_id > 0) {
             $work_order_id = $request->work_order_id > 0 ? $request->work_order_id : null;
             $data['work_order'] = $this->workOrderInterface->findById($work_order_id);
-            $data['filtered_branch'] = $data['work_order']->branch;
             $data['accounts'] = Ledger::withOnly(['categories.parent:id,name','categories:id,parent_id,name,code,type'])->where('parent_id', 0)->get(['id','parent_id','name','code','type','acc_type','ac_no']);
             $cash_accounts = Ledger::whereIn('acc_type', ['cash'])->get(['id'])->pluck('id');
             $bank_accounts = Ledger::whereIn('acc_type', ['bank'])->get(['id'])->pluck('id');
