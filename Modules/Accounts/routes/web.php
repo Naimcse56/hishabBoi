@@ -180,5 +180,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
     Route::controller(AccountsController::class)->prefix('/reports')->group(function () {
         Route::get('/cashbook', 'cashbook')->name('accountings.cashbook');
         Route::get('/bankbook', 'bankbook')->name('accountings.bankbook');
+        Route::get('/ledger-report', 'ledger_report')->name('accountings.ledger_report');
+        Route::get('/party-accounts-report', 'sub_ledger_report')->name('accountings.sub_ledger_report');
     });
 });

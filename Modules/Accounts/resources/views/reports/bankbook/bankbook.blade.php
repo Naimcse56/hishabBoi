@@ -7,7 +7,7 @@ Bank Book
         <div class="d-flex justify-content-between">
             <h4 class="mt-4">Bank Book</h4>
             <div>
-                <a href="{{route('accountings.bankbook')}}" class="btn btn-sm btn-primary mt-4 filter_by"><i class="fa fa-hourglass"></i></a>
+                <a href="{{route('accountings.bankbook')}}" class="btn btn-sm btn-primary mt-4 filter_by"><i class="fa fa-refresh"></i></a>
                 <a href="javascript:;" class="btn btn-sm btn-primary filter_by mt-4"><i class="fa fa-filter"></i></a>
                 <a href="{{strpos($_SERVER['REQUEST_URI'], '?') == true ? Illuminate\Support\Facades\Request::fullUrl().'&print=1' : Illuminate\Support\Facades\Request::fullUrl().'?print=1' }}" class="btn btn-sm btn-primary mt-4" target="_blank"><i class="fa fa-print"></i></a>
             </div>

@@ -51,8 +51,8 @@
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Cashbook</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.bankbook')}}">Bankbook</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Ledger Report</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.ledger_report')}}">Ledger Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.sub_ledger_report')}}">Party Report</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Summary</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Type</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Work Order Report</a>

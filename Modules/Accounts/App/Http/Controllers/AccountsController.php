@@ -60,7 +60,7 @@ class AccountsController extends Controller
                                             return $q->where('sub_ledger_id', $request->party_id);
                                         })->whereIn('ledger_id', $cash_account_ids)->whereBetween('date',[$start_date,$end_date])
                                         ->with(['ledger:id,name,code', 'voucher:id,type,txn_id,f_year,is_opening,date','voucher.transactions:id,voucher_id,type,amount,ledger_id,sub_ledger_id','voucher.transactions.ledger:id,name,code','work_order:id,order_name,order_no,sub_ledger_id','work_order.sub_ledger:id,name','work_order_site_detail:id,site_name'])
-                                        ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_detail_id']);
+                                        ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_id']);
             $data['transactions'] = collect($this->getDataFormatCashBankBookLedger($transactions));
         }
         $data['dateFrom'] = $start_date;
@@ -90,7 +90,7 @@ class AccountsController extends Controller
                                             return $q->where('sub_ledger_id', $request->party_id);
                                         })->whereIn('ledger_id',$bank_account_ids)
                                         ->with(['ledger:id,name,code', 'voucher:id,type,txn_id,f_year,is_opening','voucher.transactions:id,voucher_id,type,amount,ledger_id,sub_ledger_id','voucher.transactions.ledger:id,name,code','work_order:id,order_name,order_no,sub_ledger_id','work_order.sub_ledger:id,name','work_order_site_detail:id,site_name'])
-                                        ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_detail_id']);
+                                        ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_id']);
             $data['transactions'] = collect($this->getDataFormatCashBankBookLedger($transactions));
         }
         $data['dateFrom'] = $start_date;
@@ -99,6 +99,98 @@ class AccountsController extends Controller
             return view('accounts::reports.bankbook.bankbook_print', $data);
         }
         return view('accounts::reports.bankbook.bankbook', $data);
+    }
+
+    public function ledger_report(Request $request)
+    {
+        if ($request->has('account_id')) {
+            $validated = $request->validate([
+                'account_id' => 'required|numeric|gt:0',
+            ],
+            [
+                'account_id.gt' => 'Please Select An Account',
+            ]);
+        }
+        
+        $party_account_id = $request->party_account_id > 0 ? $request->party_account_id : null;
+        $data['party'] = Subledger::find($request->party_account_id > 0 ? $request->party_account_id : 0);
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
+        $data['filtered_account_balance'] = 0;
+        if ($request->account_id > 0) {
+            $transactions = Transaction::query();
+            $transactions = $transactions->where('is_approve', 1)
+                                        ->whereBetween('date',[$start_date,$end_date]);
+                                        
+            if ($request->account_id > 0) {
+                $account_id = $request->account_id;
+                if($request->party_account_id > 0) {
+                    $data['filtered_account'] = Ledger::with(['transactions:id,ledger_id,sub_ledger_id,accounting_additional_information_id,type,amount,is_approve,date'])->find($request->account_id,['id','name','ac_no','type']);
+                    $data['filtered_account_balance'] = $data['filtered_account']->TransactionBalanceAmountTillDate($start_date,$party_account_id);
+                } else {
+                    $data['filtered_account'] = Ledger::with(['transactions'])->find($request->account_id,['id','name','ac_no','type']);
+                    $data['filtered_account_balance'] = $data['filtered_account']->BalanceAmountTillDate($start_date);
+                }
+                $transactions = $transactions->where('ledger_id', $account_id)->when($party_account_id != null, function ($q) use ($party_account_id) {
+                    return $q->where('sub_ledger_id', $party_account_id);
+                });
+            }
+            $transactions = $transactions->with(['voucher:id,txn_id,f_year,type,narration,is_opening','voucher.transactions:id,voucher_id,type,amount,ledger_id,sub_ledger_id','voucher.transactions.ledger:id,name,code','work_order:id,order_name,order_no,sub_ledger_id','work_order.sub_ledger:id,name'])
+                                            ->get(['id','voucher_id','type','date','amount','ledger_id','sub_ledger_id','narration','credit_period']);
+            $data['transactions'] = collect($this->getDataFormatCashBankBookLedger($transactions));
+        }
+        $data['dateFrom'] = $start_date;
+        $data['dateTo'] = $end_date;
+        if ($request->has('print')) {
+            return view('accounts::reports.ledger.print', $data);
+        }
+        return view('accounts::reports.ledger.index', $data);
+    }
+
+    public function sub_ledger_report(Request $request)
+    {
+        if ($request->has('party_id')) {
+            $validated = $request->validate([
+                'party_id' => 'required|numeric|gt:0',
+            ],
+            [
+                'party_id.gt' => 'Please Select Account',
+            ]);
+        }
+        
+        $accounting_bill_info_id = $request->accounting_bill_info_id ? $request->accounting_bill_info_id : null;
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
+        $data['filtered_account_balance'] = 0;
+        if ($request->party_id > 0) {
+            $party_id = $request->party_id;
+            $data['filtered_account'] = SubLedger::with(['ledger:id,name,type','supplier_info:id,name,type','customer_info:id,name,type','member_info:id,name,type'])->find($request->party_id,['id','name','email','ledger_id','supplier','customer','member','code']);
+            $data['filtered_account_balance'] = $data['filtered_account']->BalanceAmountTillDate($start_date);
+            $transactions = Transaction::whereHas('voucher', function($query) use($party_id,$start_date,$end_date, $accounting_bill_info_id){
+                $query->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($party_id, $accounting_bill_info_id){
+                    $query->where('sub_ledger_id',$party_id)->when($accounting_bill_info_id != null, function ($q) use ($accounting_bill_info_id) {
+                        return $q->where('accounting_bill_info_id', $accounting_bill_info_id);
+                    });
+                });
+            })->whereNot('sub_ledger_id', $party_id)
+            ->when($request->account_id > 0, function ($q) use ($request) {
+                return $q->where('ledger_id', $request->account_id);
+            })
+            ->with(['ledger:id,name,code', 'voucher:id,type,txn_id,f_year,is_opening','voucher.transactions:id,voucher_id,type,credit_period','work_order:id,order_name,order_no,sub_ledger_id','work_order.sub_ledger:id,name','work_order_site_detail:id,site_name'])
+            ->orderBy('id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_id']);
+
+            $data['transactions'] = collect($this->getDataFormatCashBankBookLedger($transactions,'party_report'));
+        }
+        if ($request->account_id > 0) {
+            $data['ledger'] = Ledger::find($request->account_id,['id','name']); 
+        }
+        
+        $data['dateFrom'] = $start_date;
+        $data['dateTo'] = $end_date;
+        if ($request->has('print')) {
+            return view('accounts::reports.sub_ledger.print', $data);
+        }
+        return view('accounts::reports.sub_ledger.index', $data);    
     }
 
     protected function getDataFormatCashBankBookLedger($transactions, $report_type = null)
