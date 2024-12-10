@@ -8,6 +8,12 @@ use Modules\Accounts\App\Http\Controllers\WorkOrderController;
 use Modules\Accounts\App\Http\Controllers\WorkOrderSiteController;
 use Modules\Accounts\App\Http\Controllers\CashPaymentJournalController;
 use Modules\Accounts\App\Http\Controllers\BankPaymentJournalController;
+use Modules\Accounts\App\Http\Controllers\CashReceiveJournalController;
+use Modules\Accounts\App\Http\Controllers\BankReceiveJournalController;
+use Modules\Accounts\App\Http\Controllers\JournalController;
+use Modules\Accounts\App\Http\Controllers\OpeningBalanceController;
+use Modules\Accounts\App\Http\Controllers\AccountsPeriodController;
+use Modules\Accounts\App\Http\Controllers\JournalWorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,5 +105,80 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('multi-bank-payment.delete');
         Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-bank-payment.add_new_line_cr');
         Route::get('/print/{id}', 'print')->name('multi-bank-payment.print');
+    });
+    Route::controller(CashReceiveJournalController::class)->prefix('/cash-receive-journal')->group(function () {
+        Route::get('/index', 'index')->name('multi-cash-receive.index');
+        Route::get('/create', 'create')->name('multi-cash-receive.create');
+        Route::post('/store', 'store')->name('multi-cash-receive.store');
+        Route::get('/edit/{id}', 'edit')->name('multi-cash-receive.edit');
+        Route::get('/show/{id}', 'show')->name('multi-cash-receive.show');
+        Route::post('/update/{id}', 'update')->name('multi-cash-receive.update');
+        Route::post('/delete', 'destroy')->name('multi-cash-receive.delete');
+        Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-cash-receive.add_new_line_cr');
+        Route::get('/print/{id}', 'print')->name('multi-cash-receive.print');
+    });
+    Route::controller(BankReceiveJournalController::class)->prefix('/bank-receive-journal')->group(function () {
+        Route::get('/index', 'index')->name('multi-bank-receive.index');
+        Route::get('/create', 'create')->name('multi-bank-receive.create');
+        Route::post('/store', 'store')->name('multi-bank-receive.store');
+        Route::get('/edit/{id}', 'edit')->name('multi-bank-receive.edit');
+        Route::get('/show/{id}', 'show')->name('multi-bank-receive.show');
+        Route::post('/update/{id}', 'update')->name('multi-bank-receive.update');
+        Route::post('/delete', 'destroy')->name('multi-bank-receive.delete');
+        Route::get('/add-new-row-cr-entry', 'add_new_line_cr')->name('multi-bank-receive.add_new_line_cr');
+        Route::get('/print/{id}', 'print')->name('multi-bank-receive.print');
+    });
+    Route::controller(JournalController::class)->prefix('/general-journal')->group(function () {
+        Route::get('/index', 'index')->name('journal.index');
+        Route::get('/create', 'create')->name('journal.create');
+        Route::post('/store', 'store')->name('journal.store');
+        Route::get('/edit/{id}', 'edit')->name('journal.edit');
+        Route::get('/show/{id}', 'show')->name('journal.show');
+        Route::post('/update/{id}', 'update')->name('journal.update');
+        Route::post('/delete', 'destroy')->name('journal.delete');
+        Route::get('/add-new-row-entry', 'add_new_line')->name('journal.add_new_line');
+        Route::get('/print/{id}', 'print')->name('journal.print');
+    });
+    Route::controller(OpeningBalanceController::class)->prefix('/opening-balance')->group(function () {
+        Route::get('/index', 'index')->name('opening-balance.index');
+        Route::get('/create', 'create')->name('opening-balance.create');
+        Route::post('/store', 'store')->name('opening-balance.store');
+        Route::get('/edit/{id}', 'edit')->name('opening-balance.edit');
+        Route::get('/show/{id}', 'show')->name('opening-balance.show');
+        Route::post('/update/{id}', 'update')->name('opening-balance.update');
+        Route::post('/delete', 'destroy')->name('opening-balance.delete');
+        Route::get('/print/{id}', 'print')->name('opening-balance.print');
+    });
+    Route::controller(AccountsController::class)->prefix('configuration')->group(function () {
+        Route::get('/report', 'report_config')->name('accountings.report-config');
+        Route::post('/general-store', 'general_config_store')->name('accountings.general-config-store');
+    });
+    Route::controller(AccountsPeriodController::class)->group(function () {
+        Route::get('/day-closing', 'day_closing_list')->name('accountings.day_closing_list');
+        Route::get('/day-closing-current-date', 'day_closing_current_date')->name('accountings.day_closing_current_date');
+        Route::post('/day-closing-now', 'day_closing_confirm')->name('accountings.day_closing_confirm');
+        Route::get('/day-closing-check/{id}', 'day_closing_check')->name('accountings.day_closing_check');
+    });
+    Route::controller(JournalWorkOrderController::class)->prefix('/journal/work-order-based')->group(function () {
+        Route::get('/index', 'index')->name('journal.work_order.index');
+        Route::get('/create', 'create')->name('journal.work_order.create');
+        Route::post('/store', 'store')->name('journal.work_order.store');
+        Route::get('/edit/{id}', 'edit')->name('journal.work_order.edit');
+        Route::get('/show/{id}', 'show')->name('journal.work_order.show');
+        Route::post('/update/{id}', 'update')->name('journal.work_order.update');
+        Route::post('/delete', 'destroy')->name('journal.work_order.delete');
+        Route::get('/print/{id}', 'print')->name('journal.work_order.print');
+    });
+    Route::controller(VouchersController::class)->prefix('/voucher-approval')->group(function () {
+        Route::get('/index', 'approval_index')->name('voucher.approval_index');
+        Route::get('/show/{id}', 'show')->name('voucher.show');
+        Route::post('/delete', 'destroy')->name('voucher.delete');
+        Route::post('/approve-now', 'approve_now')->name('voucher.approve_now');
+        Route::post('/multiple-approve-now', 'multiple_approve_now')->name('voucher.multiple_approve_now');
+        Route::get('/accountant', 'rejected_by_accountant_index')->name('reject_by_accountant.index');
+    });
+    Route::controller(AccountsController::class)->prefix('/reports')->group(function () {
+        Route::get('/cashbook', 'cashbook')->name('accountings.cashbook');
+        Route::get('/bankbook', 'bankbook')->name('accountings.bankbook');
     });
 });

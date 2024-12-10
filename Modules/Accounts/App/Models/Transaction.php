@@ -27,11 +27,6 @@ class Transaction extends Model
         //return TransactionFactory::new();
     }
 
-    public function sub_concern()
-    {
-        return $this->belongsTo(SubConcern::class)->withDefault([]);
-    }
-
     public function ledger()
     {
         return $this->belongsTo(Ledger::class, "ledger_id", "id")->withDefault();

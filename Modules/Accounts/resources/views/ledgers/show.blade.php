@@ -13,10 +13,6 @@
                         <table class="table table-bordered mb-0">
                             <tbody>
                                 <tr>
-                                    <td>Account Created For</td>
-                                    <td>{{$ledger->branch_id > 0 ? $ledger->branch->name : "For All Branches"}}</td>
-                                </tr>
-                                <tr>
                                     <td>Account Type</td>
                                     <td>{{$ledger->TypeName}}</td>
                                 </tr>

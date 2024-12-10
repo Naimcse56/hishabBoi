@@ -22,7 +22,7 @@ class Ledger extends Model
 
     public function categories()
     {
-        return $this->hasMany(Ledger::class, "parent_id", "id")->with(['categories:id,parent_id,name,code,type,acc_type,is_cost_center,view_in_trial,view_in_bs,view_in_is,level','ledger_balances:id,ledger_id,branch_id,date,debit,credit,sub_concern_id','categories.parent:id,name,code','pending_transactions:id,ledger_id,branch_id,date,type,amount,is_approve,sub_concern_id']);
+        return $this->hasMany(Ledger::class, "parent_id", "id")->with(['categories:id,parent_id,name,code,type,acc_type,view_in_trial,view_in_bs,view_in_is,level','categories.parent:id,name,code','pending_transactions:id,ledger_id,date,type,amount,is_approve']);
     }
 
     public function parent()
@@ -90,4 +90,61 @@ class Ledger extends Model
             $model->updated_by = auth()->user()->id ?? null;
         });
     }
+
+    public function getBalanceAmountAttribute()
+    {
+        if ($this->type == 1 || $this->type == 3) {
+            return $this->transactions->where('type', 'Dr')->sum('amount') - $this->transactions->where('type', 'Cr')->sum('amount');
+        } else {
+            return $this->transactions->where('type', 'Cr')->sum('amount') - $this->transactions->where('type', 'Dr')->sum('amount');
+        }
+    }
+
+    public function BalanceAmountBetweenDate($fromDate, $toDate)
+    {
+        if ($this->type == 1 || $this->type == 3) {
+            return $this->transactions->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->transactions->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
+        } else {
+            return $this->transactions->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->transactions->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
+        }
+    }
+
+    public function NonApprovedBalanceAmountBetweenDate($fromDate, $toDate, $sub_concern_id = null)
+    {
+        if ($this->type == 1 || $this->type == 3) {
+            return $this->pending_transactions->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->pending_transactions->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
+        } else {
+            return $this->pending_transactions->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->pending_transactions->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
+        }
+    }
+
+    public function BalanceAmountTillDate($fromDate)
+    {
+        if ($this->type == 1 || $this->type == 3) {
+            return $this->transactions->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('amount') - $this->transactions->where('type', 'Cr')->where('date', '<' ,$fromDate)->sum('amount');
+        } else {
+            return $this->transactions->where('type', 'Cr')->where('date', '<' ,$fromDate)->sum('amount') - $this->transactions->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('amount');
+        }
+    }
+
+    public function DebitBalanceAmountTillDate($fromDate)
+    {
+        return $this->transactions->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('debit');
+    }
+
+    public function CreditBalanceAmountTillDate($fromDate)
+    {
+        return $this->transactions->where('type', 'Cr')->where('date', '<' ,$fromDate)->sum('credit');
+    }
+
+    public function DebitBalanceAmountOnDate($fromDate)
+    {
+        return $this->transactions->where('type', 'Dr')->where('date' ,$fromDate)->sum('debit');
+    }
+
+    public function CreditBalanceAmountOnDate($fromDate)
+    {
+        return $this->transactions->where('type', 'Cr')->where('date' ,$fromDate)->sum('credit');
+    }
+
 }

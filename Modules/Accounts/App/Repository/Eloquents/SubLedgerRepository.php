@@ -16,7 +16,7 @@ class SubLedgerRepository extends BaseRepository implements SubLedgerRepositoryI
         parent::__construct($model);
     }
 
-    public function transactionalLeadgerForSelect($search, $type, $branch_id, $page)
+    public function transactionalLeadgerForSelect($search, $type, $page)
     {
         $items = SubLedger::query();
         $items = $items->where('is_active',1);
@@ -33,13 +33,9 @@ class SubLedgerRepository extends BaseRepository implements SubLedgerRepositoryI
             $items = $items->where('type','Staff');
         }
         if ($type == "member_supplier") {
-            $items = $items->whereIn('member',['Vendor','Staff']);
+            $items = $items->whereIn('type',['Vendor','Staff']);
         }
-        if ($branch_id && $type != "member") {
-            $items = $items->paginate(20);
-        } else {
-            $items = $items->paginate(20);
-        }
+        $items = $items->paginate(20);
 
         $response = [];
         if ($page == 1) {

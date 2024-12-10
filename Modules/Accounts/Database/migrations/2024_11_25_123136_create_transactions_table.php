@@ -23,7 +23,6 @@ return new class extends Migration
             $table->unsignedBigInteger("credit_period")->nullable()->comment('in days');
             $table->double('amount', 28,2)->default(0)->index();
             $table->text('narration')->nullable();
-            $table->unsignedBigInteger('accounting_bill_info_id')->nullable();
             $table->boolean('is_opening')->default(0);
             $table->boolean('is_approve')->default(0)->comment('0 => pending, 1 => Approve, 2 => Cancelled');
             $table->string('bank_name',255)->nullable();

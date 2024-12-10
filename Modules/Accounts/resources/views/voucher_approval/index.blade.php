@@ -8,13 +8,11 @@ Vouchers Checking
             <h4 class="mt-4">Vouchers Checking List</h4>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control amount" name="amount" id="amount" value="" placeholder="Search with Amount">
-                            </div>
+                            <x-common.input :required="false" column=12 id="amount" name="amount" label="Search with Amount" placeholder="Search with Amount" :value="old('amount')"></x-common.input>
                         </div>
                     </div>
                 </div>
@@ -26,10 +24,10 @@ Vouchers Checking
                             <table id="dataTable" class="table table-striped table-bordered data-table" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>
                                         <th width="10%">TXN ID</th>
                                         <th width="60%">Details</th>
                                         <th>Status</th>
-                                        <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>
                                         <th>Rejection Comment</th>
                                         <th width="5%">Action</th>
                                     </tr>
@@ -71,7 +69,6 @@ Vouchers Checking
                 var table = $('#dataTable').DataTable( {
 					processing: true,
 					serverSide: true,
-					// ajax: "{{ route('voucher.approval_index') }}",
                     'ajax': {
                         url: "{{ route('voucher.approval_index') }}",
                         "data": function (d) {
@@ -81,11 +78,10 @@ Vouchers Checking
                         }
                     },
 					columns: [
-						// {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+						{data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
 						{data: 'txn_id', name: 'txn_id'},
 						{data: 'details', name: 'details'},
 						{data: 'status', name: 'status', searchable: false},
-						{data: 'checkbox', name: 'checkbox', orderable: false, searchable: false},
 						{data: 'comment', name: 'comment', searchable: false},
 						{data: 'action', name: 'action', orderable: false, searchable: false, printable:false},
 					],

@@ -3,23 +3,18 @@
 <div class="modal fade" id="voucher_info_modal" tabindex="-1" style="display: none;" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
-            <div class="modal-header bg-success-subtle">
+            <div class="modal-header bg-success">
                 <h5 class="modal-title">Details : {{$journal->TypeName}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body p-5 pt-0 pb-0">
                 <div class="row mb-0">
-                    {{-- <div style="text-align: center; font-size: 30px; font-weight: 300;">
-                        <img src="{{asset($journal->branch->logo_path)}}" style="width: 120px;" alt="{{$journal->branch->name}}">
-                    </div>
-                    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->branch->location}} </div>
-                    <div style="text-align: center; font-size: 16px; font-weight: 300;"> {{$journal->sub_concern->name}} </div> --}}
                     <div style="text-align: center; font-size: 14px; font-weight: 300;"> VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
                 <div class="row" style="margin-top: 0px;">
                    <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
-                      {{-- <p class="mb-0">SSID : <span>{{$journal->id}}</span></p> --}}
+                      
                       <p class="mb-0">Date. :<span>{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
                       <p class="mb-0">Voucher No : <span>{{$journal->TypeName}}</span></p>
                    </div>
@@ -109,7 +104,7 @@
                         @if ($journal->updated_by != null)
                         <p class="mb-0">Updator :<span>{{$journal->updator->name}}</span></p>
                         @endif
-                        {{-- <p class="mb-0">MAC Address :<span>{{ $journal->mac_address }}</span></p> --}}
+                        <p class="mb-0">MAC Address :<span>{{ $journal->mac_address }}</span>
                     </div>
                 </div>
             </div>

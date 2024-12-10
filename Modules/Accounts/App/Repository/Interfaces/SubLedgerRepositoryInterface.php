@@ -8,5 +8,5 @@ use App\Repository\Interfaces\BaseRepositoryInterface;
 
 interface SubLedgerRepositoryInterface extends BaseRepositoryInterface
 {
-    public function transactionalLeadgerForSelect($search, $type, $branch_id, $page);
+    public function transactionalLeadgerForSelect($search, $type, $page);
 }

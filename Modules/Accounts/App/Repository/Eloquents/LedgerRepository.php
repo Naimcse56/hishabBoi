@@ -29,7 +29,7 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
         }      
     }
 
-    public function transactionalLeadgerForSelect($search, $type, $branch_id, $account_type, $view, $page)
+    public function transactionalLeadgerForSelect($search, $type, $account_type, $view, $page)
     {
         $items = $this->model::query();
         $items = $items->where('is_active',1);
@@ -50,8 +50,6 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
             $items = $items->where('type', 3);
         } elseif ($type == "income") {
             $items = $items->where('type', 4);
-        } elseif ($type == "cost_center") {
-            $items = $items->where('is_cost_center',1);
         } elseif ($type == "cash_other") {
             $items = $items->whereIn('acc_type',['cash','others']);
         } elseif ($type == "bank_other") {

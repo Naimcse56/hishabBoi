@@ -163,7 +163,7 @@ class BaseRepository implements BaseRepositoryInterface
             $items = $items->whereLike($searchColumns, $search);
         }
     
-        // Apply dynamic conditions (like bank_id, branch_id, etc.)
+        // Apply dynamic conditions (like bank_id, etc.)
         foreach ($conditions as $column => $value) {
             if ($value) {
                 $items = $items->where($column, $value);

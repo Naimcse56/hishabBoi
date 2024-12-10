@@ -26,8 +26,55 @@
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link @if (Route::is('multi-cash-payment.*')) active @endif" href="{{route('multi-cash-payment.index')}}">Cash Payment</a>
                 <a class="nav-link @if (Route::is('multi-bank-payment.*')) active @endif" href="{{route('multi-bank-payment.index')}}">Bank Payment</a>
-                <a class="nav-link" href="{{route('multi-cash-payment.index')}}">Cash Recieve</a>
-                <a class="nav-link" href="{{route('multi-bank-payment.index')}}">Bank Recieve</a>
+                <a class="nav-link @if (Route::is('multi-cash-receive.*')) active @endif" href="{{route('multi-cash-receive.index')}}">Cash Recieve</a>
+                <a class="nav-link @if (Route::is('multi-bank-receive.*')) active @endif" href="{{route('multi-bank-receive.index')}}">Bank Recieve</a>
+                <a class="nav-link @if (Route::is('journal.*') && !Route::is('journal.work_order.*')) active @endif" href="{{route('journal.index')}}">Misc. Journal</a>
+                <a class="nav-link @if (Route::is('journal.work_order.*')) active @endif" href="{{route('journal.work_order.index')}}">W/O Journal</a>
+                <a class="nav-link @if (Route::is('opening-balance.*')) active @endif" href="{{route('opening-balance.index')}}">Opening Balance</a>
+            </nav>
+        </div>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseApprovalAccounting" aria-expanded="false" aria-controls="collapseApprovalAccounting">
+            Approval
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapseApprovalAccounting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (Route::is('voucher.approval_index')) active @endif" href="{{route('voucher.approval_index')}}">Pending</a>
+                <a class="nav-link @if (Route::is('reject_by_accountant.index')) active @endif" href="{{route('reject_by_accountant.index')}}">Rejected</a>
+            </nav>
+        </div>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseReportsAccounting" aria-expanded="false" aria-controls="collapseReportsAccounting">
+            Reports
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapseReportsAccounting" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Cashbook</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.bankbook')}}">Bankbook</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Ledger Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Summary</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Party Type</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Work Order Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Summary</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Profit Loss</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Asset and Liability</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Receipt & Payment</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Receipt & Payment Report</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Balance Sheet</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Trial Balance</a>
+                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Income Statement</a>
+            </nav>
+        </div>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccountingConfig" aria-expanded="false" aria-controls="collapseAccountingConfig">
+            Config
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="collapseAccountingConfig" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (Route::is('accountings.report-config')) active @endif" href="{{route('accountings.report-config')}}">Report</a>
+                <a class="nav-link @if (Route::is('accountings.day_closing_list')) active @endif" href="{{route('accountings.day_closing_list')}}">Day Close</a>
+                <a class="nav-link @if (Route::is('multi-cash-receive.*')) active @endif" href="javascript">Fiscal Year</a>
             </nav>
         </div>
     </nav>

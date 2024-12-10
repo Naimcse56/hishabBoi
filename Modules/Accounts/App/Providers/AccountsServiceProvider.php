@@ -5,6 +5,7 @@ namespace Modules\Accounts\App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 use Modules\Accounts\App\Models\DayCloseFiscalYear;
 use Modules\Accounts\App\Models\FiscalYear;
 use Modules\Accounts\App\Repository\Eloquents\LedgerRepository;
@@ -62,6 +63,15 @@ class AccountsServiceProvider extends ServiceProvider
                 } else {
                     return null;
                 };
+            });
+        }
+        if (Schema::hasTable('account_configurations')) {
+            $this->app->singleton('account_configurations', function () {
+                $settings = DB::table('account_configurations')->get();
+                foreach ($settings as $setting) {
+                    $datas[$setting->name] = $setting->value;
+                }
+                return $datas;
             });
         }
         $this->app->bind(LedgerRepositoryInterface::class, LedgerRepository::class);
