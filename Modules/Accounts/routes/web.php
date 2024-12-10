@@ -14,6 +14,9 @@ use Modules\Accounts\App\Http\Controllers\JournalController;
 use Modules\Accounts\App\Http\Controllers\OpeningBalanceController;
 use Modules\Accounts\App\Http\Controllers\AccountsPeriodController;
 use Modules\Accounts\App\Http\Controllers\JournalWorkOrderController;
+use Modules\Accounts\App\Http\Controllers\BalanceSheetController;
+use Modules\Accounts\App\Http\Controllers\IncomeStatementController;
+use Modules\Accounts\App\Http\Controllers\TrialBalanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,5 +187,14 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/work-order-report', 'work_order_report')->name('accountings.work_order_report');
         Route::get('/work-order-summary-report', 'work_order_summary_report')->name('accountings.work_order_summary_report');
         Route::get('/receive-payment-report', 'receive_payment_report')->name('accountings.receive_payment_report');
+    });
+    Route::controller(BalanceSheetController::class)->prefix('report')->as('accountings.')->group(function () {
+        Route::get('/balances-sheet', 'balancesheet')->name('balancesheet');
+    });
+    Route::controller(IncomeStatementController::class)->prefix('report')->as('accountings.')->group(function () {
+        Route::get('/income-statement', 'income_statement')->name('income_statement');
+    });
+    Route::controller(TrialBalanceController::class)->prefix('report')->as('accountings.')->group(function () {
+        Route::get('/trial-balance', 'trial_balance')->name('trial_balance');
     });
 });
