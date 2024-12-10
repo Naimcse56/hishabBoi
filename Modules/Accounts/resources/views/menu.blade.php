@@ -16,6 +16,18 @@
                 <a class="nav-link @if (Route::is('products-unit.*')) active @endif" href="{{route('products-unit.index')}}">Product Unit</a>
             </nav>
         </div>
+        <a class="nav-link" href="{{route('dashboard')}}">
+            {{-- <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div> --}}
+            Sales
+        </a>
+        <a class="nav-link" href="{{route('dashboard')}}">
+            {{-- <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div> --}}
+            Purchases
+        </a>
+        <a class="nav-link" href="{{route('dashboard')}}">
+            {{-- <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div> --}}
+            Quotations
+        </a>
     </nav>
 </div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccounts" aria-expanded="false" aria-controls="collapseAccounts">

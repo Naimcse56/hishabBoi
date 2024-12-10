@@ -37,6 +37,14 @@ class ProductController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function create(Request $request)
+    {
+        return view('accounts::products.create_view');
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
