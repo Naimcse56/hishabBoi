@@ -21,35 +21,35 @@ class DayCloseSeeder extends Seeder
       DB::table('account_configurations')->insert(array(
           0 => array(
             'name' => 'inc_st_first_section',
-            'value' => '21',
+            'value' => '24',
           ),
           1 => array(
             'name' => 'inc_st_second_section',
-            'value' => '80',
+            'value' => '93',
           ),
           2 => array(
             'name' => 'inc_st_third_section',
-            'value' => '17',
+            'value' => '19',
           ),
           3 => array(
             'name' => 'inc_st_fourth_section',
-            'value' => '23',
+            'value' => '26',
           ),
           4 => array(
             'name' => 'inc_st_fifth_section',
-            'value' => '24',
+            'value' => '28',
           ),
           5 => array(
             'name' => 'inc_st_six_section',
-            'value' => '0',
+            'value' => '25',
           ),
           6 => array(
             'name' => 'inc_st_seven_section',
-            'value' => '0',
+            'value' => '25',
           ),
           7 => array(
             'name' => 'inc_st_tax_expenses_section',
-            'value' => '18',
+            'value' => '20',
           ),
           8 => array(
             'name' => 'balance_sht_first_section',
@@ -61,15 +61,15 @@ class DayCloseSeeder extends Seeder
           ),
           10 => array(
             'name' => 'balance_sht_third_section',
-            'value' => '9',
+            'value' => '10',
           ),
           11 => array(
             'name' => 'balance_sht_fourth_section',
-            'value' => '27',
+            'value' => '31',
           ),
           12 => array(
             'name' => 'balance_sht_fifth_section',
-            'value' => '11',
+            'value' => '12',
           ),
           13 => array(
             'name' => 'balance_sht_six_section',
