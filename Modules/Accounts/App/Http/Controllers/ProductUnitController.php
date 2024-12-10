@@ -104,7 +104,7 @@ class ProductUnitController extends Controller
 
     public function list_for_select_ajax(Request $request)
     {
-        $data = $this->productUnitRepository->search($request->search);
+        $data = $this->productUnitRepository->listForSelect($request->search);
         return response()->json($data);
     }
 }
