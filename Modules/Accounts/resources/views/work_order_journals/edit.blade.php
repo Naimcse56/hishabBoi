@@ -32,8 +32,8 @@
                                                 ['id' => $credit_account->work_order_id, 'name' => $credit_account->work_order->order_name]
                                             ]" :value="$credit_account->work_order_id"></x-common.server-side-select>
                                     <x-common.server-side-select :required="true" column=4 name="work_order_id" class="work_order_id" disableOptionText="Select Site" label="Work Order Site" :options="[
-                                                ['id' => $credit_account->work_order_site_detail_id, 'name' => $credit_account->work_order_site_detail->site_name]
-                                            ]" :value="$credit_account->work_order_site_detail_id"></x-common.server-side-select>
+                                                ['id' => $credit_account->work_order_site_id, 'name' => $credit_account->work_order_site_detail->site_name]
+                                            ]" :value="$credit_account->work_order_site_id"></x-common.server-side-select>
                                 </div>
                             </fieldset>
                             <fieldset class="the-fieldset mb-2">

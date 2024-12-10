@@ -188,8 +188,8 @@ class BankReceiveJournalController extends Controller
             $new_data['dr_narration'] = $transaction->narration;
             $new_data['work_order_id'] = $transaction->work_order_id;
             $new_data['work_order_name'] = $transaction->work_order_id > 0 ? '('.$transaction->work_order->order_no.') '.$transaction->work_order->order_name : 'Select One';
-            $new_data['work_order_site_id'] = $transaction->work_order_site_detail_id;
-            $new_data['work_order_site_name'] = $transaction->work_order_site_detail_id > 0 ? $transaction->work_order_site_detail->site_name : 'Select One';
+            $new_data['work_order_site_id'] = $transaction->work_order_site_id;
+            $new_data['work_order_site_name'] = $transaction->work_order_site_id > 0 ? $transaction->work_order_site_detail->site_name : 'Select One';
             $new_data['cr_account_id'] = 0;
             $new_data['cr_account_name'] = null;
             $new_data['cr_account_code'] = null;

@@ -42,7 +42,7 @@ Party Summary Report
                                 ['id' => 'Vendor', 'name' => 'Vendor'],
                                 ['id' => 'Staff', 'name' => 'Staff']
                                 ]"></x-common.select>
-                                <x-common.server-side-select :required="false" column=4 name="party_id" class="party_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
+                                <x-common.server-side-select :required="false" column=4 name="party_id" class="party_id" disableOptionText="Select Party Account" label="Party Accounts"></x-common.server-side-select>
                                 <x-common.server-side-select :required="false" column=4 name="account_id" class="account_id" disableOptionText="Select Account" label="Select Account"></x-common.server-side-select>
                                 <x-common.date-picker label="From Date" :required="true" column=4 name="start_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.date-picker label="To Date" :required="true" column=4 name="end_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>

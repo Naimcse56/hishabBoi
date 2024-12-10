@@ -276,6 +276,88 @@ class AccountsController extends Controller
         }
         return $tr_data;
     }
+    public function work_order_report(Request $request)
+    {
+        if ($request->has('work_order_id')) {
+            $validated = $request->validate([
+                'work_order_id' => 'required|numeric|gt:0',
+            ],
+            [
+                'work_order_id.gt' => 'Please Select Work Order First !',
+            ]);
+        }
+        
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')->from_date;
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
+        if ($request->work_order_id) {
+            $work_order_id = $request->work_order_id ? $request->work_order_id : null;
+            $data['work_order'] = WorkOrder::find($request->work_order_id);
+            $work_order_ledger_id = $data['work_order']->sub_ledger_id;
+            if ($request->work_order_site_id > 0) {
+                $data['site_detail'] = WorkOrderSiteDetail::find($request->work_order_site_id);
+            }
+            $data['income_transactions'] = Transaction::whereHas('ledger', function ($query) {
+                                                    $query->where('type', 4);
+                                                })
+                                                ->where('is_approve',1)
+                                                ->where('work_order_id', $work_order_id)
+                                                ->when($request->work_order_site_id > 0, function ($q) use ($request) {
+                                                    return $q->where('work_order_site_id', $request->work_order_site_id);
+                                                })
+                                                ->whereBetween('date',[$start_date,$end_date])
+                                                ->with(['voucher:id,type,txn_id,f_year','ledger:id,name,ac_no'])
+                                                ->get(['id','date','voucher_id','narration','amount','type','work_order_id','ledger_id','sub_ledger_id','work_order_site_id']);
+            $data['rcv_income_transactions'] = Transaction::whereHas('ledger', function ($query) {
+                                                    $query->where('type', 1);
+                                                })->whereHas('voucher', function ($query) {
+                                                    $query->whereIn('type', ['rcv_cash','rcv_bank','rcv']);
+                                                })
+                                                ->where('is_approve',1)
+                                                ->where('type',"Dr")
+                                                ->where('work_order_id', $work_order_id)
+                                                ->when($request->work_order_site_id > 0, function ($q) use ($request) {
+                                                    return $q->where('work_order_site_id', $request->work_order_site_id);
+                                                })
+                                                ->whereBetween('date',[$start_date,$end_date])
+                                                ->with(['voucher:id,type,txn_id,f_year','ledger:id,name,ac_no'])
+                                                ->get(['id','date','voucher_id','narration','amount','type','work_order_id','ledger_id','sub_ledger_id','work_order_site_id']);
+            
+            $data['expense_transactions'] = Transaction::whereHas('ledger', function ($query) {
+                                                    $query->where('type', 3);
+                                                })
+                                                ->where('is_approve',1)
+                                                ->where('work_order_id', $work_order_id)
+                                                ->when($request->work_order_site_id > 0, function ($q) use ($request) {
+                                                    return $q->where('work_order_site_id', $request->work_order_site_id);
+                                                })
+                                                ->whereBetween('date',[$start_date,$end_date])
+                                                ->with(['voucher:id,type,txn_id,f_year','ledger:id,name,ac_no'])
+                                                ->get(['id','date','voucher_id','narration','amount','type','work_order_id','ledger_id','sub_ledger_id','work_order_site_id']);
+            $data['pay_expense_transactions'] = Transaction::whereHas('ledger', function ($query) {
+                                                    $query->where('type', 1);
+                                                })->whereHas('voucher', function ($query) {
+                                                    $query->whereIn('type', ['pay_cash','pay_bank','pay']);
+                                                })
+                                                ->where('is_approve',1)
+                                                ->where('type',"Cr")
+                                                ->where('work_order_id', $work_order_id)
+                                                ->when($request->work_order_site_id > 0, function ($q) use ($request) {
+                                                    return $q->where('work_order_site_id', $request->work_order_site_id);
+                                                })
+                                                ->whereBetween('date',[$start_date,$end_date])
+                                                ->with(['voucher:id,type,txn_id,f_year','ledger:id,name,ac_no'])
+                                                ->get(['id','date','voucher_id','narration','amount','type','work_order_id','ledger_id','sub_ledger_id','work_order_site_id']);
+
+            $data['account'] = SubLedger::find($work_order_ledger_id,['id','name','code']);
+            $data['filtered_account_balance'] = $data['account']->BalanceAmountTillDate($start_date);
+        }
+        $data['dateFrom'] = $start_date;
+        $data['dateTo'] = $end_date;
+        if ($request->has('print')) {
+            return view('accounts::reports.work_order.print', $data);
+        }
+        return view('accounts::reports.work_order.index', $data);
+    }
 
     protected function getPartySummaryDataFormat($accounts, $tr_data, $start_date, $end_date, $type, $ledger_id, $approval_type)
     {
