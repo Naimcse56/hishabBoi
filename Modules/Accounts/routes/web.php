@@ -182,5 +182,6 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/bankbook', 'bankbook')->name('accountings.bankbook');
         Route::get('/ledger-report', 'ledger_report')->name('accountings.ledger_report');
         Route::get('/party-accounts-report', 'sub_ledger_report')->name('accountings.sub_ledger_report');
+        Route::get('/party-accounts-summary-report', 'sub_ledger_summary_report')->name('accountings.sub_ledger_summary_report');
     });
 });

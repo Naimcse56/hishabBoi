@@ -164,7 +164,7 @@ class AccountsController extends Controller
         $data['filtered_account_balance'] = 0;
         if ($request->party_id > 0) {
             $party_id = $request->party_id;
-            $data['filtered_account'] = SubLedger::with(['ledger:id,name,type','supplier_info:id,name,type','customer_info:id,name,type','member_info:id,name,type'])->find($request->party_id,['id','name','email','ledger_id','supplier','customer','member','code']);
+            $data['filtered_account'] = SubLedger::with(['ledger:id,name,type'])->find($request->party_id,['id','name','email','ledger_id','code']);
             $data['filtered_account_balance'] = $data['filtered_account']->BalanceAmountTillDate($start_date);
             $transactions = Transaction::whereHas('voucher', function($query) use($party_id,$start_date,$end_date, $accounting_bill_info_id){
                 $query->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($party_id, $accounting_bill_info_id){
@@ -191,6 +191,44 @@ class AccountsController extends Controller
             return view('accounts::reports.sub_ledger.print', $data);
         }
         return view('accounts::reports.sub_ledger.index', $data);    
+    }
+
+    public function sub_ledger_summary_report(Request $request)
+    {
+        if ($request->has('type')) {
+            $validated = $request->validate([
+                'type' => 'required',
+            ]);
+        }
+        
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
+        if ($request->type) {
+            $sub_ledgers = SubLedger::query();
+            $sub_ledgers = $sub_ledgers->with(['sub_ledger_type:id,name','transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id,narration,date,is_approve','transactions.voucher:id,date,type,f_year,txn_id','transactions.voucher.transactions:id,voucher_id,sub_ledger_id,type,amount,ledger_id']);
+            $sub_ledgers = $sub_ledgers->when($request->type != null, function ($q) use ($request) {
+                                return $q->where('type', $request->type);
+                            })->get(['id','name','code','sub_ledger_type_id','ledger_id']);
+
+            $ledger_id = $request->account_id ? $request->account_id : 0;
+            if ($request->party_id > 0) {
+                $data['party'] = SubLedger::find($request->party_id);
+            }
+            if ($request->account_id > 0) {
+                $data['ledger'] = Ledger::find($request->account_id);
+            }
+            $tr_data = array();
+            $parent_data = array();
+            $reports = $this->getPartySummaryDataFormat($sub_ledgers, $tr_data, $start_date, $end_date, $request->type, $ledger_id, "approved_report");
+            $data['reports'] = collect($reports);
+        }
+        $data['type'] = $request->type;
+        $data['dateFrom'] = $start_date;
+        $data['dateTo'] = $end_date;
+        if ($request->has('print')) {
+            return view('accounts::reports.sub_ledger_summary.print', $data);
+        }
+        return view('accounts::reports.sub_ledger_summary.index', $data);    
     }
 
     protected function getDataFormatCashBankBookLedger($transactions, $report_type = null)
@@ -234,6 +272,42 @@ class AccountsController extends Controller
             array_push($tr_data, $new_data);
             if (count($child->categories) > 0) {
                 $tr_data = $this->getChildrenId($child->categories, $tr_data, $start_date);
+            }
+        }
+        return $tr_data;
+    }
+
+    protected function getPartySummaryDataFormat($accounts, $tr_data, $start_date, $end_date, $type, $ledger_id, $approval_type)
+    {
+        foreach ($accounts as $key => $child) {
+            if ($child->BalanceAmount != 0) {
+                $new_data['name'] = $child->name;
+                $new_data['code'] = $child->code;
+                $new_data['sub_ledger_type'] = $child->sub_ledger_type->name;
+                $new_data['opening_balance'] = $ledger_id > 0 ? $child->BalanceAmountTillDateByTypeByLedger($start_date, $type, $ledger_id) : $child->BalanceAmountTillDateByType($start_date, $type);
+                $new_data['transaction_data'] = array();
+                if ($ledger_id > 0) {
+                    $all_transactions = $child->transactions->where('is_approve', 1)->where('ledger_id', $ledger_id)->whereBetween('date',[$start_date, $end_date]);
+                } else {
+                    $all_transactions = $child->transactions->where('is_approve', 1)->whereBetween('date',[$start_date, $end_date]);
+                }
+                foreach ($all_transactions as $key => $transaction) {
+                    $transac_data['voucher_id'] = $transaction->voucher_id;
+                    $transac_data['date'] = date('d/m/Y', strtotime($transaction->voucher->date));
+                    $transac_data['type'] = $transaction->type;
+                    $transac_data['txn_id'] = $transaction->voucher->TypeName;
+                    $transac_data['narration'] = $transaction->narration;
+                    $transac_data['amount'] = $transaction->amount;
+                    $transac_data['ledger'] = $transaction->ledger->name;
+                    $transac_data['opposite_transaction_data'] = array();
+                    foreach ($transaction->voucher->transactions->where('type', '!=', $transaction->type) as $trn) {
+                        $opp_data['opposite_type'] = $trn->type;
+                        $opp_data['opposite_ledger'] = $trn->ledger->name;
+                        array_push($transac_data['opposite_transaction_data'], $opp_data);
+                    }
+                    array_push($new_data['transaction_data'], $transac_data);
+                }
+                array_push($tr_data, $new_data);
             }
         }
         return $tr_data;

@@ -79,10 +79,9 @@ class SubLedger extends Model
 
     public function BalanceAmountTillDateByType($fromDate, $type)
     {
-        if ($type == "customer" || $type == "member") {
+        if ($this->ledger->type == 1 || $this->ledger->type == 3) {
             return $this->transactions->where('date', '<' ,$fromDate)->where('type', 'Dr')->sum('amount') - $this->transactions->where('date', '<' ,$fromDate)->where('type', 'Cr')->sum('amount');
-        }
-        if ($type == "supplier") {
+        } else {
             return $this->transactions->where('date', '<' ,$fromDate)->where('type', 'Cr')->sum('amount') - $this->transactions->where('date', '<' ,$fromDate)->where('type', 'Dr')->sum('amount');
         }
     }
@@ -99,10 +98,9 @@ class SubLedger extends Model
 
     public function BalanceAmountTillDateByTypeByLedger($fromDate, $type, $ledger_id)
     {
-        if ($type == "customer" || $type == "member") {
+        if ($this->ledger->type == 1 || $this->ledger->type == 3) {
             return $this->transactions->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type', 'Dr')->sum('amount') - $this->transactions->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type','Cr')->sum('amount');
-        }
-        if ($type == "supplier") {
+        } else {
             return $this->transactions->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type','Cr')->sum('amount') - $this->transactions->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type', 'Dr')->sum('amount');
         }
     }
@@ -119,10 +117,9 @@ class SubLedger extends Model
 
     public function NonApprovedBalanceAmountTillDateByTypeByLedger($fromDate, $type, $ledger_id)
     {
-        if ($type == "customer" || $type == "member") {
+        if ($this->ledger->type == 1 || $this->ledger->type == 3) {
             return $this->all_transactions()->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type', 'Dr')->sum('amount') - $this->all_transactions()->where('type', 'Cr')->where('date', '<' ,$fromDate)->sum('amount');
-        }
-        if ($type == "supplier") {
+        } else {
             return $this->all_transactions()->where('ledger_id', $ledger_id)->where('date', '<' ,$fromDate)->where('type', 'Cr')->sum('amount') - $this->all_transactions()->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('amount');
         }
     }

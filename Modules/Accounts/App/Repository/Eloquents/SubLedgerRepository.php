@@ -23,17 +23,14 @@ class SubLedgerRepository extends BaseRepository implements SubLedgerRepositoryI
         if ($search != '') {
             $items = $items->whereLike(['name', 'code'], $search);
         }
-        if ($type == "customer") {
+        if ($type == "Client") {
             $items = $items->where('type','Client');
         }
-        if ($type == "supplier") {
+        if ($type == "Vendor") {
             $items = $items->where('type','Vendor');
         }
-        if ($type == "member") {
+        if ($type == "Staff") {
             $items = $items->where('type','Staff');
-        }
-        if ($type == "member_supplier") {
-            $items = $items->whereIn('type',['Vendor','Staff']);
         }
         $items = $items->paginate(20);
 
@@ -46,10 +43,10 @@ class SubLedgerRepository extends BaseRepository implements SubLedgerRepositoryI
         }
         foreach($items as $item){
         
-            $displaytype = $item->customer > 0 ? 'Client: ' : ($item->supplier > 0 ? 'Sup: ' : ($item->land_owner > 0 ? 'Land: ' : 'Mem'));
+            $displaytype = $item->type;
             $response[]  =[
                 'id'    => $item->id,
-                'text'  => $item->name .' ('.$displaytype.$item->code.')'
+                'text'  => $item->name .' ('.$displaytype.' '.$item->code.')'
             ];
         }
         $data['results'] =  $response;
