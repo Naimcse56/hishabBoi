@@ -43,21 +43,21 @@ class BalanceSheetController extends Controller
         $data['fiscal_years'] = DB::table('fiscal_years')->get();
 
         $ledgers = Ledger::with(['categories:id,parent_id,name,code,type,acc_type,view_in_bs,view_in_is'])->whereNotIn('id',[app('account_configurations')['retail_earning_account']])->get(['id','name','code','parent_id','acc_type','view_in_bs','view_in_is','type']);
-        
+        // dd("OK");
         $data['dateFrom'] = $start_date;
         $data['dateTo'] = $end_date;
         $data['report_type'] = $request->report_type ? $request->report_type : 'fiscal_year';
         $tr_data = array();
         $parent_data = array();
-        $first_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_first_section']), $tr_data, $start_date, $end_date, $sub_concern_id, $data['prve_date_from'], $data['prve_date_end'], 'report');
+        $first_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_first_section']), $tr_data, $start_date, $end_date, $data['prve_date_from'], $data['prve_date_end'], 'report');
         $data['first_section'] = collect($first_section);
-        $second_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_second_section']), $tr_data, $start_date, $end_date, $sub_concern_id, $data['prve_date_from'], $data['prve_date_end'], 'report');
+        $second_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_second_section']), $tr_data, $start_date, $end_date, $data['prve_date_from'], $data['prve_date_end'], 'report');
         $data['second_section'] = collect($second_section);
-        $third_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_third_section']), $tr_data, $start_date, $end_date, $sub_concern_id, $data['prve_date_from'], $data['prve_date_end'], 'report');
+        $third_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_third_section']), $tr_data, $start_date, $end_date, $data['prve_date_from'], $data['prve_date_end'], 'report');
         $data['third_section'] = collect($third_section);
-        $fourth_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_fourth_section']), $tr_data, $start_date, $end_date, $sub_concern_id, $data['prve_date_from'], $data['prve_date_end'], 'report');
+        $fourth_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_fourth_section']), $tr_data, $start_date, $end_date, $data['prve_date_from'], $data['prve_date_end'], 'report');
         $data['fourth_section'] = collect($fourth_section);
-        $fifth_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_fifth_section']), $tr_data, $start_date, $end_date, $sub_concern_id, $data['prve_date_from'], $data['prve_date_end'], 'report');
+        $fifth_section = $this->getChildrenSummary($ledgers->where('id',app('account_configurations')['balance_sht_fifth_section']), $tr_data, $start_date, $end_date, $data['prve_date_from'], $data['prve_date_end'], 'report');
         $data['fifth_section'] = collect($fifth_section);
         if ($request->has('print')) {
             return view('accounts::reports.balancesheet.print', $data);
@@ -68,16 +68,16 @@ class BalanceSheetController extends Controller
         return view('accounts::reports.balancesheet.index', $data);
     }
 
-    protected function getChildrenSummary($accounts, $tr_data, $start_date, $end_date, $sub_concern_id, $prev_start_date, $prev_end_date, $report_type)
+    protected function getChildrenSummary($accounts, $tr_data, $start_date, $end_date, $prev_start_date, $prev_end_date, $report_type)
     {
         foreach ($accounts->whereNotIn('id',[app('account_configurations')['retail_earning_account']]) as $key => $child) {
-            $amount_till_date = $child->BalanceAmountBetweenDate($start_date, $end_date, $sub_concern_id);
+            $amount_till_date = $child->BalanceAmountBetweenDate($start_date, $end_date);
             if ($report_type == "preview_report") {
-                $amount_till_date += $child->NonApprovedBalanceAmountBetweenDate($start_date, $end_date, $sub_concern_id);
+                $amount_till_date += $child->NonApprovedBalanceAmountBetweenDate($start_date, $end_date);
             }
-            $prev_amount_till_date = $prev_start_date != null ? $child->BalanceAmountBetweenDate($prev_start_date, $prev_end_date, $sub_concern_id) : 0;
+            $prev_amount_till_date = $prev_start_date != null ? $child->BalanceAmountBetweenDate($prev_start_date, $prev_end_date) : 0;
             if ($report_type == "preview_report") {
-                $prev_amount_till_date += $child->NonApprovedBalanceAmountBetweenDate($prev_start_date, $prev_end_date, $sub_concern_id);
+                $prev_amount_till_date += $child->NonApprovedBalanceAmountBetweenDate($prev_start_date, $prev_end_date);
             }
             $children_balance = 0;
             $prev_children_balance = 0;
@@ -86,42 +86,42 @@ class BalanceSheetController extends Controller
             $new_data['code'] = $child->code;
             $new_data['view_in_bs'] = $child->view_in_bs;
             $new_data['is_parent'] = count($child->categories) > 0 ? "yes" : "no";
-            $new_data['children_balance'] = count($child->categories) > 0 ? $this->getChildrenBalance($child->categories, $children_balance, $start_date, $end_date, $sub_concern_id, $prev_start_date, $prev_end_date, $report_type) : 0;
+            $new_data['children_balance'] = count($child->categories) > 0 ? $this->getChildrenBalance($child->categories, $children_balance, $start_date, $end_date, $prev_start_date, $prev_end_date, $report_type) : 0;
             $new_data['amount'] = $amount_till_date;
-            $new_data['prev_children_balance'] = $prev_start_date != null && count($child->categories) > 0 ? $this->getChildrenPrevBalance($child->categories, $prev_children_balance, $prev_start_date, $prev_end_date, $sub_concern_id, $report_type) : 0;
+            $new_data['prev_children_balance'] = $prev_start_date != null && count($child->categories) > 0 ? $this->getChildrenPrevBalance($child->categories, $prev_children_balance, $prev_start_date, $prev_end_date, $report_type) : 0;
             $new_data['prev_amount'] = $prev_amount_till_date;
             array_push($tr_data, $new_data);
             
             if (count($child->categories) > 0) {
-                $tr_data = $this->getChildrenSummary($child->categories, $tr_data, $start_date, $end_date, $sub_concern_id, $prev_start_date, $prev_end_date, $report_type);
+                $tr_data = $this->getChildrenSummary($child->categories, $tr_data, $start_date, $end_date, $prev_start_date, $prev_end_date, $report_type);
             }
         }
         return $tr_data;
     }
 
-    protected function getChildrenBalance($accounts, $children_balance, $start_date, $end_date, $sub_concern_id, $prev_start_date, $prev_end_date, $report_type)
+    protected function getChildrenBalance($accounts, $children_balance, $start_date, $end_date, $prev_start_date, $prev_end_date, $report_type)
     {
         foreach ($accounts->whereNotIn('id',[app('account_configurations')['retail_earning_account']]) as $key => $child) {
-            $children_balance += $child->BalanceAmountBetweenDate($start_date, $end_date, $sub_concern_id);
+            $children_balance += $child->BalanceAmountBetweenDate($start_date, $end_date);
             if ($report_type == "preview_report") {
-                $children_balance += $child->NonApprovedBalanceAmountBetweenDate($start_date, $end_date, $sub_concern_id);
+                $children_balance += $child->NonApprovedBalanceAmountBetweenDate($start_date, $end_date);
             }
             if (count($child->categories) > 0) {
-                $children_balance = $this->getChildrenBalance($child->categories, $children_balance, $start_date, $end_date, $sub_concern_id, $prev_start_date, $prev_end_date, $report_type);
+                $children_balance = $this->getChildrenBalance($child->categories, $children_balance, $start_date, $end_date, $prev_start_date, $prev_end_date, $report_type);
             }          
         }
         return $children_balance;
     }
 
-    protected function getChildrenPrevBalance($accounts, $prev_children_balance, $prev_start_date, $prev_end_date, $sub_concern_id, $report_type)
+    protected function getChildrenPrevBalance($accounts, $prev_children_balance, $prev_start_date, $prev_end_date, $report_type)
     {
         foreach ($accounts->whereNotIn('id',[app('account_configurations')['retail_earning_account']]) as $key => $child) {
-            $prev_children_balance += $child->BalanceAmountBetweenDate($prev_start_date, $prev_end_date, $sub_concern_id);
+            $prev_children_balance += $child->BalanceAmountBetweenDate($prev_start_date, $prev_end_date);
             if ($report_type == "preview_report") {
-                $prev_children_balance += $child->NonApprovedBalanceAmountBetweenDate($prev_start_date, $prev_end_date, $sub_concern_id);
+                $prev_children_balance += $child->NonApprovedBalanceAmountBetweenDate($prev_start_date, $prev_end_date);
             }
             if (count($child->categories) > 0) {
-                $prev_children_balance = $this->getChildrenPrevBalance($child->categories, $prev_children_balance, $prev_start_date, $prev_end_date, $sub_concern_id, $report_type);
+                $prev_children_balance = $this->getChildrenPrevBalance($child->categories, $prev_children_balance, $prev_start_date, $prev_end_date, $report_type);
             }          
         }
         return $prev_children_balance;
