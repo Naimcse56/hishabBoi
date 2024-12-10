@@ -5,7 +5,7 @@
     <div class="row justify-content-center w-100">
         <div class="login-form">
             <div class="text-center">
-                <img src="assets/images/icon.png"  width="65px"/>
+                <img src="{{ asset('assets/images/icon.png') }}"  width="65px"/>
                 <h4 class="login-title">Hishab Boi</h4>
             </div>
             <form method="POST" action="{{ route('login') }}" class="text-start mb-3">

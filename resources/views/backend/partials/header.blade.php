@@ -1,10 +1,11 @@
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-white">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" href="{{ route('dashboard') }}">Hishab Boi</a>
     <!-- Sidebar Toggle-->
     <a class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></a>
-    <h5 class="text-white d-md-inline-block ms-auto">{{date('Y-m-d')}} <span id="live-time" class="text-success"></span></h5>
+
     <ul class="navbar-nav ms-auto">
+        <li class="nav-item time "><i class="far fa-clock text-success"></i> {{date('F j, Y')}} <span id="live-time" ></span></li>
         <li class="nav-item dropdown">
             {{-- <img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" width="32" class="rounded-circle me-lg-2 d-flex" alt="user-image"> --}}
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
