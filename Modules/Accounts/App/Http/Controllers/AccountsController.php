@@ -462,4 +462,67 @@ class AccountsController extends Controller
         }
         return $tr_data;
     }
+
+    public function receive_payment_report(Request $request)
+    {
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
+        $data['dateFrom'] = $start_date;
+        $data['dateTo'] = $end_date;
+        $data['accounts'] = Ledger::withOnly(['categories.parent:id,name','categories:id,parent_id,name,code,type'])->where('parent_id', 0)->get(['id','parent_id','name','code','type','acc_type','ac_no']);
+        $cash_accounts = Ledger::whereIn('acc_type', ['cash'])->get(['id'])->pluck('id');
+        $bank_accounts = Ledger::whereIn('acc_type', ['bank'])->get(['id'])->pluck('id');
+        
+        $rcv_transactions = Transaction::whereHas('voucher', function($q) use ($start_date,$end_date,$cash_accounts){
+                                $q->whereIn('type',['rcv','rcv_cash'])->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($cash_accounts){
+                                    $query->whereIn('ledger_id',$cash_accounts);
+                                });
+                            })->whereNotIn('ledger_id', $cash_accounts)->get(['id','ledger_id','work_order_id','amount','type','voucher_id','date']);
+        $pay_transactions = Transaction::whereHas('voucher', function($q) use ($start_date,$end_date,$cash_accounts){
+                                $q->whereIn('type',['pay','pay_cash'])->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($cash_accounts){
+                                    $query->whereIn('ledger_id',$cash_accounts);
+                                });
+                            })->whereNotIn('ledger_id', $cash_accounts)->get(['id','ledger_id','work_order_id','amount','type','voucher_id','date']);
+        
+        $rcv_bank_transactions = Transaction::whereHas('voucher', function($q) use ($start_date,$end_date,$bank_accounts){
+                                $q->whereIn('type',['rcv_bank'])->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($bank_accounts){
+                                    $query->whereIn('ledger_id',$bank_accounts);
+                                });
+                            })->whereNotIn('ledger_id', $bank_accounts)->get(['id','ledger_id','work_order_id','amount','type','voucher_id','date']);
+        $pay_bank_transactions = Transaction::whereHas('voucher', function($q) use ($start_date,$end_date,$bank_accounts){
+                                $q->whereIn('type',['pay_bank'])->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($bank_accounts){
+                                    $query->whereIn('ledger_id',$bank_accounts);
+                                });
+                            })->whereNotIn('ledger_id', $bank_accounts)->get(['id','ledger_id','work_order_id','amount','type','voucher_id','date']);
+        $tr_data = array();
+        $parent_data = array();
+        foreach ($data['accounts'] as $key => $child) {
+            $tr_data = $this->getChildrenForRecieptPayment($child->categories, $tr_data, $parent_data, $rcv_transactions, $pay_transactions, $rcv_bank_transactions, $pay_bank_transactions);
+        }
+        $data['transactions'] = collect($tr_data)->unique()->groupBy('parent_name');
+        if ($request->has('print') || $request->has('detailParty')) {
+            return view('accounts::reports.receive_payment_report.print', $data);
+        }
+        return view('accounts::reports.receive_payment_report.index', $data);
+    }
+
+    protected function getChildrenForRecieptPayment($childrens, $tr_data, $parent_data, $rcv_transactions, $pay_transactions, $rcv_bank_transactions, $pay_bank_transactions)
+    {
+        foreach ($childrens as $key => $child) {
+            $new_data['parent_name'] = $child->parent->name;
+            $new_data['name'] = $child->name;
+            $new_data['id'] = $child->id;
+            $new_data['rcv_balance'] = $rcv_transactions->where('ledger_id', $child->id)->where('type','Cr')->sum('amount');
+            $new_data['pay_balance'] = $pay_transactions->where('ledger_id', $child->id)->where('type','Dr')->sum('amount');
+            $new_data['rcv_bank_balance'] = $rcv_bank_transactions->where('ledger_id', $child->id)->where('type','Cr')->sum('amount');
+            $new_data['pay_bank_balance'] = $pay_bank_transactions->where('ledger_id', $child->id)->where('type','Dr')->sum('amount');
+            if ($new_data['rcv_balance'] != 0 || $new_data['pay_balance'] != 0 || $new_data['rcv_bank_balance'] != 0 || $new_data['pay_bank_balance'] != 0) {
+                array_push($tr_data, $new_data);
+            }
+            if (count($child->categories) > 0) {
+                $tr_data = $this->getChildrenForRecieptPayment($child->categories, $tr_data, $parent_data, $rcv_transactions, $pay_transactions, $rcv_bank_transactions, $pay_bank_transactions);
+            }
+        }
+        return $tr_data;
+    }
 }

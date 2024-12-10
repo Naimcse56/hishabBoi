@@ -183,5 +183,6 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/party-accounts-summary-report', 'sub_ledger_summary_report')->name('accountings.sub_ledger_summary_report');
         Route::get('/work-order-report', 'work_order_report')->name('accountings.work_order_report');
         Route::get('/work-order-summary-report', 'work_order_summary_report')->name('accountings.work_order_summary_report');
+        Route::get('/receive-payment-report', 'receive_payment_report')->name('accountings.receive_payment_report');
     });
 });

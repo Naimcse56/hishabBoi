@@ -59,7 +59,7 @@
                 <a class="nav-link @if (Route::is('work-orders.pl_report')) active @endif" href="{{route('work-orders.pl_report')}}">W/O Profit Loss</a>
                 <a class="nav-link @if (Route::is('work-orders.balance_sheet_report')) active @endif" href="{{route('work-orders.balance_sheet_report')}}">W/O Asset and Liability</a>
                 <a class="nav-link @if (Route::is('work-orders.receive_payment_report')) active @endif" href="{{route('work-orders.receive_payment_report')}}">W/O Receipt & Payment</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Receipt & Payment Report</a>
+                <a class="nav-link @if (Route::is('accountings.receive_payment_report')) active @endif" href="{{route('accountings.receive_payment_report')}}">Receipt & Payment Report</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Balance Sheet</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Trial Balance</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">Income Statement</a>
