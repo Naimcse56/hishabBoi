@@ -347,7 +347,7 @@ Work Order Journal Entry
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
-                                    type: 'customer',
+                                    type: 'Client',
                                     branch_id: $(".branch_id").val()
                                 }
                                 return query;

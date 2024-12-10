@@ -91,7 +91,7 @@ Work Order
                                 var query = {
                                     search: params.term,
                                     page: params.page || 1,
-                                    type: 'customer',
+                                    type: 'Client',
                                 }
                                 return query;
                         },

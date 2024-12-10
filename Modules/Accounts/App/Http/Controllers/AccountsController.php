@@ -359,6 +359,51 @@ class AccountsController extends Controller
         return view('accounts::reports.work_order.index', $data);
     }
 
+    public function work_order_summary_report(Request $request)
+    {
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
+        if ($request->client > 0) {
+            $data['client'] = SubLedger::find($request->client,['id','name']);
+        }
+        $work_orders = WorkOrder::when($request->client > 0, function ($q) use ($request) {
+            return $q->where('sub_ledger_id', $request->client);
+        })->when($request->awarded_by > 0, function ($q) use ($request) {
+            return $q->where('awarded_by', $request->awarded_by);
+        })->get();
+        $data['awarded_persons'] = WorkOrder::get()->unique('awarded_by')->pluck(['awarded_by']);
+        $transactions = Transaction::whereHas('ledger', function ($query) {
+                            $query->where('type', 1);
+                        })->whereHas('voucher', function ($query) {
+                            $query->whereIn('type', ['pay_cash','pay_bank','pay']);
+                        })
+                        ->where('is_approve',1)
+                        ->where('type',"Cr")
+                        ->whereIn('work_order_id', $work_orders->pluck('id')->toArray())
+                        ->whereBetween('date',[$start_date,$end_date])
+                        ->with(['voucher:id,type,txn_id,f_year','ledger:id,name,ac_no'])
+                        ->get(['id','date','voucher_id','narration','amount','type','work_order_id','ledger_id','sub_ledger_id']);
+
+        $exp_transactions = Transaction::whereHas('ledger', function ($query) {
+                            $query->where('type', 3);
+                        })
+                        ->where('is_approve',1)
+                        ->whereIn('work_order_id', $work_orders->pluck('id')->toArray())
+                        ->whereBetween('date',[$start_date,$end_date])
+                        ->with(['voucher:id,type,txn_id,f_year','ledger:id,name,ac_no'])
+                        ->get(['id','date','voucher_id','narration','amount','type','work_order_id','ledger_id','sub_ledger_id']);
+                        
+        $tr_data = array();
+        $reports = $this->getWorkOrderDataFormat($work_orders, $tr_data, $start_date, $end_date, $transactions, $exp_transactions);
+        $data['reports'] = collect($reports);
+        $data['dateFrom'] = $start_date;
+        $data['dateTo'] = $end_date;
+        if ($request->has('print')) {
+            return view('accounts::reports.work_order_summary.print', $data);
+        }
+        return view('accounts::reports.work_order_summary.index', $data);    
+    }
+
     protected function getPartySummaryDataFormat($accounts, $tr_data, $start_date, $end_date, $type, $ledger_id, $approval_type)
     {
         foreach ($accounts as $key => $child) {
@@ -391,6 +436,29 @@ class AccountsController extends Controller
                 }
                 array_push($tr_data, $new_data);
             }
+        }
+        return $tr_data;
+    }
+
+    protected function getWorkOrderDataFormat($work_orders, $tr_data, $start_date, $end_date, $transactions, $expense_transactions)
+    {
+        foreach ($work_orders as $work_order)
+        {
+            $total_payment = $transactions->where('work_order_id', $work_order->id)->sum('amount');
+            $total_exp = $expense_transactions->where('work_order_id', $work_order->id)->sum('amount');
+            $est_cost = $work_order->work_order_estimation_costs()->sum('estimated_amount') > 0 ?$work_order->work_order_estimation_costs()->sum('estimated_amount') : 1;
+            $actual_exp_cal = $total_exp - $total_payment;
+            $est_profit = $work_order->order_value - $est_cost;
+            $new_data['customer'] = $work_order->sub_ledger->name;
+            $new_data['name'] = $work_order->order_name;
+            $new_data['code'] = $work_order->order_no;
+            $new_data['order_value'] = $work_order->order_value;
+            $new_data['estimated_cost'] = $est_cost;
+            $new_data['estimated_profit'] = $est_profit;
+            $new_data['total_exp'] = $total_exp;
+            $new_data['total_payment'] = $total_payment;
+            $new_data['investment_percent'] = ($total_payment / $est_cost) * 100;
+            array_push($tr_data, $new_data);
         }
         return $tr_data;
     }

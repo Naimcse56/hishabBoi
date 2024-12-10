@@ -55,7 +55,7 @@
                 <a class="nav-link @if (Route::is('accountings.sub_ledger_report')) active @endif" href="{{route('accountings.sub_ledger_report')}}">Party Report</a>
                 <a class="nav-link @if (Route::is('accountings.sub_ledger_summary_report')) active @endif" href="{{route('accountings.sub_ledger_summary_report')}}">Party Summary</a>
                 <a class="nav-link @if (Route::is('accountings.work_order_report')) active @endif" href="{{route('accountings.work_order_report')}}">Work Order Report</a>
-                <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Summary</a>
+                <a class="nav-link @if (Route::is('accountings.work_order_summary_report')) active @endif" href="{{route('accountings.work_order_summary_report')}}">W/O Summary</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Profit Loss</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Asset and Liability</a>
                 <a class="nav-link @if (0) active @endif" href="{{route('accountings.cashbook')}}">W/O Receipt & Payment</a>
