@@ -17,6 +17,8 @@ use Modules\Accounts\App\Http\Controllers\JournalWorkOrderController;
 use Modules\Accounts\App\Http\Controllers\BalanceSheetController;
 use Modules\Accounts\App\Http\Controllers\IncomeStatementController;
 use Modules\Accounts\App\Http\Controllers\TrialBalanceController;
+use Modules\Accounts\App\Http\Controllers\ProductController;
+use Modules\Accounts\App\Http\Controllers\ProductUnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +32,6 @@ use Modules\Accounts\App\Http\Controllers\TrialBalanceController;
 */
 
 Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
-    Route::resource('accounts', AccountsController::class)->names('accounts');
     Route::controller(LedgerController::class)->group(function () {
         Route::get('/ledger/index', 'index')->name('ledger.index');
         Route::get('/ledger/create', 'create')->name('ledger.create');
@@ -38,7 +39,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/ledger/edit/{id}', 'edit')->name('ledger.edit');
         Route::get('/ledger/show/{id}', 'show')->name('ledger.show');
         Route::post('/ledger/update/{id}', 'update')->name('ledger.update');
-        Route::post('/delete', 'destroy')->name('ledger.delete');
+        Route::post('/ledger/delete', 'destroy')->name('ledger.delete');
         Route::get('/ledger/transactional-account-list-ajax', 'transactional_list_for_select_ajax')->name('ledger.transactional_list_for_select');
         Route::get('/ledger-list', 'list')->name('leadger.list_all');
         Route::post('/ledger/code-checker', 'code_checker')->name('ledger.code_checker');
@@ -196,5 +197,27 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
     });
     Route::controller(TrialBalanceController::class)->prefix('report')->as('accountings.')->group(function () {
         Route::get('/trial-balance', 'trial_balance')->name('trial_balance');
+    });
+
+    
+    Route::controller(ProductController::class)->prefix('products')->group(function () {
+        Route::get('/index', 'index')->name('products.index');
+        Route::get('/create', 'create')->name('products.create');
+        Route::post('/store', 'store')->name('products.store');
+        Route::get('/edit/{id}', 'edit')->name('products.edit');
+        Route::get('/show/{id}', 'show')->name('products.show');
+        Route::post('/update/{id}', 'update')->name('products.update');
+        Route::post('/delete', 'destroy')->name('products.delete');
+        Route::get('/list-ajax', 'list_for_select')->name('products.list_for_select');
+    });
+    Route::controller(ProductUnitController::class)->prefix('products-unit')->group(function () {
+        Route::get('/index', 'index')->name('products-unit.index');
+        Route::get('/create', 'create')->name('products-unit.create');
+        Route::post('/store', 'store')->name('products-unit.store');
+        Route::get('/edit/{id}', 'edit')->name('products-unit.edit');
+        Route::get('/show/{id}', 'show')->name('products-unit.show');
+        Route::post('/update/{id}', 'update')->name('products-unit.update');
+        Route::post('/delete', 'destroy')->name('products-unit.delete');
+        Route::get('/list-ajax', 'list_for_select')->name('products-unit.list_for_select');
     });
 });
