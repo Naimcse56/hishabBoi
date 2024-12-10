@@ -44,7 +44,6 @@ class BalanceSheetController extends Controller
 
         $ledgers = Ledger::with(['categories:id,parent_id,name,code,type,acc_type,view_in_bs,view_in_is'])->whereNotIn('id',[app('account_configurations')['retail_earning_account']])->get(['id','name','code','parent_id','acc_type','view_in_bs','view_in_is','type']);
         
-        dd("OK");
         $data['dateFrom'] = $start_date;
         $data['dateTo'] = $end_date;
         $data['report_type'] = $request->report_type ? $request->report_type : 'fiscal_year';
