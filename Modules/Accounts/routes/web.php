@@ -47,8 +47,6 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('subledger-type.update');
         Route::post('/delete', 'destroy')->name('subledger-type.delete');
         Route::get('/select-list-ajax', 'list_for_select_ajax')->name('subledger-type.transactional_list_for_select');
-        Route::get('/report', 'index_report')->name('subledger-type.index_report');
-        Route::get('/report-preview', 'index_report_preview')->name('subledger-type.index_report_preview');
     });
     Route::controller(SubLedgerController::class)->prefix('/party-accounts')->group(function () {
         Route::get('/supplier-index', 'index')->name('sub-ledger.index');
