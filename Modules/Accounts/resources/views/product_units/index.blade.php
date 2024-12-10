@@ -30,6 +30,7 @@ Product Unit
             </div>
         </div>
     </div>
+    <div id="ajaxDiv"></div>
     @include('accounts::product_units.create')
 
 @endsection
@@ -47,7 +48,7 @@ Product Unit
                 var table = $('#dataTable').DataTable( {
 					processing: true,
 					serverSide: true,
-					ajax: "{{ route('subledger-type.index') }}",
+					ajax: "{{ route('products-unit.index') }}",
 					columns: [
 						{data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
 						{data: 'name', name: 'name'},
@@ -77,6 +78,7 @@ Product Unit
                     type: "POST",
                     success: function (response) {
                         $('.save-btn').prop('disabled', false);
+                        $('#name').val('');
                         $("#exampleLargeModal").modal("hide");
                         $('#dataTable').DataTable().ajax.reload();
                         toastr.success(response.message);

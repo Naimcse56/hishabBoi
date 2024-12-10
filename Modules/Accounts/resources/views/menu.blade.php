@@ -1,3 +1,23 @@
+<a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventory" aria-expanded="false" aria-controls="collapseAccounts">
+    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+    Inventory
+    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+</a>
+<div class="collapse" id="collapseInventory" aria-labelledby="headingInventory" data-bs-parent="#sidenavAccordion">
+    <nav class="sb-sidenav-menu-nested nav accordion" id="sideNavProducts">
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#head_child" aria-expanded="false" aria-controls="head_child">
+            Products
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="head_child" aria-labelledby="headingOne" data-bs-parent="#sideNavProducts">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (Route::is('products.create')) active @endif" href="{{route('products.create')}}">New Product</a>
+                <a class="nav-link @if (Route::is('products.*') && !Route::is('products.create')) active @endif" href="{{route('products.index')}}">Products List</a>
+                <a class="nav-link @if (Route::is('products-unit.*')) active @endif" href="{{route('products-unit.index')}}">Product Unit</a>
+            </nav>
+        </div>
+    </nav>
+</div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccounts" aria-expanded="false" aria-controls="collapseAccounts">
     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
     Accounts
