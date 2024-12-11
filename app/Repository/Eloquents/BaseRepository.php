@@ -103,7 +103,7 @@ class BaseRepository implements BaseRepositoryInterface
         if (!$model) {
             return false;
         }
-        if ($assetPath) {
+        if ($assetPath && $model->$assetPath) {
             $this->deleteFile($model->$assetPath);
         }
         foreach ($relations as $relation) {
