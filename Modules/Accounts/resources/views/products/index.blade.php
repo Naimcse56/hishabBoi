@@ -52,7 +52,7 @@ Products List
                         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
                         {data: 'type', name: 'type'},
                         {data: 'name', name: 'name'},
-                        {data: 'status', name: 'status'},
+                        {data: 'is_active', name: 'is_active'},
                         {data: 'selling_price', name: 'selling_price', className:'text-right'},
                         {data: 'purchase_price', name: 'purchase_price', className:'text-right'},
                         {data: 'action', name: 'action', orderable: false, searchable: false, printable:false},

@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreignId('product_unit_id')->nullable();
             $table->string('name', 255)->nullable();
             $table->string('type', 25)->comment('Service / Product');
-            $table->boolean("is_active")->default(1);
-            $table->boolean("for_selling")->default(1);
-            $table->boolean("for_purchase")->default(1);
-            $table->boolean("stock_manage")->default(1);
+            $table->enum('is_active', ['Yes', 'No']);
+            $table->enum('for_selling', ['Yes', 'No']);
+            $table->enum('for_purchase', ['Yes', 'No']);
+            $table->enum('stock_manage', ['Yes', 'No']);
             $table->double('selling_price', 28,2)->default(0)->index();
             $table->double('purchase_price', 28,2)->default(0)->index();
             $table->string('image',300)->nullable();

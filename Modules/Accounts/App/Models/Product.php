@@ -36,4 +36,14 @@ class Product extends Model
     {
         return $this->belongsTo(ProductUnit::class)->withDefault();
     }
+
+    public function purchase_ledger()
+    {
+        return $this->belongsTo(Ledger::class, "purchase_ledger_id", "id")->withDefault();
+    }
+
+    public function selling_ledger()
+    {
+        return $this->belongsTo(Ledger::class, "selling_ledger_id", "id")->withDefault();
+    }
 }

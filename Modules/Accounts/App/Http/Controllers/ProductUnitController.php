@@ -102,7 +102,7 @@ class ProductUnitController extends Controller
         }
     }
 
-    public function list_for_select_ajax(Request $request)
+    public function list_for_select(Request $request)
     {
         $data = $this->productUnitRepository->listForSelect($request->search);
         return response()->json($data);

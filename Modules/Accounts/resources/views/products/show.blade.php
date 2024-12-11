@@ -4,7 +4,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
-                <h5 class="modal-title">{{$ledger->name}} Information</h5>
+                <h5 class="modal-title">{{$product->type}} Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -13,57 +13,40 @@
                         <table class="table table-bordered mb-0">
                             <tbody>
                                 <tr>
-                                    <td>Account Type</td>
-                                    <td>{{$ledger->TypeName}}</td>
+                                    <td>Product Name</td>
+                                    <td>{{$product->name}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Parent Account</td>
-                                    <td>{{$ledger->parent->name}}</td>
+                                    <td>Product Unit</td>
+                                    <td>{{$product->product_unit->name}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Account Name</td>
-                                    <td>{{$ledger->name}}</td>
+                                    <td>For Selling</td>
+                                    <td>{{$product->for_selling}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Account Code</td>
-                                    <td>{{$ledger->code}}</td>
-                                </tr>
-                                @if ($ledger->acc_type == "bank")
-                                    <tr>
-                                        <td>Routing No</td>
-                                        <td>{{$ledger->routing_no}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Swift Code</td>
-                                        <td>{{$ledger->swift_code}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Branch Code</td>
-                                        <td>{{$ledger->branch_code}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bank Address</td>
-                                        <td>{{$ledger->bank_address}}</td>
-                                    </tr>
-                                @endif
-                                <tr>
-                                    <td>Ledger Type</td>
-                                    <td>{{$ledger->acc_type}}</td>
+                                    <td>Selling Account</td>
+                                    <td>{{$product->selling_ledger->name}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Balance</td>
-                                    <td>{{currencySymbol($ledger->BalanceAmount)}}</td>
+                                    <td>Selling Price</td>
+                                    <td>{{currencySymbol($product->selling_price)}}</td>
                                 </tr>
                                 <tr>
-                                    <td>Child Account</td>
-                                    <td>
-                                        @foreach ($ledger->childrenCategories as $child_account)
-                                            ({{$child_account->code}}) {{$child_account->name}} <br>
-                                            @foreach ($child_account->childrenCategories as $child)
-                                                ({{$child->code}}) {{$child->name}} <br>
-                                            @endforeach
-                                        @endforeach
-                                    </td>
+                                    <td>For Purchase</td>
+                                    <td>{{$product->for_purchase}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Purchase Account</td>
+                                    <td>{{$product->purchase_ledger->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Purchase Price</td>
+                                    <td>{{currencySymbol($product->purchase_price)}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Details</td>
+                                    <td>{{$product->details}}</td>
                                 </tr>
                             </tbody>
                         </table>
