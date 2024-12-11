@@ -24,14 +24,14 @@ class SaleController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $this->saleRepository->allDataTable();
+            $data = $this->saleRepository->allDataTable([],['*'],['sub_ledger:id,name']);
             return Datatables::of($data)
                     ->addIndexColumn()
-                    ->editColumn('selling_price', function($row){
-                        return currencySymbol($row->selling_price);
+                    ->editColumn('date', function($row){
+                        return showDateFormat($row->date);
                     })
-                    ->editColumn('purchase_price', function($row){
-                        return currencySymbol($row->purchase_price);
+                    ->editColumn('payable_amount', function($row){
+                        return currencySymbol($row->payable_amount);
                     })
                     ->addColumn('action', function($row){      
                         return view('accounts::sales.components.action', compact('row'));
@@ -55,7 +55,15 @@ class SaleController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //
+        try {
+            DB::beginTransaction();
+            $item = $this->saleRepository->createData($request->except('_token'));
+            DB::commit();
+            return redirect()->route('sales.create')->with('success', $item->invoice_no.' Added Successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -63,7 +71,12 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        return view('accounts::show');
+        try {
+            $data['purchase'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            return view('accounts::sales.show', $data);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -71,7 +84,12 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        return view('accounts::edit');
+        try {
+            $data['purchase'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            return view('accounts::sales.edit_view', $data);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        };
     }
 
     /**
@@ -79,14 +97,28 @@ class SaleController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        //
+        try {
+            DB::beginTransaction();
+            $id = (int) decrypt($id);
+            $item = $this->saleRepository->updateData($id, $request->except('_token'));
+            DB::commit();
+            return redirect()->route('sales.index')->with('success', $item->invoice_no.' Updated Successfully');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $response = $this->saleRepository->deleteById($request->id,['sale_details']);
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 }

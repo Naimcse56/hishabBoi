@@ -17,6 +17,7 @@ Sale List
                                 <thead>
                                     <tr>
                                         <th>SL</th>
+                                        <th>Date</th>
                                         <th>Invoice No</th>
                                         <th>Client</th>
                                         <th>Phone</th>
@@ -49,11 +50,12 @@ Sale List
                     ajax: "{{ route('sales.index') }}",
                     columns: [
                         {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
-                        {data: 'type', name: 'type'},
-                        {data: 'name', name: 'name'},
-                        {data: 'is_active', name: 'is_active'},
-                        {data: 'selling_price', name: 'selling_price', className:'text-right'},
-                        {data: 'purchase_price', name: 'purchase_price', className:'text-right'},
+                        {data: 'date', name: 'date'},
+                        {data: 'invoice_no', name: 'invoice_no'},
+                        {data: 'sub_ledger.name', name: 'sub_ledger.name'},
+                        {data: 'phone', name: 'phone'},
+                        {data: 'payable_amount', name: 'payable_amount', className:'text-right'},
+                        {data: 'is_approved', name: 'is_approved'},
                         {data: 'action', name: 'action', orderable: false, searchable: false, printable:false},
                     ],
                     responsive: false,
