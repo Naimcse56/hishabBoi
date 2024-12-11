@@ -16,18 +16,26 @@
                 <a class="nav-link @if (Route::is('products-unit.*')) active @endif" href="{{route('products-unit.index')}}">Product Unit</a>
             </nav>
         </div>
-        <a class="nav-link" href="{{route('dashboard')}}">
-            {{-- <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div> --}}
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#SalesMenu" aria-expanded="false" aria-controls="SalesMenu">
             Sales
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
-        <a class="nav-link" href="{{route('dashboard')}}">
-            {{-- <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div> --}}
-            Purchases
+        <div class="collapse" id="SalesMenu" aria-labelledby="headingOne" data-bs-parent="#sideNavProducts">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (Route::is('sales.create')) active @endif" href="{{route('sales.create')}}">New Sale</a>
+                <a class="nav-link @if (Route::is('sales.*') && !Route::is('sales.create')) active @endif" href="{{route('sales.index')}}">Sale List</a>
+            </nav>
+        </div>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#PurchaseMenu" aria-expanded="false" aria-controls="PurchaseMenu">
+            Purchase
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
-        <a class="nav-link" href="{{route('dashboard')}}">
-            {{-- <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div> --}}
-            Quotations
-        </a>
+        <div class="collapse" id="PurchaseMenu" aria-labelledby="headingOne" data-bs-parent="#sideNavProducts">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (Route::is('purchases.create')) active @endif" href="{{route('purchases.create')}}">New Purchase</a>
+                <a class="nav-link @if (Route::is('purchases.*') && !Route::is('purchases.create')) active @endif" href="{{route('purchases.index')}}">Purchase List</a>
+            </nav>
+        </div>
     </nav>
 </div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccounts" aria-expanded="false" aria-controls="collapseAccounts">

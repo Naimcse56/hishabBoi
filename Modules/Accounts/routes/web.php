@@ -19,6 +19,8 @@ use Modules\Accounts\App\Http\Controllers\IncomeStatementController;
 use Modules\Accounts\App\Http\Controllers\TrialBalanceController;
 use Modules\Accounts\App\Http\Controllers\ProductController;
 use Modules\Accounts\App\Http\Controllers\ProductUnitController;
+use Modules\Accounts\App\Http\Controllers\SaleController;
+use Modules\Accounts\App\Http\Controllers\PurchaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -219,5 +221,25 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('products-unit.update');
         Route::post('/delete', 'destroy')->name('products-unit.delete');
         Route::get('/list-ajax', 'list_for_select')->name('products-unit.list_for_select');
+    });
+    Route::controller(SaleController::class)->prefix('sales')->group(function () {
+        Route::get('/index', 'index')->name('sales.index');
+        Route::get('/create', 'create')->name('sales.create');
+        Route::post('/store', 'store')->name('sales.store');
+        Route::get('/edit/{id}', 'edit')->name('sales.edit');
+        Route::get('/show/{id}', 'show')->name('sales.show');
+        Route::post('/update/{id}', 'update')->name('sales.update');
+        Route::post('/delete', 'destroy')->name('sales.delete');
+        Route::get('/list-ajax', 'list_for_select')->name('sales.list_for_select');
+    });
+    Route::controller(PurchaseController::class)->prefix('purchase')->group(function () {
+        Route::get('/index', 'index')->name('purchases.index');
+        Route::get('/create', 'create')->name('purchases.create');
+        Route::post('/store', 'store')->name('purchases.store');
+        Route::get('/edit/{id}', 'edit')->name('purchases.edit');
+        Route::get('/show/{id}', 'show')->name('purchases.show');
+        Route::post('/update/{id}', 'update')->name('purchases.update');
+        Route::post('/delete', 'destroy')->name('purchases.delete');
+        Route::get('/list-ajax', 'list_for_select')->name('purchases.list_for_select');
     });
 });
