@@ -118,7 +118,10 @@ class ProductController extends Controller
             if ($request->hasFile('image')) {
                 $product = $this->productRepository->findById(decrypt($id));
                 // Add the image path to the validated data
-                $this->deleteFile($product->image);
+                if($product->image)
+                {
+                    $this->deleteFile($product->image);
+                }
                 $validatedData['image'] = $this->uploadFile($request->image, 'product-image');
             }
             $item = $this->productRepository->update(decrypt($id),$validatedData);
