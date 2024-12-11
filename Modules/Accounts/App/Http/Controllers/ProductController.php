@@ -11,9 +11,11 @@ use Modules\Accounts\App\Repository\Eloquents\ProductRepository;
 use Modules\Accounts\App\Http\Requests\ProductStoreRequest;
 use Modules\Accounts\App\Http\Requests\ProductUpdateRequest;
 use DataTables;
+use App\Traits\FileUploadTrait;
 
 class ProductController extends Controller
 {
+    use FileUploadTrait;
     private object $productRepository;
 
     public function __construct(ProductRepository $productRepository)
@@ -59,7 +61,15 @@ class ProductController extends Controller
     {
         try {
             DB::beginTransaction();
-            $item = $this->productRepository->create($request->validated());
+            // Get the validated data except for the 'image' field
+            $validatedData = $request->validated();
+            
+            // Handle the image file separately if it exists
+            if ($request->hasFile('image')) {
+                // Add the image path to the validated data
+                $validatedData['image'] = $this->uploadFile($request->image, 'product-image');
+            }
+            $item = $this->productRepository->create($validatedData);
             DB::commit();
             return redirect()->route('products.create')->with('success', $item->name.' Added Successfully');
         } catch (\Exception $e) {
@@ -101,7 +111,17 @@ class ProductController extends Controller
     {
         try {
             DB::beginTransaction();
-            $item = $this->productRepository->update(decrypt($id),$request->validated());
+            // Get the validated data except for the 'image' field
+            $validatedData = $request->validated();
+            
+            // Handle the image file separately if it exists
+            if ($request->hasFile('image')) {
+                $product = $this->productRepository->findById(decrypt($id));
+                // Add the image path to the validated data
+                $this->deleteFile($product->image);
+                $validatedData['image'] = $this->uploadFile($request->image, 'product-image');
+            }
+            $item = $this->productRepository->update(decrypt($id),$validatedData);
             DB::commit();
             return redirect()->route('products.index')->with('success', $item->name.' Updated Successfully');
         } catch (\Exception $e) {
