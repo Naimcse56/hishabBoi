@@ -20,6 +20,13 @@ class LedgerController extends Controller
     {
         $this->ledgerInterface = $ledgerInterface;
     }
+
+
+    public function invoice()
+    {
+         return view('accounts::ledgers.invoice');
+    }
+    
     /**
      * Display a listing of the resource.
      */

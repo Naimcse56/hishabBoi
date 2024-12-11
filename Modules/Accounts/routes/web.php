@@ -32,9 +32,14 @@ use Modules\Accounts\App\Http\Controllers\PurchaseController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+  
 
 Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
     Route::controller(LedgerController::class)->group(function () {
+
+        Route::get('/invoice', 'invoice')->name('invoice');
+
+
         Route::get('/ledger/index', 'index')->name('ledger.index');
         Route::get('/ledger/create', 'create')->name('ledger.create');
         Route::post('/ledger/store', 'store')->name('ledger.store');
@@ -242,4 +247,6 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/delete', 'destroy')->name('purchases.delete');
         Route::get('/list-ajax', 'list_for_select')->name('purchases.list_for_select');
     });
+
+
 });
