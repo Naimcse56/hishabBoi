@@ -136,7 +136,7 @@ class ProductController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->productRepository->deleteById($request->id);
+            $response = $this->productRepository->deleteById($request->id,'image');
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

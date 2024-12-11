@@ -13,6 +13,9 @@
                         <table class="table table-bordered mb-0">
                             <tbody>
                                 <tr>
+                                    <td colspan="2"><img src="{{asset('storage/'.$product->image)}}" alt="{{$product->name}}" class="w-25"></td>
+                                </tr>
+                                <tr>
                                     <td>Product Name</td>
                                     <td>{{$product->name}}</td>
                                 </tr>

@@ -78,7 +78,7 @@ interface BaseRepositoryInterface
      * @param int $modelId
      * @return bool
      */
-    public function deleteById(int $modelId) : bool;
+    public function deleteById(int $modelId, string $assetPath, array $relations) : bool;
 
     // Custom Function Start
     public function firstData(array $relations, array $conditions, array $columns);

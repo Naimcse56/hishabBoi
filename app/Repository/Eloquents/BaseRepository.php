@@ -5,9 +5,11 @@ namespace App\Repository\Eloquents;
 use App\Repository\Interfaces\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\FileUploadTrait;
 
 class BaseRepository implements BaseRepositoryInterface
 {
+    use FileUploadTrait;
     /**
      * @var Model
      */
@@ -95,11 +97,14 @@ class BaseRepository implements BaseRepositoryInterface
      * @param int $modelId
      * @return bool
      */
-    public function deleteById(int $modelId, array $relations = []): bool
+    public function deleteById(int $modelId, string $assetPath=null, array $relations = []): bool
     {
         $model = $this->findById($modelId);
         if (!$model) {
             return false;
+        }
+        if ($assetPath) {
+            $this->deleteFile($model->$assetPath);
         }
         foreach ($relations as $relation) {
             $this->deleteRelatedModels($model, $relation);
