@@ -146,9 +146,15 @@ class ProductController extends Controller
         }
     }
 
-    public function list_for_select_ajax(Request $request)
+    public function list_for_select(Request $request)
     {
         $data = $this->productRepository->listForSelect($request->search,$request->status,$request->is_selling,$request->is_purchase,$request->type);
         return response()->json($data);
+    }
+
+    public function get_detail_purchase(Request $request)
+    {
+        $data['product'] = $this->productRepository->findById($request->id);
+        return view('accounts::purchases.get_detail_purchase', $data);
     }
 }

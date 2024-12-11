@@ -35,7 +35,7 @@ class ProductRepository extends BaseRepository
         foreach($items as $item){
             $response[]  =[
                 'id'    => $item->id,
-                'text'  => $item->name
+                'text'  => $item->type." : ".$item->name
             ];
         }
         $data['results'] =  $response;
