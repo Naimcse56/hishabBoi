@@ -120,14 +120,4 @@ class Voucher extends Model
     {
         return $this->belongsTo(User::class, 'approved_by')->withDefault(['name'=>'N/A']);
     }
-
-    public function verifier()
-    {
-        return $this->belongsTo(User::class, 'verified_by')->withDefault(['name'=>'N/A']);
-    }
-
-    public function finalizer()
-    {
-        return $this->belongsTo(User::class, 'final_by')->withDefault(['name'=>'N/A']);
-    }
 }
