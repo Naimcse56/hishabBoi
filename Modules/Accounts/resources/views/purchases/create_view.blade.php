@@ -25,6 +25,7 @@ New Purchase
                         <fieldset class="the-fieldset mb-3">
                             <legend class="the-legend">Purchase Details Information</legend>
                             <div class="entry_row_div">
+
                             </div>
                         </fieldset>
                         
@@ -41,7 +42,9 @@ New Purchase
                                     ['id' => 'Paid', 'name' => 'Paid'],
                                     ['id' => 'Partial', 'name' => 'Partial']
                                 ]"></x-common.radio>
-                                </div>
+                                
+                            <x-common.input :required="true" type="number" step="0.01" min="0" column=4 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="old('payment_amount', 0)"></x-common.input>
+                            </div>
                         </fieldset>
                         <div class="row">
                             <x-common.text-area :required="false" column=8 name="note" label="Note" placeholder="Note..."></x-common.text-area>
@@ -117,7 +120,11 @@ New Purchase
                     }
                 });
             });
-
+            $(document).on('click', '.delete_new_row', function(e){
+                e.preventDefault();
+                $(this).closest(".new_added_row").remove();
+                getSumAmount();
+            });
         })(jQuery);
     </script>
 @endpush

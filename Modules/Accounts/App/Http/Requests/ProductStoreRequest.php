@@ -23,6 +23,8 @@ class ProductStoreRequest extends FormRequest
             "for_selling" => "required|string|in:Yes,No",
             "for_purchase" => "required|string|in:Yes,No",
             "selling_price" => "required|gt:0",
+            "selling_price_tax" => "required|min:0|max:100",
+            "purchase_price_tax" => "required|min:0|max:100",
             "purchase_price" => "required|gt:0",
             "details" => "nullable",
         ];

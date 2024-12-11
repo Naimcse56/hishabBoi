@@ -23,7 +23,9 @@ return new class extends Migration
             $table->enum('for_purchase', ['Yes', 'No']);
             $table->enum('stock_manage', ['Yes', 'No']);
             $table->double('selling_price', 28,2)->default(0)->index();
+            $table->double('selling_price_tax', 28,2)->default(0)->comment('percentage');
             $table->double('purchase_price', 28,2)->default(0)->index();
+            $table->double('purchase_price_tax', 28,2)->default(0)->comment('percentage');
             $table->string('image',300)->nullable();
             $table->text('details')->nullable();
             $table->foreignId('created_by')->nullable();

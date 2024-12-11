@@ -32,14 +32,16 @@ Product
                                 ['id' => 'No', 'name' => 'No']
                             ]"></x-common.radio>
                             <x-common.file-browse label="Image" :required="false" column=4 name="image" extension="application/image"></x-common.file-browse>
-                            <x-common.server-side-select :required="true" column=6 name="purchase_ledger_id" id="purchase_ledger_id" class="purchase_ledger_id" disableOptionText="Select Ledger" label="Purchase Account" :options="[
+                            <x-common.server-side-select :required="true" column=4 name="purchase_ledger_id" id="purchase_ledger_id" class="purchase_ledger_id" disableOptionText="Select Ledger" label="Purchase Account" :options="[
                                 ['id' => $product->purchase_ledger_id, 'name' => $product->purchase_ledger->name]
                             ]" :value="$product->purchase_ledger_id"></x-common.server-side-select>
-                            <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="purchase_price" name="purchase_price" label="Purchase Price" placeholder="Purchase Price" :value="old('purchase_price', $product->purchase_price)"></x-common.input>
-                            <x-common.server-side-select :required="true" column=6 name="selling_ledger_id" id="selling_ledger_id" class="selling_ledger_id" disableOptionText="Select Ledger" label="Selling Account" :options="[
+                            <x-common.input :required="true" type="number" step="0.01" min="0" column=4 id="purchase_price" name="purchase_price" label="Purchase Price" placeholder="Purchase Price" :value="old('purchase_price', $product->purchase_price)"></x-common.input>
+                            <x-common.input :required="true" type="number" step="0.01" min="0" column=4 id="purchase_price_tax" name="purchase_price_tax" label="Purchase Price Tax (%)" placeholder="Purchase Price Tax (%)" :value="old('purchase_price_tax', $product->purchase_price_tax)"></x-common.input>
+                            <x-common.server-side-select :required="true" column=4 name="selling_ledger_id" id="selling_ledger_id" class="selling_ledger_id" disableOptionText="Select Ledger" label="Selling Account" :options="[
                                 ['id' => $product->selling_ledger_id, 'name' => $product->selling_ledger->name]
                             ]" :value="$product->selling_ledger_id"></x-common.server-side-select>
-                            <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="selling_price" name="selling_price" label="Selling Price" placeholder="Selling Price" :value="old('selling_price', $product->selling_price)"></x-common.input>
+                            <x-common.input :required="true" type="number" step="0.01" min="0" column=4 id="selling_price" name="selling_price" label="Selling Price" placeholder="Selling Price" :value="old('selling_price', $product->selling_price)"></x-common.input>
+                            <x-common.input :required="true" type="number" step="0.01" min="0" column=4 id="selling_price_tax" name="selling_price_tax" label="Selling Price Tax (%)" placeholder="Selling Price Tax (%)" :value="old('selling_price_tax', 0)"></x-common.input>
                             <x-common.radio :required="true" column=4 name="is_active" class="is_active" label="Status" placeholder="Status" :value="$product->is_active" :options="[
                                 ['id' => 'Yes', 'name' => 'Active'],
                                 ['id' => 'No', 'name' => 'In-Active']
