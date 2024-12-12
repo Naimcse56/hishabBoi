@@ -11425,4 +11425,23 @@ max-width: 980px;
   padding: 30px;
   border-radius: 3px;
   overflow: hidden;
+  background: #fff;
+}
+.datetime{
+    margin-top: 28px;
+}
+.orange{
+    color: #FF8F00;
+}
+.d-block{
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    padding-top: 60px;
+}
+.border{
+    border: 1px solid ;
+}
+.mt30{
+    margin-top: 30px;
 }
