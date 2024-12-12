@@ -72,7 +72,7 @@ class SaleController extends Controller
     public function show($id)
     {
         try {
-            $data['purchase'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            $data['sale'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
             return view('accounts::sales.show', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -85,7 +85,7 @@ class SaleController extends Controller
     public function edit($id)
     {
         try {
-            $data['purchase'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            $data['sale'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
             return view('accounts::sales.edit_view', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);

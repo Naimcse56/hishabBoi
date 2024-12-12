@@ -76,7 +76,7 @@ Purchase
                             </div>
                         </fieldset>
                         <div class="row">
-                            <x-common.text-area :required="false" column=8 name="note" label="Note" placeholder="Note..."></x-common.text-area>
+                            <x-common.text-area :required="false" column=8 name="note" label="Note" placeholder="Note..." :value="$sale->note"></x-common.text-area>
                             <x-common.button column=12 type="submit" id="update_btn" class="btn-primary btn-120" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                         </div>
                     </form>

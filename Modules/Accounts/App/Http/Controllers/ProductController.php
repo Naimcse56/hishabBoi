@@ -157,4 +157,10 @@ class ProductController extends Controller
         $data['product'] = $this->productRepository->findById($request->id);
         return view('accounts::purchases.get_detail_purchase', $data);
     }
+
+    public function get_detail_sale(Request $request)
+    {
+        $data['product'] = $this->productRepository->findById($request->id);
+        return view('accounts::sales.get_detail_sale', $data);
+    }
 }

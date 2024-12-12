@@ -214,6 +214,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/edit/{id}', 'edit')->name('products.edit');
         Route::get('/show/{id}', 'show')->name('products.show');
         Route::post('/get-details-for-purchase', 'get_detail_purchase')->name('products.get_detail_purchase');
+        Route::post('/get-details-for-sale', 'get_detail_sale')->name('products.get_detail_sale');
         Route::post('/update/{id}', 'update')->name('products.update');
         Route::post('/delete', 'destroy')->name('products.delete');
         Route::get('/list-ajax', 'list_for_select')->name('products.list_for_select');
