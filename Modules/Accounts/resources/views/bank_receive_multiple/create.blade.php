@@ -42,11 +42,9 @@ Bank Voucher
                                                 <x-common.server-side-select :required="false" column=4 name="work_order_site_detail_id[]" class="work_order_site_detail_id" disableOptionText="Select Work Order Site" label="Work Order Site"></x-common.server-side-select>
                                                 
                                                 <div class="col-md-1 mb-3">
-                                                    <div class="d-block">
-                                                        <label class="form-label" for=""> Action </label>
-                                                        <div>
-                                                            <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row_cr"><i class="fa fa-trash"></i></a>
-                                                        </div>
+                                                    <label class="form-label" for=""> Action </label>
+                                                    <div>
+                                                        <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row_cr"><i class="fa fa-trash"></i></a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mb-3">

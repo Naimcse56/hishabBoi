@@ -144,11 +144,9 @@ class WorkOrderController extends Controller
                             <span class="text-danger"></span>
                         </div>
                         <div class="col-md-1 mb-3">
-                            <div class="d-block">
-                                <label class="form-label" for=""> Action </label>
-                                <div>
-                                    <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="fa fa-trash"></i></a>
-                                </div>
+                            <label class="form-label" for=""> Action </label>
+                            <div>
+                                <a class="btn btn-sm btn-outline-danger delete_leadger delete_new_row"><i class="fa fa-trash"></i></a>
                             </div>
                         </div>
                     </div>';

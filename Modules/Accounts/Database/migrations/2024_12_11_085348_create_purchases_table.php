@@ -17,11 +17,9 @@ return new class extends Migration
             $table->foreignId("sub_ledger_id")->nullable()->comment('supplier_id');
             $table->string('invoice_no',100)->nullable()->index();
             $table->string('ref_no',100)->nullable();
-            $table->string('phone',15)->comment('supplier phone');
+            $table->string('phone',15)->nullable()->comment('supplier phone');
+            $table->double('total_amount', 28,2)->default(0)->index();
             $table->double('payable_amount', 28,2)->default(0)->index();
-            $table->string('shipping_name', 200)->nullable();
-            $table->double('shipping_charge', 28,2)->default(0);
-            $table->double('other_charge', 28,2)->default(0);
             $table->double('discount_amount', 28,2)->default(0);
             $table->double('discount_percentage', 8,2)->default(0);
             $table->enum('payment_method', ['Cash', 'Bank', 'Due', 'Online']);

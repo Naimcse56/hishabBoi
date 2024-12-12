@@ -59,7 +59,7 @@ class PurchaseController extends Controller
             DB::beginTransaction();
             $item = $this->purchaseRepository->createData($request->except('_token'));
             DB::commit();
-            return redirect()->route('purchases.create')->with('success', $item->invoice_no.' Added Successfully');
+            return redirect()->route('purchases.index')->with('success', $item->invoice_no.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());

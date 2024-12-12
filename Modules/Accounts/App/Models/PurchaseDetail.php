@@ -22,7 +22,7 @@ class PurchaseDetail extends Model
 
     public function product()
     {
-        return $this->belongsTo(Produc::class)->withDefault();
+        return $this->belongsTo(Product::class)->withDefault();
     }
 
     public function purchase()
