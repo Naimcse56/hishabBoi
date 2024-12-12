@@ -59,7 +59,7 @@ class PurchaseController extends Controller
             DB::beginTransaction();
             $item = $this->purchaseRepository->createData($request->except('_token'));
             DB::commit();
-            return redirect()->route('purchases.index')->with('success', $item->invoice_no.' Added Successfully');
+            return redirect()->route('purchases.print',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
@@ -74,6 +74,19 @@ class PurchaseController extends Controller
         try {
             $data['purchase'] = $this->purchaseRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','purchase_details']);
             return view('accounts::purchases.show', $data);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Show the specified resource.
+     */
+    public function print($id)
+    {
+        try {
+            $data['purchase'] = $this->purchaseRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','purchase_details']);
+            return view('accounts::purchases.print', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         }
@@ -115,7 +128,7 @@ class PurchaseController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->purchaseRepository->deleteById($request->id,['purchase_details']);
+            $response = $this->purchaseRepository->deleteById($request->id,null,['purchase_details']);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

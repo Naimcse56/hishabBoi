@@ -235,6 +235,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/store', 'store')->name('sales.store');
         Route::get('/edit/{id}', 'edit')->name('sales.edit');
         Route::get('/show/{id}', 'show')->name('sales.show');
+        Route::get('/print/{id}', 'print')->name('sales.print');
         Route::post('/update/{id}', 'update')->name('sales.update');
         Route::post('/delete', 'destroy')->name('sales.delete');
         Route::get('/list-ajax', 'list_for_select')->name('sales.list_for_select');
@@ -245,6 +246,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/store', 'store')->name('purchases.store');
         Route::get('/edit/{id}', 'edit')->name('purchases.edit');
         Route::get('/show/{id}', 'show')->name('purchases.show');
+        Route::get('/print/{id}', 'print')->name('purchases.print');
         Route::post('/update/{id}', 'update')->name('purchases.update');
         Route::post('/delete', 'destroy')->name('purchases.delete');
         Route::get('/list-ajax', 'list_for_select')->name('purchases.list_for_select');

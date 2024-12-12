@@ -59,7 +59,7 @@ class SaleController extends Controller
             DB::beginTransaction();
             $item = $this->saleRepository->createData($request->except('_token'));
             DB::commit();
-            return redirect()->route('sales.create')->with('success', $item->invoice_no.' Added Successfully');
+            return redirect()->route('sales.print',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
@@ -74,6 +74,19 @@ class SaleController extends Controller
         try {
             $data['sale'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
             return view('accounts::sales.show', $data);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Show the specified resource.
+     */
+    public function print($id)
+    {
+        try {
+            $data['sale'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            return view('accounts::sales.print', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         }
@@ -115,7 +128,7 @@ class SaleController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->saleRepository->deleteById($request->id,['sale_details']);
+            $response = $this->saleRepository->deleteById($request->id,null,['sale_details']);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
