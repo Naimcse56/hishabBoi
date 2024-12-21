@@ -21,7 +21,10 @@ class LedgerController extends Controller
         $this->ledgerInterface = $ledgerInterface;
     }
 
-
+ public function general_setting()
+    {
+         return view('accounts::setting.create');
+    }
     public function invoice()
     {
          return view('accounts::ledgers.invoice');

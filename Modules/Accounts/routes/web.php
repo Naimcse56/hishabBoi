@@ -38,6 +38,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
     Route::controller(LedgerController::class)->group(function () {
 
         Route::get('/invoice', 'invoice')->name('invoice');
+        Route::get('/general-setting', 'general_setting')->name('general.setting');
 
 
         Route::get('/ledger/index', 'index')->name('ledger.index');
