@@ -4,6 +4,8 @@ namespace Modules\Base\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Modules\Base\App\Models\GeneralSetting;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,12 @@ class BaseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->singleton('general_setting', function () {
+            foreach (GeneralSetting::get() as $setting) {
+                $datas[$setting->name] = $setting->value;
+            }
+            return $datas;
+        });
     }
 
     /**

@@ -38,7 +38,7 @@ if (!function_exists('carbonDateByDayMonthYear')) {
 if (!function_exists('showDateFormat')) {
     function showDateFormat($input_date){
         try {
-            $system_date_format = 'jS M, Y';
+            $system_date_format = app('general_setting')['date_format'];
             return date_format(date_create($input_date), $system_date_format);
         } catch (\Exception $th) {
             return $input_date;
@@ -60,7 +60,7 @@ if (!function_exists('showDefaultImage')) {
 if (!function_exists('currencySymbol')) {
     function currencySymbol($amount)
     {
-        return "BDT ".number_format(floatval($amount), 2);
+        return app('general_setting')['system_currency_symbol'].number_format(floatval($amount), 2);
     }
 }
 

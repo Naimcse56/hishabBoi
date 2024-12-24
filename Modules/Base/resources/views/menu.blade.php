@@ -5,8 +5,8 @@
 </a>
 <div class="collapse" id="collapseBaseSettings" aria-labelledby="headingInventory" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav accordion" id="sideNavProducts">
-        <a class="nav-link" href="{{ route('company_settings.configurations') }}">Company Settings</a>
-        <a class="nav-link" href="#">Currency</a>
-        <a class="nav-link" href="#">Language</a>
+        <a class="nav-link @if (Route::is('company_settings.configurations')) active @endif" href="{{ route('company_settings.configurations') }}">Company Settings</a>
+        <a class="nav-link @if (Route::is('currencies.*')) active @endif" href="{{ route('currencies.index') }}">Currency</a>
+        <a class="nav-link @if (Route::is('email_settings.configurations')) active @endif" href="{{ route('email_settings.configurations') }}">Email Setup</a>
     </nav>
 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-General Setting
+Company Setting
 @endsection
 @section('content')
     <div class="container-fluid px-4">
@@ -16,9 +16,8 @@ General Setting
                             <div class="row">                                
                                 <x-common.input :required="true" column=6 id="company_name" name="company_name" label="Company Name" placeholder="Company Name" :value="old('company_name')"></x-common.input>
                                 <x-common.input :required="true" column=6 id="company_phone" name="company_phone" label="Company Phone" placeholder="Company Phone" :value="old('company_phone')"></x-common.input>
-                                <x-common.input :required="true" column=6 id="company_email" name="company_email" type="email" label="Company Email" placeholder="Phone" :value="old('company_email')"></x-common.input>
-                                <x-common.input :required="true" column=6 id="email" name="email" label="Email" placeholder="Email" :value="old('email')"></x-common.input>
-                                <x-common.select :required="true" column=4 name="date_format" class="date_format" label="Date Format" placeholder="Date Format" :value="'Fund Transfer'" :options="[
+                                <x-common.input :required="true" column=6 id="company_email" name="company_email" type="email" label="Company Email" placeholder="Company Email" :value="old('company_email')"></x-common.input>
+                                <x-common.select :required="true" column=6 name="date_format" class="date_format" label="Date Format" placeholder="Date Format" :value="'d/m/Y'" :options="[
                                     ['id' => 'jS M, Y', 'name' => '17th May, 2019'],
                                     ['id' => 'Y-m-d', 'name' => '2019-05-17'],
                                     ['id' => 'Y-d-m', 'name' => '2019-05-19'],
