@@ -1,4 +1,5 @@
 {
     "User": true,
-    "Accounts": true
+    "Accounts": true,
+    "Base": true
 }

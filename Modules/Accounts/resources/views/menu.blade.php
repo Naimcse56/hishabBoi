@@ -1,5 +1,5 @@
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseInventory" aria-expanded="false" aria-controls="collapseAccounts">
-    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+    <div class="sb-nav-link-icon"><i class="fa fa-shopping-cart"></i></div>
     Inventory
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 </a>
@@ -39,7 +39,7 @@
     </nav>
 </div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAccounts" aria-expanded="false" aria-controls="collapseAccounts">
-    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+    <div class="sb-nav-link-icon"><i class="fa fa-bar-chart"></i></div>
     Accounts
     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 </a>

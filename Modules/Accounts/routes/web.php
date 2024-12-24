@@ -36,11 +36,7 @@ use Modules\Accounts\App\Http\Controllers\PurchaseController;
 
 Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
     Route::controller(LedgerController::class)->group(function () {
-
-        Route::get('/invoice', 'invoice')->name('invoice');
-        Route::get('/general-setting', 'general_setting')->name('general.setting');
-
-
+        Route::view('/invoice', 'accounts::ledgers.invoice')->name('invoice');
         Route::get('/ledger/index', 'index')->name('ledger.index');
         Route::get('/ledger/create', 'create')->name('ledger.create');
         Route::post('/ledger/store', 'store')->name('ledger.store');

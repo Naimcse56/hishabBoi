@@ -8,6 +8,7 @@
                     Dashboard
                 </a>
                 @include('accounts::menu')
+                @include('base::menu')
             </div>
         </div>
         <div class="sb-sidenav-footer">
