@@ -114,4 +114,37 @@ class PurchaseRepository extends BaseRepository
         }
         return $purchase_order;
     }
+
+    public function listForSelect($search, $filter_for = null)
+    {
+        $items = $this->model::query();
+        if ($search != '') {
+            $items = $items->whereLike(['invoice_no','phone'], $search);
+        }
+        if ($filter_for == "payment") {
+            $items = $items->where('payment_status','!=' , 'Paid');
+        }
+        $items = $items->paginate(10);
+        $response = [];
+        foreach($items as $item){
+            if ($filter_for == "payment") {
+                $response[]  =[
+                    'id'    => $item->id,
+                    'text'  => $item->invoice_no." : ".currencySymbol($item->DueBill)
+                ];
+            } else {
+                $response[]  =[
+                    'id'    => $item->id,
+                    'text'  => $item->invoice_no
+                ];
+            }
+            
+        }
+        $data['results'] =  $response;
+        if ($items->count() > 0)
+        {
+            $data['pagination'] =  ["more" => true];
+        }
+        return $data;
+    }
 }

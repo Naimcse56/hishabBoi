@@ -48,6 +48,11 @@ class Purchase extends Model
         return $this->morphs()->orderBy('id',$orderBy)->first();
     }
 
+    public function getDueBillAttribute()
+    {
+        return $this->payable_amount - $this->morphs()->where('is_approve','!=',2)->sum('amount');
+    }
+
     public function purchase_details()
     {
         return $this->hasMany(PurchaseDetail::class);

@@ -9,6 +9,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Modules\Accounts\App\Repository\Interfaces\JournalRepositoryInterface;
 use Modules\Accounts\App\Models\Ledger;
+use Modules\Accounts\App\Models\Purchase;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use DataTables;
@@ -63,8 +64,8 @@ class BankPaymentJournalController extends Controller
     {
         $is_invoiced = 0;
         $total_debit_amount = 0;
-        $referable_type = null;
-        $referable_id = 0;
+        $referable_type = $request->purchase_id > 0 ? get_class(Purchase::class) : null;
+        $referable_id = $request->purchase_id > 0 ? $request->purchase_id : 0;
         foreach ($request->credit_amount as $key => $credit_amount) {
             $total_debit_amount += $credit_amount;
             if ($credit_amount > 0 && $request->credit_account_id[$key] > 0 && $request->debit_account_id[$key] > 0) {
@@ -235,8 +236,8 @@ class BankPaymentJournalController extends Controller
     {
         $is_invoiced = 0;
         $total_debit_amount = 0;
-        $referable_type = null;
-        $referable_id = 0;
+        $referable_type = $request->purchase_id > 0 ? get_class(Purchase::class) : null;
+        $referable_id = $request->purchase_id > 0 ? $request->purchase_id : 0;
         foreach ($request->credit_amount as $key => $credit_amount) {
             $total_debit_amount += $credit_amount;
             if ($credit_amount > 0 && $request->credit_account_id[$key] > 0 && $request->debit_account_id[$key] > 0) {

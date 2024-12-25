@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('bank_account_name',255)->nullable();
             $table->string('check_no',200)->nullable();
             $table->date('check_mature_date')->nullable();
+            $table->unsignedBigInteger('payment_id')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

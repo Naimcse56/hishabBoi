@@ -6,6 +6,7 @@ use Modules\Accounts\App\Repository\Interfaces\JournalRepositoryInterface;
 use Modules\Accounts\App\Models\Ledger;
 use Modules\Accounts\App\Models\SubLedger;
 use Modules\Accounts\App\Models\Voucher;
+use Modules\Accounts\App\Models\Payment;
 use Modules\Accounts\App\Models\Transaction;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +35,7 @@ class JournalRepository implements JournalRepositoryInterface
     }
 
     public function create($data)
-    {
+    {dd('payment info working');
         $Voucher = '';
         $transactions = $this->dataEntry($data);
         $cash_v = Voucher::where('type', strtolower($data['type']))->orderBy('id', 'DESC')->first();
@@ -102,7 +103,7 @@ class JournalRepository implements JournalRepositoryInterface
     }
 
     public function update(array $data, $id)
-    {
+    {dd('payment info working');
         $Voucher = '';
         $transactions = $this->dataEntry($data);
         $Voucher = Voucher::findOrFail($id);
@@ -135,7 +136,22 @@ class JournalRepository implements JournalRepositoryInterface
             'attachment' => (!empty($data['attachment']) && $data['attachment'] != null) ? $data['attachment'] : $Voucher->attachment,
         ]);
         $Voucher->transactions()->forceDelete();
-
+        $Voucher->payment()->delete();
+        if (!empty($data['referable_type'])) {
+            Payment::create([
+                'date' => $data['date'],
+                'morphable_type' => $data['referable_type'],
+                'morphable_id' => $data['referable_id'],
+                'amount' => $data['amount'],
+                'ledger_id' => $data['credit_account_id'],
+                'bank_name' => $data['bank_name'],
+                'bank_account_name' => $data['bank_account_name'],
+                'check_no' => $data['check_no'],
+                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'mac_address' => exec('getmac'),
+                'ip' => \Request::ip(),
+            ]);
+        }
         foreach ($transactions as $key => $transaction) {
             $transactionEntry = Transaction::create([
                 'voucher_id' => $Voucher->id,

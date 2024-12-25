@@ -20,6 +20,7 @@ Cash Voucher
                                 <x-common.select :required="true" column=4 name="pay_or_rcv_type" class="pay_or_rcv_type" label="Type" placeholder="Type" :value="'Cash'" :options="[
                                     ['id' => 'Cash', 'name' => 'Cash']
                                 ]"></x-common.select>
+                                <x-common.server-side-select :required="false" column=4 name="purchase_id" id="purchase_id" class="purchase_id" disableOptionText="Select One" label="Purchase Invoice"></x-common.server-side-select>
                                 <x-common.text-area :required="false" column=12 name="narration" label="Purpose / Narration" placeholder="Remarks..."></x-common.text-area>
                             </div>
                                 
@@ -81,7 +82,27 @@ Cash Voucher
     <script>
         (function($) {
             "use strict";
-            APP_TOKEN; 
+            APP_TOKEN;
+            $(".purchase_id").select2({
+                ajax: {
+                    url: '{{route('purchases.list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                filter_for: "payment",
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
 
             $(document).on('click', '#add_new_line_cr', function(e){
                 e.preventDefault();

@@ -32,6 +32,11 @@ class Transaction extends Model
         return $this->belongsTo(Ledger::class, "ledger_id", "id")->withDefault();
     }
 
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, "payment_id", "id")->withDefault();
+    }
+
     public function sub_ledger()
     {
         return $this->belongsTo(SubLedger::class, "sub_ledger_id", "id")->withDefault();

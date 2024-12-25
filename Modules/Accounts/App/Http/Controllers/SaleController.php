@@ -134,4 +134,10 @@ class SaleController extends Controller
             return response()->json(['error' => $e->getMessage()]);
         }
     }
+
+    public function list_for_select(Request $request)
+    {
+        $data = $this->saleRepository->listForSelect($request->search,$request->filter_for);
+        return response()->json($data);
+    }
 }
