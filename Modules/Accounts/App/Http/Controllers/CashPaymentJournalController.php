@@ -64,8 +64,9 @@ class CashPaymentJournalController extends Controller
     {
         $is_invoiced = 0;
         $total_debit_amount = 0;
-        $referable_type = $request->purchase_id > 0 ? get_class(Purchase::class) : null;
+        $referable_type = $request->purchase_id > 0 ? get_class(new Purchase) : null;
         $referable_id = $request->purchase_id > 0 ? $request->purchase_id : 0;
+        $payment_account_id = $request->sale_id > 0 ? $request->credit_account_id[0] : 0;
         
         foreach ($request->credit_amount as $key => $credit_amount) {
             $total_debit_amount += $credit_amount;
@@ -110,6 +111,7 @@ class CashPaymentJournalController extends Controller
                 'panel'=> 'cash_payment_multiple',
                 'is_manual_entry'=> 1,
                 'credit_period'=> $request->credit_period,
+                'payment_account_id'=> $payment_account_id,
 
                 'debit_account_id'=> $debit_account_id,
                 'debit_sub_account_id'=> $debit_partner_id,
@@ -212,8 +214,9 @@ class CashPaymentJournalController extends Controller
     {
         $is_invoiced = 0;
         $total_debit_amount = 0;
-        $referable_type = $request->purchase_id > 0 ? get_class(Purchase::class) : null;
+        $referable_type = $request->purchase_id > 0 ? get_class(new Purchase) : null;
         $referable_id = $request->purchase_id > 0 ? $request->purchase_id : 0;
+        $payment_account_id = $request->sale_id > 0 ? $request->credit_account_id[0] : 0;
         foreach ($request->credit_amount as $key => $credit_amount) {
             $total_debit_amount += $credit_amount;
             if ($credit_amount > 0 && $request->credit_account_id[$key] > 0 && $request->debit_account_id[$key] > 0) {
@@ -256,6 +259,7 @@ class CashPaymentJournalController extends Controller
                 'is_invoiced'=> $is_invoiced,
                 'is_manual_entry'=> 1,
                 'credit_period'=> $request->credit_period,
+                'payment_account_id'=> $payment_account_id,
 
                 'debit_account_id'=> $debit_account_id,
                 'debit_sub_account_id'=> $debit_partner_id,

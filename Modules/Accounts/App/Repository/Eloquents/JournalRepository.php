@@ -35,7 +35,7 @@ class JournalRepository implements JournalRepositoryInterface
     }
 
     public function create($data)
-    {dd('payment info working');
+    {
         $Voucher = '';
         $transactions = $this->dataEntry($data);
         $cash_v = Voucher::where('type', strtolower($data['type']))->orderBy('id', 'DESC')->first();
@@ -80,11 +80,11 @@ class JournalRepository implements JournalRepositoryInterface
                 'morphable_type' => $data['referable_type'],
                 'morphable_id' => $data['referable_id'],
                 'amount' => $data['amount'],
-                'ledger_id' => $data['credit_account_id'],
-                'bank_name' => $data['bank_name'],
-                'bank_account_name' => $data['bank_account_name'],
-                'check_no' => $data['check_no'],
-                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'ledger_id' => $data['payment_account_id'],
+                'bank_name' => !empty($data['bank_name']) ? $data['bank_name'] : null,
+                'bank_account_name' => !empty($data['bank_account_name']) ? $data['bank_account_name'] : null,
+                'check_no' => !empty($data['check_no']) ? $data['check_no'] : null,
+                'check_mature_date' => !empty($data['check_mature_date']) ? Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d') : null,
                 'mac_address' => exec('getmac'),
                 'ip' => \Request::ip(),
             ]);
@@ -159,11 +159,11 @@ class JournalRepository implements JournalRepositoryInterface
                 'morphable_type' => $data['referable_type'],
                 'morphable_id' => $data['referable_id'],
                 'amount' => $data['amount'],
-                'ledger_id' => $data['credit_account_id'],
-                'bank_name' => $data['bank_name'],
-                'bank_account_name' => $data['bank_account_name'],
-                'check_no' => $data['check_no'],
-                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'ledger_id' => $data['payment_account_id'],
+                'bank_name' => !empty($data['bank_name']) ? $data['bank_name'] : null,
+                'bank_account_name' => !empty($data['bank_account_name']) ? $data['bank_account_name'] : null,
+                'check_no' => !empty($data['check_no']) ? $data['check_no'] : null,
+                'check_mature_date' => !empty($data['check_mature_date']) ? Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d') : null,
                 'mac_address' => exec('getmac'),
                 'ip' => \Request::ip(),
             ]);
