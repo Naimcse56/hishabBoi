@@ -74,6 +74,21 @@ class JournalRepository implements JournalRepositoryInterface
             'pay_or_rcv_type' => (!empty($data['pay_or_rcv_type'])) ? $data['pay_or_rcv_type'] : null,
             'attachment' => (!empty($data['attachment'])) ? $data['attachment'] : null,
         ]);
+        if (!empty($data['referable_type'])) {
+            $payment = Payment::create([
+                'date' => $data['date'],
+                'morphable_type' => $data['referable_type'],
+                'morphable_id' => $data['referable_id'],
+                'amount' => $data['amount'],
+                'ledger_id' => $data['credit_account_id'],
+                'bank_name' => $data['bank_name'],
+                'bank_account_name' => $data['bank_account_name'],
+                'check_no' => $data['check_no'],
+                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'mac_address' => exec('getmac'),
+                'ip' => \Request::ip(),
+            ]);
+        }
         foreach ($transactions as $key => $transaction) {
             $transactionEntry = Transaction::create([
                 'voucher_id' => $Voucher->id,
@@ -91,6 +106,7 @@ class JournalRepository implements JournalRepositoryInterface
                 'check_mature_date' => $transaction['check_mature_date'],
                 'bank_account_name' => $transaction['bank_account_name'],
                 'credit_period' => $transaction['credit_period'],
+                'payment_id' => !empty($data['referable_type']) ? $payment->id : 0,
             ]);
         }
         $Voucher->update(['txn_id' => $txn_num]);
@@ -103,7 +119,7 @@ class JournalRepository implements JournalRepositoryInterface
     }
 
     public function update(array $data, $id)
-    {dd('payment info working');
+    {
         $Voucher = '';
         $transactions = $this->dataEntry($data);
         $Voucher = Voucher::findOrFail($id);
@@ -138,7 +154,7 @@ class JournalRepository implements JournalRepositoryInterface
         $Voucher->transactions()->forceDelete();
         $Voucher->payment()->delete();
         if (!empty($data['referable_type'])) {
-            Payment::create([
+            $payment = Payment::create([
                 'date' => $data['date'],
                 'morphable_type' => $data['referable_type'],
                 'morphable_id' => $data['referable_id'],
@@ -169,6 +185,7 @@ class JournalRepository implements JournalRepositoryInterface
                 'bank_account_name' => $transaction['bank_account_name'],
                 'accounting_period_id' => 1,
                 'credit_period' => $transaction['credit_period'],
+                'payment_id' => !empty($data['referable_type']) ? $payment->id : 0,
             ]);
         }
 

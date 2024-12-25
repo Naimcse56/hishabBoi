@@ -70,12 +70,18 @@ Sale
                                         ]"></x-common.radio>
                                         
                                         <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period" placeholder="Credit Period" :value="$sale->credit_period"></x-common.input>
-                                        <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="old('payment_amount', 0)"></x-common.input>
-                                        <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment Recieve Account"></x-common.server-side-select>
-                                        <x-common.input :required="false" column=6 id="bank_name" name="bank_name" label="Bank Name" placeholder="Bank Name" :value="old('bank_name')"></x-common.input>
-                                        <x-common.input :required="false" column=6 id="bank_account_name" name="bank_account_name" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_account_name')"></x-common.input>
-                                        <x-common.input :required="false" column=6 id="check_no" name="check_no" label="Cheque No" placeholder="Cheque No" :value="old('check_no')"></x-common.input>
-                                        <x-common.date-picker label="Check Maturity Date" :required="false" column=6 name="check_mature_date" placeholder="Check Maturity Date" :value="date('d/m/Y')" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                        <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="$sale->latestPaymentInfo('asc') ? $sale->latestPaymentInfo('asc')->amount : 0"></x-common.input>
+                                        @if ($sale->latestPaymentInfo('asc'))                                            
+                                            <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment Recieve Account" :value="$sale->latestPaymentInfo('asc')->ledger_id" :options="[
+                                                ['id' => $sale->latestPaymentInfo('asc')->ledger_id, 'name' => $sale->latestPaymentInfo('asc')->ledger->name]
+                                            ]"></x-common.server-side-select>
+                                        @else
+                                            <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment Recieve Account"></x-common.server-side-select>
+                                        @endif
+                                        <x-common.input :required="false" column=6 id="bank_name" name="bank_name" label="Bank Name" placeholder="Bank Name" :value="$sale->latestPaymentInfo('asc') ? $sale->latestPaymentInfo('asc')->bank_name : ''"></x-common.input>
+                                        <x-common.input :required="false" column=6 id="bank_account_name" name="bank_account_name" label="Bank Account Name" placeholder="Bank Account Name" :value="$sale->latestPaymentInfo('asc') ? $sale->latestPaymentInfo('asc')->bank_account_name : ''"></x-common.input>
+                                        <x-common.input :required="false" column=6 id="check_no" name="check_no" label="Cheque No" placeholder="Cheque No" :value="$sale->latestPaymentInfo('asc') ? $sale->latestPaymentInfo('asc')->check_no : ''"></x-common.input>
+                                        <x-common.date-picker label="Check Maturity Date" :required="false" column=6 name="check_mature_date" placeholder="Check Maturity Date" :value="$sale->latestPaymentInfo('asc') ? date('d/m/Y', strtotime($sale->latestPaymentInfo('asc')->date)) : date('d/m/Y')" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                     </div>
                                 </div>
                             </div>

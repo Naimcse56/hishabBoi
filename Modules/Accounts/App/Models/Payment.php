@@ -24,4 +24,9 @@ class Payment extends Model
     {
         return $this->morphTo()->withDefault();
     }
+
+    public function ledger()
+    {
+        return $this->belongsTo(Ledger::class, "ledger_id", "id")->withDefault();
+    }
 }

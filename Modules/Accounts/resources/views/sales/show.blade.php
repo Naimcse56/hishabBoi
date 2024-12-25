@@ -80,7 +80,7 @@ Sale Details
                             </div>
                             <div class="col-md-6">
                                 <h6>Terms & Condition</h6>
-                                <h6>Bootstrap's tables are opt-in. Add the base class .table to anBootstrap's tables are opt-in. Add the base class .table to an</h6>
+                                <p>{!!$sale->terms_condition!!}</p>
                             </div>
                         </div>
                         <div class="mt30">

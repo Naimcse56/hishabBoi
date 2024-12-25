@@ -128,7 +128,7 @@ class SaleController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->saleRepository->deleteById($request->id,null,['sale_details']);
+            $response = $this->saleRepository->deleteById($request->id,null,['sale_details','morphs','refers']);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

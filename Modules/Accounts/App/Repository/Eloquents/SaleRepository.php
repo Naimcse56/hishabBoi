@@ -5,6 +5,7 @@ namespace Modules\Accounts\App\Repository\Eloquents;
 use App\Repository\Eloquents\BaseRepository;
 use Modules\Accounts\App\Models\Sale;
 use Modules\Accounts\App\Models\SaleDetail;
+use Modules\Accounts\App\Models\Payment;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -46,7 +47,7 @@ class SaleRepository extends BaseRepository
                 'total_price' => floatval($data['total_sale_price'][$key]),
             ]);
         }
-        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+        if (!empty($data['credit_account_id']) && $data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
             Payment::create([
                 'date' => $sale->date,
                 'morphable_type' => get_class($sale),
@@ -95,8 +96,10 @@ class SaleRepository extends BaseRepository
                 'total_price' => floatval($data['total_sale_price'][$key]),
             ]);
         }
-        $sale->latestPaymentInfo("asc")->delete();
-        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+        if ($sale->latestPaymentInfo("asc")) {
+            $sale->latestPaymentInfo("asc")->delete();
+        }
+        if (!empty($data['credit_account_id']) && $data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
             Payment::create([
                 'date' => $sale->date,
                 'morphable_type' => get_class($sale),

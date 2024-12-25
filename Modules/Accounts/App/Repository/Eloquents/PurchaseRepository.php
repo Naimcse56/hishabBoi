@@ -47,7 +47,7 @@ class PurchaseRepository extends BaseRepository
                 'total_price' => floatval($data['total_purchase_price'][$key]),
             ]);
         }
-        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+        if (!empty($data['credit_account_id']) && $data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
             Payment::create([
                 'date' => $purchase_order->date,
                 'morphable_type' => get_class($purchase_order),
@@ -96,8 +96,10 @@ class PurchaseRepository extends BaseRepository
                 'total_price' => floatval($data['total_purchase_price'][$key]),
             ]);
         }
-        $purchase_order->latestPaymentInfo("asc")->delete();
-        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+        if ($purchase_order->latestPaymentInfo("asc")) {
+            $purchase_order->latestPaymentInfo("asc")->delete();
+        }
+        if (!empty($data['credit_account_id']) && $data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
             Payment::create([
                 'date' => $purchase_order->date,
                 'morphable_type' => get_class($purchase_order),

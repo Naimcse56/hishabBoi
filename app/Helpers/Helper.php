@@ -60,7 +60,7 @@ if (!function_exists('showDefaultImage')) {
 if (!function_exists('currencySymbol')) {
     function currencySymbol($amount)
     {
-        return app('general_setting')['system_currency_symbol'].number_format(floatval($amount), 2);
+        return app('general_setting')['system_currency_symbol']." ".number_format(floatval($amount), 2);
     }
 }
 
