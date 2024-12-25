@@ -20,7 +20,7 @@
     <link href="{{asset('assets/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css"/>
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" type="text/css" />
-
+    <link href="{{asset('assets/css/toastr.min.css')}}" rel="stylesheet" type="text/css" />
     @stack('css')
 </head>
 <body class="sb-nav-fixed">
@@ -32,7 +32,6 @@
             @include('backend.partials.sidebar')
             <div id="layoutSidenav_content">
                 <main>
-                    @include('backend.partials.session_message')
                     @yield('content')
                 </main>
     
@@ -63,12 +62,15 @@
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{asset('assets/js/toastr.min.js')}}"></script>
     <script>
         $(document).ready(function() {
             var serverTime = new Date("{{ now() }}");
             // Use serverTime for additional logic if needed
         });
     </script>
+    
+    @include('backend.partials.session_message')
     @stack('scripts')
 </body>
 </html>
