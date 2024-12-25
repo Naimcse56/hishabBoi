@@ -71,12 +71,18 @@ Purchase
                                         
                                         <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period" placeholder="Credit Period" :value="$purchase->credit_period"></x-common.input>
                                         <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="old('payment_amount', 0)"></x-common.input>
+                                        <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment Recieve Account"></x-common.server-side-select>
+                                        <x-common.input :required="false" column=6 id="bank_name" name="bank_name" label="Bank Name" placeholder="Bank Name" :value="old('bank_name')"></x-common.input>
+                                        <x-common.input :required="false" column=6 id="bank_account_name" name="bank_account_name" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_account_name')"></x-common.input>
+                                        <x-common.input :required="false" column=6 id="check_no" name="check_no" label="Cheque No" placeholder="Cheque No" :value="old('check_no')"></x-common.input>
+                                        <x-common.date-picker label="Check Maturity Date" :required="false" column=6 name="check_mature_date" placeholder="Check Maturity Date" :value="date('d/m/Y')" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                     </div>
                                 </div>
                             </div>
                         </fieldset>
                         <div class="row">
-                            <x-common.text-area :required="false" column=8 name="note" label="Note" placeholder="Note..." :value="$sale->note"></x-common.text-area>
+                            <x-common.text-area :required="false" column=6 name="note" label="Note" placeholder="Note..." :value="$purchase->note"></x-common.text-area>
+                            <x-common.text-editor label="Terms and Condition" :required="false" column=6 name="terms_condition" id="terms_condition" :value="$purchase->terms_condition"></x-common.text-editor>
                             <x-common.button column=12 type="submit" id="update_btn" class="btn-primary btn-120" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                         </div>
                     </form>
@@ -92,7 +98,26 @@ Purchase
         (function($) {
             "use strict";
             APP_TOKEN;
-            
+            $(".credit_account_id").select2({
+                ajax: {
+                    url: '{{route('ledger.transactional_list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                type: "cash_bank",
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
             $(".product_select_id").select2({
                 ajax: {
                     url: '{{route('products.list_for_select')}}',

@@ -6,9 +6,9 @@ Email Setting
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
             <div><h4 class="mt-4">Email Settings</h4></div>
-               </div>
+        </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mb-3">
                 <div class="card">
                     <div class="card-body">
                         <form class="create_form" action="{{route('env_settings_update')}}" method="POST" enctype="multipart/form-data">
@@ -52,7 +52,7 @@ Email Setting
                             @csrf
                             <div class="row">
                                 <x-common.input :required="true" column=6 id="email" name="email" label="Email To" placeholder="Email To" :value="old('email')"></x-common.input>
-                                <x-common.input :required="true" column=6 id="message" name="message" label="Mail Body" placeholder="Mail Body" :value="old('message')"></x-common.input>
+                                <x-common.input :required="true" column=12 id="message" name="message" label="Mail Body" placeholder="Mail Body" :value="old('message')"></x-common.input>
                             </div>
                          
                             <div class="row">

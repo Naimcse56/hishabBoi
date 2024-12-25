@@ -5,6 +5,7 @@ namespace Modules\Accounts\App\Repository\Eloquents;
 use App\Repository\Eloquents\BaseRepository;
 use Modules\Accounts\App\Models\Purchase;
 use Modules\Accounts\App\Models\PurchaseDetail;
+use Modules\Accounts\App\Models\Payment;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -34,6 +35,7 @@ class PurchaseRepository extends BaseRepository
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
             'note' => $data['note'],
+            'terms_condition' => $data['terms_condition'],
         ]);
         foreach ($data['qty'] as $key => $item) {
             PurchaseDetail::create([
@@ -43,6 +45,21 @@ class PurchaseRepository extends BaseRepository
                 'tax' => floatval($data['purchase_price_tax'][$key]),
                 'per_price' => floatval($data['purchase_price'][$key]),
                 'total_price' => floatval($data['total_purchase_price'][$key]),
+            ]);
+        }
+        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+            Payment::create([
+                'date' => $purchase_order->date,
+                'morphable_type' => get_class($purchase_order),
+                'morphable_id' => $purchase_order->id,
+                'amount' => $data['payment_amount'],
+                'ledger_id' => $data['credit_account_id'],
+                'bank_name' => $data['bank_name'],
+                'bank_account_name' => $data['bank_account_name'],
+                'check_no' => $data['check_no'],
+                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'mac_address' => exec('getmac'),
+                'ip' => \Request::ip(),
             ]);
         }
         return $purchase_order;
@@ -66,6 +83,7 @@ class PurchaseRepository extends BaseRepository
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
             'note' => $data['note'],
+            'terms_condition' => $data['terms_condition'],
         ]);
         $purchase_order->purchase_details()->delete();
         foreach ($data['qty'] as $key => $item) {
@@ -76,6 +94,22 @@ class PurchaseRepository extends BaseRepository
                 'tax' => floatval($data['purchase_price_tax'][$key]),
                 'per_price' => floatval($data['purchase_price'][$key]),
                 'total_price' => floatval($data['total_purchase_price'][$key]),
+            ]);
+        }
+        $purchase_order->latestPaymentInfo("asc")->delete();
+        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+            Payment::create([
+                'date' => $purchase_order->date,
+                'morphable_type' => get_class($purchase_order),
+                'morphable_id' => $purchase_order->id,
+                'amount' => $data['payment_amount'],
+                'ledger_id' => $data['credit_account_id'],
+                'bank_name' => $data['bank_name'],
+                'bank_account_name' => $data['bank_account_name'],
+                'check_no' => $data['check_no'],
+                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'mac_address' => exec('getmac'),
+                'ip' => \Request::ip(),
             ]);
         }
         return $purchase_order;

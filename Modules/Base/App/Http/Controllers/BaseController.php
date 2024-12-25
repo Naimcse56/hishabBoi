@@ -4,8 +4,10 @@ namespace Modules\Base\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use Modules\Base\App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Mail\EmailManager;
 use Mail;
 
 class BaseController extends Controller
@@ -22,10 +24,19 @@ class BaseController extends Controller
     {
         return view('base::configurations.email_settings');
     }
-
-    public function company_settings_update(Request $request)
+    
+    public function terms_condition()
     {
-        dd($request->all());
+        return view('base::configurations.terms_condition');
+    }
+
+    public function base_settings_update(Request $request)
+    {
+        foreach ($request->except('_token') as $column_name => $column_value) {
+            GeneralSetting::where('name',$column_name)->first()->update(['value' => $column_value]);
+        }
+
+        return back()->with('success', 'Updated Successfully');
     }
 
     public function env_settings_update(Request $request)
@@ -63,7 +74,7 @@ class BaseController extends Controller
 
         try {
             Mail::to($request->email)->queue(new EmailManager($array));
-            return back()->with('success', 'Sent Successfully');
+            return back()->with('success', 'Mail Sent Successfully');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
         }

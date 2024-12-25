@@ -11,7 +11,7 @@ Company Setting
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <form class="create_form" action="{{route('company_settings_update.configurations')}}" method="POST" enctype="multipart/form-data">
+                        <form class="create_form" action="{{route('base_settings_update.configurations')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">                                
                                 <x-common.input :required="true" column=6 id="company_name" name="company_name" label="Company Name" placeholder="Company Name" :value="old('company_name')"></x-common.input>

@@ -18,10 +18,11 @@ use Modules\Base\App\Http\Controllers\CurrencyController;
 Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
     Route::controller(BaseController::class)->prefix('base-configurations')->group(function () {
         Route::get('/company-settings', 'company_settings')->name('company_settings.configurations');
-        Route::post('/company-settings-update', 'company_settings_update')->name('company_settings_update.configurations');
+        Route::post('/base-settings-update', 'base_settings_update')->name('base_settings_update.configurations');
         Route::get('/email-settings', 'email_settings')->name('email_settings.configurations');
         Route::post('/settings-update', 'env_settings_update')->name('env_settings_update');
         Route::post('/test-mail-send', 'test_mail_send')->name('test_mail_send');
+        Route::get('/terms-condition', 'terms_condition')->name('terms_condition.configurations');
     });
     Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
         Route::get('/index', 'index')->name('currencies.index');

@@ -34,6 +34,7 @@ class SaleRepository extends BaseRepository
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
             'note' => $data['note'],
+            'terms_condition' => $data['terms_condition'],
         ]);
         foreach ($data['qty'] as $key => $item) {
             SaleDetail::create([
@@ -43,6 +44,21 @@ class SaleRepository extends BaseRepository
                 'tax' => floatval($data['sale_price_tax'][$key]),
                 'per_price' => floatval($data['sale_price'][$key]),
                 'total_price' => floatval($data['total_sale_price'][$key]),
+            ]);
+        }
+        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+            Payment::create([
+                'date' => $sale->date,
+                'morphable_type' => get_class($sale),
+                'morphable_id' => $sale->id,
+                'amount' => $data['payment_amount'],
+                'ledger_id' => $data['credit_account_id'],
+                'bank_name' => $data['bank_name'],
+                'bank_account_name' => $data['bank_account_name'],
+                'check_no' => $data['check_no'],
+                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'mac_address' => exec('getmac'),
+                'ip' => \Request::ip(),
             ]);
         }
         return $sale;
@@ -66,6 +82,7 @@ class SaleRepository extends BaseRepository
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
             'note' => $data['note'],
+            'terms_condition' => $data['terms_condition'],
         ]);
         $sale->sale_details()->delete();
         foreach ($data['qty'] as $key => $item) {
@@ -76,6 +93,22 @@ class SaleRepository extends BaseRepository
                 'tax' => floatval($data['sale_price_tax'][$key]),
                 'per_price' => floatval($data['sale_price'][$key]),
                 'total_price' => floatval($data['total_sale_price'][$key]),
+            ]);
+        }
+        $sale->latestPaymentInfo("asc")->delete();
+        if ($data['credit_account_id'] > 0 && $data['payment_amount'] > 0) {
+            Payment::create([
+                'date' => $sale->date,
+                'morphable_type' => get_class($sale),
+                'morphable_id' => $sale->id,
+                'amount' => $data['payment_amount'],
+                'ledger_id' => $data['credit_account_id'],
+                'bank_name' => $data['bank_name'],
+                'bank_account_name' => $data['bank_account_name'],
+                'check_no' => $data['check_no'],
+                'check_mature_date' => Carbon::createFromFormat('d/m/Y', $data["check_mature_date"])->format('Y-m-d'),
+                'mac_address' => exec('getmac'),
+                'ip' => \Request::ip(),
             ]);
         }
         return $sale;

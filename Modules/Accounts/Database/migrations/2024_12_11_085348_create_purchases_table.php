@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('payment_method', ['Cash', 'Bank', 'Due', 'Online']);
             $table->enum('payment_status', ['Paid', 'Partial', 'Due']);
             $table->text('note')->nullable();
+            $table->text('terms_condition')->nullable();
             $table->unsignedBigInteger("credit_period")->nullable(0)->comment('in days');
             $table->enum('is_approved', ['Pending', 'Approved', 'Rejected']);
             $table->foreignId("approved_by")->nullable();

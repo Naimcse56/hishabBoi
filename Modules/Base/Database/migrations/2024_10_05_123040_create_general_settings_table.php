@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('general_settings', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
-            $table->text('value', 255)->nullable();
+            $table->text('value')->nullable();
             $table->timestamps();
         });
 
@@ -26,7 +26,7 @@ return new class extends Migration
             ),
             1 => array(
                'name' => 'company_logo',
-               'value' => null,
+               'value' => 'assets/images/invoice.png',
             ),
             2 => array(
                'name' => 'company_address',
@@ -55,6 +55,22 @@ return new class extends Migration
             8 => array(
                'name' => 'date_format',
                'value' => 'd/m/Y',
+            ),
+            9 => array(
+               'name' => 'decimal_point',
+               'value' => 2,
+            ),
+            10 => array(
+               'name' => 'currency_position',
+               'value' => 'left',
+            ),
+            11 => array(
+               'name' => 'purchase_terms_condition',
+               'value' => null,
+            ),
+            12 => array(
+               'name' => 'sale_terms_condition',
+               'value' => null,
             ),
         ));
     }

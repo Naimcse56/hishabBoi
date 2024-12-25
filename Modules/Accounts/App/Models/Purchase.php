@@ -33,6 +33,21 @@ class Purchase extends Model
         });
     }
 
+    public function refers()
+    {
+        return $this->morphMany(Voucher::class, 'referable');
+    }
+
+    public function morphs()
+    {
+        return $this->morphMany(Payment::class, 'morphable');
+    }
+
+    public function latestPaymentInfo($orderBy = "desc")
+    {
+        return $this->morphs()->orderBy('id',$orderBy)->first();
+    }
+
     public function purchase_details()
     {
         return $this->hasMany(PurchaseDetail::class);
