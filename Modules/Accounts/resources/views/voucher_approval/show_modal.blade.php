@@ -43,8 +43,8 @@
                                    <tr>
                                        <th scope="col" width="30%">Ledger</th>
                                        <th scope="col">Party</th>
-                                       <th scope="col" width="15%">Debit (BDT)</th>
-                                       <th scope="col" width="15%">Credit (BDT)</th>
+                                       <th scope="col" width="15%">Debit</th>
+                                       <th scope="col" width="15%">Credit</th>
                                    </tr>
                                </thead>
                                <tbody>

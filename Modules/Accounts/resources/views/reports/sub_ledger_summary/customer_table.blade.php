@@ -13,9 +13,9 @@
             <th scope="col" class="text-center">Date</th>
             <th scope="col" class="text-center">TXN ID</th>
             <th scope="col" class="text-center">Narration</th>
-            <th scope="col" class="text-center" width="10%">Debit (BDT)</th>
-            <th scope="col" class="text-center" width="10%">Credit (BDT)</th>
-            <th scope="col" class="text-center" width="10%">Current Balance (BDT)</th>
+            <th scope="col" class="text-center" width="10%">Debit</th>
+            <th scope="col" class="text-center" width="10%">Credit</th>
+            <th scope="col" class="text-center" width="10%">Current Balance</th>
         </tr>
     </thead>
     <tbody>

@@ -27,8 +27,8 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
             <th scope="col">Voucher Type</th>
             {{-- <th scope="col">SSID</th> --}}
             <th scope="col">Trn No.</th>
-            <th scope="col" class="text-right">Receipt (BDT)</th>
-            <th scope="col" class="text-right">Payment (BDT)</th>
+            <th scope="col" class="text-right">Receipt</th>
+            <th scope="col" class="text-right">Payment</th>
         </tr>
     </thead>
     <tbody>

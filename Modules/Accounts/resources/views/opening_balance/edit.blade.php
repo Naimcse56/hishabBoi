@@ -52,7 +52,7 @@ Opening Balance Edit
                         </fieldset>
                         <div class="row">
                             <div class="col-md-7 text-right">
-                                <label class="form-label" for="Total Amount">Total Amount (BDT) :</label>
+                                <label class="form-label" for="Total Amount">Total Amount :</label>
                             </div>
                             <div class="col-md-2 text-right">
                                 <div class="primary_input mb-15 d-block">

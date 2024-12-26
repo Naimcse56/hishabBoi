@@ -17,8 +17,8 @@
         <tr>
             <th scope="col" class="fs-14">Particular</th>
             <th scope="col" class="nowrap fs-14" width="10%">Note</th>
-            <th scope="col" class="text-center nowrap fs-14" width="10%">Amount (BDT) <br>{{date('Y', strtotime($dateFrom)) == date('Y', strtotime($dateTo)) ? date('Y', strtotime($dateFrom)).' - '.date('Y', strtotime($dateTo))+1 : date('Y', strtotime($dateFrom)).' - '.date('Y', strtotime($dateTo))}}</th>
-            <th scope="col" class="text-center nowrap fs-14" width="10%">Amount (BDT) <br>{{$prve_date_end ? date('Y', strtotime($prve_date_from)).' - '.date('Y', strtotime($prve_date_end)) : ""}}</th>
+            <th scope="col" class="text-center nowrap fs-14" width="10%">Amount <br>{{date('Y', strtotime($dateFrom)) == date('Y', strtotime($dateTo)) ? date('Y', strtotime($dateFrom)).' - '.date('Y', strtotime($dateTo))+1 : date('Y', strtotime($dateFrom)).' - '.date('Y', strtotime($dateTo))}}</th>
+            <th scope="col" class="text-center nowrap fs-14" width="10%">Amount <br>{{$prve_date_end ? date('Y', strtotime($prve_date_from)).' - '.date('Y', strtotime($prve_date_end)) : ""}}</th>
         </tr>
     </thead>
     <tbody>

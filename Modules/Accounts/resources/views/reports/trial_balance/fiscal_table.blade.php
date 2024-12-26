@@ -16,8 +16,8 @@
         </tr>
         <tr>
             <th scope="col" colspan="2" width="60%"></th>
-            <th scope="col" class="text-center nowrap fs-14" colspan="2">Amount (BDT) <br>{{date('Y', strtotime($dateFrom)).' - '.date('Y', strtotime($dateTo))}}</th>
-            {{-- <th scope="col" class="text-center nowrap fs-14" colspan="2">Amount (BDT) <br>{{$prve_date_end ? date('Y', strtotime($prve_date_from)).' - '.date('Y', strtotime($prve_date_end)) : ""}}</th> --}}
+            <th scope="col" class="text-center nowrap fs-14" colspan="2">Amount <br>{{date('Y', strtotime($dateFrom)).' - '.date('Y', strtotime($dateTo))}}</th>
+            {{-- <th scope="col" class="text-center nowrap fs-14" colspan="2">Amount <br>{{$prve_date_end ? date('Y', strtotime($prve_date_from)).' - '.date('Y', strtotime($prve_date_end)) : ""}}</th> --}}
         </tr>
         <tr>
             <th scope="col">Particular</th>

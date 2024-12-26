@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <th scope="col" colspan="2" width="50%"></th>
-            <th scope="col" class="text-center nowrap fs-14" colspan="2">Amount (BDT) <br>{{date('d.m.Y', strtotime($dateTo))}}</th>
+            <th scope="col" class="text-center nowrap fs-14" colspan="2">Amount <br>{{date('d.m.Y', strtotime($dateTo))}}</th>
         </tr>
         <tr>
             <th scope="col">Particular</th>

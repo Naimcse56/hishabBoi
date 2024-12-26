@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <th scope="col" class="fs-14">Particular</th>
-            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount (BDT)</th>
+            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount</th>
         </tr>
     </thead>
     <tbody>

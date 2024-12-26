@@ -53,7 +53,7 @@
         <tr><td colspan="2"></td></tr>
         <tr>
             <th scope="col" class="fs-14 text-center">Particular</th>
-            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount (BDT)</th>
+            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount</th>
         </tr>
     </thead>
     <tbody>

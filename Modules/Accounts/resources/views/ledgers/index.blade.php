@@ -21,7 +21,7 @@ My Account
                                         <th>Code</th>
                                         <th>AC Name</th>
                                         <th>Status</th>
-                                        <th>Current Balance (BDT)</th>
+                                        <th>Current Balance</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

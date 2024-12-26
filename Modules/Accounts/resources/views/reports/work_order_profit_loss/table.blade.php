@@ -54,7 +54,7 @@
         <tr>
             <th scope="col" class="fs-14">Particular</th>
             <th scope="col" class="nowrap fs-14" width="10%">Note</th>
-            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount (BDT) <br>{{date('d.m.Y', strtotime($dateTo))}}</th>
+            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount <br>{{date('d.m.Y', strtotime($dateTo))}}</th>
         </tr>
     </thead>
     <tbody>

@@ -84,7 +84,7 @@ Bank Voucher
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label class="form-label" for="Total Amount">Total Amount (BDT) :</label>
+                                            <label class="form-label" for="Total Amount">Total Amount :</label>
                                             <label class="form-label total_credit_amount text-danger" for="Cr Amount">0.00</label>
                                         </div>
                                     </div>

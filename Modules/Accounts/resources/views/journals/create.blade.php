@@ -37,7 +37,7 @@
                             </fieldset>
                             <div class="row">
                                 <div class="col-md-7 text-right">
-                                    <label class="form-label" for="Total Amount">Total Amount (BDT) :</label>
+                                    <label class="form-label" for="Total Amount">Total Amount :</label>
                                 </div>
                                 <div class="col-md-2 text-right">
                                     <label class="form-label total_debit_amount" for="Dr Amount">0.00</label>

@@ -20,8 +20,8 @@ Products List
                                         <th>Type</th>
                                         <th>Name</th>
                                         <th>Status</th>
-                                        <th>Sell. Price (BDT)</th>
-                                        <th>Purchase. Price (BDT)</th>
+                                        <th>Sell. Price</th>
+                                        <th>Purchase. Price</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
