@@ -21,7 +21,7 @@ Sale List
                                         <th>Invoice No</th>
                                         <th>Client</th>
                                         <th>Phone</th>
-                                        <th>Total Payable (BDT)</th>
+                                        <th>Total Payable</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
