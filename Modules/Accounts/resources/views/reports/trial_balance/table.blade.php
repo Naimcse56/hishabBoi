@@ -26,7 +26,7 @@
         @isset($filtered_branch)
             @if ($first_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="4">Assets</td>
+                    <td class="fw-semibold" colspan="4">Assets</td>
                 </tr>
                 @foreach ($first_section->skip(1) as $k => $item)
                     @php
@@ -70,7 +70,7 @@
             @endif
             @if ($second_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="4">Expenses</td>
+                    <td class="fw-semibold" colspan="4">Expenses</td>
                 </tr>
                 @foreach ($second_section->skip(1) as $k => $item)
                     @php
@@ -114,7 +114,7 @@
             @endif
             @if ($third_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="4">Liabilities and Equities</td>
+                    <td class="fw-semibold" colspan="4">Liabilities and Equities</td>
                 </tr>
                 @foreach ($third_section->skip(1) as $k => $item)
                     @php
@@ -158,7 +158,7 @@
             @endif
             @if ($fourth_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="4">Revenues</td>
+                    <td class="fw-semibold" colspan="4">Revenues</td>
                 </tr>
                 @foreach ($fourth_section->skip(1) as $k => $item)
                     @php
@@ -201,7 +201,7 @@
                 @endforeach
             @endif
             <tr>
-                <td class="fw-bold" colspan="2">Total</td>
+                <td class="fw-semibold" colspan="2">Total</td>
                 <td class="text-right nowrap">{{number_format($total_dr,2)}}</td>
                 <td class="text-right nowrap">{{number_format($total_cr,2)}}</td>
             </tr>

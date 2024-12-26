@@ -75,9 +75,9 @@
                 @endphp
                 @if ((($item['view_in_bs'] == 1 && $amount != 0) || $k == 0))
                     <tr>
-                        <td class="{{$k == 0 ? 'fw-bold' : ''}}">{{$item['name']}}</td>
+                        <td class="{{$k == 0 ? 'fw-semibold' : ''}}">{{$item['name']}}</td>
                         <td>{{$k > 0 ? $item['code'] : ""}}</td>
-                        <td class="text-right nowrap {{$k == 0 ? 'fw-bold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                        <td class="text-right nowrap {{$k == 0 ? 'fw-semibold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                     </tr>
                 @endif
             @endforeach
@@ -98,17 +98,17 @@
                 @endphp
                 @if ((($item['view_in_bs'] == 1 && $amount != 0) || $k == 0))
                     <tr>
-                        <td class="{{$k == 0 ? 'fw-bold' : ''}}">{{$item['name']}}</td>
+                        <td class="{{$k == 0 ? 'fw-semibold' : ''}}">{{$item['name']}}</td>
                         <td>{{$k > 0 ? $item['code'] : ""}}</td>
-                        <td class="text-right nowrap {{$k == 0 ? 'fw-bold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                        <td class="text-right nowrap {{$k == 0 ? 'fw-semibold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                     </tr>
                 @endif
             @endforeach
         @endif
         <tr>
-            <td class="fw-bold text-right">Total</td>
+            <td class="fw-semibold text-right">Total</td>
             <td></td>
-            <td class="text-right nowrap fw-bold">{{number_format($first_section->sum('amount') + $second_section->sum('amount'),2)}}</td>
+            <td class="text-right nowrap fw-semibold">{{number_format($first_section->sum('amount') + $second_section->sum('amount'),2)}}</td>
         </tr>
         </tr>
         <tr>
@@ -130,17 +130,17 @@
                 @endphp
                 @if ((($item['view_in_bs'] == 1 && $amount != 0) || $k == 0))
                     <tr>
-                        <td class="{{$k == 0 ? 'fw-bold' : ''}}">{{$item['name']}}</td>
+                        <td class="{{$k == 0 ? 'fw-semibold' : ''}}">{{$item['name']}}</td>
                         <td>{{$k > 0 ? $item['code'] : ""}}</td>
-                        <td class="text-right nowrap {{$k == 0 ? 'fw-bold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                        <td class="text-right nowrap {{$k == 0 ? 'fw-semibold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                     </tr>
                 @endif
             @endforeach
         @endif
         <tr>
-            <td class="fw-bold text-right">Total</td>
+            <td class="fw-semibold text-right">Total</td>
             <td></td>
-            <td class="text-right nowrap fw-bold">{{number_format($fifth_section->sum('amount'),2)}}</td>
+            <td class="text-right nowrap fw-semibold">{{number_format($fifth_section->sum('amount'),2)}}</td>
         </tr>
     @endisset
         

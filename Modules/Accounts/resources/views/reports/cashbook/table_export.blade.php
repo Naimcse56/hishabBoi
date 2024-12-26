@@ -69,8 +69,8 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
         @endforeach
         <tr>
             <td colspan="5"></td>
-            <td class="text-right nowrap fw-bold">{{number_format(abs($total_rcv)+$opening_add_today, 2)}}</td>
-            <td class="text-right nowrap fw-bold">{{number_format(abs($total_pay), 2)}}</td>
+            <td class="text-right nowrap fw-semibold">{{number_format(abs($total_rcv)+$opening_add_today, 2)}}</td>
+            <td class="text-right nowrap fw-semibold">{{number_format(abs($total_pay), 2)}}</td>
         </tr>
         <tr>
             <td colspan="7"></td>

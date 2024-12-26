@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body p-5 pt-0 pb-0">
                 <div class="row mb-0">
-                    <div style="text-align: center; font-size: 14px; font-weight: 300;"> VOUCHER ({{ $journal->TypeDetails }}) </div>
+                    <div class="text-center fw-semibold"> VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
                 <div class="row" style="margin-top: 0px;">
@@ -27,7 +27,7 @@
                 @if ($journal->is_approve == 2)
                   <div class="row">
                       <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
-                          <p class="mb-0 text-danger fw-bold">Reject Note : <span>{{$journal->rejection_comment}}</span></p>
+                          <p class="mb-0 text-danger fw-semibold">Reject Note : <span>{{$journal->rejection_comment}}</span></p>
                       </div>
                   </div>
                 @endif
@@ -110,7 +110,7 @@
                    <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
                         <p class="mb-0">Creator :<span>{{$journal->creator->name}}</span></p>
                         @if ($journal->attachment)
-                            <a href="{{asset($journal->attachment)}}" class="fw-bold" download="{{str_replace(' ','-',$journal->TypeName.'-attachment')}}"><i class="bx bx-download"></i> Attachment <i class="bx bx-download"></i></a>
+                            <a href="{{asset($journal->attachment)}}" class="fw-semibold" download="{{str_replace(' ','-',$journal->TypeName.'-attachment')}}"><i class="bx bx-download"></i> Attachment <i class="bx bx-download"></i></a>
                         @endif
                         @if ($journal->updated_by != null)
                         <p class="mb-0">Updator :<span>{{$journal->updator->name}}</span></p>

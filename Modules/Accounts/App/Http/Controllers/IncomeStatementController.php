@@ -42,12 +42,6 @@ class IncomeStatementController extends Controller
         }
         $data['fiscal_years'] = DB::table('fiscal_years')->get();
 
-        $sub_concern_id = $request->sub_concern_id > 0 ? $request->sub_concern_id : null;
-
-        if ($request->sub_concern_id > 0) {
-            $data['business_unit'] = SubConcern::find($request->sub_concern_id);
-        }
-
         $ledgers = Ledger::get(['id','name','code','parent_id','acc_type','view_in_bs','view_in_is','type','level']);
         
         $data['dateFrom'] = $start_date;

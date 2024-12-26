@@ -21,7 +21,7 @@
     <tbody>
         @foreach ($reports->groupBy('sub_ledger_type') as $member_type => $report_item)
             <tr>
-                <td class="fw-bold" colspan="7">
+                <td class="fw-semibold" colspan="7">
                     {{$member_type}}
                 </td>
             </tr>
@@ -31,7 +31,7 @@
                     $total_cr = 0;
                 @endphp
                 <tr>
-                    <td class="fw-bold tabspace-2" colspan="7">{{$report['name']}}</td>
+                    <td class="fw-semibold tabspace-2" colspan="7">{{$report['name']}}</td>
                 </tr>
                 <tr>
                     <td colspan="6">Opening Balance</td>
@@ -78,7 +78,7 @@
                 </tr>
             @endforeach
             <tr>
-                <td class="fw-bold" colspan="7"></td>
+                <td class="fw-semibold" colspan="7"></td>
             </tr>
         @endforeach
     </tbody>

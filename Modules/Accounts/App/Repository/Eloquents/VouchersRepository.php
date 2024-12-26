@@ -78,9 +78,6 @@ class VouchersRepository
         $voucher = Voucher::findOrFail($id);
         if ($voucher->is_approve != 1) {
             $voucher->transactions()->update(['is_approve' => 1]);
-            foreach ($voucher->transactions()->where('check_no', '!=', null)->get() as $transaction) {
-                $transaction->cheque_detail->update(['is_clear' => 1]);
-            }
             $voucher->update(['is_approve' => 1, 'approved_by' => auth()->user()->id]);
         }
         return $voucher;

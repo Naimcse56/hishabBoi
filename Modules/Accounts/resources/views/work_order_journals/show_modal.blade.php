@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body p-5 pt-0 pb-0">
                 <div class="row mb-0">
-                    <div style="text-align: center; font-size: 14px; font-weight: 300;"> WORK ORDER VOUCHER ({{ $journal->TypeDetails }}) </div>
+                    <div class="text-center fw-semibold"> WORK ORDER VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
                 <div class="row" style="margin-top: 0px;">
@@ -21,7 +21,7 @@
                 @if ($journal->is_approve == 2)
                   <div class="row">
                       <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
-                          <p class="mb-0 text-danger fw-bold">Reject Note : <span>{{$journal->rejection_comment}}</span></p>
+                          <p class="mb-0 text-danger fw-semibold">Reject Note : <span>{{$journal->rejection_comment}}</span></p>
                       </div>
                   </div>
                 @endif

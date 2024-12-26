@@ -67,13 +67,13 @@
         </tr>
         @if ($work_order->work_order_site_details()->count() > 0)
             <tr>
-                <td colspan="8" class="text-center fw-bold">Sites Information</td>
+                <td colspan="8" class="text-center fw-semibold">Sites Information</td>
             </tr>
             <tr>
-                <td colspan="5" class="fw-bold">Site Name</td>
-                <td class="fw-bold">Site Location</td>
-                <td class="fw-bold">Est. Budget</td>
-                <td class="fw-bold">Site Manager</td>
+                <td colspan="5" class="fw-semibold">Site Name</td>
+                <td class="fw-semibold">Site Location</td>
+                <td class="fw-semibold">Est. Budget</td>
+                <td class="fw-semibold">Site Manager</td>
             </tr>
             @foreach ($work_order->work_order_site_details as $site_detail)
             <tr>
@@ -106,7 +106,7 @@
             <td class="text-right nowrap" colspan="2">{{($filtered_account_balance)}}</td>
         </tr>
         <tr>
-            <td colspan="8" class="fw-bold">Billing Information</td>
+            <td colspan="8" class="fw-semibold">Billing Information</td>
         </tr>
         @foreach ($income_transactions as $key => $transaction)
             @php
@@ -119,7 +119,7 @@
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction->voucher_id)) }}">{{  @$transaction->voucher->TypeName }}</a></td>
                 <td>{{ $transaction->narration }}</td>
                 <td>
-                    <p class="fw-bold mb-0 nowrap">{{ $transaction->ledger->name }}</p>
+                    <p class="fw-semibold mb-0 nowrap">{{ $transaction->ledger->name }}</p>
                     <p class="mb-0">{{ $transaction->work_order_site_detail_id > 0 ? 'Site : '.$transaction->work_order_site_detail->site_name : '' }}</p>
                 </td>
                 <td class="text-right nowrap">
@@ -150,7 +150,7 @@
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($rcv_transaction->voucher_id)) }}">{{  @$rcv_transaction->voucher->TypeName }}</a></td>
                 <td>{{ $rcv_transaction->narration }}</td>
                 <td>
-                    <p class="fw-bold mb-0 nowrap">{{ $rcv_transaction->ledger->name }}</p>
+                    <p class="fw-semibold mb-0 nowrap">{{ $rcv_transaction->ledger->name }}</p>
                     <p class="mb-0">{{ $rcv_transaction->work_order_site_detail_id > 0 ? 'Site : '.$rcv_transaction->work_order_site_detail->site_name : '' }}</p>
                 </td>
                 <td class="text-right nowrap">
@@ -167,14 +167,14 @@
             </tr>
         @endforeach
         <tr>
-            <td colspan="4" class="text-right text-primary fw-bold">Total</td>
+            <td colspan="4" class="text-right text-primary fw-semibold">Total</td>
             <td class="text-right text-primary">{{ number_format($rcv_income_transactions->where('type','Dr')->sum('amount') + $income_transactions->where('type','Dr')->sum('amount'), 2) }}</td>
             <td class="text-right text-primary">{{ number_format($rcv_income_transactions->where('type','Cr')->sum('amount') + $income_transactions->where('type','Cr')->sum('amount'), 2) }}</td>
             <td class="text-right nowrap text-primary" colspan="2">{{$total_receive >= 0 ? number_format($total_receive, 2) : '('.number_format(abs($total_receive), 2).')'}}</td>
         </tr>
 
         <tr>
-            <td colspan="8" class="fw-bold">Cost Information</td>
+            <td colspan="8" class="fw-semibold">Cost Information</td>
         </tr>
         @foreach ($expense_transactions as $key => $exp_transaction)
             @php
@@ -187,7 +187,7 @@
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($exp_transaction->voucher_id)) }}">{{  @$exp_transaction->voucher->TypeName }}</a></td>
                 <td>{{ $exp_transaction->narration }}</td>
                 <td>
-                    <p class="fw-bold mb-0 nowrap">{{ $exp_transaction->ledger->name }}</p>
+                    <p class="fw-semibold mb-0 nowrap">{{ $exp_transaction->ledger->name }}</p>
                     <p class="mb-0">{{ $exp_transaction->work_order_site_detail_id > 0 ? 'Site : '.$exp_transaction->work_order_site_detail->site_name : '' }}</p>
                 </td>
                 <td class="text-right nowrap">
@@ -217,7 +217,7 @@
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($pay_transaction->voucher_id)) }}">{{  @$pay_transaction->voucher->TypeName }}</a></td>
                 <td>{{ $pay_transaction->narration }}</td>
                 <td>
-                    <p class="fw-bold mb-0 nowrap">{{ $pay_transaction->ledger->name }}</p>
+                    <p class="fw-semibold mb-0 nowrap">{{ $pay_transaction->ledger->name }}</p>
                     <p class="mb-0">{{ $pay_transaction->work_order_site_detail_id > 0 ? 'Site : '.$pay_transaction->work_order_site_detail->site_name : '' }}</p>
                 </td>
                 <td class="text-right nowrap">
@@ -234,7 +234,7 @@
             </tr>
         @endforeach
         <tr>
-            <td colspan="4" class="text-right text-primary fw-bold">Total</td>
+            <td colspan="4" class="text-right text-primary fw-semibold">Total</td>
             <td class="text-right text-primary">{{ number_format($expense_transactions->where('type','Dr')->sum('amount') + $pay_expense_transactions->where('type','Dr')->sum('amount'), 2) }}</td>
             <td class="text-right text-primary">{{ number_format($expense_transactions->where('type','Cr')->sum('amount') + $pay_expense_transactions->where('type','Cr')->sum('amount'), 2) }}</td>
             <td class="text-right nowrap text-primary" colspan="2">{{ $total_pay >= 0 ? number_format($total_pay, 2, '.', '') : '('.number_format(abs($total_pay), 2).')' }}</td>

@@ -25,7 +25,7 @@ Cash Voucher
                             </div>
                                 
                             <fieldset class="the-fieldset mb-4">
-                                <legend class="the-legend fw-bold bg-danger-subtle">Payment Information</legend>
+                                <legend class="the-legend fw-semibold bg-danger-subtle">Payment Information</legend>
                                 <div class="entry_row_div_cr">
                                     <div class="row new_added_row_cr">                                    
                                         <div class="col-md-8">

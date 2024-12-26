@@ -26,7 +26,7 @@
         @isset($filtered_branch)
             @if ($first_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="6" style="text-align: left;">Assets</td>
+                    <td class="fw-semibold" colspan="6" style="text-align: left;">Assets</td>
                 </tr>
                 @foreach ($first_section->skip(1) as $k => $item)
                     @php
@@ -71,7 +71,7 @@
                     @endphp
                     {{-- @if ($item['view_in_trial'] == 1) --}}
                         <tr>
-                            <td class="fw-bold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
+                            <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
                             <td>{{$k > 0 ? $item['code'] : ""}}</td>
                             <td class="text-right nowrap">{{$debit}}</td>
                             <td class="text-right nowrap">{{$credit}}</td>
@@ -83,7 +83,7 @@
             @endif
             @if ($second_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="6">Expenses</td>
+                    <td class="fw-semibold" colspan="6">Expenses</td>
                 </tr>
                 @foreach ($second_section->skip(1) as $k => $item)
                     @php
@@ -128,7 +128,7 @@
                     @endphp
                     {{-- @if ($item['view_in_trial'] == 1) --}}
                         <tr>
-                            <td class="fw-bold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
+                            <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
                             <td>{{$k > 0 ? $item['code'] : ""}}</td>
                             <td class="text-right nowrap">{{$debit}}</td>
                             <td class="text-right nowrap">{{$credit}}</td>
@@ -140,7 +140,7 @@
             @endif
             @if ($third_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="6" style="text-align: left;">Liabilities and Equities</td>
+                    <td class="fw-semibold" colspan="6" style="text-align: left;">Liabilities and Equities</td>
                 </tr>
                 @foreach ($third_section->skip(1) as $k => $item)
                     @php
@@ -185,7 +185,7 @@
                     @endphp
                     {{-- @if ($item['view_in_trial'] == 1) --}}
                         <tr>
-                            <td class="fw-bold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
+                            <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
                             <td>{{$k > 0 ? $item['code'] : ""}}</td>
                             <td class="text-right nowrap">{{$debit}}</td>
                             <td class="text-right nowrap">{{$credit}}</td>
@@ -197,7 +197,7 @@
             @endif
             @if ($fourth_section->count() > 0)
                 <tr>
-                    <td class="fw-bold" colspan="6" style="text-align: left;">Revenues</td>
+                    <td class="fw-semibold" colspan="6" style="text-align: left;">Revenues</td>
                 </tr>
                 @foreach ($fourth_section->skip(1) as $k => $item)
                     @php
@@ -242,7 +242,7 @@
                     @endphp
                     {{-- @if ($item['view_in_trial'] == 1) --}}
                         <tr>
-                            <td class="fw-bold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
+                            <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;"><a target="_blank" style="z-index: 10; position: relative;" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$item['name']}}</a></td>
                             <td>{{$k > 0 ? $item['code'] : ""}}</td>
                             <td class="text-right nowrap">{{$debit}}</td>
                             <td class="text-right nowrap">{{$credit}}</td>

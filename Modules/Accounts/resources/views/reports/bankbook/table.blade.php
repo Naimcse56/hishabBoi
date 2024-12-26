@@ -37,7 +37,7 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
                 <td>{{$key+1}}</td>
                 <td class="nowrap align-middle">{{date('d-m-Y', strtotime($transaction['date']))}}</td>
                 <td><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">
-                    <p class="mb-0 fw-bold">
+                    <p class="mb-0 fw-semibold">
                         @if (isset($transaction['opposite_data']))
                             @foreach ($transaction['opposite_data'] as $opposite_data)
                                 {{@$opposite_data['info_type']}} :
@@ -46,7 +46,7 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
                             @endforeach
                         @endif
                     </p>
-                    <p class="mb-0 fw-bold">
+                    <p class="mb-0 fw-semibold">
                         {{$transaction['type'].' Info : '.$transaction['particular']}}
                     </p>
                     <p class="mb-0">
@@ -71,8 +71,8 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
         @endforeach
         <tr>
             <td colspan="5"></td>
-            <td class="text-right nowrap fw-bold">{{number_format(abs($total_rcv)+$opening_add_today, 2)}}</td>
-            <td class="text-right nowrap fw-bold">{{number_format(abs($total_pay), 2)}}</td>
+            <td class="text-right nowrap fw-semibold">{{number_format(abs($total_rcv)+$opening_add_today, 2)}}</td>
+            <td class="text-right nowrap fw-semibold">{{number_format(abs($total_pay), 2)}}</td>
         </tr>
         <tr>
             <td colspan="7"></td>

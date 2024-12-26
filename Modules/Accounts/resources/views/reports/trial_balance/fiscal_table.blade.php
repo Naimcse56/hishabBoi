@@ -32,7 +32,7 @@
         @isset($filtered_branch)
             @if ($first_section->count() > 0)
             <tr>
-                <td class="fw-bold" colspan="6" style="text-align: left;">Assets</td>
+                <td class="fw-semibold" colspan="6" style="text-align: left;">Assets</td>
             </tr>
                 @foreach ($first_section->skip(1) as $k => $item)
                     @php
@@ -103,7 +103,7 @@
             @endif
             @if ($second_section->count() > 0)
             <tr>
-                <td class="fw-bold" colspan="6" style="text-align: left;">Expenses</td>
+                <td class="fw-semibold" colspan="6" style="text-align: left;">Expenses</td>
             </tr>
                 @foreach ($second_section->skip(1) as $k => $item)
                     @php
@@ -174,7 +174,7 @@
             @endif
             @if ($third_section->count() > 0)
             <tr>
-                <td class="fw-bold" colspan="6" style="text-align: left;">Liabilities and Equities</td>
+                <td class="fw-semibold" colspan="6" style="text-align: left;">Liabilities and Equities</td>
             </tr>
                 @foreach ($third_section->skip(1) as $k => $item)
                     @php
@@ -245,7 +245,7 @@
             @endif
             @if ($fourth_section->count() > 0)
             <tr>
-                <td class="fw-bold" colspan="6" style="text-align: left;">Revenues</td>
+                <td class="fw-semibold" colspan="6" style="text-align: left;">Revenues</td>
             </tr>
                 @foreach ($fourth_section->skip(1) as $k => $item)
                     @php
@@ -314,7 +314,7 @@
                     @endif
                 @endforeach
                 <tr>
-                    <td class="fw-bold" colspan="2" style="text-align: right;">Total</td>
+                    <td class="fw-semibold" colspan="2" style="text-align: right;">Total</td>
                     <td class="text-right nowrap">{{number_format($total_dr,2)}}</td>
                     <td class="text-right nowrap">{{number_format($total_cr,2)}}</td>
                     {{-- <td class="text-right nowrap">{{number_format($total_dr_prev,2)}}</td>

@@ -25,7 +25,7 @@ Cash Voucher
                             </div>
                             <div class="sales-voucher mb-4">
                                 <fieldset class="the-fieldset mb-4">
-                                    <legend class="the-legend fw-bold bg-danger-subtle">Receive Information</legend>
+                                    <legend class="the-legend fw-semibold bg-danger-subtle">Receive Information</legend>
                                     <div class="entry_row_div_cr">
                                         @foreach ($transactions as $trans_account)
                                         <div class="row new_added_row_cr">                                    
