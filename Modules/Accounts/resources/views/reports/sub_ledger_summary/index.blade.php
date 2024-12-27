@@ -2,25 +2,6 @@
 @section('title')
 Party Summary Report
 @endsection
-@push('styles')
-    <style>
-    .fs-14{
-        font-size: 14px !important;
-    }
-    .tabspace-1{
-        padding-left: 1rem !important;
-    }
-    .tabspace-2{
-        padding-left: 2rem !important;
-    }
-    .tabspace-3{
-        padding-left: 3rem !important;
-    }
-    .tabspace-4{
-        padding-left: 4rem !important;
-    }
-    </style>
-@endpush
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">

@@ -59,7 +59,7 @@ Bank Book
                     $('.filter_div').addClass('d-none')
                 }
             });            
-            $(".debit_account_id").select2({
+            $(".bank_id").select2({
                 ajax: {
                     url: '{{route('ledger.transactional_list_for_select')}}',
                     type: "get",

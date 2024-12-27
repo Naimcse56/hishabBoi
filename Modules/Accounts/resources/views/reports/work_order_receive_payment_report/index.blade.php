@@ -13,7 +13,7 @@ Receipt And Payment Report
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 filter_div {{isset($filtered_branch) ? 'd-none' : ''}}">
+            <div class="col-md-12 filter_div">
                 <div class="card">
                     <div class="card-body">
                         <form class="form" method="GET" action="{{route('work-orders.receive_payment_report')}}">

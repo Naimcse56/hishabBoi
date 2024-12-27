@@ -2,13 +2,6 @@
 @section('title')
 Work Order Profit Loss Report
 @endsection
-@push('styles')
-    <style>
-    .fs-14{
-        font-size: 14px !important;
-    }
-    </style>
-@endpush
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
@@ -20,7 +13,7 @@ Work Order Profit Loss Report
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 filter_div {{isset($filtered_branch) ? 'd-none' : ''}}">
+            <div class="col-md-12 filter_div">
                 <div class="card">
                     <div class="card-body">
                         <form class="form" method="GET" action="{{route('work-orders.pl_report')}}">

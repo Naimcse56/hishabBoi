@@ -18,7 +18,7 @@ Cash Book
                     <div class="card-body">
                         <form class="form" method="GET" action="{{route('accountings.cashbook')}}">
                             <div class="row">
-                                <x-common.server-side-select :required="true" column=4 name="cash_account_id" class="bank_id" disableOptionText="Select Cash Account" label="Cash Accounts"></x-common.server-side-select>
+                                <x-common.server-side-select :required="true" column=4 name="cash_account_id" class="cash_account_id" disableOptionText="Select Cash Account" label="Cash Accounts"></x-common.server-side-select>
                                 <x-common.date-picker label="From Date" :required="true" column=4 name="start_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.date-picker label="To Date" :required="true" column=4 name="end_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.select :required="true" column=4 name="type" class="type" label="Type" placeholder="Type" :value="'Client'" :options="[
@@ -60,7 +60,7 @@ Cash Book
                 }
             });
             
-            $(".debit_account_id").select2({
+            $(".cash_account_id").select2({
                 ajax: {
                     url: '{{route('ledger.transactional_list_for_select')}}',
                     type: "get",

@@ -21,6 +21,7 @@ use Modules\Accounts\App\Http\Controllers\ProductController;
 use Modules\Accounts\App\Http\Controllers\ProductUnitController;
 use Modules\Accounts\App\Http\Controllers\SaleController;
 use Modules\Accounts\App\Http\Controllers\PurchaseController;
+use Modules\Accounts\App\Http\Controllers\LedgerDetailsReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -201,6 +202,9 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
     });
     Route::controller(TrialBalanceController::class)->prefix('report')->as('accountings.')->group(function () {
         Route::get('/trial-balance', 'trial_balance')->name('trial_balance');
+    });
+    Route::controller(LedgerDetailsReportController::class)->prefix('report')->as('accountings.')->group(function () {
+        Route::get('/ledger-report-details-based-on-data', 'detail_report_ledger')->name('ledger_report_details_specific_filter');
     });
 
     

@@ -1,15 +1,11 @@
 @extends('accounts::print_layouts.index')
 @section('title')
-Balance Sheet Report Print
+BalanceSheet Print
 @endsection
 @section('content')
         <div class="row">
             <div class="col-md-12">
-                @if ($report_type == "fiscal_year")
-                    @include('accounts::reports.balancesheet.fiscal_table')
-                @else
-                    @include('accounts::reports.balancesheet.table')
-                @endif
+                @include('accounts::reports.balancesheet.table')
             </div>
         </div>
 @endsection
