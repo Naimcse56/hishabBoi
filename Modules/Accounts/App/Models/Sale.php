@@ -82,4 +82,14 @@ class Sale extends Model
     {
         return $this->belongsTo(User::class, 'approved_by')->withDefault(['name'=>'N/A']);
     }
+
+    public function work_order()
+    {
+        return $this->belongsTo(WorkOrder::class)->withDefault(['order_name'=>'N/A']);
+    }
+
+    public function work_order_site_detail()
+    {
+        return $this->belongsTo(WorkOrderSiteDetail::class,'work_order_site_id')->withDefault(['site_name'=>'']);
+    }
 }

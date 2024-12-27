@@ -20,7 +20,9 @@ New Sale
                             <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="old('invoice_no')"></x-common.input>
                             <x-common.input :required="false" column=4 id="ref_no" name="ref_no" label="Reference No" placeholder="Reference No" :value="old('ref_no')"></x-common.input>
                             <x-common.input :required="true" column=4 id="phone" name="phone" label="Phone No" placeholder="Phone No" :value="old('phone')"></x-common.input>
-                            <x-common.server-side-select :required="true" column=12 name="product_select_id" id="product_select_id" class="product_select_id" disableOptionText="Select Product" label="Product"></x-common.server-side-select>
+                            <x-common.server-side-select :required="false" column=4 name="work_order_id" class="work_order_id" disableOptionText="Select Work Order" label="Work Order"></x-common.server-side-select>
+                            <x-common.server-side-select :required="false" column=4 name="work_order_site_detail_id" class="work_order_site_detail_id" disableOptionText="Select Work Order Site" label="Work Order Site"></x-common.server-side-select>
+                            <x-common.server-side-select :required="true" column=8 name="product_select_id" id="product_select_id" class="product_select_id" disableOptionText="Select Product" label="Product"></x-common.server-side-select>
                         </div>
                         <fieldset class="the-fieldset mb-3">
                             <legend class="the-legend">Sale Details Information</legend>
@@ -81,6 +83,48 @@ New Sale
         (function($) {
             "use strict";
             APP_TOKEN;
+
+            $(".work_order_site_detail_id").select2({
+                ajax: {
+                    url: '{{route('work-order-sites.list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                work_order_id: $(".work_order_id").val()
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+
+            $(".work_order_id").select2({
+                ajax: {
+                    url: '{{route('work-order.list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                sub_ledger_id: $(".sub_ledger_id").val(),
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
             $(".credit_account_id").select2({
                 ajax: {
                     url: '{{route('ledger.transactional_list_for_select')}}',

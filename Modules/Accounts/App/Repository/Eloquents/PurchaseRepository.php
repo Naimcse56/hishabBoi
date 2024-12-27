@@ -36,6 +36,8 @@ class PurchaseRepository extends BaseRepository
             'payment_status' => $data['payment_status'],
             'note' => $data['note'],
             'terms_condition' => $data['terms_condition'],
+            'work_order_site_id' => (!empty($data['work_order_site_detail_id'])) ? $data['work_order_site_detail_id'] : 0,
+            'work_order_id' => (!empty($data['work_order_id'])) ? $data['work_order_id'] : 0,
         ]);
         foreach ($data['qty'] as $key => $item) {
             PurchaseDetail::create([
@@ -84,6 +86,8 @@ class PurchaseRepository extends BaseRepository
             'payment_status' => $data['payment_status'],
             'note' => $data['note'],
             'terms_condition' => $data['terms_condition'],
+            'work_order_site_id' => (!empty($data['work_order_site_detail_id'])) ? $data['work_order_site_detail_id'] : 0,
+            'work_order_id' => (!empty($data['work_order_id'])) ? $data['work_order_id'] : 0,
         ]);
         $purchase_order->purchase_details()->delete();
         foreach ($data['qty'] as $key => $item) {
