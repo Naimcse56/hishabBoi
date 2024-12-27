@@ -9,9 +9,9 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
     <thead>
         <tr>
             <th colspan="7" class="text-center sky-bg">
-                <h5 class="mb-0">@isset($filtered_branch) {{$filtered_branch->name}} @endisset </h5>
-                <h6 class="mb-2">@isset($filtered_branch) {{$filtered_branch->location}} @endisset </h6>
-                <h6 class="mb-0">Bank Book @if(Route::is('accountings.bankbook_preview')) Preview @endif : @isset($filtered_account)
+                <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
+                <h6 class="mb-0">Bank Book : @isset($filtered_account)
                     {{$filtered_account->name}}
                     @if ($filtered_account->ac_no)
                         <br>Account No : {{$filtered_account->ac_no}}

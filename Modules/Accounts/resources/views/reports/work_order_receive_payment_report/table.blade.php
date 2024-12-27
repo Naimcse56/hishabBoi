@@ -7,8 +7,8 @@
     <thead>
         <tr>
             <th colspan="6" class="text-center sky-bg">
-                <h5 class="mb-2">@isset($filtered_branch) {{$filtered_branch->name}} @endisset </h5>
-                <h6 class="mb-2">@isset($filtered_branch) {{$filtered_branch->location}} @endisset </h6>
+                <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
                 <h6 class="mb-0">Work Order Based Receipt And Payment Report</h6>
                 @isset($work_order)
                     <p class="mb-0">W/O : {{$work_order->order_name}}</p>

@@ -10,10 +10,9 @@
 <table class="table table-bordered mb-0" style="width:100%">
     <thead>
         <tr>
-            <th colspan="3" class="text-center sky-bg">
-                <h5 class="mb-0">@isset($filtered_branch){{$filtered_branch->name}} @endisset </h5>
-                <h6 class="mb-2">@isset($filtered_branch) {{$filtered_branch->location}} @endisset </h6>
-                <h6 class="mb-2">@isset($business_unit) {{$business_unit->name}} @endisset </h6>
+            <th colspan="2" class="text-center sky-bg">
+                <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
                 <h6 class="mb-2">Work Order Asset and Liability Statement Report : {{$work_order->sub_ledger->name}} </h6>
                 @isset($work_order)
                     <p class="mb-0">W/O : {{$work_order->order_name}}</p>
@@ -25,42 +24,44 @@
         </tr>
         <tr>
             <td class="text-right"></td>
-            <th colspan="2" class="text-right">Estimated</th>
+            <th class="text-right">Estimated</th>
         </tr>
         <tr>
             <td class="text-right">Work Order Value</td>
-            <td colspan="2" class="text-right">{{number_format($order_value, 2)}}</td>
+            <td class="text-right">{{number_format($order_value, 2)}}</td>
         </tr>
         @foreach ($work_order->work_order_estimation_costs as $estimation)
             <tr>
                 <td class="text-right">{{ $estimation->ledger->name }}</td>
-                <td colspan="2" class="text-right">{{ number_format($estimation->estimated_amount, 2, '.', '') }}</td>
+                <td class="text-right">{{ number_format($estimation->estimated_amount, 2, '.', '') }}</td>
             </tr>
         @endforeach
         <tr>
             <td class="text-right">Total Cost Budget</td>
-            <td colspan="2" class="text-right">{{number_format($est_cost, 2)}}</td>
+            <td class="text-right">{{number_format($est_cost, 2)}}</td>
         </tr>
         <tr>
             <td class="text-right">Profit</td>
-            <td colspan="2" class="text-right">{{number_format($est_profit, 2)}}</td>
+            <td class="text-right">{{number_format($est_profit, 2)}}</td>
         </tr>
         <tr>
             <td class="text-right">Profit Percentage</td>
-            <td colspan="2" class="text-right">{{number_format($est_profit_percent, 2)}} %</td>
+            <td class="text-right">{{number_format($est_profit_percent, 2)}} %</td>
         </tr>
-        <tr><td colspan="3"></td></tr>
-        <tr><td colspan="3"></td></tr>
+        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2"></td></tr>
         <tr>
-            <th scope="col" class="fs-14">Particular</th>
-            <th scope="col" class="nowrap fs-14" width="10%">Note</th>
-            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount <br>{{date('d.m.Y', strtotime($dateTo))}}</th>
+            <th scope="col" class="fs-14 text-center">Particular</th>
+            <th scope="col" class="text-right nowrap fs-14" width="10%">Amount</th>
         </tr>
     </thead>
     <tbody>
-        @isset($filtered_branch)
         @if ($first_section->count() > 0)
-            @foreach ($first_section as $k => $item)
+            <tr>
+                <td class="fw-semibold" style="text-align: left;">{{$first_section->first()['code']}} : {{$first_section->first()['name']}}</td>
+                <td class="text-right nowrap fw-semibold">{{$first_section->sum('amount') >= 0 ? number_format($first_section->sum('amount'),2) : '('.number_format(abs($first_section->sum('amount')),2).')'}}</td>
+            </tr>
+            @foreach ($first_section->skip(1) as $k => $item)
                 @php
                     $amount = 0;
                     if ($k == 0) {
@@ -73,17 +74,21 @@
                     }
                     
                 @endphp
-                @if ((($item['view_in_bs'] == 1 && $amount != 0) || $k == 0))
+                @if ($amount != 0)
                     <tr>
-                        <td class="{{$k == 0 ? 'fw-semibold' : ''}}">{{$item['name']}}</td>
-                        <td>{{$k > 0 ? $item['code'] : ""}}</td>
-                        <td class="text-right nowrap {{$k == 0 ? 'fw-semibold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                        <td class="fw-semibold {{$item['view_in_bs'] == 1 ? 'tab-5' : 'tab-10'}}" style="text-align: left;">{{$item['name']}}</td>
+                        <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                     </tr>
                 @endif
             @endforeach
         @endif
         @if ($second_section->count() > 0)
-            @foreach ($second_section as $k => $item)
+            <tr>
+                <td class="fw-semibold" style="text-align: left;">{{$second_section->first()['code']}} : {{$second_section->first()['name']}}</td>
+                <td class="text-right nowrap fw-semibold">{{$second_section->sum('amount') >= 0 ? number_format($second_section->sum('amount'),2) : '('.number_format(abs($second_section->sum('amount')),2).')'}}</td>
+            </tr>
+            @foreach ($second_section->skip(1) as $k => $item)
+            
                 @php
                     $amount = 0;
                     if ($k == 0) {
@@ -96,26 +101,28 @@
                     }
                     
                 @endphp
-                @if ((($item['view_in_bs'] == 1 && $amount != 0) || $k == 0))
+                @if ($amount != 0)
                     <tr>
-                        <td class="{{$k == 0 ? 'fw-semibold' : ''}}">{{$item['name']}}</td>
-                        <td>{{$k > 0 ? $item['code'] : ""}}</td>
-                        <td class="text-right nowrap {{$k == 0 ? 'fw-semibold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                        <td class="fw-semibold {{$item['view_in_bs'] == 1 ? 'tab-5' : 'tab-10'}}" style="text-align: left;"> {{$item['view_in_bs'] == 1 ? $item['code'].' : ' : ''}} {{$item['name']}}</td>
+                        <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                     </tr>
                 @endif
             @endforeach
         @endif
         <tr>
             <td class="fw-semibold text-right">Total</td>
-            <td></td>
             <td class="text-right nowrap fw-semibold">{{number_format($first_section->sum('amount') + $second_section->sum('amount'),2)}}</td>
         </tr>
-        </tr>
         <tr>
-            <td colspan="3"></td>
+            <td colspan="2"></td>
         </tr>
         @if ($fifth_section->count() > 0)
-            @foreach ($fifth_section as $k => $item)
+            <tr>
+                <td class="fw-semibold" style="text-align: left;">{{$fifth_section->first()['code']}} : {{$fifth_section->first()['name']}}</td>
+                <td class="text-right nowrap fw-semibold">{{$fifth_section->sum('amount') >= 0 ? number_format($fifth_section->sum('amount'),2) : '('.number_format(abs($fifth_section->sum('amount')),2).')'}}</td>
+            </tr>
+            @foreach ($fifth_section->skip(1) as $k => $item)
+            
                 @php
                     $amount = 0;
                     if ($k == 0) {
@@ -128,36 +135,16 @@
                     }
                     
                 @endphp
-                @if ((($item['view_in_bs'] == 1 && $amount != 0) || $k == 0))
+                @if ($amount != 0)
                     <tr>
-                        <td class="{{$k == 0 ? 'fw-semibold' : ''}}">{{$item['name']}}</td>
-                        <td>{{$k > 0 ? $item['code'] : ""}}</td>
-                        <td class="text-right nowrap {{$k == 0 ? 'fw-semibold' : ''}}"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                        <td class="fw-semibold {{$item['view_in_bs'] == 1 ? 'tab-5' : 'tab-10'}}" style="text-align: left;">{{$item['name']}}</td>
+                        <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id'], 'work_order_id' =>$work_order->id])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                     </tr>
                 @endif
             @endforeach
         @endif
         <tr>
             <td class="fw-semibold text-right">Total</td>
-            <td></td>
             <td class="text-right nowrap fw-semibold">{{number_format($fifth_section->sum('amount'),2)}}</td>
-        </tr>
-    @endisset
-        
+        </tr>  
     </tbody>
-    @if (strpos($_SERVER['REQUEST_URI'], 'print') == true)
-    <tfoot>
-        <tr>
-            <td colspan="3">
-                <div class="d-flex justify-content-between mt-25">
-                    <p class="sign_dash">(PREPARED BY)</p>
-                    <p class="sign_dash">(CHECKED BY)</p>
-                    <p class="sign_dash">(HEAD OF CONCERN)</p>
-                    <p class="sign_dash">(APPROVED BY)</p>
-                    <p class="sign_dash">(APPROVED BY)</p>
-                </div>
-            </td>
-        </tr>
-    </tfoot>
-    @endif
-</table>

@@ -1,5 +1,4 @@
 @php
-    // $currentBalance = 0 + $filtered_account_balance;
     $currentBalance = 0;
     $total_dr = 0;
     $total_cr = 0;
@@ -8,20 +7,15 @@
     <thead>
         <tr>
             <th colspan="10" class="text-center sky-bg">
-                <h5 class="mb-2">@isset($filtered_branch) {{$filtered_branch->name}} @endisset </h5>
-                <h6 class="mb-2">@isset($filtered_branch) {{$filtered_branch->location}} @endisset </h6>
-                <h6 class="mb-1">Party Account Report @if (Route::is('accountings.sub_ledger_report_preview')) Preview @endif
+                <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
+                <h6 class="mb-1">Party Account Report
                     @isset($ledger)
                     ({{$ledger->name}})
                     @endisset</h6>
                 <h6 class="mb-1">
                     @isset($filtered_account)
                     {{ucwords(request('type'))}} : {{$filtered_account->name}} ({{$filtered_account->code}})
-                    @endisset
-                </h6>
-                <h6 class="mb-0">
-                    @isset($bill_info)
-                    Bill No : {{$bill_info->bill_no}} ({{date('d, F - Y', strtotime($bill_info->bill_date))}})
                     @endisset
                 </h6>
             </th>
@@ -36,7 +30,6 @@
             <th scope="col" class="text-center">Credit Period</th>
             <th scope="col" class="text-center">Over Days</th>
             <th scope="col" class="text-center">Trn No.</th>
-            {{-- <th scope="col" class="text-center">SSID</th> --}}
             <th scope="col" class="text-center" width="20%">Narration</th>
             <th scope="col" class="text-right" width="8%">Debit</th>
             <th scope="col" class="text-right" width="8%">Credit</th>
@@ -54,14 +47,10 @@
                     {{ date('d-m-Y', strtotime(@$transaction['date'])) }}
                 </td>
                 <td class="nowrap " style="vertical-align:middle;">
-                    @if ($transaction['accounting_bill_info_id'] > 0)
-                        {!! $transaction['bill_date'] !!}
-                    @endif
                 </td>
                 <td class="nowrap " style="vertical-align:middle;">{{ $transaction['credit_period'] }}</td>
                 <td class="nowrap " style="vertical-align:middle;">{{ $transaction['diff_in_days'] }}</td>
                 <td class="nowrap " style="vertical-align:middle;"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">{{  @$transaction['txn_id'] }}</a></td>
-                {{-- <td>{{  @$transaction['voucher_id'] }}</td> --}}
                 <td>
                     {{$transaction['particular']}} ;<br>
                     @if($transaction['work_order_id'] > 0)

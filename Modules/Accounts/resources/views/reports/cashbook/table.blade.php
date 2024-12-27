@@ -10,6 +10,8 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
     <thead>
         <tr>
             <th colspan="7" class="text-center sky-bg">
+                <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
                 <h5 class="mb-0">Cash Book : 
                     @isset($filtered_account)
                         {{$filtered_account->name}}

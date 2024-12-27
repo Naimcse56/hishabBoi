@@ -3,6 +3,7 @@
         <tr>
             <th scope="col" colspan="4" class="text-center sky-bg">
                 <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
                 <h6 class="mb-0">Trial Balance Report</h6>
             </th>
         </tr>

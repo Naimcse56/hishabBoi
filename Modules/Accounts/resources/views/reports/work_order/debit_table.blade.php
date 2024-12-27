@@ -16,6 +16,8 @@
     <thead>
         <tr>
             <th colspan="8" class="text-center sky-bg">
+                <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
+                <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
                 <h6 class="mb-2">Work Order Report : {{$work_order->sub_ledger->name}} </h6>
                 @isset($work_order)
                     <p class="mb-0">W/O : {{$work_order->order_name}}</p>

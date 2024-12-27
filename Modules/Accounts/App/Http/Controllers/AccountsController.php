@@ -125,7 +125,7 @@ class AccountsController extends Controller
             if ($request->account_id > 0) {
                 $account_id = $request->account_id;
                 if($request->party_account_id > 0) {
-                    $data['filtered_account'] = Ledger::with(['transactions:id,ledger_id,sub_ledger_id,accounting_additional_information_id,type,amount,is_approve,date'])->find($request->account_id,['id','name','ac_no','type']);
+                    $data['filtered_account'] = Ledger::with(['transactions:id,ledger_id,sub_ledger_id,type,amount,is_approve,date'])->find($request->account_id,['id','name','ac_no','type']);
                     $data['filtered_account_balance'] = $data['filtered_account']->TransactionBalanceAmountTillDate($start_date,$party_account_id);
                 } else {
                     $data['filtered_account'] = Ledger::with(['transactions'])->find($request->account_id,['id','name','ac_no','type']);
@@ -157,8 +157,6 @@ class AccountsController extends Controller
                 'party_id.gt' => 'Please Select Account',
             ]);
         }
-        
-        $accounting_bill_info_id = $request->accounting_bill_info_id ? $request->accounting_bill_info_id : null;
         $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
         $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
         $data['filtered_account_balance'] = 0;
@@ -166,11 +164,9 @@ class AccountsController extends Controller
             $party_id = $request->party_id;
             $data['filtered_account'] = SubLedger::with(['ledger:id,name,type'])->find($request->party_id,['id','name','email','ledger_id','code']);
             $data['filtered_account_balance'] = $data['filtered_account']->BalanceAmountTillDate($start_date);
-            $transactions = Transaction::whereHas('voucher', function($query) use($party_id,$start_date,$end_date, $accounting_bill_info_id){
-                $query->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($party_id, $accounting_bill_info_id){
-                    $query->where('sub_ledger_id',$party_id)->when($accounting_bill_info_id != null, function ($q) use ($accounting_bill_info_id) {
-                        return $q->where('accounting_bill_info_id', $accounting_bill_info_id);
-                    });
+            $transactions = Transaction::whereHas('voucher', function($query) use($party_id,$start_date,$end_date){
+                $query->where('is_approve', 1)->whereBetween('date',[$start_date,$end_date])->whereHas('transactions', function($query) use($party_id){
+                    $query->where('sub_ledger_id',$party_id);
                 });
             })->whereNot('sub_ledger_id', $party_id)
             ->when($request->account_id > 0, function ($q) use ($request) {

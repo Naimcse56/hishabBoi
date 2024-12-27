@@ -31,7 +31,6 @@ Work Order Asset and Liability Statement Report
                     </div>
                 </div>
             </div>
-            @isset($filtered_branch)
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -39,7 +38,6 @@ Work Order Asset and Liability Statement Report
                     </div>
                 </div>
             </div>
-            @endisset
         </div>
     </div>
 @endsection
