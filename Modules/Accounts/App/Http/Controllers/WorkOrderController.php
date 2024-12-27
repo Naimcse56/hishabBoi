@@ -186,9 +186,6 @@ class WorkOrderController extends Controller
             if ($request->has('print')) {
                 return view('accounts::reports.work_order_profit_loss.print', $data);
             }
-            if ($request->has('note')) {
-                return view('accounts::reports.work_order_profit_loss.note_print', $data);
-            }
         }
         return view('accounts::reports.work_order_profit_loss.index', $data);
     }
@@ -219,9 +216,6 @@ class WorkOrderController extends Controller
 
             if ($request->has('print')) {
                 return view('accounts::reports.work_order_balance_sheet.print', $data);
-            }
-            if ($request->has('note')) {
-                return view('accounts::reports.work_order_balance_sheet.note_print', $data);
             }
         }
         return view('accounts::reports.work_order_balance_sheet.index', $data);
