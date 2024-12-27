@@ -33,10 +33,13 @@ class SaleController extends Controller
                     ->editColumn('payable_amount', function($row){
                         return currencySymbol($row->payable_amount);
                     })
+                    ->addColumn('is_approved', function($row){      
+                        return view('accounts::sales.components.is_active', compact('row'));
+                    })
                     ->addColumn('action', function($row){      
                         return view('accounts::sales.components.action', compact('row'));
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['is_approved','action'])
                     ->make(true);
         }
         return view('accounts::sales.index');

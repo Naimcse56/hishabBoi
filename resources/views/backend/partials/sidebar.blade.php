@@ -1,6 +1,6 @@
 <!-- Sidenav Menu Start -->
 <div id="layoutSidenav_nav">
-    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <nav class="sb-sidenav accordion sb-sidenav-dark bg-primary" id="sidenavAccordion">
         <div class="sb-sidenav-menu">
             <div class="nav">
                 <a class="nav-link" href="{{route('dashboard')}}">
@@ -11,10 +11,10 @@
                 @include('base::menu')
             </div>
         </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            <div class="small text-black">{{auth()->user()->name}}</div>
-        </div>
+        {{-- <div class="sb-sidenav-footer text-bg-primary">
+            <div class="small fw-semibold">Logged in as:</div>
+            <div class="small fw-semibold">{{auth()->user()->name}}</div>
+        </div> --}}
     </nav>
 </div>
 <!-- Sidenav Menu End -->

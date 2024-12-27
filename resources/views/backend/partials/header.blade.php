@@ -1,14 +1,14 @@
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-white">
+<nav class="sb-topnav navbar navbar-expand navbar-dark text-bg-primary">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="{{ route('dashboard') }}">Hishab Boi</a>
+    <a class="navbar-brand ps-3 fw-semibold text-bg-primary" href="{{ route('dashboard') }}">Hishab Boi</a>
     <!-- Sidebar Toggle-->
     <a class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></a>
 
     <ul class="navbar-nav ms-auto">
-        <li class="nav-item time "><i class="far fa-clock text-success"></i> {{date('F j, Y')}} <span id="live-time" ></span></li>
+        <li class="nav-item time fw-semibold"><i class="far fa-clock text-white"></i> {{date('F j, Y')}} <span id="live-time" ></span></li>
         <li class="nav-item dropdown">
             {{-- <img src="{{ Avatar::create(Auth::user()->name)->toBase64() }}" width="32" class="rounded-circle me-lg-2 d-flex" alt="user-image"> --}}
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw text-white"></i></a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="{{route('profile_edit')}}">Account</a></li>
                 <li><hr class="dropdown-divider" /></li>

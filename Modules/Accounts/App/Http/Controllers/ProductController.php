@@ -37,10 +37,13 @@ class ProductController extends Controller
                     ->editColumn('purchase_price', function($row){
                         return currencySymbol($row->purchase_price);
                     })
+                    ->addColumn('is_active', function($row){      
+                        return view('accounts::products.components.is_active', compact('row'));
+                    })
                     ->addColumn('action', function($row){      
                         return view('accounts::products.components.action', compact('row'));
                     })
-                    ->rawColumns(['action'])
+                    ->rawColumns(['is_active','action'])
                     ->make(true);
         }
         return view('accounts::products.index');
