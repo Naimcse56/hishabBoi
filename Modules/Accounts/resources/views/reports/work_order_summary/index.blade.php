@@ -5,7 +5,7 @@ Work Order Summary Report
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
-            <h4 class="mt-4">>Work Order Summary Report</h4>
+            <h4 class="mt-4">Work Order Summary Report</h4>
             <div>
                 <a href="{{route('accountings.work_order_summary_report')}}" class="btn btn-sm btn-primary mt-4 filter_by"><i class="fa fa-refresh"></i></a>
                 <a href="javascript:;" class="btn btn-sm btn-primary mt-4 filter_by"><i class="fa fa-filter"></i></a>
