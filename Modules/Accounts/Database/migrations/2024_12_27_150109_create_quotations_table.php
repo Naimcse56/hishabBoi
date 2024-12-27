@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
+        Schema::create('quotations', function (Blueprint $table) {
             $table->id();
             $table->date('date')->default(date("Y-m-d"))->index();
             $table->foreignId("sub_ledger_id")->nullable()->comment('supplier_id');
@@ -28,10 +28,10 @@ return new class extends Migration
             $table->text('terms_condition')->nullable();
             $table->unsignedBigInteger("credit_period")->nullable(0)->comment('in days');
             $table->enum('is_approved', ['Pending', 'Approved', 'Rejected']);
+            $table->enum('is_convert_to_sale', ['Pending', 'Converted', 'Rejected']);
             $table->foreignId("approved_by")->nullable();
             $table->foreignId('created_by')->nullable();
             $table->foreignId('updated_by')->nullable();
-            $table->foreignId('quotation_id')->default(0);
             $table->timestamps();
         });
     }
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('quotations');
     }
 };

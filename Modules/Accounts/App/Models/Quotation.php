@@ -4,10 +4,9 @@ namespace Modules\Accounts\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Modules\Accounts\Database\factories\SaleFactory;
-use App\Models\User;
+use Modules\Accounts\Database\factories\QuotationFactory;
 
-class Sale extends Model
+class Quotation extends Model
 {
     use HasFactory;
 
@@ -16,9 +15,9 @@ class Sale extends Model
      */
     protected $guarded = ['id'];
     
-    protected static function newFactory(): SaleFactory
+    protected static function newFactory(): QuotationFactory
     {
-        //return SaleFactory::new();
+        //return QuotationFactory::new();
     }
 
     public static function boot()
@@ -33,29 +32,9 @@ class Sale extends Model
         });
     }
 
-    public function refers()
+    public function quotation_details()
     {
-        return $this->morphMany(Voucher::class, 'referable');
-    }
-
-    public function morphs()
-    {
-        return $this->morphMany(Payment::class, 'morphable');
-    }
-
-    public function latestPaymentInfo($orderBy = "desc")
-    {
-        return $this->morphs()->orderBy('id',$orderBy)->first();
-    }
-
-    public function getDueBillAttribute()
-    {
-        return $this->payable_amount - $this->morphs()->where('is_approve','!=',2)->sum('amount');
-    }
-
-    public function sale_details()
-    {
-        return $this->hasMany(SaleDetail::class);
+        return $this->hasMany(QuotationDetail::class);
     }
 
     public function sub_ledger()
