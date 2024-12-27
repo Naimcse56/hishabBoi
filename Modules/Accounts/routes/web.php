@@ -20,6 +20,7 @@ use Modules\Accounts\App\Http\Controllers\TrialBalanceController;
 use Modules\Accounts\App\Http\Controllers\ProductController;
 use Modules\Accounts\App\Http\Controllers\ProductUnitController;
 use Modules\Accounts\App\Http\Controllers\SaleController;
+use Modules\Accounts\App\Http\Controllers\QuotationController;
 use Modules\Accounts\App\Http\Controllers\PurchaseController;
 use Modules\Accounts\App\Http\Controllers\LedgerDetailsReportController;
 
@@ -251,6 +252,17 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('purchases.update');
         Route::post('/delete', 'destroy')->name('purchases.delete');
         Route::get('/list-ajax', 'list_for_select')->name('purchases.list_for_select');
+    });
+    Route::controller(QuotationController::class)->prefix('quotations')->group(function () {
+        Route::get('/index', 'index')->name('quotations.index');
+        Route::get('/create', 'create')->name('quotations.create');
+        Route::post('/store', 'store')->name('quotations.store');
+        Route::get('/edit/{id}', 'edit')->name('quotations.edit');
+        Route::get('/show/{id}', 'show')->name('quotations.show');
+        Route::get('/print/{id}', 'print')->name('quotations.print');
+        Route::post('/update/{id}', 'update')->name('quotations.update');
+        Route::post('/delete', 'destroy')->name('quotations.delete');
+        Route::get('/list-ajax', 'list_for_select')->name('quotations.list_for_select');
     });
 
 

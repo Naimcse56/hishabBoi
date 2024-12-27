@@ -16,6 +16,16 @@
                 <a class="nav-link @if (Route::is('products-unit.*')) active @endif" href="{{route('products-unit.index')}}">Product Unit</a>
             </nav>
         </div>
+        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#QuotationMenu" aria-expanded="false" aria-controls="QuotationMenu">
+            Quotations
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="QuotationMenu" aria-labelledby="headingOne" data-bs-parent="#sideNavProducts">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link @if (Route::is('quotations.create')) active @endif" href="{{route('quotations.create')}}">New Quotation</a>
+                <a class="nav-link @if (Route::is('quotations.*') && !Route::is('quotations.create')) active @endif" href="{{route('quotations.index')}}">Quotation List</a>
+            </nav>
+        </div>
         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#SalesMenu" aria-expanded="false" aria-controls="SalesMenu">
             Sales
             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

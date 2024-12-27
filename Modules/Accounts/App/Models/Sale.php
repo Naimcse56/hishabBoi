@@ -58,6 +58,11 @@ class Sale extends Model
         return $this->hasMany(SaleDetail::class);
     }
 
+    public function quotation()
+    {
+        return $this->belongsTo(Quotation::class)->withDefault();
+    }
+
     public function sub_ledger()
     {
         return $this->belongsTo(SubLedger::class, "sub_ledger_id", "id")->withDefault();
