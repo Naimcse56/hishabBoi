@@ -25,7 +25,7 @@ class DayCloseSeeder extends Seeder
           ),
           1 => array(
             'name' => 'inc_st_second_section',
-            'value' => '93',
+            'value' => '16',
           ),
           2 => array(
             'name' => 'inc_st_third_section',
