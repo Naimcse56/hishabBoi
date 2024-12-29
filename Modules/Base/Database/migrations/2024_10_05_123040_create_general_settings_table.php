@@ -66,11 +66,11 @@ return new class extends Migration
             ),
             11 => array(
                'name' => 'purchase_terms_condition',
-               'value' => null,
+               'value' => "<p>No Term and Condition Applied</p>",
             ),
             12 => array(
                'name' => 'sale_terms_condition',
-               'value' => null,
+               'value' => "<p>No Term and Condition Applied After 10 Days</p>",
             ),
             13 => array(
                'name' => 'purchase_discount_ledger',
