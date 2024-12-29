@@ -65,7 +65,7 @@
                                 <tr>
                                     <td class="text-center">{{$key+1}}</td>
                                     <td class="col-4">{{$item->product->name}}</td>
-                                    <td class="text-center">{{$item->quantity}}</td>
+                                    <td class="text-center">{{$item->quantity}} <small>{{$item->product->product_unit->name}}</small></td>
                                     <td class="text-center">{{$item->tax}}</td>
                                     <td class="text-center">{{$item->discount}}</td>
                                     <td class="text-end nowrap">{{currencySymbol($item->per_price)}}</td>
