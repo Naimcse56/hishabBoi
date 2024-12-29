@@ -126,6 +126,21 @@ class SaleRepository extends BaseRepository
         return 'S#'.date('Y').sprintf('%05d', $invoice_id);
     }
 
+    public function deleteData($id)
+    {
+        $sale = $this->model::find($id);
+        if ($sale->is_approved != 'Approved') {
+            $sale->sale_details()->delete();
+            $sale->morphs()->delete();
+            foreach ($sale->refers as $key => $voucher) {
+                $voucher->transactions()->delete();
+                $voucher->delete();
+            }
+            return true;
+        }
+        return true;
+    }
+
     public function listForSelect($search, $filter_for = null)
     {
         $items = $this->model::query();
@@ -135,7 +150,7 @@ class SaleRepository extends BaseRepository
         if ($filter_for == "recieve") {
             $items = $items->where('payment_status','!=' , 'Paid');
         }
-        $items = $items->paginate(10);
+        $items = $items->where('is_approved','Approved')->paginate(10);
         $response = [];
         foreach($items as $item){
             if ($filter_for == "recieve") {

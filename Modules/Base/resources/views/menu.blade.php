@@ -8,6 +8,6 @@
         <a class="nav-link @if (Route::is('company_settings.configurations')) active @endif" href="{{ route('company_settings.configurations') }}">Company Settings</a>
         <a class="nav-link @if (Route::is('currencies.*')) active @endif" href="{{ route('currencies.index') }}">Currency</a>
         <a class="nav-link @if (Route::is('email_settings.configurations')) active @endif" href="{{ route('email_settings.configurations') }}">Email Setup</a>
-        <a class="nav-link @if (Route::is('terms_condition.configurations')) active @endif" href="{{ route('terms_condition.configurations') }}">Terms & Conditions</a>
+        <a class="nav-link @if (Route::is('sales_purchase.configurations')) active @endif" href="{{ route('sales_purchase.configurations') }}">Sales & Purchase</a>
     </nav>
 </div>

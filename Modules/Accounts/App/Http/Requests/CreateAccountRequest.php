@@ -14,6 +14,8 @@ class CreateAccountRequest extends FormRequest
     {
         return [
             "name" => "required",
+            "level" => "required",
+            "type" => "required",
             "code" => ['required', 'max:50', 'unique:ledgers'],
             "parent_id" => "required|gt:0",
             "is_active" => "required|in:0,1",
@@ -39,7 +41,7 @@ class CreateAccountRequest extends FormRequest
     {
         return [
             'acc_type.in' => 'The Account Type must be one of the following types: :values',
-            'acc_type.in' => 'The Account Type must be one of the following types: :values',
+            'is_active.in' => 'The Status must be one of the following types: :values',
         ];
     }
 

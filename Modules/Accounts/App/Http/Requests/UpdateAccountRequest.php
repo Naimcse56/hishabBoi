@@ -15,6 +15,8 @@ class UpdateAccountRequest extends FormRequest
         // $v_id = decrypt($this->id);
         return [
             "name" => "required",
+            "level" => "required",
+            "type" => "required",
             "code" => ['required', 'max:50', 'unique:ledgers,code,'.decrypt($this->id)],
             "parent_id" => "required|gt:0",
             "is_active" => "nullable|in:0,1",

@@ -22,7 +22,7 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
         Route::get('/email-settings', 'email_settings')->name('email_settings.configurations');
         Route::post('/settings-update', 'env_settings_update')->name('env_settings_update');
         Route::post('/test-mail-send', 'test_mail_send')->name('test_mail_send');
-        Route::get('/terms-condition', 'terms_condition')->name('terms_condition.configurations');
+        Route::get('/sales-purchase-configuration', 'sales_purchase')->name('sales_purchase.configurations');
     });
     Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
         Route::get('/index', 'index')->name('currencies.index');

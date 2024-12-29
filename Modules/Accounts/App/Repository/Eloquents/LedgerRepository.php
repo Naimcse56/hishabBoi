@@ -117,6 +117,15 @@ class LedgerRepository extends BaseRepository implements LedgerRepositoryInterfa
             if ($id) {
                 $existLedger = $this->model::find($id);
                 if ($existLedger->type == $type) {
+                    $checkCode = $this->model::where("code", $code)->first();
+                    if ($checkCode) {
+                        $pos = 0;
+                        $begin = substr($checkCode->code, 0, $pos+1);
+                        $end = substr($checkCode->code, $pos+1);
+
+                        $code = $begin.(int)$end + 1;
+                        return $code;
+                    }
                     return $existLedger->code;
                 }
             }

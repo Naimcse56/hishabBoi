@@ -72,6 +72,14 @@ return new class extends Migration
                'name' => 'sale_terms_condition',
                'value' => null,
             ),
+            13 => array(
+               'name' => 'purchase_discount_ledger',
+               'value' => 52,
+            ),
+            14 => array(
+               'name' => 'sales_discount_ledger',
+               'value' => 25,
+            ),
         ));
     }
 

@@ -132,7 +132,7 @@ class QuotationController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->quotationRepository->deleteById($request->id,null,['quotation_details','refers']);
+            $response = $this->quotationRepository->deleteById($request->id,null,['quotation_details']);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);

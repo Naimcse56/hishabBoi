@@ -279,7 +279,7 @@ class LedgerSeeder extends Seeder
             'view_in_is' => 0,
          ),
          24 => array(
-            'name' => 'Sales from Construction Contract',
+            'name' => 'Discount on Sales',
             'code' => 'I4002',
             'type' => 4,
             'parent_id' => 24,
@@ -313,7 +313,7 @@ class LedgerSeeder extends Seeder
          ),
          27 => array(
             'name' => 'Financial Expenses',
-            'code' => 'E3046',
+            'code' => 'E3009',
             'type' => 3,
             'parent_id' => 16,
             'level' => 2,
@@ -368,7 +368,7 @@ class LedgerSeeder extends Seeder
          ),
          32 => array(
             'name' => 'Conveyance Bill',
-            'code' => 'E3047',
+            'code' => 'E3010',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -379,7 +379,7 @@ class LedgerSeeder extends Seeder
          ),
          33 => array(
             'name' => 'Printing and Stationary',
-            'code' => 'E3048',
+            'code' => 'E3011',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -390,7 +390,7 @@ class LedgerSeeder extends Seeder
          ),
          34 => array(
             'name' => 'Allowance',
-            'code' => 'E3049',
+            'code' => 'E3012',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -401,7 +401,7 @@ class LedgerSeeder extends Seeder
          ),
          35 => array(
             'name' => 'Office Rent',
-            'code' => 'E3050',
+            'code' => 'E3013',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -423,7 +423,7 @@ class LedgerSeeder extends Seeder
          ),
          37 => array(
             'name' => 'Entertainment bill',
-            'code' => 'E3052',
+            'code' => 'E3014',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -434,7 +434,7 @@ class LedgerSeeder extends Seeder
          ),
          38 => array(
             'name' => 'Medical and Treatment',
-            'code' => 'E3053',
+            'code' => 'E3015',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -445,7 +445,7 @@ class LedgerSeeder extends Seeder
          ),
          39 => array(
             'name' => 'Electricity Bill',
-            'code' => 'E3054',
+            'code' => 'E3016',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -456,7 +456,7 @@ class LedgerSeeder extends Seeder
          ),
          40 => array(
             'name' => 'Wasa Bill',
-            'code' => 'E3055',
+            'code' => 'E3017',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -467,7 +467,7 @@ class LedgerSeeder extends Seeder
          ),
          41 => array(
             'name' => 'Electrical and Computer Accessories',
-            'code' => 'E3056',
+            'code' => 'E3018',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -478,7 +478,7 @@ class LedgerSeeder extends Seeder
          ),
          42 => array(
             'name' => 'Office Maintenance',
-            'code' => 'E3057',
+            'code' => 'E3019',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -489,7 +489,7 @@ class LedgerSeeder extends Seeder
          ),
          43 => array(
             'name' => 'Repair and Maintenance',
-            'code' => 'E3058',
+            'code' => 'E3020',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -500,7 +500,7 @@ class LedgerSeeder extends Seeder
          ),
          44 => array(
             'name' => 'Car & Vehicles Maintenace',
-            'code' => 'E3059',
+            'code' => 'E3021',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -511,7 +511,7 @@ class LedgerSeeder extends Seeder
          ),
          45 => array(
             'name' => 'Postage & Courier',
-            'code' => 'E3060',
+            'code' => 'E3022',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -522,7 +522,7 @@ class LedgerSeeder extends Seeder
          ),
          46 => array(
             'name' => 'Telephone & Mobile Bill',
-            'code' => 'E3061',
+            'code' => 'E3023',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -533,7 +533,7 @@ class LedgerSeeder extends Seeder
          ),
          47 => array(
             'name' => 'Tours & Travel Expense',
-            'code' => 'E3062',
+            'code' => 'E3024',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -544,7 +544,7 @@ class LedgerSeeder extends Seeder
          ),
          48 => array(
             'name' => 'Internet Bill',
-            'code' => 'E3063',
+            'code' => 'E3025',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -555,7 +555,7 @@ class LedgerSeeder extends Seeder
          ),
          49 => array(
             'name' => 'Audit Fee',
-            'code' => 'E3064',
+            'code' => 'E3026',
             'type' => 3,
             'parent_id' => 19,
             'level' => 3,
@@ -566,9 +566,20 @@ class LedgerSeeder extends Seeder
          ),
          50 => array(
             'name' => 'Business Promotion Expenses',
-            'code' => 'E3065',
+            'code' => 'E3027',
             'type' => 3,
             'parent_id' => 19,
+            'level' => 3,
+            'is_active' => 1,
+            'acc_type' => 'others',
+            'view_in_bs' => 0,
+            'view_in_is' => 0,
+         ),
+         51 => array(
+            'name' => 'Purchase Discount',
+            'code' => 'E3028',
+            'type' => 3,
+            'parent_id' => 17,
             'level' => 3,
             'is_active' => 1,
             'acc_type' => 'others',

@@ -121,6 +121,21 @@ class PurchaseRepository extends BaseRepository
         return $purchase_order;
     }
 
+    public function deleteData($id)
+    {
+        $purchase_order = $this->model::find($id);
+        if ($purchase_order->is_approved != 'Approved') {
+            $purchase_order->purchase_order_details()->delete();
+            $purchase_order->morphs()->delete();
+            foreach ($purchase_order->refers as $key => $voucher) {
+                $voucher->transactions()->delete();
+                $voucher->delete();
+            }
+            return true;
+        }
+        return true;
+    }
+
     public function invoiceNo()
     {
         $invoice = $this->model::orderBy('id','desc')->first();
@@ -137,7 +152,7 @@ class PurchaseRepository extends BaseRepository
         if ($filter_for == "payment") {
             $items = $items->where('payment_status','!=' , 'Paid');
         }
-        $items = $items->paginate(10);
+        $items = $items->where('is_approved','Approved')->paginate(10);
         $response = [];
         foreach($items as $item){
             if ($filter_for == "payment") {

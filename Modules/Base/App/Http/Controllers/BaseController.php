@@ -5,6 +5,7 @@ namespace Modules\Base\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Modules\Base\App\Models\GeneralSetting;
+use Modules\Accounts\App\Models\AccountConfiguration;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Mail\EmailManager;
@@ -25,9 +26,10 @@ class BaseController extends Controller
         return view('base::configurations.email_settings');
     }
     
-    public function terms_condition()
-    {
-        return view('base::configurations.terms_condition');
+    public function sales_purchase()
+    {        
+        $data['settings'] = GeneralSetting::get();
+        return view('base::configurations.sales_purchase_config', $data);
     }
 
     public function base_settings_update(Request $request)

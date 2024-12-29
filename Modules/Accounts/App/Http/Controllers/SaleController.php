@@ -135,7 +135,7 @@ class SaleController extends Controller
     {
         try {
             DB::beginTransaction();
-            $response = $this->saleRepository->deleteById($request->id,null,['sale_details','morphs','refers']);
+            $response = $this->saleRepository->deleteData($request->id);
             DB::commit();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
@@ -166,6 +166,13 @@ class SaleController extends Controller
                 $credit_work_order_site_detail_id[] = $sale->work_order_site_id;
                 $credit_narration[] = $sold_product->product->name.' sold in '.$sale->invoice_no;
             }
+            $debit_amounts[] = $sale->discount_amount;
+            $debit_account_id[] = app('general_setting')['sales_discount_ledger'];
+            $debit_partner_id[] = 0;
+            $debit_work_order_id[] = $sale->work_order_id;
+            $debit_work_order_site_detail_id[] = $sale->work_order_site_id;
+            $debit_narration[] = $sale->invoice_no;
+
             $debit_amounts[] = $sale->payable_amount;
             $debit_account_id[] = $sale->sub_ledger->ledger_id;
             $debit_partner_id[] = $sale->sub_ledger_id;

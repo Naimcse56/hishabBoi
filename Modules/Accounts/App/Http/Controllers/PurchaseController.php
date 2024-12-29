@@ -132,7 +132,7 @@ class PurchaseController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->purchaseRepository->deleteById($request->id,null,['purchase_details']);
+            $response = $this->purchaseRepository->deleteData($request->id);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
