@@ -121,9 +121,9 @@ class SaleRepository extends BaseRepository
 
     public function invoiceNo()
     {
-        $po = $this->model::orderBy('id','desc')->first();
-        $po_id = $po ? $po->id+1 : 1;
-        return 'S#'.date('Y').sprintf('%05d', $po_id);
+        $invoice = $this->model::orderBy('id','desc')->first();
+        $invoice_id = $invoice ? $invoice->id+1 : 1;
+        return 'S#'.date('Y').sprintf('%05d', $invoice_id);
     }
 
     public function listForSelect($search, $filter_for = null)
@@ -157,5 +157,12 @@ class SaleRepository extends BaseRepository
             $data['pagination'] =  ["more" => true];
         }
         return $data;
+    }
+
+    public function statusApproval($id, $status)
+    {
+        $sale = $this->findById($id,['*'],['sale_details','sale_details.product:id,name,selling_ledger_id']);
+        $sale->update(['is_approved' => $status]);
+        return $sale;
     }
 }

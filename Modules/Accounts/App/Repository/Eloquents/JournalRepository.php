@@ -49,7 +49,6 @@ class JournalRepository implements JournalRepositoryInterface
         }else{
             $txn_num = 100001;
         }
-
         $Voucher = Voucher::create([
             'amount' => $data['amount'],
             'date' => $data['date'],

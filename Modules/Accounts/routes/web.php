@@ -240,6 +240,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/print/{id}', 'print')->name('sales.print');
         Route::post('/update/{id}', 'update')->name('sales.update');
         Route::post('/delete', 'destroy')->name('sales.delete');
+        Route::post('/approval-status-approve', 'approve_status')->name('sales.approve_status');
         Route::get('/list-ajax', 'list_for_select')->name('sales.list_for_select');
     });
     Route::controller(PurchaseController::class)->prefix('purchase')->group(function () {

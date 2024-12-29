@@ -123,9 +123,9 @@ class PurchaseRepository extends BaseRepository
 
     public function invoiceNo()
     {
-        $po = $this->model::orderBy('id','desc')->first();
-        $po_id = $po ? $po->id+1 : 1;
-        return 'PO#'.date('Y').sprintf('%05d', $po_id);
+        $invoice = $this->model::orderBy('id','desc')->first();
+        $invoice_id = $invoice ? $invoice->id+1 : 1;
+        return 'PO#'.date('Y').sprintf('%05d', $invoice_id);
     }
 
     public function listForSelect($search, $filter_for = null)

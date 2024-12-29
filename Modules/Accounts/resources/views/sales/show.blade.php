@@ -9,6 +9,11 @@ Sale Details
         <div>
             <a href="{{route('sales.print',encrypt($sale->id))}}" class="btn btn-sm btn-secondary mt-4"><i class="fa fa-print"></i> Print & Download</a>
             <a href="{{route('sales.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-list"></i> List</a>
+            @if ($sale->is_approved != "Approved")
+                <button type="button" onclick="approveData('Sale Approval', '{{ route('sales.approve_status') }}', {{ $sale->id }})" class="btn btn-sm btn-success mt-4">
+                    <i class="fa fa-thumbs-up"></i> APPROVE
+                </button>
+            @endif
         </div>
     </div>
     <div class="row">
