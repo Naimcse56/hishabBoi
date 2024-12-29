@@ -22,11 +22,8 @@ return new class extends Migration
             $table->double('payable_amount', 28,2)->default(0)->index();
             $table->double('discount_amount', 28,2)->default(0);
             $table->double('discount_percentage', 8,2)->default(0);
-            $table->enum('payment_method', ['Cash', 'Bank', 'Due', 'Online']);
-            $table->enum('payment_status', ['Paid', 'Partial', 'Due']);
             $table->text('note')->nullable();
             $table->text('terms_condition')->nullable();
-            $table->unsignedBigInteger("credit_period")->nullable(0)->comment('in days');
             $table->enum('is_approved', ['Pending', 'Approved', 'Rejected']);
             $table->enum('is_convert_to_sale', ['Pending', 'Converted', 'Rejected']);
             $table->foreignId("approved_by")->nullable();

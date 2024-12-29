@@ -18,7 +18,7 @@ Work Order Site
                                 <x-common.server-side-select :required="true" column=4 name="work_order_id" id="work_order_id" class="work_order_id" disableOptionText="Select Work Order" label="Work Order Name"></x-common.server-side-select>
                                 <x-common.input :required="true" column=4 id="site_name" name="site_name" label="Site Name" placeholder="Site Name" :value="old('site_name')"></x-common.input>
                                 <x-common.input :required="false" column=4 id="site_location" name="site_location" label="Site Location" placeholder="Site Location" :value="old('site_location')"></x-common.input>
-                                <x-common.input :required="false" column=4 id="est_budget" name="est_budget" label="Est. Budget" placeholder="Est. Budget" type="number" step="0.01" min="0" :value="old('est_budget')"></x-common.input>
+                                <x-common.input :required="false" column=4 id="est_budget" name="est_budget" label="Est. Budget" placeholder="Est. Budget" type="number" step="0.01" min="0" :value="old('est_budget',0)"></x-common.input>
                                 <x-common.input :required="false" column=4 id="site_pm_name" name="site_pm_name" label="Site Manager" placeholder="Site Manager" :value="old('site_pm_name')"></x-common.input>
                                 <x-common.text-area :required="false" column=12 name="note" label="Remarks" placeholder="Remarks..."></x-common.text-area>
                             </div>

@@ -36,12 +36,12 @@ Chart of Accounts
                                 <fieldset class="the-fieldset mt-2">
                                     <legend class="the-legend">Bank Information</legend>
                                     <div class="row">
-                                        <x-common.input :required="true" column=4 id="bank_ac_name" name="bank_ac_name" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_ac_name', $ledger->bank_ac_name)"></x-common.input>
-                                        <x-common.input :required="true" column=4 id="ac_no" name="ac_no" label="Bank Account No" placeholder="Bank Account No" :value="old('ac_no', $ledger->ac_no)"></x-common.input>
-                                        <x-common.input :required="true" column=4 id="routing_no" name="routing_no" label="Routing No" placeholder="Routing No" :value="old('routing_no', $ledger->routing_no)"></x-common.input>
-                                        <x-common.input :required="true" column=4 id="swift_code" name="swift_code" label="Swift Code" placeholder="Swift Code" :value="old('swift_code', $ledger->swift_code)"></x-common.input>
-                                        <x-common.input :required="true" column=4 id="branch_code" name="branch_code" label="Branch Code" placeholder="Branch Code" :value="old('branch_code', $ledger->branch_code)"></x-common.input>
-                                        <x-common.input :required="true" column=4 id="bank_address" name="bank_address" label="Bank Address" placeholder="Bank Address" :value="old('bank_address', $ledger->bank_address)"></x-common.input>
+                                        <x-common.input :required="false" column=4 id="bank_ac_name" name="bank_ac_name" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_ac_name', $ledger->bank_ac_name)"></x-common.input>
+                                        <x-common.input :required="false" column=4 id="ac_no" name="ac_no" label="Bank Account No" placeholder="Bank Account No" :value="old('ac_no', $ledger->ac_no)"></x-common.input>
+                                        <x-common.input :required="false" column=4 id="routing_no" name="routing_no" label="Routing No" placeholder="Routing No" :value="old('routing_no', $ledger->routing_no)"></x-common.input>
+                                        <x-common.input :required="false" column=4 id="swift_code" name="swift_code" label="Swift Code" placeholder="Swift Code" :value="old('swift_code', $ledger->swift_code)"></x-common.input>
+                                        <x-common.input :required="false" column=4 id="branch_code" name="branch_code" label="Branch Code" placeholder="Branch Code" :value="old('branch_code', $ledger->branch_code)"></x-common.input>
+                                        <x-common.input :required="false" column=4 id="bank_address" name="bank_address" label="Bank Address" placeholder="Bank Address" :value="old('bank_address', $ledger->bank_address)"></x-common.input>
                                     </div>
                                 </fieldset>
                             </div>

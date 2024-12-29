@@ -50,7 +50,8 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        return view('accounts::purchases.create_view');
+        $data['invoice_no'] = $this->purchaseRepository->invoiceNo();
+        return view('accounts::purchases.create_view',$data);
     }
 
     /**
@@ -62,7 +63,7 @@ class PurchaseController extends Controller
             DB::beginTransaction();
             $item = $this->purchaseRepository->createData($request->except('_token'));
             DB::commit();
-            return redirect()->route('purchases.print',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
+            return redirect()->route('purchases.show',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());

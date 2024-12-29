@@ -50,7 +50,8 @@ class SaleController extends Controller
      */
     public function create()
     {
-        return view('accounts::sales.create_view');
+        $data['invoice_no'] = $this->saleRepository->invoiceNo();
+        return view('accounts::sales.create_view', $data);
     }
 
     /**
@@ -62,7 +63,7 @@ class SaleController extends Controller
             DB::beginTransaction();
             $item = $this->saleRepository->createData($request->except('_token'));
             DB::commit();
-            return redirect()->route('sales.print',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
+            return redirect()->route('sales.show',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());

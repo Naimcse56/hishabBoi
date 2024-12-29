@@ -78,7 +78,6 @@
             </tr>
             <tr class="bg-light fw-semibold">
                 <td class="col-7 py-1">
-                    <span class="fw-semibold">Paid Amount:</span> <i>{{currencySymbol($quotation->morphs()->sum('amount'))}}</i>
                 </td>
                 <td class="col-5 py-1 pe-1">Sub Total: <span class="float-end">{{currencySymbol($quotation->total_amount)}}</span></td>
             </tr>
@@ -107,7 +106,7 @@
         </tbody>
     </table>
     <footer class="text-center mt-4">
-      <div class="btn-group btn-group-sm d-print-none"> <a href="{{route('sales.index')}}" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-list"></i> Back To List</a> </div>
+      <div class="btn-group btn-group-sm d-print-none"> <a href="{{route('quotations.index')}}" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-list"></i> Back To List</a> </div>
       <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-print"></i> Print & Download</a> </div>
     </footer>
 </div>

@@ -89,7 +89,7 @@ Quotation Details
                             </tr>
                             <tr class="bg-light fw-semibold">
                                 <td class="col-7 py-1">
-                                    <span class="fw-semibold">Paid Amount:</span> <i>{{currencySymbol($quotation->morphs()->sum('amount'))}}</i>
+                                    
                                 </td>
                                 <td class="col-5 py-1 pe-1">Sub Total: <span class="float-end">{{currencySymbol($quotation->total_amount)}}</span></td>
                             </tr>

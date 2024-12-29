@@ -17,7 +17,7 @@ New Quotation
                         <div class="row mb-2">
                             <x-common.server-side-select :required="true" column=4 name="sub_ledger_id" id="sub_ledger_id" class="sub_ledger_id" disableOptionText="Select One" label="Client"></x-common.server-side-select>
                             <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
-                            <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="old('invoice_no')"></x-common.input>
+                            <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="old('invoice_no', $invoice_no)"></x-common.input>
                             <x-common.input :required="false" column=4 id="ref_no" name="ref_no" label="Reference No" placeholder="Reference No" :value="old('ref_no')"></x-common.input>
                             <x-common.input :required="true" column=4 id="phone" name="phone" label="Phone No" placeholder="Phone No" :value="old('phone')"></x-common.input>
                             <x-common.server-side-select :required="true" column=12 name="product_select_id" id="product_select_id" class="product_select_id" disableOptionText="Select Product" label="Product"></x-common.server-side-select>

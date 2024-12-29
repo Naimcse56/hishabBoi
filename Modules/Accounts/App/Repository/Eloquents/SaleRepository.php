@@ -30,7 +30,6 @@ class SaleRepository extends BaseRepository
             'payable_amount' => $data['net_amount'],
             'discount_percentage' => $data['discount_amount'],
             'discount_amount' => $data['total_amount'] * $data['discount_amount'] / 100,
-            'note' => $data['note'],
             'credit_period' => $data['credit_period'],
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
@@ -80,7 +79,6 @@ class SaleRepository extends BaseRepository
             'payable_amount' => $data['net_amount'],
             'discount_percentage' => $data['discount_amount'],
             'discount_amount' => $data['total_amount'] * $data['discount_amount'] / 100,
-            'note' => $data['note'],
             'credit_period' => $data['credit_period'],
             'payment_method' => $data['payment_method'],
             'payment_status' => $data['payment_status'],
@@ -119,6 +117,13 @@ class SaleRepository extends BaseRepository
             ]);
         }
         return $sale;
+    }
+
+    public function invoiceNo()
+    {
+        $po = $this->model::orderBy('id','desc')->first();
+        $po_id = $po ? $po->id+1 : 1;
+        return 'S#'.date('Y').sprintf('%05d', $po_id);
     }
 
     public function listForSelect($search, $filter_for = null)

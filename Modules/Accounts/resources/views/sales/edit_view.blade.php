@@ -75,7 +75,7 @@ Sale
                                             ['id' => 'Partial', 'name' => 'Partial']
                                         ]"></x-common.radio>
                                         
-                                        <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period" placeholder="Credit Period" :value="$sale->credit_period"></x-common.input>
+                                        <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period (in days)" placeholder="Credit Period" :value="$sale->credit_period"></x-common.input>
                                         <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="$sale->latestPaymentInfo('asc') ? $sale->latestPaymentInfo('asc')->amount : 0"></x-common.input>
                                         @if ($sale->latestPaymentInfo('asc'))                                            
                                             <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment Recieve Account" :value="$sale->latestPaymentInfo('asc')->ledger_id" :options="[

@@ -30,15 +30,11 @@ class QuotationRepository extends BaseRepository
             'discount_percentage' => $data['discount_amount'],
             'discount_amount' => $data['total_amount'] * $data['discount_amount'] / 100,
             'note' => $data['note'],
-            'credit_period' => $data['credit_period'],
-            'payment_method' => $data['payment_method'],
-            'payment_status' => $data['payment_status'],
-            'note' => $data['note'],
             'terms_condition' => $data['terms_condition'],
         ]);
         foreach ($data['qty'] as $key => $item) {
             QuotationDetail::create([
-                'sale_id' => $sale->id,
+                'quotation_id' => $sale->id,
                 'product_id' => $data['product_id'][$key],
                 'quantity' => $data['qty'][$key],
                 'tax' => floatval($data['sale_price_tax'][$key]),
@@ -63,16 +59,12 @@ class QuotationRepository extends BaseRepository
             'discount_percentage' => $data['discount_amount'],
             'discount_amount' => $data['total_amount'] * $data['discount_amount'] / 100,
             'note' => $data['note'],
-            'credit_period' => $data['credit_period'],
-            'payment_method' => $data['payment_method'],
-            'payment_status' => $data['payment_status'],
-            'note' => $data['note'],
             'terms_condition' => $data['terms_condition'],
         ]);
         $sale->quotation_details()->delete();
         foreach ($data['qty'] as $key => $item) {
             QuotationDetail::create([
-                'sale_id' => $sale->id,
+                'quotation_id' => $sale->id,
                 'product_id' => $data['product_id'][$key],
                 'quantity' => $data['qty'][$key],
                 'tax' => floatval($data['sale_price_tax'][$key]),
@@ -81,6 +73,13 @@ class QuotationRepository extends BaseRepository
             ]);
         }
         return $sale;
+    }
+
+    public function invoiceNo()
+    {
+        $po = $this->model::orderBy('id','desc')->first();
+        $po_id = $po ? $po->id+1 : 1;
+        return 'QTN#'.date('Y').sprintf('%05d', $po_id);
     }
 
     public function listForSelect($search, $filter_for = null)

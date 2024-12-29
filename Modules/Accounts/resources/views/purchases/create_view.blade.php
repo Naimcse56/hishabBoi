@@ -17,7 +17,7 @@ New Purchase
                         <div class="row mb-2">
                             <x-common.server-side-select :required="true" column=4 name="sub_ledger_id" id="sub_ledger_id" class="sub_ledger_id" disableOptionText="Select One" label="Vendor"></x-common.server-side-select>
                             <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
-                            <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="old('invoice_no')"></x-common.input>
+                            <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="old('invoice_no', $invoice_no)"></x-common.input>
                             <x-common.input :required="false" column=4 id="ref_no" name="ref_no" label="Reference No" placeholder="Reference No" :value="old('ref_no')"></x-common.input>
                             <x-common.input :required="true" column=4 id="phone" name="phone" label="Phone No" placeholder="Phone No" :value="old('phone')"></x-common.input>
                             <x-common.server-side-select :required="false" column=4 name="work_order_id" class="work_order_id" disableOptionText="Select Work Order" label="Work Order"></x-common.server-side-select>
@@ -54,7 +54,7 @@ New Purchase
                                             ['id' => 'Partial', 'name' => 'Partial']
                                         ]"></x-common.radio>
                                         
-                                        <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period" placeholder="Credit Period" :value="old('credit_period', 0)"></x-common.input>
+                                        <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period (in days)" placeholder="Credit Period" :value="old('credit_period', 0)"></x-common.input>
                                         <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="old('payment_amount', 0)"></x-common.input>
                                         <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment From Account"></x-common.server-side-select>
                                         <x-common.input :required="false" column=6 id="bank_name" name="bank_name" label="Bank Name" placeholder="Bank Name" :value="old('bank_name')"></x-common.input>

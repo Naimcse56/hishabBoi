@@ -50,7 +50,8 @@ class QuotationController extends Controller
      */
     public function create()
     {
-        return view('accounts::quotations.create_view');
+        $data['invoice_no'] = $this->quotationRepository->invoiceNo();
+        return view('accounts::quotations.create_view',$data);
     }
 
     /**
@@ -62,7 +63,7 @@ class QuotationController extends Controller
             DB::beginTransaction();
             $item = $this->quotationRepository->createData($request->except('_token'));
             DB::commit();
-            return redirect()->route('quotations.print',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
+            return redirect()->route('quotations.show',encrypt($item->id))->with('success', $item->invoice_no.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', $e->getMessage());
@@ -75,7 +76,7 @@ class QuotationController extends Controller
     public function show($id)
     {
         try {
-            $data['sale'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            $data['quotation'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','quotation_details']);
             return view('accounts::quotations.show', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -88,7 +89,7 @@ class QuotationController extends Controller
     public function print($id)
     {
         try {
-            $data['sale'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            $data['quotation'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','quotation_details']);
             return view('accounts::quotations.print', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -101,7 +102,7 @@ class QuotationController extends Controller
     public function edit($id)
     {
         try {
-            $data['sale'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
+            $data['quotation'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','quotation_details']);
             return view('accounts::quotations.edit_view', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
@@ -131,7 +132,7 @@ class QuotationController extends Controller
     public function destroy(Request $request)
     {
         try {
-            $response = $this->quotationRepository->deleteById($request->id,null,['sale_details','morphs','refers']);
+            $response = $this->quotationRepository->deleteById($request->id,null,['quotation_details','refers']);
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()]);
