@@ -73,7 +73,7 @@ class JournalRepository implements JournalRepositoryInterface
             'pay_or_rcv_type' => (!empty($data['pay_or_rcv_type'])) ? $data['pay_or_rcv_type'] : null,
             'attachment' => (!empty($data['attachment'])) ? $data['attachment'] : null,
         ]);
-        if (!empty($data['referable_type'])) {
+        if (!empty($data['referable_type']) && $data['is_manual_entry'] == 1) {
             $payment = Payment::create([
                 'date' => $data['date'],
                 'morphable_type' => $data['referable_type'],
@@ -105,7 +105,7 @@ class JournalRepository implements JournalRepositoryInterface
                 'check_mature_date' => $transaction['check_mature_date'],
                 'bank_account_name' => $transaction['bank_account_name'],
                 'credit_period' => $transaction['credit_period'],
-                'payment_id' => !empty($data['referable_type']) ? $payment->id : 0,
+                'payment_id' => !empty($data['referable_type']) && isset($payment) ? $payment->id : 0,
             ]);
         }
         $Voucher->update(['txn_id' => $txn_num]);

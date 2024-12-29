@@ -233,6 +233,7 @@ class SaleController extends Controller
                 $debit_bank_ac_name[] = $payment->bank_account_name;
                 $debit_check_no[] = $payment->check_no;
                 $debit_check_mature_date[] = $payment->check_mature_date;
+                $payment->update(['is_approve' => 1]);
             }
             
             $credit_amounts[] = $sale->payable_amount;
@@ -273,7 +274,9 @@ class SaleController extends Controller
                 'is_approve' => 1,
                 'attachment' => null
             ]);
-            dd($sale->refers);
+            if ($sale->morphs->where('is_approve', 1)->sum('amount') == $sale->payable_amount) {
+                $sale->update(['payment_status' => 'Paid']);
+            }
             DB::commit();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {

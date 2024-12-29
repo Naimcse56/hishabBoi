@@ -20,7 +20,7 @@ Sale Details
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-bordered border border-secondary mb-0">
+                    <table class="table table-bordered border border-secondary mb-2">
                         <tbody>
                             <tr>
                             <td colspan="2" class="bg-light text-center"><h3 class="mb-0">{{ app('general_setting')['company_name'] }}</h3></td>
@@ -122,6 +122,69 @@ Sale Details
                             </tr>
                         </tbody>
                     </table>
+                    @foreach ($sale->refers as $voucher)
+                        @php
+                            $total_debit = 0;
+                            $total_credit = 0;
+                        @endphp
+                        <table class="table table-bordered border border-secondary mb-2">
+                            <thead>
+                                <tr>
+                                    <td colspan="4"><strong>Details : {{$voucher->TypeName}}</strong></td>
+                                </tr>
+                                <tr class="bg-light">
+                                    <td><strong>Ledger</strong></td>
+                                    <td><strong>Party</strong></td>
+                                    <td class="col-2 text-end"><strong>Debit</strong></td>
+                                    <td class="col-2 text-end"><strong>Credit</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($voucher->transactions as $item)
+                                    @php
+                                        if ($item->type == "Dr") {
+                                            $total_debit += $item->amount;
+                                        } else {
+                                            $total_credit += $item->amount;
+                                        }
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $item->ledger->name }} ({{ $item->ledger->code }})</a></td>
+                                        <td>
+                                            {{ $item->sub_ledger->name }}
+                                            @if ($item->work_order_id)
+                                            <p class="mb-0 font-13">Client : {{ $item->work_order->sub_ledger->name }}</p>
+                                            <p class="mb-0 font-13">Work Order : {{ $item->work_order->order_name }}</p>
+                                            <p class="mb-0 font-13">Work Order No : {{ $item->work_order->order_no }}</p>
+                                            <p class="mb-0 font-13">Work Order Site : {{ $item->work_order_site_detail->site_name }}</p>
+                                            @endif
+                                            @if ($item->check_no || $item->bank_name || $item->bank_account_name)
+                                                <p class="mb-0 font-13">Bank Name : {{$item->bank_name}}</p>
+                                                <p class="mb-0 font-13">Bank Account Name : {{$item->bank_account_name}}</p>
+                                                <p class="mb-0 font-13">Cheque No : {{$item->check_no}}</p>
+                                                <p class="mb-0 font-13">Cheque Maturity Date : {{$item->check_mature_date}}</p>
+                                            @endif
+                                        </td>
+                                        <td class="nowrap text-end">
+                                            {{ ($item->type == "Dr") ? number_format($item->amount, 2) : "" }}
+                                        </td>
+                                        <td class="nowrap text-end">
+                                            {{ ($item->type == "Cr") ? number_format($item->amount, 2) : "" }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="2">Total Amount</td>
+                                    <td class="nowrap text-end" id="total_debit"> {{ number_format($total_debit, 2) }}</td>
+                                    <td class="nowrap text-end" id="total_credit"> {{ number_format($total_credit, 2) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Taka In&nbsp;Words:&nbsp;</td>
+                                    <td colspan="3">{{convert_number($voucher->amount)}}          &nbsp;Only</td>
+                                </tr>
+                            </tbody>
+                        </table>                        
+                    @endforeach
                 </div>
             </div>
         </div>
