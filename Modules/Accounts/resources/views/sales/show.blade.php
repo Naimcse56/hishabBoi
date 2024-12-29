@@ -68,7 +68,7 @@ Sale Details
                                         <thead>
                                             <tr class="bg-light">
                                                 <td class="text-center" width="3%"><strong>#</strong></td>
-                                                <td class="col-6"><strong>Product</strong></td>
+                                                <td class="col-4"><strong>Product</strong></td>
                                                 <td class="text-center"><strong>Qty</strong></td>
                                                 <td class="text-center"><strong>Tax (%)</strong></td>
                                                 <td class="text-center"><strong>Dis (%)</strong></td>
@@ -80,12 +80,12 @@ Sale Details
                                             @foreach ($sale->sale_details as $key => $item)
                                                 <tr>
                                                     <td class="text-center">{{$key+1}}</td>
-                                                    <td class="col-6">{{$item->product->name}}</td>
-                                                    <td class="text-center">{{$item->quantity}}</td>
+                                                    <td class="col-4">{{$item->product->name}}</td>
+                                                    <td class="text-center">{{$item->quantity}} <small>{{$item->product->product_unit->name}}</small></td>
                                                     <td class="text-center">{{$item->tax}}</td>
                                                     <td class="text-center">{{$item->discount}}</td>
-                                                    <td class="text-end">{{currencySymbol($item->per_price)}}</td>
-                                                    <td class="text-end">{{currencySymbol($item->total_price)}}</td>
+                                                    <td class="text-end nowrap">{{currencySymbol($item->per_price)}}</td>
+                                                    <td class="text-end nowrap">{{currencySymbol($item->total_price)}}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -135,6 +135,7 @@ Sale Details
                                 <tr class="bg-light">
                                     <td><strong>Ledger</strong></td>
                                     <td><strong>Party</strong></td>
+                                    <td><strong>Narration</strong></td>
                                     <td class="col-2 text-end"><strong>Debit</strong></td>
                                     <td class="col-2 text-end"><strong>Credit</strong></td>
                                 </tr>
@@ -165,6 +166,7 @@ Sale Details
                                                 <p class="mb-0 font-13">Cheque Maturity Date : {{$item->check_mature_date}}</p>
                                             @endif
                                         </td>
+                                        <td>{{$item->narration}}</td>
                                         <td class="nowrap text-end">
                                             {{ ($item->type == "Dr") ? number_format($item->amount, 2) : "" }}
                                         </td>
@@ -174,13 +176,13 @@ Sale Details
                                     </tr>
                                 @endforeach
                                 <tr>
-                                    <td colspan="2">Total Amount</td>
+                                    <td colspan="3">Total Amount</td>
                                     <td class="nowrap text-end" id="total_debit"> {{ number_format($total_debit, 2) }}</td>
                                     <td class="nowrap text-end" id="total_credit"> {{ number_format($total_credit, 2) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Taka In&nbsp;Words:&nbsp;</td>
-                                    <td colspan="3">{{convert_number($voucher->amount)}}          &nbsp;Only</td>
+                                    <td colspan="4">{{convert_number($voucher->amount)}}          &nbsp;Only</td>
                                 </tr>
                             </tbody>
                         </table>                        

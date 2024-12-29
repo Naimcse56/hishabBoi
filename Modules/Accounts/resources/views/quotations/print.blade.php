@@ -52,7 +52,7 @@
                         <thead>
                             <tr class="bg-light">
                                 <td class="text-center" width="3%"><strong>#</strong></td>
-                                <td class="col-6"><strong>Product</strong></td>
+                                <td class="col-4"><strong>Product</strong></td>
                                 <td class="text-center"><strong>Qty</strong></td>
                                 <td class="text-center"><strong>Tax (%)</strong></td>
                                 <td class="text-center"><strong>Dis (%)</strong></td>
@@ -64,12 +64,12 @@
                             @foreach ($quotation->quotation_details as $key => $item)
                                 <tr>
                                     <td class="text-center">{{$key+1}}</td>
-                                    <td class="col-6">{{$item->product->name}}</td>
+                                    <td class="col-4">{{$item->product->name}}</td>
                                     <td class="text-center">{{$item->quantity}}</td>
                                     <td class="text-center">{{$item->tax}}</td>
                                     <td class="text-center">{{$item->discount}}</td>
-                                    <td class="text-end">{{currencySymbol($item->per_price)}}</td>
-                                    <td class="text-end">{{currencySymbol($item->total_price)}}</td>
+                                    <td class="text-end nowrap">{{currencySymbol($item->per_price)}}</td>
+                                    <td class="text-end nowrap">{{currencySymbol($item->total_price)}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

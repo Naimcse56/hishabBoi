@@ -171,14 +171,14 @@ class SaleController extends Controller
             $debit_partner_id[] = 0;
             $debit_work_order_id[] = $sale->work_order_id;
             $debit_work_order_site_detail_id[] = $sale->work_order_site_id;
-            $debit_narration[] = $sale->invoice_no;
+            $debit_narration[] = 'Got Discount on invoice '.$sale->invoice_no;
 
             $debit_amounts[] = $sale->payable_amount;
             $debit_account_id[] = $sale->sub_ledger->ledger_id;
             $debit_partner_id[] = $sale->sub_ledger_id;
             $debit_work_order_id[] = $sale->work_order_id;
             $debit_work_order_site_detail_id[] = $sale->work_order_site_id;
-            $debit_narration[] = $sale->invoice_no;
+            $debit_narration[] = 'Voucher for invoice'.$sale->invoice_no;
 
             $sales_voucher = $this->journalRepositoryInterface->create([
                 'type' => $type,
@@ -212,78 +212,81 @@ class SaleController extends Controller
                 'attachment' => null
             ]);
 
-            // Reset Arrays for new values entry
-            $debit_amounts = [];
-            $debit_account_id = [];
-            $debit_partner_id = [];
-            $debit_work_order_id = [];
-            $debit_work_order_site_detail_id = [];
-            $debit_narration = [];
-            
-            $credit_amounts = [];
-            $credit_account_id = [];
-            $credit_partner_id = [];
-            $credit_work_order_id = [];
-            $credit_work_order_site_detail_id = [];
-            $credit_narration = [];
+            if ($sale->morphs->where('is_approve', 0)->count() > 0) {
+                // Reset Arrays for new values entry
+                $debit_amounts = [];
+                $debit_account_id = [];
+                $debit_partner_id = [];
+                $debit_work_order_id = [];
+                $debit_work_order_site_detail_id = [];
+                $debit_narration = [];
+                
+                $credit_amounts = [];
+                $credit_account_id = [];
+                $credit_partner_id = [];
+                $credit_work_order_id = [];
+                $credit_work_order_site_detail_id = [];
+                $credit_narration = [];
 
-            $total_payment_rcv = 0;
-            foreach ($sale->morphs->where('is_approve', 0) as $key => $payment) {
-                $total_payment_rcv += $payment->amount;
-                $debit_amounts[] = $payment->amount;
-                $debit_account_id[] = $payment->ledger_id;
-                $debit_partner_id[] = 0;
-                $debit_work_order_id[] = $sale->work_order_id;
-                $debit_work_order_site_detail_id[] = $sale->work_order_site_id;
-                $debit_narration[] = $sale->invoice_no;
-                $debit_bank_name[] = $payment->bank_name;
-                $debit_bank_ac_name[] = $payment->bank_account_name;
-                $debit_check_no[] = $payment->check_no;
-                $debit_check_mature_date[] = $payment->check_mature_date;
-                $payment->update(['is_approve' => 1]);
+                $total_payment_rcv = 0;
+                foreach ($sale->morphs->where('is_approve', 0) as $key => $payment) {
+                    $total_payment_rcv += $payment->amount;
+                    $debit_amounts[] = $payment->amount;
+                    $debit_account_id[] = $payment->ledger_id;
+                    $debit_partner_id[] = 0;
+                    $debit_work_order_id[] = $sale->work_order_id;
+                    $debit_work_order_site_detail_id[] = $sale->work_order_site_id;
+                    $debit_narration[] = $sale->invoice_no;
+                    $debit_bank_name[] = $payment->bank_name;
+                    $debit_bank_ac_name[] = $payment->bank_account_name;
+                    $debit_check_no[] = $payment->check_no;
+                    $debit_check_mature_date[] = $payment->check_mature_date;
+                    $payment->update(['is_approve' => 1]);
+                }
+                
+                $credit_amounts[] = $sale->payable_amount;
+                $credit_account_id[] = $sale->sub_ledger->ledger_id;
+                $credit_partner_id[] = $sale->sub_ledger_id;
+                $credit_work_order_id[] = $sale->work_order_id;
+                $credit_work_order_site_detail_id[] = $sale->work_order_site_id;
+                $credit_narration[] = 'Payment Received for '.$sale->invoice_no;
+
+                $recieve_voucher = $this->journalRepositoryInterface->create([
+                    'type' => "rcv",
+                    'amount'=> $total_payment_rcv,
+                    'date'=> $sale->date,
+                    'account_type'=> "cash_bank",
+                    'concern_person'=> $sale->created_by,
+                    'credit_account_id'=> $credit_account_id,
+                    'credit_sub_account_id'=> $credit_partner_id,
+                    'credit_work_order_id'=> $credit_work_order_id,
+                    'credit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
+                    'credit_account_amount'=> $credit_amounts,
+                    'credit_narration'=> $credit_narration,
+                    'narration_voucher'=> 'Payment Received for '.$sale->invoice_no,
+                    'pay_or_rcv_type'=> "rcv",
+                    'referable_type'=> $referable_type,
+                    'referable_id'=> $referable_id,
+                    'is_invoiced'=> 1,
+                    'panel'=> 'sales',
+                    'is_manual_entry'=> 0,
+                    'credit_period'=> $sale->credit_period,
+                    'payment_account_id'=> 0,
+
+                    'debit_account_id'=> $debit_account_id,
+                    'debit_sub_account_id'=> $debit_partner_id,
+                    'debit_work_order_id'=> $debit_work_order_id,
+                    'debit_work_order_site_detail_id'=> $debit_work_order_site_detail_id,
+                    'debit_account_amount'=> $debit_amounts,
+                    'debit_narration'=> $debit_narration,
+                    'is_approve' => 1,
+                    'attachment' => null
+                ]);
+                if ($sale->morphs->where('is_approve', 1)->sum('amount') == $sale->payable_amount) {
+                    $sale->update(['payment_status' => 'Paid']);
+                }
             }
             
-            $credit_amounts[] = $sale->payable_amount;
-            $credit_account_id[] = $sale->sub_ledger->ledger_id;
-            $credit_partner_id[] = $sale->sub_ledger_id;
-            $credit_work_order_id[] = $sale->work_order_id;
-            $credit_work_order_site_detail_id[] = $sale->work_order_site_id;
-            $credit_narration[] = 'Payment Received for '.$sale->invoice_no;
-
-            $recieve_voucher = $this->journalRepositoryInterface->create([
-                'type' => "rcv",
-                'amount'=> $total_payment_rcv,
-                'date'=> $sale->date,
-                'account_type'=> "cash_bank",
-                'concern_person'=> $sale->created_by,
-                'credit_account_id'=> $credit_account_id,
-                'credit_sub_account_id'=> $credit_partner_id,
-                'credit_work_order_id'=> $credit_work_order_id,
-                'credit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
-                'credit_account_amount'=> $credit_amounts,
-                'credit_narration'=> $credit_narration,
-                'narration_voucher'=> 'Payment Received for '.$sale->invoice_no,
-                'pay_or_rcv_type'=> "rcv",
-                'referable_type'=> $referable_type,
-                'referable_id'=> $referable_id,
-                'is_invoiced'=> 1,
-                'panel'=> 'sales',
-                'is_manual_entry'=> 0,
-                'credit_period'=> $sale->credit_period,
-                'payment_account_id'=> 0,
-
-                'debit_account_id'=> $debit_account_id,
-                'debit_sub_account_id'=> $debit_partner_id,
-                'debit_work_order_id'=> $debit_work_order_id,
-                'debit_work_order_site_detail_id'=> $debit_work_order_site_detail_id,
-                'debit_account_amount'=> $debit_amounts,
-                'debit_narration'=> $debit_narration,
-                'is_approve' => 1,
-                'attachment' => null
-            ]);
-            if ($sale->morphs->where('is_approve', 1)->sum('amount') == $sale->payable_amount) {
-                $sale->update(['payment_status' => 'Paid']);
-            }
             DB::commit();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
