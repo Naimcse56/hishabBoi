@@ -164,7 +164,7 @@ class SaleController extends Controller
                 $credit_partner_id[] = 0;
                 $credit_work_order_id[] = $sale->work_order_id;
                 $credit_work_order_site_detail_id[] = $sale->work_order_site_id;
-                $credit_narration[] = $sale->invoice_no;
+                $credit_narration[] = $sold_product->product->name.' sold in '.$sale->invoice_no;
             }
             $debit_amounts[] = $sale->payable_amount;
             $debit_account_id[] = $sale->sub_ledger->ledger_id;
