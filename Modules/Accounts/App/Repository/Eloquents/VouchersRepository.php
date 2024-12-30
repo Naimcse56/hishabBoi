@@ -72,7 +72,7 @@ class VouchersRepository
         return "done";
     }
 
-    // Voucher Checking and approval From here
+    // Voucher Checking and approval From here with referrable data
     public function approveStatus($id)
     {
         $voucher = Voucher::findOrFail($id);
