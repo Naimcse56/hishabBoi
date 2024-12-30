@@ -131,6 +131,7 @@ class PurchaseRepository extends BaseRepository
                 $voucher->transactions()->delete();
                 $voucher->delete();
             }
+            $purchase_order->delete();
             return true;
         }
         return true;
