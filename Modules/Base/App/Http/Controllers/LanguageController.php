@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
 use Modules\Base\App\Repository\Eloquents\LanguageRepository;
 use DataTables;
 
@@ -128,5 +129,126 @@ class LanguageController extends Controller
     {
         $data = $this->languageRepository->listForSelect($request->search);
         return response()->json($data);
+    }
+
+    public function translate_view($id)
+    {
+        try {
+            $language = $this->languageRepository->findById($id);
+            session()->put('locale', $language->code);
+            $lang = 'default';
+            $files   = glob(resource_path('lang/' . $lang . '/*.php'));
+
+            $modules = \Module::all();
+            foreach ($modules as $module) {
+                if ($module->isEnabled()) {
+                    $file = glob(module_path($module->getName()) . '/Resources/lang/'.$lang.'/*.php');
+                    if ($file) {
+                        $files[$module->getLowerName()] = $file;
+                    };
+                }
+            }
+            return view('base::languages.translate_view', [
+                "files" => $files, 'language' => $language
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function get_translate_file(Request $request)
+    {
+        try{
+            $language = $this->languageRepository->findById($request->id);
+
+            $file_name = $request->file_name;
+
+            $languages = Lang::get($file_name);
+
+            $check_module = explode('::', $file_name);
+
+            if (count($check_module) > 1) {
+               $translatable_file_name = $check_module[1].'.php';
+               $folder = module_path(ucfirst($check_module[0])).'/Resources/lang/'.$language->code.'/';
+               $default_folder = module_path(ucfirst($check_module[0])).'/Resources/lang/default/';
+            } else{
+                $translatable_file_name = $request->file_name.'.php';
+                $folder = resource_path('lang/' . $language->code.'/');
+                $default_folder = resource_path('lang/default/');
+            }
+
+
+            $file = $folder . $translatable_file_name;
+            $default_file = $default_folder .$translatable_file_name;
+
+            if(file_exists($file))
+            {
+                $languages = include  "{$file}";
+
+                return view('base::languages.translate_modal', [
+                    "languages" => $languages,
+                    "language" => $language,
+                    "translatable_file_name" => $file_name
+                ]);
+            }
+
+
+            if (!file_exists($folder)) {
+                mkdir($folder);
+            }
+
+            if (!file_exists($file)) {
+                copy($default_file, $file);
+            }
+
+            return view('base::language.modals.translate_modal', [
+                "languages" => $languages,
+                "language" => $language,
+                "translatable_file_name" => $file_name
+            ]);
+        }catch (\Exception $e) {
+            return back();
+        }
+    }
+
+    public function key_value_store(Request $request)
+    {
+        $validate_rules = [
+            'id' => 'required',
+            'translatable_file_name' => 'required',
+            'key' => 'required',
+        ];
+        $request->validate($validate_rules, validationMessage($validate_rules));
+
+        try{
+            $language = $this->languageRepository->findById($request->id);
+
+            $file_name = $request->translatable_file_name;
+
+            $check_module = explode('::', $file_name);
+
+            if (count($check_module) > 1) {
+               $translatable_file_name = $check_module[1].'.php';
+               $folder = module_path(ucfirst($check_module[0])).'/Resources/lang/'.$language->code.'/';
+            } else{
+                $translatable_file_name = $request->translatable_file_name.'.php';
+                $folder = resource_path('lang/' . $language->code.'/');
+            }
+
+            $file = $folder . $translatable_file_name;
+
+            if (!file_exists($folder)) {
+                mkdir($folder);
+            }
+            if (file_exists($file)) {
+                file_put_contents($file, '');
+            }
+
+            file_put_contents($file, '<?php return ' . var_export($request->key, true) . ';');
+            return back();
+
+        }catch (\Exception $e) {
+            return back();
+        }
     }
 }
