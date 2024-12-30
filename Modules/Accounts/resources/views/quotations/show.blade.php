@@ -9,6 +9,11 @@ Quotation Details
         <div>
             <a href="{{route('quotations.print',encrypt($quotation->id))}}" class="btn btn-sm btn-secondary mt-4"><i class="fa fa-print"></i> Print & Download</a>
             <a href="{{route('quotations.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-list"></i> List</a>
+            @if ($quotation->is_approved != "Approved")
+                <button type="button" onclick="approveData('Quotation Approval', '{{ route('quotations.approve_status') }}', {{ $quotation->id }})" class="btn btn-sm btn-success mt-4">
+                    <i class="fa fa-thumbs-up"></i> APPROVE
+                </button>
+            @endif
         </div>
     </div>
     <div class="row">

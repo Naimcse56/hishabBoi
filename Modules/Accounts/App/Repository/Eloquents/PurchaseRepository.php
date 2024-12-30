@@ -143,6 +143,13 @@ class PurchaseRepository extends BaseRepository
         return 'PO#'.date('Y').sprintf('%05d', $invoice_id);
     }
 
+    public function statusApproval($id, $status)
+    {
+        $sale = $this->findById($id,['*'],['purchase_details','purchase_details.product:id,name,purchase_ledger_id']);
+        $sale->update(['is_approved' => $status]);
+        return $sale;
+    }
+
     public function listForSelect($search, $filter_for = null)
     {
         $items = $this->model::query();
