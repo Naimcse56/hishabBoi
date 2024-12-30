@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Base\App\Http\Controllers\BaseController;
 use Modules\Base\App\Http\Controllers\CurrencyController;
+use Modules\Base\App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ use Modules\Base\App\Http\Controllers\CurrencyController;
 
 Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
     Route::controller(BaseController::class)->prefix('base-configurations')->group(function () {
+        Route::get('/general-settings', 'general_settings')->name('general_settings.configurations');
         Route::get('/company-settings', 'company_settings')->name('company_settings.configurations');
         Route::post('/base-settings-update', 'base_settings_update')->name('base_settings_update.configurations');
         Route::get('/email-settings', 'email_settings')->name('email_settings.configurations');
@@ -33,5 +35,15 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('currencies.update');
         Route::post('/delete', 'destroy')->name('currencies.delete');
         Route::get('/list-ajax', 'list_for_select')->name('currencies.list_for_select');
+    });
+    Route::controller(LanguageController::class)->prefix('language')->group(function () {
+        Route::get('/index', 'index')->name('language.index');
+        Route::get('/create', 'create')->name('language.create');
+        Route::post('/store', 'store')->name('language.store');
+        Route::get('/edit/{id}', 'edit')->name('language.edit');
+        Route::get('/show/{id}', 'show')->name('language.show');
+        Route::post('/update/{id}', 'update')->name('language.update');
+        Route::post('/delete', 'destroy')->name('language.delete');
+        Route::get('/list-ajax', 'list_for_select')->name('language.list_for_select');
     });
 });

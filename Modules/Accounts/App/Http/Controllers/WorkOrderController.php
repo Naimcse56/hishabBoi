@@ -37,7 +37,7 @@ class WorkOrderController extends Controller
                     ->addColumn('action', function($row){      
                         return view('accounts::work_orders.components.action', compact('row'));
                     })
-                    ->rawColumns(['action','is_active'])
+                    ->rawColumns(['action'])
                     ->make(true);
         }
         return view('accounts::work_orders.index');

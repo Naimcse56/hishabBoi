@@ -141,7 +141,7 @@
                     go_for_form_submit(this);
                 }
                 else {
-                    alert('Debit and credit mismatched')
+                    toastr.error('Debit and credit mismatched')
                 }
             });
     
@@ -166,21 +166,21 @@
                     success:function(response){
                         if(response.message_warning !== undefined)
                         {
-                            alert(response.message_warning);
+                            toastr.error(response.message_warning);
                         }else if (response.message !== undefined) {
                             $(".entry_row_div").html("");
                             $(".narration").val("");
-                            alert(response.message);
+                            toastr.error(response.message);
                             window.location.replace(response.url);
                         }else {
-                            alert("Something went wrong");
+                            toastr.error("Something went wrong");
                         }
                     },
                     error:function(response) {
                         if (response.message_error !== undefined) {
-                            alert(response.message_error)
+                            toastr.error(response.message_error)
                         }else {
-                            alert(response.responseJSON.message);
+                            toastr.error(response.responseJSON.message);
                         }
                     }
                 });

@@ -14,17 +14,10 @@ Company Setting
                         <form class="create_form" action="{{route('base_settings_update.configurations')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">                                
-                                <x-common.input :required="true" column=6 id="company_name" name="company_name" label="Company Name" placeholder="Company Name" :value="old('company_name')"></x-common.input>
-                                <x-common.input :required="true" column=6 id="company_phone" name="company_phone" label="Company Phone" placeholder="Company Phone" :value="old('company_phone')"></x-common.input>
-                                <x-common.input :required="true" column=6 id="company_email" name="company_email" type="email" label="Company Email" placeholder="Company Email" :value="old('company_email')"></x-common.input>
-                                <x-common.select :required="true" column=6 name="date_format" class="date_format" label="Date Format" placeholder="Date Format" :value="'d/m/Y'" :options="[
-                                    ['id' => 'jS M, Y', 'name' => '17th May, 2019'],
-                                    ['id' => 'Y-m-d', 'name' => '2019-05-17'],
-                                    ['id' => 'Y-d-m', 'name' => '2019-05-19'],
-                                    ['id' => 'Y/m/d', 'name' => '2019/05/17'],
-                                    ['id' => 'd/m/Y', 'name' => '17/05/2019']
-                                ]"></x-common.select>
-                                <x-common.text-area :required="true" column=12 name="company_address" label="Company Address" placeholder="Company Address"></x-common.text-area>
+                                <x-common.input :required="true" column=6 id="company_name" name="company_name" label="Company Name" placeholder="Company Name" :value="app('general_setting')['company_name']"></x-common.input>
+                                <x-common.input :required="true" column=6 id="company_phone" name="company_phone" label="Company Phone" placeholder="Company Phone" :value="app('general_setting')['company_phone']"></x-common.input>
+                                <x-common.input :required="true" column=6 id="company_email" name="company_email" type="email" label="Company Email" placeholder="Company Email" :value="app('general_setting')['company_email']"></x-common.input>
+                                <x-common.text-area :required="true" column=12 name="company_address" label="Company Address" placeholder="Company Address" :value="app('general_setting')['company_address']"></x-common.text-area>
                                 <x-common.file-browse label="Company Logo" :required="false" column=6 name="company_logo" extension="application/image"></x-common.file-browse>
                                 <x-common.file-browse label="Favicon" :required="false" column=6 name="favicon" extension="application/image"></x-common.file-browse>
                             </div>

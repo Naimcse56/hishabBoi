@@ -31,7 +31,7 @@ class SubLedgerTypeController extends Controller
                     ->addColumn('action', function($row){      
                         return view('accounts::subledger_type.components.action', compact('row'));
                     })
-                    ->rawColumns(['action','is_active'])
+                    ->rawColumns(['action'])
                     ->make(true);
         }
         return view('accounts::subledger_type.index');

@@ -80,6 +80,10 @@ return new class extends Migration
                'name' => 'sales_discount_ledger',
                'value' => 25,
             ),
+            15 => array(
+               'name' => 'system_language',
+               'value' => 'en',
+            ),
         ));
     }
 

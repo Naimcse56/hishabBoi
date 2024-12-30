@@ -3,13 +3,13 @@
 namespace Modules\Base\App\Repository\Eloquents;
 
 use App\Repository\Eloquents\BaseRepository;
-use Modules\Base\App\Models\Currency;
+use Modules\Base\App\Models\Language;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-class CurrencyRepository extends BaseRepository
+class LanguageRepository extends BaseRepository
 {
-    public function __construct(Currency $model)
+    public function __construct(Language $model)
     {
         parent::__construct($model);
     }
@@ -18,14 +18,14 @@ class CurrencyRepository extends BaseRepository
     {
         $items = $this->model::query();
         if ($search != '') {
-            $items = $items->whereLike(['name','code','symbol'], $search);
+            $items = $items->whereLike(['name','code'], $search);
         }
-        $items = $items->paginate(10);
+        $items = $items->where('status', 1)->paginate(10);
         $response = [];
         foreach($items as $item){
             $response[]  =[
-                'id'    => $item->id.'-'.$item->symbol,
-                'text'  => $item->name.' ('.$item->symbol.')'
+                'id'    => $item->code,
+                'text'  => $item->name
             ];
         }
         $data['results'] =  $response;
