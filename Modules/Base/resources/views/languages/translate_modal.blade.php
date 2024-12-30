@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-12">
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped table-bordered" style="width:100%">
                     <thead>
                        <tr>
                           <th scope="col">{{ __('base::base.sl') }}</th>
@@ -23,52 +23,50 @@
                        $i = 1
                        @endphp
                        @foreach ($languages as $key => $value)
-                       <tr>
-                          <td>{{ $i }}</td>
-                          <td>{{ $key }}</td>
-                          <td>
-                             @if( is_array($value) )
-                             <table class="table">
-                                <tbody>
-                                   @foreach($value as $sub_key => $sub_value)
-                                   <tr>
-                                      <td width="10%">{{ $sub_key }}</td>
-                                      <td>
-                                         @if( is_array($sub_value) )
-                                         <table class="table">
-                                            <tbody>
-                                               @foreach($sub_value as $sub_sub_key => $sub_sub_value)
-                                               <tr>
-                                                  <td>{{ $sub_sub_key }}</td>
-                                                  <td>
-                                                     <div class="col-lg-12">
-                                                        <input type="text" class="form-control" style="width:100%" name="key[{{ $key }}][{{ $sub_key }}][{{ $sub_sub_key }}]" @isset($sub_sub_value) value="{{ $sub_sub_value }}" @endisset>
-                                                     </div>
-                                                  </td>
-                                               </tr>
-                                               @endforeach
-                                            </tbody>
-                                         </table>
-                                         @else
-                                         <div class="col-lg-12">
-                                            <input type="text" class="form-control" style="width:100%" name="key[{{ $key }}][{{ $sub_key }}]" @isset($sub_value) value="{{ $sub_value }}" @endisset>
-                                         </div>
-                                         @endif
-                                      </td>
-                                   </tr>
-                                   @endforeach
-                                </tbody>
-                             </table>
-                             @else
-                             <div class="col-lg-12">
-                                <input type="text" class="form-control" style="width:100%" name="key[{{ $key }}]" @isset($value) value="{{ $value }}" @endisset>
-                             </div>
-                             @endif
-                          </td>
-                       </tr>
-                       @php
-                       $i++
-                       @endphp
+                        <tr>
+                           <td>{{ $i }}</td>
+                           <td>{{ $key }}</td>
+                           <td>
+                              @if( is_array($value) )
+                                 <table class="table">
+                                    <tbody>
+                                       @foreach($value as $sub_key => $sub_value)
+                                       <tr>
+                                          <td width="10%">{{ $sub_key }}</td>
+                                          <td>
+                                             @if( is_array($sub_value) )
+                                             <table class="table">
+                                                <tbody>
+                                                   @foreach($sub_value as $sub_sub_key => $sub_sub_value)
+                                                   <tr>
+                                                      <td>{{ $sub_sub_key }}</td>
+                                                      <td>
+                                                         <div class="col-lg-12">
+                                                            <input type="text" class="form-control" name="key[{{ $key }}][{{ $sub_key }}][{{ $sub_sub_key }}]" @isset($sub_sub_value) value="{{ $sub_sub_value }}" @endisset>
+                                                         </div>
+                                                      </td>
+                                                   </tr>
+                                                   @endforeach
+                                                </tbody>
+                                             </table>
+                                             @else
+                                             <div class="col-lg-12">
+                                                <input type="text" class="form-control" name="key[{{ $key }}][{{ $sub_key }}]" @isset($sub_value) value="{{ $sub_value }}" @endisset>
+                                             </div>
+                                             @endif
+                                          </td>
+                                       </tr>
+                                       @endforeach
+                                    </tbody>
+                                 </table>
+                              @else
+                                 <input type="text" class="form-control" name="key[{{ $key }}]" @isset($value) value="{{ $value }}" @endisset>
+                              @endif
+                           </td>
+                        </tr>
+                        @php
+                           $i++
+                        @endphp
                        @endforeach
                     </tbody>
                  </table>
