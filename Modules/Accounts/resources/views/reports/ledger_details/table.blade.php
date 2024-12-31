@@ -7,8 +7,8 @@ $total_pay = number_format($transactions->where('type','Cr')->where('is_opening'
 $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_pay);
 $current_balance = !request('reciept_payment') ? 0 + $total_opening : 0;
 @endphp
-{{-- <div class="table-responsive"> --}}
-<table class="table table-bordered mb-0" style="width:100%">
+
+<table class="table table-bordered mb-0">
     <thead>
         <tr>
             <th colspan="6" class="text-center sky-bg">
@@ -124,4 +124,3 @@ $current_balance = !request('reciept_payment') ? 0 + $total_opening : 0;
     </tfoot>
     @endif
 </table>
-{{-- </div> --}}

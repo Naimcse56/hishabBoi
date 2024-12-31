@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="d-grid">
-                    <button class="btn btn-custom" type="submit">{{ __('Send Password Reset Link') }}</button>
+                    <button class="btn btn-primary" type="submit">{{ __('Send Password Reset Link') }}</button>
                 </div>
             </form>
         </div>

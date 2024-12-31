@@ -24,8 +24,8 @@ class CurrencyRepository extends BaseRepository
         $response = [];
         foreach($items as $item){
             $response[]  =[
-                'id'    => $item->id,
-                'text'  => $item->name
+                'id'    => $item->id.'-'.$item->symbol,
+                'text'  => $item->name.' ('.$item->symbol.')'
             ];
         }
         $data['results'] =  $response;

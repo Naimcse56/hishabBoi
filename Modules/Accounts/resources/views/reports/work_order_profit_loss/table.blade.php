@@ -7,7 +7,7 @@
     $est_profit = $order_value - $est_cost;
     $est_profit_percent = $est_profit * 100 / $order_value;
 @endphp
-<table class="table table-bordered mb-0" style="width:100%">
+<table class="table table-bordered mb-0">
     <thead>
         <tr>
             <th colspan="2" class="text-center sky-bg">

@@ -77,7 +77,7 @@ class ProductController extends Controller
             return redirect()->route('products.create')->with('success', $item->name.' Added Successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => $e->getMessage()]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 

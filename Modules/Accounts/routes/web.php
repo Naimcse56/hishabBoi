@@ -252,6 +252,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/print/{id}', 'print')->name('purchases.print');
         Route::post('/update/{id}', 'update')->name('purchases.update');
         Route::post('/delete', 'destroy')->name('purchases.delete');
+        Route::post('/approval-status-approve', 'approve_status')->name('purchases.approve_status');
         Route::get('/list-ajax', 'list_for_select')->name('purchases.list_for_select');
     });
     Route::controller(QuotationController::class)->prefix('quotations')->group(function () {
@@ -263,6 +264,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
         Route::get('/print/{id}', 'print')->name('quotations.print');
         Route::post('/update/{id}', 'update')->name('quotations.update');
         Route::post('/delete', 'destroy')->name('quotations.delete');
+        Route::post('/approval-status-approve', 'approve_status')->name('quotations.approve_status');
         Route::get('/list-ajax', 'list_for_select')->name('quotations.list_for_select');
     });
 

@@ -2,16 +2,16 @@
 
 namespace Modules\Base\App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Modules\Base\App\Models\GeneralSetting;
-use Modules\Accounts\App\Models\AccountConfiguration;
+use Mail;
+use App\Models\User;
+use App\Mail\EmailManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Mail\EmailManager;
-use Mail;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Spatie\Permission\Models\Permission;
-use App\Models\User;
+use Modules\Base\App\Models\GeneralSetting;
+use Modules\Accounts\App\Models\AccountConfiguration;
  
 class BaseController extends Controller
 {
@@ -52,6 +52,10 @@ class BaseController extends Controller
         return view('base::configurations.company_settings');
     }
     
+    public function general_settings()
+    {
+        return view('base::configurations.general_settings');
+    }
     
     public function email_settings()
     {
@@ -66,8 +70,14 @@ class BaseController extends Controller
 
     public function base_settings_update(Request $request)
     {
-        foreach ($request->except('_token') as $column_name => $column_value) {
+        foreach ($request->except('_token','system_currency_id') as $column_name => $column_value) {
             GeneralSetting::where('name',$column_name)->first()->update(['value' => $column_value]);
+        }
+        if ($request->system_currency_id) {
+            $currency_id = explode('-',$request->system_currency_id)[0];
+            $currency_symbol = explode('-',$request->system_currency_id)[1];
+            GeneralSetting::where('name','system_currency_id')->first()->update(['value' => $currency_id]);
+            GeneralSetting::where('name','system_currency_symbol')->first()->update(['value' => $currency_symbol]);
         }
 
         return back()->with('success', 'Updated Successfully');

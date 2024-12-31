@@ -19,7 +19,7 @@ class QuotationRepository extends BaseRepository
 
     public function createData(array $data)
     {
-        $sale = $this->model::create([
+        $quotation = $this->model::create([
             'sub_ledger_id' => $data['sub_ledger_id'],
             'date' => Carbon::createFromFormat('d/m/Y', $data["date"])->format('Y-m-d'),
             'invoice_no' => $data['invoice_no'],
@@ -34,7 +34,7 @@ class QuotationRepository extends BaseRepository
         ]);
         foreach ($data['qty'] as $key => $item) {
             QuotationDetail::create([
-                'quotation_id' => $sale->id,
+                'quotation_id' => $quotation->id,
                 'product_id' => $data['product_id'][$key],
                 'quantity' => $data['qty'][$key],
                 'tax' => floatval($data['sale_price_tax'][$key]),
@@ -42,13 +42,13 @@ class QuotationRepository extends BaseRepository
                 'total_price' => floatval($data['total_sale_price'][$key]),
             ]);
         }
-        return $sale;
+        return $quotation;
     }
 
     public function updateData($id, array $data)
     {
-        $sale = $this->model::find($id);
-        $sale->update([
+        $quotation = $this->model::find($id);
+        $quotation->update([
             'sub_ledger_id' => $data['sub_ledger_id'],
             'date' => Carbon::createFromFormat('d/m/Y', $data["date"])->format('Y-m-d'),
             'invoice_no' => $data['invoice_no'],
@@ -61,10 +61,10 @@ class QuotationRepository extends BaseRepository
             'note' => $data['note'],
             'terms_condition' => $data['terms_condition'],
         ]);
-        $sale->quotation_details()->delete();
+        $quotation->quotation_details()->delete();
         foreach ($data['qty'] as $key => $item) {
             QuotationDetail::create([
-                'quotation_id' => $sale->id,
+                'quotation_id' => $quotation->id,
                 'product_id' => $data['product_id'][$key],
                 'quantity' => $data['qty'][$key],
                 'tax' => floatval($data['sale_price_tax'][$key]),
@@ -72,7 +72,7 @@ class QuotationRepository extends BaseRepository
                 'total_price' => floatval($data['total_sale_price'][$key]),
             ]);
         }
-        return $sale;
+        return $quotation;
     }
 
     public function invoiceNo()
@@ -82,13 +82,20 @@ class QuotationRepository extends BaseRepository
         return 'QTN#'.date('Y').sprintf('%05d', $invoice_id);
     }
 
+    public function statusApproval($id, $status)
+    {
+        $quotation = $this->findById($id);
+        $quotation->update(['is_approved' => $status]);
+        return $quotation;
+    }
+
     public function listForSelect($search, $filter_for = null)
     {
         $items = $this->model::query();
         if ($search != '') {
             $items = $items->whereLike(['invoice_no','phone'], $search);
         }
-        $items = $items->paginate(10);
+        $items = $items->where('is_approved','Approved')->paginate(10);
         $response = [];
         foreach($items as $item){
             if ($filter_for == "recieve") {

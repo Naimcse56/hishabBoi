@@ -62,6 +62,9 @@ class SaleController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
+            if (app('general_setting')['sales_discount_ledger'] == 0 && $request->discount_percentage > 0) {
+                return redirect()->back()->with('error', "Set Sales discount Ledger First!");
+            }
             DB::beginTransaction();
             $item = $this->saleRepository->createData($request->except('_token'));
             DB::commit();
@@ -105,7 +108,10 @@ class SaleController extends Controller
     {
         try {
             $data['sale'] = $this->saleRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','sale_details']);
-            return view('accounts::sales.edit_view', $data);
+            if ($data['sale']->is_approved != "Approved") {
+                return view('accounts::sales.edit_view', $data);
+            }
+            return back();
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         };
@@ -244,7 +250,7 @@ class SaleController extends Controller
                     $payment->update(['is_approve' => 1]);
                 }
                 
-                $credit_amounts[] = $sale->payable_amount;
+                $credit_amounts[] = $total_payment_rcv;
                 $credit_account_id[] = $sale->sub_ledger->ledger_id;
                 $credit_partner_id[] = $sale->sub_ledger_id;
                 $credit_work_order_id[] = $sale->work_order_id;
@@ -282,7 +288,7 @@ class SaleController extends Controller
                     'is_approve' => 1,
                     'attachment' => null
                 ]);
-                if ($sale->morphs->where('is_approve', 1)->sum('amount') == $sale->payable_amount) {
+                if ($sale->morphs->where('is_approve', 1)->sum('amount') >= $sale->payable_amount) {
                     $sale->update(['payment_status' => 'Paid']);
                 }
             }

@@ -114,7 +114,7 @@ Chart of Accounts
                         if (typeof result.generated_code !== "undefined") {
                             $("#code").val(result.generated_code);
                         }else{
-                            alert('Oops! Reload your browser please!')
+                            toastr.error('Oops! Reload your browser please!')
                         }
                     }
                 });

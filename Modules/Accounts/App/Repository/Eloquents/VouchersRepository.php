@@ -72,13 +72,25 @@ class VouchersRepository
         return "done";
     }
 
-    // Voucher Checking and approval From here
+    // Voucher Checking and approval From here with referrable data
     public function approveStatus($id)
     {
         $voucher = Voucher::findOrFail($id);
         if ($voucher->is_approve != 1) {
+            foreach ($voucher->transactions as $transaction) {
+                if ($transaction->payment_id > 0) {
+                    $transaction->payment->update(['is_approve' => 1]);
+                }
+            }
             $voucher->transactions()->update(['is_approve' => 1]);
             $voucher->update(['is_approve' => 1, 'approved_by' => auth()->user()->id]);
+            if ($voucher->referable) {
+                if ($voucher->referable->morphs->where('is_approve', 1)->sum('amount') >= $voucher->referable->payable_amount) {
+                    $voucher->referable->update(['payment_status' => 'Paid']);
+                } elseif ($voucher->referable->morphs->where('is_approve', 1)->sum('amount') < $voucher->referable->payable_amount) {
+                    $voucher->referable->update(['payment_status' => 'Partial']);
+                }
+            }
         }
         return $voucher;
     }

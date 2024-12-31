@@ -3,7 +3,7 @@
 <div class="modal fade" id="showModal" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-success text-white">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title">{{$product->type}} Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

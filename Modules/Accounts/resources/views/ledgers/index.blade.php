@@ -11,24 +11,22 @@ My Account
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="dataTable" class="table table-striped table-bordered data-table" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>SL</th>
-                                        <th>Type</th>
-                                        <th>Code</th>
-                                        <th>AC Name</th>
-                                        <th>Status</th>
-                                        <th>Current Balance</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="card-body table-responsive">
+                        <table id="dataTable" class="table table-striped table-bordered data-table">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Type</th>
+                                    <th>Code</th>
+                                    <th>AC Name</th>
+                                    <th>Status</th>
+                                    <th>Current Balance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

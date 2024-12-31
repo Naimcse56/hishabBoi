@@ -136,6 +136,7 @@ class SaleRepository extends BaseRepository
                 $voucher->transactions()->delete();
                 $voucher->delete();
             }
+            $sale->delete();
             return true;
         }
         return true;

@@ -103,7 +103,10 @@ class QuotationController extends Controller
     {
         try {
             $data['quotation'] = $this->quotationRepository->findById(decrypt($id),['*'],['sub_ledger:id,name','quotation_details']);
-            return view('accounts::quotations.edit_view', $data);
+            if ($data['quotation']->is_approved != "Approved") {
+                return view('accounts::quotations.edit_view', $data);
+            }
+            return back();
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         };
@@ -143,5 +146,18 @@ class QuotationController extends Controller
     {
         $data = $this->quotationRepository->listForSelect($request->search,$request->filter_for);
         return response()->json($data);
+    }
+
+    public function approve_status(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $this->quotationRepository->statusApproval($request->id,"Approved");            
+            DB::commit();
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();dd($e);
+            return response()->json(['error' => $e->getMessage()]);
+        }
     }
 }
