@@ -1,6 +1,7 @@
 <div class="btn-group" role="group" aria-label="Basic example">
-    <button type="button" class="btn btn-sm btn-warning edit_leadger" data-id="{{ encrypt($row->id) }}"><i class="fa fa-edit"></i></button>
-    <a href="{{route('language.translate_view',$row->id)}}" class="btn btn-sm btn-info"> Translation </a>
+    <button type="button" class="btn btn-sm btn-warning edit_leadger" data-id="{{ encrypt($row->id) }}"><i class="fa fa-edit"></i></button>    
+    <button type="button" class="btn btn-sm btn-info detail_info" data-route="{{ route('language.translate_view',$row->id) }}"> Translation
+    </button>
     @if ($row->id > 3)
         <button type="button" onclick="deleteData('Language ', '{{ route('language.delete') }}', {{ $row->id }})" class="btn btn-sm btn-danger" id="basicAlert">
             <i class="fa fa-trash"></i>

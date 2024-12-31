@@ -46,7 +46,7 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
         Route::post('/update/{id}', 'update')->name('language.update');
         Route::post('/delete', 'destroy')->name('language.delete');
         Route::get('/list-ajax', 'list_for_select')->name('language.list_for_select');
-        Route::post('/get-translate-file', 'get_translate_file')->name('language.get_translate_file');
+        Route::get('/get-translate-file/{file_name}/{language_id}', 'get_translate_file')->name('language.get_translate_file');
         Route::post('/key-value-store', 'key_value_store')->name('language.key_value_store');
     });
 });

@@ -13,7 +13,7 @@ Language
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                        <table id="dataTable" class="table table-striped table-bordered data-table" style="width:100%">
+                        <table id="dataTable" class="table table-striped table-bordered data-table">
                             <thead>
                                 <tr>
                                     <th width="4%">#</th>
@@ -100,6 +100,23 @@ Language
                         }
                     }
 
+                });
+            });
+            $(document).on('click','.detail_info', function(){
+                $('.detail_info').addClass('disabled');
+                var url = $(this).attr("data-route");
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "HTML",
+                    success: function (response) {
+                        $('#ajaxDiv').html(response);
+                        $('#voucher_info_modal').modal('show');
+                        $('.detail_info').removeClass('disabled');
+                    },
+                    error: function (error) {
+                        $('.detail_info').removeClass('disabled');
+                    }
                 });
             });
         })(jQuery);

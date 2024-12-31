@@ -148,7 +148,7 @@ class LanguageController extends Controller
                     };
                 }
             }
-            return view('base::languages.translate_view', [
+            return view('base::languages.translate_file_choose', [
                 "files" => $files, 'language' => $language
             ]);
         } catch (\Exception $e) {
@@ -156,12 +156,10 @@ class LanguageController extends Controller
         }
     }
 
-    public function get_translate_file(Request $request)
+    public function get_translate_file($file_name,$language_id)
     {
         try{
-            $language = $this->languageRepository->findById($request->id);
-
-            $file_name = $request->file_name;
+            $language = $this->languageRepository->findById($language_id);
 
             $languages = Lang::get($file_name);
 
@@ -172,7 +170,7 @@ class LanguageController extends Controller
                $folder = module_path(ucfirst($check_module[0])).'/Resources/lang/'.$language->code.'/';
                $default_folder = module_path(ucfirst($check_module[0])).'/Resources/lang/default/';
             } else{
-                $translatable_file_name = $request->file_name.'.php';
+                $translatable_file_name = $file_name.'.php';
                 $folder = resource_path('lang/' . $language->code.'/');
                 $default_folder = resource_path('lang/default/');
             }
@@ -185,7 +183,7 @@ class LanguageController extends Controller
             {
                 $languages = include  "{$file}";
 
-                return view('base::languages.translate_modal', [
+                return view('base::languages.translate_view', [
                     "languages" => $languages,
                     "language" => $language,
                     "translatable_file_name" => $file_name
@@ -201,7 +199,7 @@ class LanguageController extends Controller
                 copy($default_file, $file);
             }
 
-            return view('base::language.modals.translate_modal', [
+            return view('base::languages.translate_view', [
                 "languages" => $languages,
                 "language" => $language,
                 "translatable_file_name" => $file_name
@@ -218,7 +216,6 @@ class LanguageController extends Controller
             'translatable_file_name' => 'required',
             'key' => 'required',
         ];
-        $request->validate($validate_rules, validationMessage($validate_rules));
 
         try{
             $language = $this->languageRepository->findById($request->id);
@@ -245,10 +242,10 @@ class LanguageController extends Controller
             }
 
             file_put_contents($file, '<?php return ' . var_export($request->key, true) . ';');
-            return back();
+            return back()->with('success', ' Added Successfully');
 
         }catch (\Exception $e) {
-            return back();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }
