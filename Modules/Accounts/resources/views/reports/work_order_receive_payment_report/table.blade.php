@@ -3,7 +3,7 @@
     $total_direct_expense = 0;
     $total_tax_expense = 0;
 @endphp
-<table class="table table-bordered mb-0" style="width:100%">
+<table class="table table-bordered mb-0">
     <thead>
         <tr>
             <th colspan="6" class="text-center sky-bg">
@@ -35,7 +35,7 @@
             @endphp
             <tr>
                 <td colspan="3">
-                    <table class="table table-bordered mb-0" style="width:100%">
+                    <table class="table table-bordered mb-0">
                         <tbody>
                             @foreach ($transactions as $key => $transaction)
                                 @if ($transaction->sum('rcv_balance') || $transaction->sum('rcv_bank_balance') > 0)
@@ -78,7 +78,7 @@
                     </table>
                 </td>
                 <td colspan="3">
-                    <table class="table table-bordered mb-0" style="width:100%">
+                    <table class="table table-bordered mb-0">
                         <tbody>
                             @foreach ($transactions as $key => $transaction)
                                 @if ($transaction->sum('pay_balance') || $transaction->sum('pay_bank_balance') > 0)

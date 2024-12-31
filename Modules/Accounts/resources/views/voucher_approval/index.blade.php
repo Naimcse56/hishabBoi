@@ -21,7 +21,7 @@ Vouchers Checking
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="dataTable" class="table table-striped table-bordered data-table" style="width:100%">
+                            <table id="dataTable" class="table table-striped table-bordered data-table">
                                 <thead>
                                     <tr>
                                         <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>

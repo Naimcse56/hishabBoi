@@ -11401,6 +11401,13 @@ th {
     font-size: 10px;
 }
 }
+@media (max-width: 1150px) {
+    .table-responsive {
+		overflow-x: auto;  /* Ensures scroll is active below or equal to 1150px */
+        width: 100%;
+		white-space: nowrap;  /* Ensures scroll is active below 1150px */
+    }
+}
 
 
 

@@ -8,7 +8,7 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
 $current_balance = !request('reciept_payment') ? 0 + $total_opening : 0;
 @endphp
 {{-- <div class="table-responsive"> --}}
-<table class="table table-bordered mb-0" style="width:100%">
+<table class="table table-bordered mb-0">
     <thead>
         <tr>
             <th colspan="6" class="text-center sky-bg">

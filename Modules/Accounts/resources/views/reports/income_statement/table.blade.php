@@ -3,7 +3,7 @@
     $total_direct_expense = 0;
     $total_tax_expense = 0;
 @endphp
-<table class="table table-bordered mb-0" style="width:100%">
+<table class="table table-bordered mb-0">
     <thead>
         <tr>
             <th colspan="2" class="text-center sky-bg">

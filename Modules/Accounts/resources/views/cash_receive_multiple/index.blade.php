@@ -13,7 +13,7 @@ Multi Cash Payment Voucher
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                        <table id="dataTable" class="table table-striped table-bordered data-table" style="width:100%">
+                        <table id="dataTable" class="table table-striped table-bordered data-table">
                             <thead>
                                 <tr>
                                     <th width="4%">#</th>

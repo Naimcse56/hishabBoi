@@ -5,7 +5,7 @@ $total_rcv = number_format($transactions->where('type','Dr')->where('is_opening'
 $total_pay = number_format($transactions->where('type','Cr')->where('is_opening',0)->sum('amount'), 2,".","");
 $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_pay);
 @endphp
-<table class="table table-bordered mb-0" style="width:100%">
+<table class="table table-bordered mb-0">
     <thead>
         <tr>
             <th colspan="7" class="text-center sky-bg">
