@@ -38,7 +38,7 @@
   "Language Translation" => "Language Translation",
   "Email Setup" => "Email Setup",
   "Sales & Purchase" => "Sales & Purchase",
-  "" => "",
+  "Word" => "Word",
   "" => "",
   "" => "",
   "" => "",
