@@ -15,15 +15,16 @@
                                 $file_name = basename($value, '.php')
                             @endphp
                             <div class="col-md-12">
-                                <a href="{{route('language.get_translate_file',['file_name'=>$file_name,'language_id'=>$language->id])}}" class="btn btn-sm btn-primary">Translate this File : {{ $file_name }}</a>
+                                <a href="{{route('language.get_translate_file',['file_name'=>$file_name,'language_id'=>$language->id])}}" class="btn btn-sm btn-primary w-100">Translate this File : {{ $file_name }}</a>
                             </div>
                         @else
                             @foreach ($value as $k => $v)
                                 <div class="col-md-12">
                                     @php
-                                        $file_name = $key .'::'.basename($v, '.php')
+                                        $file_name = $key .'::'.basename($v, '.php');
+                                        $display_name = basename($v, '.php');
                                     @endphp
-                                    <a href="{{route('language.get_translate_file',['file_name'=>$file_name,'language_id'=>$language->id])}}" class="btn btn-sm btn-primary mb-2">Translate this File : {{ ucwords($file_name) }}</a>
+                                    <a href="{{route('language.get_translate_file',['file_name'=>$file_name,'language_id'=>$language->id])}}" class="btn btn-sm btn-primary mb-2 w-100">Translate this File : {{ ucwords($display_name) }}</a>
                                 </div>
                             @endforeach
                         @endif
