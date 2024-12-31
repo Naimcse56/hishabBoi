@@ -17,7 +17,7 @@ Currency
                             <thead>
                                 <tr>
                                     <th width="4%">#</th>
-                                    <th>Name</th>
+                                    <th>Currency</th>
                                     <th>Code</th>
                                     <th>Symbol</th>
                                     <th width="10%">Action</th>
