@@ -11320,14 +11320,6 @@ th {
     margin-bottom: 45px;
     margin-top: 10px;
 }
-.btn-custom{
-    background: #1E88E5;
-    color: #fff;
-}
-.btn-custom:hover{
-    background: #0277BD;
-    color: #fff;
-}
 
 .card-custom{
     padding: 30px;
