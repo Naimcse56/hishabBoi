@@ -10,9 +10,40 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Mail\EmailManager;
 use Mail;
-
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
+ 
 class BaseController extends Controller
 {
+
+     public function user_permisssions(Request $request)
+    {
+            $user_id = $request->query('user_id');
+        $permissions = Permission::all();
+       
+         $user = User::find($user_id);
+    $assigned_permissions = $user ? $user->getPermissionNames()->toArray() : [];
+
+     
+        return view('base::configurations.user_permissions',compact('permissions','user_id','assigned_permissions'));
+    }
+     public function store_permisssions(Request $request)
+    {
+         $validated = $request->validate([
+        'user_id' => 'required|exists:users,id',  
+        'permissions' => 'required|array',  
+        'permissions.*' => 'exists:permissions,name', 
+    ]);
+      // Find the user
+    $user = User::findOrFail($validated['user_id']);
+
+    // Assign the permissions to the user
+    $user->syncPermissions($validated['permissions']);
+ return back()->with('success', 'Parmission Assigned Successfully.');
+   
+    }
+
+
     /**
      * Display a listing of the resource.
      */
@@ -20,6 +51,7 @@ class BaseController extends Controller
     {
         return view('base::configurations.company_settings');
     }
+    
     
     public function email_settings()
     {
