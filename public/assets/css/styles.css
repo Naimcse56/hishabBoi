@@ -1745,6 +1745,7 @@ progress {
   color: var(--bs-table-color);
   vertical-align: top;
   border-color: var(--bs-table-border-color);
+  overflow-x: auto;
 }
 .table > :not(caption) > * > *, .datatable-table > :not(caption) > * > * {
   padding: 0.5rem 0.35rem;
@@ -11400,13 +11401,6 @@ th {
 .time {
     font-size: 10px;
 }
-}
-@media (max-width: 1150px) {
-    .table-responsive {
-		overflow-x: auto;  /* Ensures scroll is active below or equal to 1150px */
-        width: 100%;
-		white-space: nowrap;  /* Ensures scroll is active below 1150px */
-    }
 }
 
 

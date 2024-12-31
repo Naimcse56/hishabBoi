@@ -20,23 +20,21 @@ Vouchers Checking
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="dataTable" class="table table-striped table-bordered data-table">
-                                <thead>
-                                    <tr>
-                                        <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>
-                                        <th width="10%">TXN ID</th>
-                                        <th width="60%">Details</th>
-                                        <th>Status</th>
-                                        <th>Rejection Comment</th>
-                                        <th width="5%">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                        <table id="dataTable" class="table table-striped table-bordered data-table">
+                            <thead>
+                                <tr>
+                                    <th width="4%"><input type="checkbox" class="form-check-input select_all_voucher_ids bg-primary" name="select_all"/></th>
+                                    <th width="10%">TXN ID</th>
+                                    <th width="60%">Details</th>
+                                    <th>Status</th>
+                                    <th>Rejection Comment</th>
+                                    <th width="5%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                                </tbody>
-                            </table>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="card-footer d-flex">   
                         <button type="button" onclick="approveMultipleVoucherData('Voucher Approval', '{{ route('voucher.multiple_approve_now') }}', 'reject')" class="btn btn-sm btn-outline-danger w-50">

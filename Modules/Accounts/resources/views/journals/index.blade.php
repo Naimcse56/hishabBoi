@@ -12,7 +12,6 @@ General Journal List
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="table-responsive">
                         <table id="dataTable" class="table table-striped table-bordered data-table">
                             <thead>
                                 <tr>
@@ -28,7 +27,7 @@ General Journal List
                             <tbody>
                                 
                             </tbody>
-                        </table></div>
+                        </table>
                     </div>
                 </div>
             </div>
