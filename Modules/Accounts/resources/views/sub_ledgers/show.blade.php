@@ -3,7 +3,7 @@
 <div class="modal fade" id="detail_info_modal" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-success">
+            <div class="modal-header bg-primary">
                 <h5 class="modal-title">{{$ledger->type}} Account Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>

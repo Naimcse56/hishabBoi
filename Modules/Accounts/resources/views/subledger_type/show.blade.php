@@ -3,7 +3,7 @@
 <div class="modal fade" id="detail_info_modal">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-success-subtle">
+            <div class="modal-header bg-primary-subtle">
                 <h5 class="modal-title">Business Unit Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
