@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Opening Balance Edit
+Edit Opening Balance
 @endsection
 @section('content')
 <div class="container-fluid px-4">

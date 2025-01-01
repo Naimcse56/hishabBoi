@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body p-5 pt-0 pb-0">
                 <div class="row mb-0">
-                    <div class="text-center fw-semibold"> VOUCHER RECEIPT ({{ $journal->TypeDetails }}) </div>
+                    <div class="text-center fw-semibold"> VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
                 <div class="row" style="margin-top: 0px;">
