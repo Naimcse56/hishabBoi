@@ -94,7 +94,7 @@
                                        <td class="nowrap" id="total_credit"> {{ number_format($total_credit, 2) }}</td>
                                    </tr>
                                    <tr>
-                                        <td>Taka In&nbsp;Words:&nbsp;</td>
+                                        <td>In&nbsp;Words:&nbsp;</td>
                                         <td colspan="3">{{convert_number($journal->amount)}}          &nbsp;Only</td>
                                    </tr>
                                </tbody>

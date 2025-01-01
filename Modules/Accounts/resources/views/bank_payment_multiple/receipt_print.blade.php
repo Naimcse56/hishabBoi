@@ -87,8 +87,6 @@ Voucher Print
          <p class="mb-0" style="border-top: 1px #666666 solid;">Prepared By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Checked By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Head of Concern</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Approved By</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Approved By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Received By</p>
    </div>
 </div>

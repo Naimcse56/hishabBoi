@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Configuration
+Configurations
 @endsection
 @section('content')
     <div class="container-fluid px-4">

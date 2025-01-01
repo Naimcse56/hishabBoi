@@ -33,11 +33,11 @@ Day Closing
                                         <th colspan="1" class="text-center"></th>
                                     </tr>
                                     <tr>
-                                        <th width="20%">LEDGER</th>
-                                        <th width="10%" class="text-center">DEBIT</th>
-                                        <th width="10%" class="text-center">CREDIT</th>
-                                        <th width="20%" class="text-center">DEBIT</th>
-                                        <th width="20%" class="text-center">CREDIT</th>
+                                        <th width="20%">Ledger</th>
+                                        <th width="10%" class="text-center">Debit</th>
+                                        <th width="10%" class="text-center">Credit</th>
+                                        <th width="20%" class="text-center">Debit</th>
+                                        <th width="20%" class="text-center">Credit</th>
                                         <th width="10%" class="text-center nowrap">Closing Balance</th>
                                     </tr>
                                 </thead>

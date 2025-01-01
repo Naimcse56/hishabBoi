@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Multi Cash Payment Voucher
+Multi Cash Receive Voucher
 @endsection
 @section('content')
     <div class="container-fluid px-4">

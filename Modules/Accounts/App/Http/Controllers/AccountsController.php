@@ -154,7 +154,7 @@ class AccountsController extends Controller
                 'party_id' => 'required|numeric|gt:0',
             ],
             [
-                'party_id.gt' => 'Please Select Account',
+                'party_id.gt' => 'Please Select An Account',
             ]);
         }
         $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];

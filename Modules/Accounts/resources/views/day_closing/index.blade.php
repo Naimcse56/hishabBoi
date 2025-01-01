@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Day Closing
+Day Closing List
 @endsection
 @section('content')
     <div class="container-fluid px-4">

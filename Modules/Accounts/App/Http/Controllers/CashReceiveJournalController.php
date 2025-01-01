@@ -320,7 +320,7 @@ class CashReceiveJournalController extends Controller
                                     <span class="text-danger"></span>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label class="form-label" for="Credit Account">Debit Account <span class="text-danger">*</span></label>
+                                    <label class="form-label" for="Debit Account">Debit Account <span class="text-danger">*</span></label>
                                     <select class="form-select debit_account_id" name="debit_account_id[]" required>
                                         <option value="0" selected>Select Debit Account</option>
                                     </select>

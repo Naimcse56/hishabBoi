@@ -181,7 +181,7 @@ Purchase Details
                                     <td class="nowrap text-end" id="total_credit"> {{ number_format($total_credit, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Taka In&nbsp;Words:&nbsp;</td>
+                                    <td>In&nbsp;Words:&nbsp;</td>
                                     <td colspan="4">{{convert_number($voucher->amount)}}          &nbsp;Only</td>
                                 </tr>
                             </tbody>

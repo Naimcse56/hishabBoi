@@ -25,7 +25,7 @@ class BalanceSheetController extends Controller
         $data['prve_date_from'] = null;
 
         $ledgers = Ledger::with(['categories:id,parent_id,name,code,type,acc_type,level'])->whereNotIn('id',[app('account_configurations')['retail_earning_account']])->get(['id','name','code','parent_id','acc_type','level','type']);
-        // dd("OK");
+
         $data['dateFrom'] = $start_date;
         $data['dateTo'] = $end_date;
         $tr_data = array();
