@@ -2,17 +2,48 @@
 
 namespace Modules\Base\App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use Modules\Base\App\Models\GeneralSetting;
-use Modules\Accounts\App\Models\AccountConfiguration;
+use Mail;
+use App\Models\User;
+use App\Mail\EmailManager;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Mail\EmailManager;
-use Mail;
-
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Spatie\Permission\Models\Permission;
+use Modules\Base\App\Models\GeneralSetting;
+use Modules\Accounts\App\Models\AccountConfiguration;
+ 
 class BaseController extends Controller
 {
+
+     public function user_permisssions(Request $request)
+    {
+            $user_id = $request->query('user_id');
+        $permissions = Permission::all();
+       
+         $user = User::find($user_id);
+    $assigned_permissions = $user ? $user->getPermissionNames()->toArray() : [];
+
+     
+        return view('base::configurations.user_permissions',compact('permissions','user_id','assigned_permissions'));
+    }
+     public function store_permisssions(Request $request)
+    {
+         $validated = $request->validate([
+        'user_id' => 'required|exists:users,id',  
+        'permissions' => 'required|array',  
+        'permissions.*' => 'exists:permissions,name', 
+    ]);
+      // Find the user
+    $user = User::findOrFail($validated['user_id']);
+
+    // Assign the permissions to the user
+    $user->syncPermissions($validated['permissions']);
+ return back()->with('success', 'Parmission Assigned Successfully.');
+   
+    }
+
+
     /**
      * Display a listing of the resource.
      */

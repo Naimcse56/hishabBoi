@@ -18,6 +18,8 @@ use Modules\Base\App\Http\Controllers\LanguageController;
 
 Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
     Route::controller(BaseController::class)->prefix('base-configurations')->group(function () {
+        Route::get('/user-permisssions', 'user_permisssions')->name('user.permisssions');
+        Route::post('/store-permisssions', 'store_permisssions')->name('store.permisssions');
         Route::get('/general-settings', 'general_settings')->name('general_settings.configurations');
         Route::get('/company-settings', 'company_settings')->name('company_settings.configurations');
         Route::post('/base-settings-update', 'base_settings_update')->name('base_settings_update.configurations');
