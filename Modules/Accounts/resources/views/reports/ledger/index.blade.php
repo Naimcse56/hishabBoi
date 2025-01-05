@@ -22,7 +22,7 @@ Ledger Report
                                 <x-common.date-picker label="From Date" :required="true" column=4 name="start_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 <x-common.date-picker label="To Date" :required="true" column=4 name="end_date" placeholder="Date" :value="date('d/m/Y', strtotime(app('day_closing_info')->from_date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
                                 
-                                <x-common.server-side-select :required="false" column=4 name="party_account_id" class="party_account_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
+                                <x-common.server-side-select :required="false" column=4 name="party_account_id" class="party_account_id" disableOptionText="Select Party Account" label="Party Accounts"></x-common.server-side-select>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                                 </div>

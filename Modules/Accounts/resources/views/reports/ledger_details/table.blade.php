@@ -25,8 +25,8 @@ $current_balance = !request('reciept_payment') ? 0 + $total_opening : 0;
             <th scope="col">Particular</th>
             <th scope="col">Voucher Type</th>
             <th scope="col">Trn No.</th>
-            <th scope="col" class="text-right">Debit (BDT)</th>
-            <th scope="col" class="text-right">Credit (BDT)</th>
+            <th scope="col" class="text-right">Debit </th>
+            <th scope="col" class="text-right">Credit </th>
         </tr>
     </thead>
     <tbody>
