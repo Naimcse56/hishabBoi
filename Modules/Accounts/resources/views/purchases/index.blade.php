@@ -6,7 +6,7 @@ Purchase List
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
             <div><h4 class="mt-4">Purchase List</h4></div>
-            <div><a href="{{route('purchases.create')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> Add New Purchase</a></div>
+            <div><a href="{{route('purchases.create')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-plus"></i> Add New</a></div>
         </div>
         <div class="row">
             <div class="col-md-12">

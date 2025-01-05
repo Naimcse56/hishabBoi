@@ -13,7 +13,7 @@
                     <div class="row">
                         <x-common.input :required="true" column=12 id="name" name="name" label="Name" placeholder="Name" :value="$item->name"></x-common.input>
                         <x-common.radio :required="true" column=12 name="is_for" class="is_for" label="Type For" :value="$item->is_for" :options="[
-                            ['id' => '1', 'name' => 'Supplier / Vendor'],
+                            ['id' => '1', 'name' => 'Vendor'],
                             ['id' => '2', 'name' => 'Client'],
                             ['id' => '0', 'name' => 'Staff']
                         ]"></x-common.radio>

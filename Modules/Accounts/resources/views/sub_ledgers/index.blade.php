@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Party Accounts
+Party Accounts List
 @endsection
 @section('content')
 <div class="container-fluid px-4">

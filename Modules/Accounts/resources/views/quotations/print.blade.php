@@ -16,7 +16,7 @@
             <td colspan="2" class="py-1">
                 <div class="row">
                     <div class="col">Memo</div>
-                    <div class="col text-center fw-semibold text-3 text-uppercase">Sale Invoice</div>
+                    <div class="col text-center fw-semibold text-3 text-uppercase">Quotation Invoice</div>
                     <div class="col text-end">Original</div>
                 </div>
             </td>

@@ -53,7 +53,7 @@
             <td class="nowrap" id="total_credit"> {{ number_format($total_credit, 2) }}</td>
         </tr>
         <tr>
-                <td>In&nbsp;Words:&nbsp;</td>
+                <td>In Words</td>
                 <td colspan="3">{{convert_number($row->amount)}}          &nbsp;Only</td>
         </tr>
         <tr>

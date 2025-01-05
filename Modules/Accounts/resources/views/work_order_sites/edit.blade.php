@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Work Order Site
+Edit Work Order Site
 @endsection
 @section('content')
     <div class="container-fluid px-4">

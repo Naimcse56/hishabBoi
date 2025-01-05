@@ -1,6 +1,6 @@
 @extends('layouts.admin_app')
 @section('title')
-Sale
+Edit Sale
 @endsection
 @section('content')
 <div class="container-fluid px-4">

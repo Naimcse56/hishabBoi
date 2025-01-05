@@ -1,11 +1,11 @@
 @extends('layouts.admin_app')
 @section('title')
-Rejected Vouchers List By Head
+Rejected Vouchers
 @endsection
 @section('content')
     <div class="container-fluid px-4">
         <div class="d-flex justify-content-between">
-            <h4 class="mt-4">Rejected Vouchers List</h4>
+            <h4 class="mt-4">Rejected Vouchers</h4>
         </div>
         <div class="row">
             <div class="col-md-12">

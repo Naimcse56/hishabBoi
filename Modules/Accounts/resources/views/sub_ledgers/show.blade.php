@@ -13,7 +13,7 @@
                         <table class="table table-bordered mb-0">
                             <tbody>
                                 <tr>
-                                    <td width="30%">Head Account</td>
+                                    <td width="30%">Parent Account</td>
                                     <td>{{$ledger->ledger->name}}</td>
                                 </tr>
                                 <tr>

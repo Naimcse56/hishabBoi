@@ -32,7 +32,7 @@ Purchase Details
                             <td colspan="2" class="py-1">
                                 <div class="row">
                                     <div class="col">Memo</div>
-                                    <div class="col text-center fw-semibold text-3 text-uppercase">Sale Invoice</div>
+                                    <div class="col text-center fw-semibold text-3 text-uppercase">Purchase Invoice</div>
                                     <div class="col text-end">Original</div>
                                 </div>
                             </td>
@@ -69,7 +69,7 @@ Purchase Details
                                             <tr class="bg-light">
                                                 <td class="text-center" width="3%"><strong>#</strong></td>
                                                 <td class="col-4"><strong>Product</strong></td>
-                                                <td class="text-center"><strong>Qty</strong></td>
+                                                <td class="text-center"><strong>QTY</strong></td>
                                                 <td class="text-center"><strong>Tax (%)</strong></td>
                                                 <td class="text-center"><strong>Dis (%)</strong></td>
                                                 <td class="col-2 text-end"><strong>Rate</strong></td>
@@ -181,7 +181,7 @@ Purchase Details
                                     <td class="nowrap text-end" id="total_credit"> {{ number_format($total_credit, 2) }}</td>
                                 </tr>
                                 <tr>
-                                    <td>In&nbsp;Words:&nbsp;</td>
+                                    <td>In Words: </td>
                                     <td colspan="4">{{convert_number($voucher->amount)}}          &nbsp;Only</td>
                                 </tr>
                             </tbody>
