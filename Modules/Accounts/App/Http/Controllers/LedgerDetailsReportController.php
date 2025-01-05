@@ -88,7 +88,7 @@ class LedgerDetailsReportController extends Controller
                     return $q->where('work_order_id', $request->work_order_id);
                 })->whereIn('ledger_id', $accounts_ids)->whereBetween('date',[$start_date,$end_date])
                 ->with(['ledger:id,name,code', 'voucher:id,type,txn_id,f_year,is_opening,date','voucher.transactions:id,voucher_id,type,amount,ledger_id,sub_ledger_id','voucher.transactions.ledger:id,name,code','work_order:id,order_name,order_no,sub_ledger_id','work_order.sub_ledger:id,name','work_order_site_detail:id,site_name'])
-                ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_detail_id']);
+                ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_id']);
             } else {
                 $transactions = Transaction::whereHas('voucher', function($query) use($accounts_ids,$start_date,$end_date,$request,$reciept_payment){
                     $query->where('is_approve', 1)->when($reciept_payment != 'all', function ($q) use ($request,$reciept_payment) {
@@ -100,7 +100,7 @@ class LedgerDetailsReportController extends Controller
                     return $q->where('work_order_id', $request->work_order_id);
                 })->whereIn('ledger_id', $accounts_ids)->whereBetween('date',[$start_date,$end_date])
                 ->with(['ledger:id,name,code', 'voucher:id,type,txn_id,f_year,is_opening,date','voucher.transactions:id,voucher_id,type,amount,ledger_id,sub_ledger_id','voucher.transactions.ledger:id,name,code','work_order:id,order_name,order_no,sub_ledger_id','work_order.sub_ledger:id,name','work_order_site_detail:id,site_name'])
-                ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_detail_id']);
+                ->orderBy('voucher_id')->get(['id','date','voucher_id','ledger_id','sub_ledger_id','type','amount','narration','work_order_id','work_order_site_id']);
             }
             $data['transactions'] = collect($this->getDataFormatLedger($transactions), $approval);
         }
