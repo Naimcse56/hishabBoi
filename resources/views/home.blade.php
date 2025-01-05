@@ -143,10 +143,10 @@ Dashboard
                 legendText: "{name}",
                 indexLabelPlacement: "inside",
                 dataPoints: [
-                    { y: {{$opening_bank}}, name: "Opening" },
-                    { y: {{$pay_bank}}, name: "Payment" },
-                    { y: {{$rcv_bank}}, name: "Receipt" },
-                    { y: {{$closing_bank}}, name: "Current Balance" }
+                    { y: {{$opening_recievable}}, name: "Opening" },
+                    { y: {{$pay_recievable}}, name: "Payment" },
+                    { y: {{$rcv_recievable}}, name: "Receipt" },
+                    { y: {{$closing_recievable}}, name: "Current Balance" }
                 ]
             }]
         };
@@ -170,10 +170,10 @@ Dashboard
                 legendText: "{name}",
                 indexLabelPlacement: "inside",
                 dataPoints: [
-                    { y: {{$opening_bank}}, name: "Opening" },
-                    { y: {{$pay_bank}}, name: "Payment" },
-                    { y: {{$rcv_bank}}, name: "Receipt" },
-                    { y: {{$closing_bank}}, name: "Current Balance" }
+                    { y: {{$opening_payable}}, name: "Opening" },
+                    { y: {{$pay_payable}}, name: "Payment" },
+                    { y: {{$rcv_payable}}, name: "Receipt" },
+                    { y: {{$closing_payable}}, name: "Current Balance" }
                 ]
             }]
         };
