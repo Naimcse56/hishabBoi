@@ -116,7 +116,6 @@
                     <p class="sign_dash">(CHECKED BY)</p>
                     <p class="sign_dash">(HEAD OF CONCERN)</p>
                     <p class="sign_dash">(APPROVED BY)</p>
-                    <p class="sign_dash">(APPROVED BY)</p>
                 </div>
             </td>
         </tr>

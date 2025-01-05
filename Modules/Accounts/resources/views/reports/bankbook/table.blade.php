@@ -22,10 +22,9 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
         </tr>
         <tr>
             <th scope="col" width="5%">Sl No.</th>
-            <th scope="col">Date.</th>
+            <th scope="col">Date</th>
             <th scope="col">Particular</th>
             <th scope="col">Voucher Type</th>
-            {{-- <th scope="col">SSID</th> --}}
             <th scope="col">Trn No.</th>
             <th scope="col" class="text-right">Receipt</th>
             <th scope="col" class="text-right">Payment</th>
@@ -102,7 +101,6 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
                     <p class="sign_dash">(PREPARED BY)</p>
                     <p class="sign_dash">(CHECKED BY)</p>
                     <p class="sign_dash">(HEAD OF CONCERN)</p>
-                    <p class="sign_dash">(APPROVED BY)</p>
                     <p class="sign_dash">(APPROVED BY)</p>
                 </div>
             </td>

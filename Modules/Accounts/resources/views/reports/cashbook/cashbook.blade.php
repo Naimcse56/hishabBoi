@@ -26,7 +26,7 @@ Cash Book
                                 ['id' => 'Vendor', 'name' => 'Vendor'],
                                 ['id' => 'Staff', 'name' => 'Staff']
                                 ]"></x-common.select>
-                                <x-common.server-side-select :required="false" column=4 name="party_id" class="party_id" disableOptionText="Select Party Account" label="Party Accounts (Dr)"></x-common.server-side-select>
+                                <x-common.server-side-select :required="false" column=4 name="party_id" class="party_id" disableOptionText="Select Party Account" label="Party Accounts"></x-common.server-side-select>
                                 <div class="col-md-12 mb-3">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                                 </div>

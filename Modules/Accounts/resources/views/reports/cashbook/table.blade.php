@@ -100,7 +100,6 @@ $difference = $total_opening+$opening_add_today + abs($total_rcv) - abs($total_p
                     <p class="sign_dash">(CHECKED BY)</p>
                     <p class="sign_dash">(HEAD OF CONCERN)</p>
                     <p class="sign_dash">(APPROVED BY)</p>
-                    <p class="sign_dash">(APPROVED BY)</p>
                 </div>
             </td>
         </tr>
