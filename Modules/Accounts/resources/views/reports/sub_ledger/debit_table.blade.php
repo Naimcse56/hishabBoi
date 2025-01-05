@@ -7,7 +7,7 @@
 <table class="table table-bordered mb-0">
     <thead>
         <tr>
-            <th colspan="10" class="text-center sky-bg">
+            <th colspan="7" class="text-center sky-bg">
                 <h5 class="mb-2">{{ app('general_setting')['company_name'] }}</h5>
                 <h6 class="mb-2">{{ app('general_setting')['company_address']}}</h6>
                 <h6 class="mb-1">Party Account Report @if (Route::is('accountings.sub_ledger_report_preview')) Preview @endif
@@ -22,16 +22,13 @@
             </th>
         </tr>
         <tr>
-            <th colspan="10" class="text-center">Date Range: {{date('d, F - Y', strtotime($dateFrom)).' to '.date('d, F - Y', strtotime($dateTo))}}</th>
+            <th colspan="7" class="text-center">Date Range: {{date('d, F - Y', strtotime($dateFrom)).' to '.date('d, F - Y', strtotime($dateTo))}}</th>
         </tr>
         <tr>
             <th scope="col" width="4%">Sl No.</th>
             <th scope="col" class="text-center">Date</th>
-            <th scope="col" class="text-center" width="10%">Bill Date / No.</th>
-            <th scope="col" class="text-center">Credit Period</th>
-            <th scope="col" class="text-center">Over Days</th>
             <th scope="col" class="text-center">Trn No.</th>
-            <th scope="col" class="text-center" width="20%">Narration</th>
+            <th scope="col" class="text-center" width="30%">Narration</th>
             <th scope="col" class="text-right" width="8%">Debit</th>
             <th scope="col" class="text-right" width="8%">Credit</th>
             <th scope="col" class="text-right" width="8%">Balance</th>
@@ -47,10 +44,6 @@
                 <td class="nowrap " style="vertical-align:middle;">
                     {{ date('d-m-Y', strtotime(@$transaction['date'])) }}
                 </td>
-                <td class="nowrap " style="vertical-align:middle;">
-                </td>
-                <td class="nowrap " style="vertical-align:middle;">{{ $transaction['credit_period'] }}</td>
-                <td class="nowrap " style="vertical-align:middle;">{{ $transaction['diff_in_days'] }}</td>
                 <td class="nowrap " style="vertical-align:middle;"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">{{  @$transaction['txn_id'] }}</a></td>
                 <td>
                     {{$transaction['particular']}} ;<br>
@@ -80,25 +73,25 @@
             </tr>
         @endforeach
         <tr>
-            <td colspan="10"></td>
+            <td colspan="6"></td>
         </tr>
         <tr>
-            <td colspan="9" class="text-right">Opening Balance</td>
+            <td colspan="6" class="text-right">Opening Balance</td>
             <td class="text-right nowrap">{{$filtered_account_balance >= 0 ? number_format($filtered_account_balance, 2) : '('.number_format(abs($filtered_account_balance), 2).')'}}</td>
         </tr>
         <tr>
-            <td colspan="9" class="text-right">Current Period Balance</td>
+            <td colspan="6" class="text-right">Current Period Balance</td>
             <td class="text-right nowrap">{{ $currentBalance >= 0 ? number_format($currentBalance, 2) : '('.number_format(abs($currentBalance), 2).')' }}</td>
         </tr>
         <tr>
-            <td colspan="9" class="text-right">Closing Balance</td>
+            <td colspan="6" class="text-right">Closing Balance</td>
             <td class="text-right nowrap">{{ ($currentBalance + $filtered_account_balance) >= 0 ? number_format($currentBalance + $filtered_account_balance, 2) : '('.number_format(abs($currentBalance + $filtered_account_balance), 2).')' }}</td>
         </tr>
     </tbody>
     @if (strpos($_SERVER['REQUEST_URI'], 'print') == true)
     <tfoot>
         <tr>
-            <td colspan="10">
+            <td colspan="7">
                 <div class="d-flex justify-content-between mt-25">
                     <p class="sign_dash">(PREPARED BY)</p>
                     <p class="sign_dash">(CHECKED BY)</p>
