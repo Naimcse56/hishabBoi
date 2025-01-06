@@ -8,6 +8,8 @@ use App\Models\User;
 use Modules\Accounts\App\Models\Ledger;
 use Modules\Accounts\App\Models\SubLedger;
 use Modules\Accounts\App\Models\Voucher;
+use Modules\Accounts\App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
@@ -40,8 +42,7 @@ class HomeController extends Controller
         $data['closing_bank'] = 0;
         $data['closing_payable'] = 0;
         $data['closing_recievable'] = 0;
-        $data['income_this_year'] = 0;
-        $data['expense_this_year'] = 0;
+        
         $payable_id = SubLedger::where('type','Vendor')->pluck('id');
         $recievable_id = SubLedger::where('type','Client')->pluck('id');
         $date = app('day_closing_info')->from_date;
@@ -69,20 +70,72 @@ class HomeController extends Controller
         foreach ($ledgers->where('id',$recievable_id) as $ledger) {
             $data['closing_recievable'] += $ledger->BalanceAmount;
         }
-        $income_ledgers = Ledger::where('is_active',1)
-                        ->where('type',4)
-                        ->whereHas('transactions')
-                        ->get(['id','name','acc_type','type']);
-        foreach ($income_ledgers as $income_ledger) {
-            $data['income_this_year'] += $income_ledger->BalanceAmountBetweenDate($current_year->from_date, $date);
+
+        $startDate = Carbon::parse($current_year->from_date)->startOfMonth();
+        $endDate = Carbon::now()->addMonths(12)->endOfMonth();
+    
+        $income_amounts = DB::table('transactions')
+                            ->join('ledgers', 'transactions.ledger_id', '=', 'ledgers.id')
+                            ->where('ledgers.type', 4)
+                            ->whereBetween('transactions.date', [$startDate, $endDate])
+                            ->select(
+                                DB::raw('DATE_FORMAT(transactions.date, "%Y-%m") as month'),
+                                DB::raw('SUM(CASE WHEN transactions.type = "Cr" THEN transactions.amount ELSE 0 END) - SUM(CASE WHEN transactions.type = "Dr" THEN transactions.amount ELSE 0 END) as income')
+                            )
+                            ->groupBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))
+                            ->orderBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))
+                            ->get();
+                    
+        $expense_amounts =  DB::table('transactions')
+                                ->join('ledgers', 'transactions.ledger_id', '=', 'ledgers.id')
+                                ->where('ledgers.type', 3)  // Only expense ledgers
+                                ->whereBetween('transactions.date', [$startDate, $endDate])  // Date range: last 12 months
+                                ->select(
+                                    DB::raw('DATE_FORMAT(transactions.date, "%Y-%m") as month'),
+                                    DB::raw('SUM(CASE WHEN transactions.type = "Dr" THEN transactions.amount ELSE 0 END) - SUM(CASE WHEN transactions.type = "Cr" THEN transactions.amount ELSE 0 END) as expense')
+                                )
+                                ->groupBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))  // Group by year-month
+                                ->orderBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))  // Order by date
+                                ->get();
+    
+        $asset_amounts = DB::table('transactions')
+                            ->join('ledgers', 'transactions.ledger_id', '=', 'ledgers.id')
+                            ->where('ledgers.type', 2)
+                            ->whereBetween('transactions.date', [$startDate, $endDate])
+                            ->select(
+                                DB::raw('DATE_FORMAT(transactions.date, "%Y-%m") as month'),
+                                DB::raw('SUM(CASE WHEN transactions.type = "Cr" THEN transactions.amount ELSE 0 END) - SUM(CASE WHEN transactions.type = "Dr" THEN transactions.amount ELSE 0 END) as asset')
+                            )
+                            ->groupBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))
+                            ->orderBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))
+                            ->get();
+                    
+        $liability_amounts =  DB::table('transactions')
+                                ->join('ledgers', 'transactions.ledger_id', '=', 'ledgers.id')
+                                ->where('ledgers.type', 1)  // Only expense ledgers
+                                ->whereBetween('transactions.date', [$startDate, $endDate])  // Date range: last 12 months
+                                ->select(
+                                    DB::raw('DATE_FORMAT(transactions.date, "%Y-%m") as month'),
+                                    DB::raw('SUM(CASE WHEN transactions.type = "Dr" THEN transactions.amount ELSE 0 END) - SUM(CASE WHEN transactions.type = "Cr" THEN transactions.amount ELSE 0 END) as liability')
+                                )
+                                ->groupBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))  // Group by year-month
+                                ->orderBy(DB::raw('DATE_FORMAT(transactions.date, "%Y-%m")'))  // Order by date
+                                ->get();
+        $data['income_expense_array'] = array();
+        $data['asset_liability_array'] = array();
+        foreach ($income_amounts as $key => $income_amount) {
+            $new_detail_data['month'] = $income_amount->month;
+            $new_detail_data['income'] = $income_amount->income;
+            $new_detail_data['expense'] = $expense_amounts[$key]->expense;
+            array_push($data['income_expense_array'], $new_detail_data);
         }
-        $expense_ledgers = Ledger::where('is_active',1)
-                        ->where('type',3)
-                        ->whereHas('transactions')
-                        ->get(['id','name','acc_type','type']);
-        foreach ($expense_ledgers as $expense_ledger) {
-            $data['expense_this_year'] += $expense_ledger->BalanceAmountBetweenDate($current_year->from_date, $date);
+        foreach ($asset_amounts as $key => $asset_amount) {
+            $new_data['month'] = $asset_amount->month;
+            $new_data['asset'] = $asset_amount->asset;
+            $new_data['liability'] = $liability_amounts[$key]->liability;
+            array_push($data['asset_liability_array'], $new_data);
         }
+        
         return view('home', $data);
     }
 

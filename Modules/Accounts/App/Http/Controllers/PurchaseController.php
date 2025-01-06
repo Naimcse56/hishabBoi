@@ -162,26 +162,26 @@ class PurchaseController extends Controller
             $referable_id = $request->id;
             $type = "purchase";
             foreach ($purchase->purchase_details as $i => $sold_product) {
-                $credit_amounts[] = $sold_product->total_price;
-                $credit_account_id[] = $sold_product->product->purchase_ledger_id;
-                $credit_partner_id[] = 0;
-                $credit_work_order_id[] = $purchase->work_order_id;
-                $credit_work_order_site_detail_id[] = $purchase->work_order_site_id;
-                $credit_narration[] = $sold_product->product->name.' Purchased in '.$purchase->invoice_no;
+                $debit_amounts[] = $sold_product->total_price;
+                $debit_account_id[] = $sold_product->product->purchase_ledger_id;
+                $debit_partner_id[] = 0;
+                $debit_work_order_id[] = $purchase->work_order_id;
+                $debit_work_order_site_detail_id[] = $purchase->work_order_site_id;
+                $debit_narration[] = $sold_product->product->name.' Purchased in '.$purchase->invoice_no;
             }
-            $debit_amounts[] = $purchase->discount_amount;
-            $debit_account_id[] = app('general_setting')['purchase_discount_ledger'];
-            $debit_partner_id[] = 0;
-            $debit_work_order_id[] = $purchase->work_order_id;
-            $debit_work_order_site_detail_id[] = $purchase->work_order_site_id;
-            $debit_narration[] = 'Got Discount on invoice '.$purchase->invoice_no;
+            $credit_amounts[] = $purchase->discount_amount;
+            $credit_account_id[] = app('general_setting')['purchase_discount_ledger'];
+            $credit_partner_id[] = 0;
+            $credit_work_order_id[] = $purchase->work_order_id;
+            $credit_work_order_site_detail_id[] = $purchase->work_order_site_id;
+            $credit_narration[] = 'Got Discount on invoice '.$purchase->invoice_no;
 
-            $debit_amounts[] = $purchase->payable_amount;
-            $debit_account_id[] = $purchase->sub_ledger->ledger_id;
-            $debit_partner_id[] = $purchase->sub_ledger_id;
-            $debit_work_order_id[] = $purchase->work_order_id;
-            $debit_work_order_site_detail_id[] = $purchase->work_order_site_id;
-            $debit_narration[] = 'Voucher for invoice'.$purchase->invoice_no;
+            $credit_amounts[] = $purchase->payable_amount;
+            $credit_account_id[] = $purchase->sub_ledger->ledger_id;
+            $credit_partner_id[] = $purchase->sub_ledger_id;
+            $credit_work_order_id[] = $purchase->work_order_id;
+            $credit_work_order_site_detail_id[] = $purchase->work_order_site_id;
+            $credit_narration[] = 'Voucher for invoice'.$purchase->invoice_no;
 
             $purchases_voucher = $this->journalRepositoryInterface->create([
                 'type' => $type,
@@ -234,25 +234,25 @@ class PurchaseController extends Controller
                 $total_payment_rcv = 0;
                 foreach ($purchase->morphs->where('is_approve', 0) as $key => $payment) {
                     $total_payment_rcv += $payment->amount;
-                    $debit_amounts[] = $payment->amount;
-                    $debit_account_id[] = $payment->ledger_id;
-                    $debit_partner_id[] = 0;
-                    $debit_work_order_id[] = $purchase->work_order_id;
-                    $debit_work_order_site_detail_id[] = $purchase->work_order_site_id;
-                    $debit_narration[] = $purchase->invoice_no;
-                    $debit_bank_name[] = $payment->bank_name;
-                    $debit_bank_ac_name[] = $payment->bank_account_name;
-                    $debit_check_no[] = $payment->check_no;
-                    $debit_check_mature_date[] = $payment->check_mature_date;
+                    $credit_amounts[] = $payment->amount;
+                    $credit_account_id[] = $payment->ledger_id;
+                    $credit_partner_id[] = 0;
+                    $credit_work_order_id[] = $purchase->work_order_id;
+                    $credit_work_order_site_detail_id[] = $purchase->work_order_site_id;
+                    $credit_narration[] = $purchase->invoice_no;
+                    $credit_bank_name[] = $payment->bank_name;
+                    $credit_bank_ac_name[] = $payment->bank_account_name;
+                    $credit_check_no[] = $payment->check_no;
+                    $credit_check_mature_date[] = $payment->check_mature_date;
                     $payment->update(['is_approve' => 1]);
                 }
                 
-                $credit_amounts[] = $total_payment_rcv;
-                $credit_account_id[] = $purchase->sub_ledger->ledger_id;
-                $credit_partner_id[] = $purchase->sub_ledger_id;
-                $credit_work_order_id[] = $purchase->work_order_id;
-                $credit_work_order_site_detail_id[] = $purchase->work_order_site_id;
-                $credit_narration[] = 'Payment for '.$purchase->invoice_no;
+                $debit_amounts[] = $total_payment_rcv;
+                $debit_account_id[] = $purchase->sub_ledger->ledger_id;
+                $debit_partner_id[] = $purchase->sub_ledger_id;
+                $debit_work_order_id[] = $purchase->work_order_id;
+                $debit_work_order_site_detail_id[] = $purchase->work_order_site_id;
+                $debit_narration[] = 'Payment for '.$purchase->invoice_no;
 
                 $recieve_voucher = $this->journalRepositoryInterface->create([
                     'type' => "pay",
@@ -266,6 +266,10 @@ class PurchaseController extends Controller
                     'credit_work_order_site_detail_id'=> $credit_work_order_site_detail_id,
                     'credit_account_amount'=> $credit_amounts,
                     'credit_narration'=> $credit_narration,
+                    'credit_bank_name'=> $credit_bank_name,
+                    'credit_bank_ac_name'=> $credit_bank_ac_name,
+                    'credit_check_no'=> $credit_check_no,
+                    'credit_check_mature_date'=> $credit_check_mature_date,
                     'narration_voucher'=> 'Payment for '.$purchase->invoice_no,
                     'pay_or_rcv_type'=> "pay",
                     'referable_type'=> $referable_type,

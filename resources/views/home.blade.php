@@ -47,9 +47,50 @@ Dashboard
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
+                            <p class="fw-semibold">Income VS Expense</p>
                             <div class="card">
-                                <div class="text-white chart_div_custom" id="chart_div"></div>
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Month</th>
+                                            <th scope="col" class="text-end">Income</th>
+                                            <th scope="col" class="text-end">Expense</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($income_expense_array as $income_expense)
+                                            <tr>
+                                                <td>{{ $income_expense["month"] }}</td>
+                                                <td class="text-end">{{ currencySymbol($income_expense['income']) }}</td>
+                                                <td class="text-end">{{ currencySymbol($income_expense['expense']) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="fw-semibold">Asset VS Liabilities</p>
+                            <div class="card">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Month</th>
+                                            <th scope="col" class="text-end">Asset</th>
+                                            <th scope="col" class="text-end">Liability</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($asset_liability_array as $asset_liability)
+                                            <tr>
+                                                <td>{{ $income_expense["month"] }}</td>
+                                                <td class="text-end">{{ currencySymbol($asset_liability['liability']) }}</td>
+                                                <td class="text-end">{{ currencySymbol($asset_liability['asset']) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                  </table>
                             </div>
                         </div>
                     </div>
@@ -61,31 +102,4 @@ Dashboard
 @endsection
 @push('scripts')
     <script src="{{asset('assets/plugins/chart/google_chart.min.js')}}"></script>
-    <script>
-        (function($) {
-            "use strict";
-            
-            google.charts.load('current', {'packages':['corechart']});
-            google.charts.setOnLoadCallback(drawChart);
-
-            function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['Month', 'Income', 'Expenses'],
-                ['2013',  1000,      400],
-                ['2014',  1170,      460],
-                ['2015',  660,       1120],
-                ['2016',  1030,      540]
-            ]);
-
-            var options = {
-                title: 'Income VS Expense',
-                hAxis: {title: 'Month',  titleTextStyle: {color: '#333'}},
-                vAxis: {minValue: 0}
-            };
-
-            var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-            }
-        })(jQuery);
-    </script>
 @endpush
