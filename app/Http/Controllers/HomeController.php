@@ -29,7 +29,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {$data['opening_cash'] = 0;
+    {
+        $data['opening_cash'] = 0;
         $data['rcv_cash'] = 0;
         $data['pay_cash'] = 0;
         $data['closing_cash'] = 0;
@@ -37,13 +38,7 @@ class HomeController extends Controller
         $data['rcv_bank'] = 0;
         $data['pay_bank'] = 0;
         $data['closing_bank'] = 0;
-        $data['opening_payable'] = 0;
-        $data['rcv_payable'] = 0;
-        $data['pay_payable'] = 0;
         $data['closing_payable'] = 0;
-        $data['opening_recievable'] = 0;
-        $data['rcv_recievable'] = 0;
-        $data['pay_recievable'] = 0;
         $data['closing_recievable'] = 0;
         $payable_id = SubLedger::where('type','Vendor')->pluck('id');
         $recievable_id = SubLedger::where('type','Client')->pluck('id');
@@ -66,20 +61,11 @@ class HomeController extends Controller
             $data['closing_bank'] += $ledger->BalanceAmount;
         }
         foreach ($ledgers->where('id',$payable_id) as $ledger) {
-            $data['opening_payable'] += $ledger->BalanceAmountTillDate($date);
-            $data['rcv_payable'] += $ledger->transactions()->where('date', $date)->where('type', 'Dr')->sum('amount');
-            $data['pay_payable'] += $ledger->transactions()->where('date', $date)->where('type', 'Cr')->sum('amount');
             $data['closing_payable'] += $ledger->BalanceAmount;
         }
         foreach ($ledgers->where('id',$recievable_id) as $ledger) {
-            $data['opening_recievable'] += $ledger->BalanceAmountTillDate($date);
-            $data['rcv_recievable'] += $ledger->transactions()->where('date', $date)->where('type', 'Dr')->sum('amount');
-            $data['pay_recievable'] += $ledger->transactions()->where('date', $date)->where('type', 'Cr')->sum('amount');
             $data['closing_recievable'] += $ledger->BalanceAmount;
         }
-        $data['total_voucher'] = Voucher::where('date',$date)->count();
-        $data['approved_voucher'] = Voucher::where('date',$date)->where('is_approve', 1)->count();
-        $data['pending_voucher'] = Voucher::where('date',$date)->where('is_approve', 0)->count();
         return view('home', $data);
     }
 

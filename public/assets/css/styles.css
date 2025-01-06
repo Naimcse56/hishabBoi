@@ -11320,61 +11320,29 @@ th {
     margin-bottom: 45px;
     margin-top: 10px;
 }
-
-.card-custom{
-    padding: 30px;
-    background: #fff;
-    border: 1px solid #a9a7b35c;
-    border-radius: 4px;
-    text-align: center;
+.card-custom {
+  padding: 10px;
+  color: #fff;
+  font-weight: 500;
+  border: 1px solid #a9a7b35c;
+  border-radius: 5px;
+  text-align: center;
 }
 .green{
-    color: rgb(34 197 94);
-    background-color: #22c55e1a;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
+  background: linear-gradient(210deg, rgb(17 179 104) 0%, rgb(80 209 149) 59%);
 }
 .blue{
-    color: rgb(14 165 233);
-    background-color: #0ea5e91a;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
+  background: linear-gradient(210deg, rgb(63 63 251) 0%, rgb(95 132 229) 100%);
 }
 .red{
-    color: rgb(239 68 68);
-    background-color: #ef44441a;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
+  background: linear-gradient(210deg, rgb(209 28 96) 0%, rgb(235 136 136) 100%);
 }
 .pink{
-    color: #FF4081;
-    background-color: #e91e631f;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
+  background: linear-gradient(210deg, rgb(251 63 215) 0%, rgb(229 95 193) 100%);
 }
 
 .amount{
-    color: #000;
+    color: #fff;
     margin-top: 10px;
 }
 .about{
