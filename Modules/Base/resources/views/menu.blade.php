@@ -8,7 +8,7 @@
         <a class="nav-link @if (0) active @endif" href="javascript:;">Staff</a>
         <a class="nav-link @if (0) active @endif" href="javascript:;">Designation</a>
         <a class="nav-link @if (0) active @endif" href="javascript:;">Department</a>
-        <a class="nav-link @if (0) active @endif" href="{{ route('user.permisssions') }}">User Permissions</a>
+        <a class="nav-link @if (Route::is('user.permisssions')) active @endif" href="{{ route('user.permisssions') }}">User Permissions</a>
     </nav>
 </div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBaseSettings" aria-expanded="false" aria-controls="collapseBaseSettings">

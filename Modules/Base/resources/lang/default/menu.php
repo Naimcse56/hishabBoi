@@ -52,5 +52,10 @@
   "Report" => "Report",
   "Day Close" => "Day Close",
   "Fiscal Year" => "Fiscal Year",
+  "Human Resource" => "Human Resource",
+  "Staff" => "Staff",
+  "Designation" => "Designation",
+  "Department" => "Department",
+  "" => "",
   "" => "",
 );
