@@ -5,9 +5,9 @@
 </a>
 <div class="collapse" id="collapseHumanResource" aria-labelledby="headingInventory" data-bs-parent="#sidenavAccordion">
     <nav class="sb-sidenav-menu-nested nav accordion" id="sideNavProducts">
-        <a class="nav-link @if (0) active @endif" href="javascript:;">Staff</a>
-        <a class="nav-link @if (0) active @endif" href="javascript:;">Designation</a>
-        <a class="nav-link @if (0) active @endif" href="javascript:;">Department</a>
+        <a class="nav-link @if (Route::is('staffs.*')) active @endif" href="{{ route('staffs.index') }}">Staff</a>
+        <a class="nav-link @if (Route::is('designation.*')) active @endif" href="{{ route('designation.index') }}">Designation</a>
+        <a class="nav-link @if (Route::is('departments.*')) active @endif" href="{{ route('departments.index') }}">Department</a>
         <a class="nav-link @if (Route::is('user.permisssions')) active @endif" href="{{ route('user.permisssions') }}">User Permissions</a>
     </nav>
 </div>
