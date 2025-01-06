@@ -103,9 +103,9 @@ class Ledger extends Model
     public function BalanceAmountBetweenDate($fromDate, $toDate)
     {
         if ($this->type == 1 || $this->type == 3) {
-            return $this->transactions->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->transactions->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
+            return $this->transactions()->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->transactions()->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
         } else {
-            return $this->transactions->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->transactions->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
+            return $this->transactions()->where('type', 'Cr')->whereBetween('date', array($fromDate, $toDate))->sum('amount') - $this->transactions()->where('type', 'Dr')->whereBetween('date', array($fromDate, $toDate))->sum('amount');
         }
     }
 
@@ -129,22 +129,22 @@ class Ledger extends Model
 
     public function DebitBalanceAmountTillDate($fromDate)
     {
-        return $this->transactions->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('debit');
+        return $this->transactions->where('type', 'Dr')->where('date', '<' ,$fromDate)->sum('amount');
     }
 
     public function CreditBalanceAmountTillDate($fromDate)
     {
-        return $this->transactions->where('type', 'Cr')->where('date', '<' ,$fromDate)->sum('credit');
+        return $this->transactions->where('type', 'Cr')->where('date', '<' ,$fromDate)->sum('amount');
     }
 
     public function DebitBalanceAmountOnDate($fromDate)
     {
-        return $this->transactions->where('type', 'Dr')->where('date' ,$fromDate)->sum('debit');
+        return $this->transactions->where('type', 'Dr')->where('date' ,$fromDate)->sum('amount');
     }
 
     public function CreditBalanceAmountOnDate($fromDate)
     {
-        return $this->transactions->where('type', 'Cr')->where('date' ,$fromDate)->sum('credit');
+        return $this->transactions->where('type', 'Cr')->where('date' ,$fromDate)->sum('amount');
     }
 
     public function TransactionBalanceAmountBetweenDate($fromDate, $toDate, $work_order_id = null)

@@ -11340,7 +11340,10 @@ th {
 .pink{
   background: linear-gradient(210deg, rgb(251 63 215) 0%, rgb(229 95 193) 100%);
 }
-
+.chart_div_custom {
+  width: 100%;
+  height: 500px;
+}
 .amount{
     color: #fff;
     margin-top: 10px;

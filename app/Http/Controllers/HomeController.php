@@ -40,9 +40,12 @@ class HomeController extends Controller
         $data['closing_bank'] = 0;
         $data['closing_payable'] = 0;
         $data['closing_recievable'] = 0;
+        $data['income_this_year'] = 0;
+        $data['expense_this_year'] = 0;
         $payable_id = SubLedger::where('type','Vendor')->pluck('id');
         $recievable_id = SubLedger::where('type','Client')->pluck('id');
         $date = app('day_closing_info')->from_date;
+        $current_year = app('current_fiscal_year');
         $ledgers = Ledger::where('is_active',1)
                         ->whereIn('acc_type',['cash','bank'])
                         ->orWhereIn('id',$payable_id)
@@ -65,6 +68,20 @@ class HomeController extends Controller
         }
         foreach ($ledgers->where('id',$recievable_id) as $ledger) {
             $data['closing_recievable'] += $ledger->BalanceAmount;
+        }
+        $income_ledgers = Ledger::where('is_active',1)
+                        ->where('type',4)
+                        ->whereHas('transactions')
+                        ->get(['id','name','acc_type','type']);
+        foreach ($income_ledgers as $income_ledger) {
+            $data['income_this_year'] += $income_ledger->BalanceAmountBetweenDate($current_year->from_date, $date);
+        }
+        $expense_ledgers = Ledger::where('is_active',1)
+                        ->where('type',3)
+                        ->whereHas('transactions')
+                        ->get(['id','name','acc_type','type']);
+        foreach ($expense_ledgers as $expense_ledger) {
+            $data['expense_this_year'] += $expense_ledger->BalanceAmountBetweenDate($current_year->from_date, $date);
         }
         return view('home', $data);
     }
