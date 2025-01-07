@@ -10,18 +10,18 @@
             </div>
             <form method="POST" action="{{ route('login') }}" class="text-start mb-3">
                 @csrf
-                <div class="form-floating mb-3">
+                <div class="mb-3">
+                    <label class="form-label" for="email">Email address</label>
                     <input class="form-control @error('email') is-invalid @enderror" id="email" name="email" type="email" value="{{ old('email', 'admin@example.com') }}" placeholder="name@example.com" required/>
-                    <label for="email">Email address</label>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-                <div class="form-floating mb-3">
+                <div class="mb-3">
+                    <label class="form-label" for="password">Password</label>
                     <input class="form-control @error('password') is-invalid @enderror" type="password" id="password" name="password" value="admin@example.com" placeholder="Password" required/>
-                    <label for="password">Password</label>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
