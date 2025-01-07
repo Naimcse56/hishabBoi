@@ -19,7 +19,7 @@ use Modules\Base\App\Http\Controllers\StaffController;
 |
 */
 
-Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'system','middleware' => ['auth','isActiveUser']], function () {
     Route::controller(BaseController::class)->prefix('base-configurations')->group(function () {
         Route::get('/user-permisssions', 'user_permisssions')->name('user.permisssions');
         Route::post('/store-permisssions', 'store_permisssions')->name('store.permisssions');
@@ -53,7 +53,7 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
         Route::post('/key-value-store', 'key_value_store')->name('language.key_value_store');
     });
 });
-Route::group(['prefix' => 'human-resource','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'human-resource','middleware' => ['auth','isActiveUser']], function () {
     Route::controller(DesignationController::class)->prefix('designation')->group(function () {
         Route::get('/index', 'index')->name('designation.index');
         Route::post('/store', 'store')->name('designation.store');
