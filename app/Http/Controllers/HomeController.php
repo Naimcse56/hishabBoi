@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Modules\Accounts\App\Models\Ledger;
 use Modules\Accounts\App\Models\SubLedger;
 use Modules\Accounts\App\Models\Voucher;

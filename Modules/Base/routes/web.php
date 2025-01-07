@@ -74,7 +74,7 @@ Route::group(['prefix' => 'human-resource','middleware' => ['auth']], function (
     });
     Route::controller(StaffController::class)->prefix('staffs')->group(function () {
         Route::get('/index', 'index')->name('staffs.index');
-        Route::view('/create', 'base::staffs.create')->name('staffs.create');
+        Route::get('/create', 'create')->name('staffs.create');
         Route::post('/store', 'store')->name('staffs.store');
         Route::get('/edit/{id}', 'edit')->name('staffs.edit');
         Route::get('/show/{id}', 'show')->name('staffs.show');

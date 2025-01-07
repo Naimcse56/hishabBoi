@@ -15,6 +15,7 @@ class Staff extends Model
     /**
      * The attributes that are mass assignable.
      */
+    protected $table = "staffs";
     protected $guarded = ['id'];
     
     protected static function newFactory(): StaffFactory

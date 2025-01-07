@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Modules\Base\App\Repository\Eloquents\StaffRepository;
+use Modules\Accounts\App\Models\SubLedgerType;
 use DataTables;
 
 class StaffController extends Controller
@@ -36,24 +37,24 @@ class StaffController extends Controller
         return view('base::staffs.index');
     }
 
+    public function create()
+    {
+        $data['sub_ledger_types'] = SubLedgerType::select('id','name as name')->get();
+        return view('base::staffs.create', $data);
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-        ]);
         try {
             DB::beginTransaction();
-            $item = $this->staffRepository->create($validated);
+            $item = $this->staffRepository->create($request->except('_token'));
             DB::commit();
-            if ($request->ajax()) {
-                return response()->json(["message" => 'Added Successfully'], 200);
-            }
+            return redirect()->route('staffs.create')->with('success', $item->staff_id.' Added Successfully');
         } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json(['message' => $e->getMessage()]);
+            DB::rollBack();dd($e);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
@@ -63,8 +64,19 @@ class StaffController extends Controller
     public function edit($id)
     {
         try {
-            $data['item'] = $this->staffRepository->findById(decrypt($id));
+            $data['staff'] = $this->staffRepository->findById(decrypt($id));
+            $data['sub_ledger_types'] = SubLedgerType::select('id','name as name')->get();
             return view('base::staffs.edit', $data);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            $data['staff'] = $this->staffRepository->findById(decrypt($id));
+            return view('base::staffs.show', $data);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()]);
         }
@@ -75,12 +87,9 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-        ]);
         try {
             DB::beginTransaction();
-            $item = $this->staffRepository->update(decrypt($id),$validated);
+            $item = $this->staffRepository->update(decrypt($id),$request->except('_token'));
             DB::commit();
             return redirect()->back()->with('success', $item->name.' Updated Successfully');
         } catch (\Exception $e) {
