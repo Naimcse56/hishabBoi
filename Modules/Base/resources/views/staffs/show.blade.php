@@ -49,7 +49,7 @@ Staff Details
                                         <span class="text-primary">{{ $staff->phone }}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <h6 class="mb-0"><i class="fa fa-address-card"></i> System ID/No</h6>
+                                        <h6 class="mb-0"><i class="fa fa-address-card"></i> Staff ID</h6>
                                         <span class="text-primary">{{ $staff->staff_id }}</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">

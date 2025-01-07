@@ -45,7 +45,7 @@ New Staff
                                     <fieldset class="the-fieldset mt-2">
                                         <legend class="the-legend">Ledger Information</legend>
                                         <div class="row">
-                                            <x-common.server-side-select :required="true" column=4 name="ledger_id" id="ledger_id" class="ledger_id" disableOptionText="Select Parent" label="Parent Account"></x-common.server-side-select>
+                                            <x-common.server-side-select :required="true" column=4 name="ledger_id" id="ledger_id" class="ledger_id" disableOptionText="Select One" label="Ledger Account"></x-common.server-side-select>
                                             <x-common.select :required="false" column=4 name="sub_ledger_type_id" id="sub_ledger_type_id" class="sub_ledger_type_id" disableOptionText="Select Type" label="Staff Type" :options=$sub_ledger_types></x-common.select>
                                         </div>
                                     </fieldset>
