@@ -15,7 +15,7 @@ use Session;
 class InstallController extends Controller
 {
     public function step0() {
-        $this->writeEnvironmentFile('APP_URL', URL::to('/'));
+        // $this->writeEnvironmentFile('APP_URL', URL::to('/'));
         return view('installation.step0');
     }
 

@@ -1,4 +1,4 @@
-@extends('backend.layouts.blank')
+@extends('layouts.install')
 @section('content')
     <div class="container pt-5">
         <div class="d-flex justify-content-center mt-5">
