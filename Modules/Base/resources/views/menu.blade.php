@@ -8,7 +8,7 @@
         <a class="nav-link @if (Route::is('staffs.*')) active @endif" href="{{ route('staffs.index') }}">Staff</a>
         <a class="nav-link @if (Route::is('designation.*')) active @endif" href="{{ route('designation.index') }}">Designation</a>
         <a class="nav-link @if (Route::is('departments.*')) active @endif" href="{{ route('departments.index') }}">Department</a>
-        <a class="nav-link @if (Route::is('user.permisssions')) active @endif" href="{{ route('user.permisssions') }}">User Permissions</a>
+        <a class="nav-link @if (Route::is('user.permisssions')) active @endif" href="{{ route('user.permisssions') }}">Staff Permissions</a>
     </nav>
 </div>
 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBaseSettings" aria-expanded="false" aria-controls="collapseBaseSettings">
