@@ -11412,3 +11412,7 @@ max-width: 980px;
 .nowrap {
   white-space: nowrap;
 }
+.permission{
+  border: 1px solid #ccc;
+  padding: 15px;
+}

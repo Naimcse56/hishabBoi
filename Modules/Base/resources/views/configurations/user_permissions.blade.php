@@ -15,7 +15,7 @@ Company Setting
                             @csrf
                             <div class="row">                                
                                      <x-common.select :required="true" column=6 
-                                     name="user_id"  label="User" placeholder="User" :value="'User'" :options="[
+                                     name="user_id"  label="User" placeholder="User" :value="'1'" :options="[
                                     ['id' => '1', 'name' => 'Monir'],
                                     
                                 ]"></x-common.select>
@@ -27,8 +27,10 @@ Company Setting
                             </div>
                         </form>
                         @if($user_id)
- <div><h4 class="mt-4">User Permissions List</h4></div>
-   <form class="create_form" action="{{ route('store.permisssions') }}" method="POST"  >
+ <div>
+     
+    <h4 class="mt-4">User Permissions List</h4></div>
+   <form class="create_form permission" action="{{ route('store.permisssions') }}" method="POST"  >
                             @csrf
                             <input type="hidden" value="{{ $user_id }}"  name="user_id"/>
  <div class="row">
