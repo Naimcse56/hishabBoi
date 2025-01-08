@@ -30,7 +30,7 @@
                               </g>
                             </g>
                         </svg>
-                        <h1 class="fs-21 fw-700 text-uppercase mt-2" style="color: #3d3d3d;">Active eCommerce CMS Settings</h1>
+                        <h1 class="fs-21 fw-700 text-uppercase mt-2" style="color: #3d3d3d;">E-BILLING SETTINGS</h1>
                         <p class="fs-12 fw-500" style="color:  #666; line-height: 18px;">Fill this form with basic information & admin login credentials</p>
                     </div>
 
@@ -54,21 +54,17 @@
                         <div class="form-group">
                             <label for="admin_name" class="fs-12 fw-500" style="color: #666;">System Currency</label>
                             <select class="form-control rounded-2 border aiz-selectpicker" style="height: 36px !important;" data-live-search="true" name="system_default_currency" required>
-                                @foreach (\App\Models\Currency::all() as $key => $currency)
-                                    <option value="{{ $currency->id }}">{{ $currency->name }}</option>
+                                @foreach (\Modules\Base\App\Models\Currency::all() as $key => $currency)
+                                    <option value="{{ $currency->id }} - {{ $currency->symbol }}">{{ $currency->name }}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="mb-4 pb-4 absolute-bottom-left right-0 d-flex justify-content-center">
-                            <button type="submit" class="btn btn-install text-uppercase">Continue</button>
+                            <button type="submit" class="btn btn-primary text-uppercase">Continue</button>
                         </div>
                     </form>
                 </div>
-
-                <!-- Common file -->
-                @include('installation.common')
-
             </div>
         </div>
     </div>

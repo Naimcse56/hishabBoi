@@ -70,25 +70,10 @@
                             @php
                                 $route = ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1') ? route('step1') :  route('step2') 
                             @endphp
-                            <a href="{{ $route }}" class="back-btn-svg mr-3" title="Go Back" style="box-shadow: 0px 8px 16px rgb(255 88 0 / 16%); border-radius: 50%;">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-                                <g id="Group_22706" data-name="Group 22706" transform="translate(-770 -653)">
-                                  <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(770 653)" fill="none" stroke="#cccccc" stroke-width="1">
-                                    <circle cx="20" cy="20" r="20" stroke="none"/>
-                                    <circle class="inner" cx="20" cy="20" r="19.5" fill="none"/>
-                                  </g>
-                                  <path id="e078aa9915b23dfe83446121b09a6213" class="arrow" d="M98.073,90.719H88.146l4.576-4.576L91.537,85,85,91.537l6.537,6.537,1.144-1.144-4.535-4.576h9.927Z" transform="translate(698.463 581.463)" fill="#cccccc"/>
-                                </g>
-                              </svg>
-                            </a>
-                            <button type="submit" class="btn btn-install text-uppercase">Continue</button>
+                            <button type="submit" class="btn btn-primary text-uppercase mt-3">Continue</button>
                         </div>
                     </form>
                 </div>
-                
-                <!-- Common file -->
-                @include('installation.common')
-                
             </div>
         </div>
     </div>

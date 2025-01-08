@@ -22,7 +22,7 @@ class InstallController extends Controller
     public function step1() {
         $permission['curl_enabled']           = function_exists('curl_version');
         $permission['db_file_write_perm']     = is_writable(base_path('.env'));
-        $permission['routes_file_write_perm'] = is_writable(base_path('app/Providers/RouteServiceProvider.php'));
+        $permission['routes_file_write_perm'] = is_writable(base_path('bootstrap\app.php'));
         return view('installation.step1', compact('permission'));
     }
 
@@ -57,9 +57,11 @@ class InstallController extends Controller
     }
 
     public function system_settings(Request $request) {
-        $businessSetting = GeneralSetting::where('name', 'system_currency_symbol')->first();
-        $businessSetting->value = $request->system_default_currency;
-        $businessSetting->save();
+
+        $currency_id = explode('-',$request->system_default_currency)[0];
+        $currency_symbol = explode('-',$request->system_default_currency)[1];
+        GeneralSetting::where('name','system_currency_id')->first()->update(['value' => $currency_id]);
+        GeneralSetting::where('name','system_currency_symbol')->first()->update(['value' => $currency_symbol]);
 
         $this->writeEnvironmentFile('APP_NAME', $request->system_name);
         Artisan::call('key:generate');
@@ -90,24 +92,29 @@ class InstallController extends Controller
         return view('installation.step6');
     }
     public function database_installation(Request $request) {
-
         if(self::check_database_connection($request->DB_HOST, $request->DB_DATABASE, $request->DB_USERNAME, $request->DB_PASSWORD)) {
             $path = base_path('.env');
             if (file_exists($path)) {
                 foreach ($request->types as $type) {
                     $this->writeEnvironmentFile($type, $request[$type]);
                 }
+                try {
+                    Artisan::call('migrate', ['--force' => true]);
+                    Artisan::call('db:seed');
+                } catch (\Throwable $th) {
+                    dd($th);
+                }
                 return redirect('step4');
             }else {
                 return redirect('step3');
             }
-        }else {
+        }else {dd("s");
             return redirect('step3/database_error');
         }
     }
 
     public function import_sql() {
-        Artisan::call('migrate', ['--force' => true]);
+        Artisan::call('migrate:fresh', ['--force' => true]);
         Artisan::call('db:seed');
         return redirect('step5');
     }

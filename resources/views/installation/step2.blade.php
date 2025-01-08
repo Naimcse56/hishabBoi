@@ -70,14 +70,10 @@
                                   </g>
                               </svg>
                           </a>
-                            <button type="submit" class="btn btn-install text-uppercase">Continue</button>
+                            <button type="submit" class="btn btn-primary text-uppercase">Continue</button>
                         </div>
                     </form>
                 </div>
-
-                <!-- Common file -->
-                @include('installation.common')
-                
             </div>
         </div>
     </div>

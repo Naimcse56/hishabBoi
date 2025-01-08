@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("acc_type", 15)->default("no")->nullable()->comment('cash / bank / others ');
             $table->string('name', 255)->nullable()->index();
-            $table->string('code', 100)->unique()->index();
+            $table->string('code', 100)->index();
             $table->unsignedBigInteger('type')->nullable()->comment('1 => Asset, 2 => Liability, 3 => Expense, 4 => Income, 5 => Equity');
             $table->foreignId('parent_id')->nullable();
             $table->tinyInteger("level")->default(0);

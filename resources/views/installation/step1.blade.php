@@ -80,7 +80,7 @@
                             @endif
                         </li>
                         <li class="list-group-item fs-12 fw-600 d-flex align-items-center justify-content-between" style="line-height: 18px; color: #666; gap: 7px;">
-                            RouteServiceProvider.php File Permission
+                            Bootstrap App File Permission
 
                             @if ($permission['routes_file_write_perm'])
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13.435" height="13.435" viewBox="0 0 13.435 13.435">
@@ -95,53 +95,21 @@
                     </ul>
                     
                     <div class="d-flex mt-3">
-                        <div>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-                                <g id="Group_22706" data-name="Group 22706" transform="translate(-704 -571)">
-                                  <g id="Rectangle_19036" data-name="Rectangle 19036" transform="translate(704 571)" fill="#fff" stroke="#ea4335" stroke-width="1">
-                                    <rect width="16" height="16" rx="8" stroke="none"/>
-                                    <rect x="0.5" y="0.5" width="15" height="15" rx="7.5" fill="none"/>
-                                  </g>
-                                  <g id="Group_22693" data-name="Group 22693" transform="translate(0 -12)">
-                                    <g id="Group_22698" data-name="Group 22698">
-                                      <rect id="Rectangle_19044" data-name="Rectangle 19044" width="1.5" height="5" rx="0.75" transform="translate(715.475 589.939) rotate(45)" fill="#ea4335"/>
-                                      <rect id="Rectangle_19111" data-name="Rectangle 19111" width="1.5" height="5" rx="0.75" transform="translate(716.536 591) rotate(135)" fill="#ea4335"/>
-                                      <rect id="Rectangle_19051" data-name="Rectangle 19051" width="8" height="1.5" rx="0.75" transform="translate(708 590.25)" fill="#ea4335"/>
-                                    </g>
-                                  </g>
-                                </g>
-                            </svg>
-                        </div>
                         <p class="ml-2 mb-0 fs-12 fw-500 text-justify text-gray-dark" style="color: #666; line-height: 18px;">
                             Note: Go to your server  and find the php <span class="text-dark fw-900">extension/package</span> and disable <span class="text-dark fw-900">pdo_mysql</span> then enable <span class="text-dark fw-900">nd_mysqli</span> and <span class="text-dark fw-900">nd_pdo_mysql</span> both for preventing value convert issue like an integer to string.
                         </p>
                     </div>
 
                     <p class="mb-4 pb-4 absolute-bottom-left right-0 d-flex justify-content-center">
-                        <a href="{{ url('/') }}" class="back-btn-svg mr-3" title="Go Back" style="box-shadow: 0px 8px 16px rgb(255 88 0 / 16%); border-radius: 50%;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
-                                <g id="Group_22706" data-name="Group 22706" transform="translate(-770 -653)">
-                                  <g id="Ellipse_26" data-name="Ellipse 26" transform="translate(770 653)" fill="none" stroke="#cccccc" stroke-width="1">
-                                    <circle cx="20" cy="20" r="20" stroke="none"/>
-                                    <circle class="inner" cx="20" cy="20" r="19.5" fill="none"/>
-                                  </g>
-                                  <path id="e078aa9915b23dfe83446121b09a6213" class="arrow" d="M98.073,90.719H88.146l4.576-4.576L91.537,85,85,91.537l6.537,6.537,1.144-1.144-4.535-4.576h9.927Z" transform="translate(698.463 581.463)" fill="#cccccc"/>
-                                </g>
-                            </svg>
-                        </a>
-                        @if ($permission['curl_enabled'] == 1 && $permission['db_file_write_perm'] == 1 && $permission['routes_file_write_perm'] == 1 && $phpVersion >= 7.20)
+                        @if ($permission['curl_enabled'] == 1 && $permission['db_file_write_perm'] == 1 && $permission['routes_file_write_perm'] == 1 && $phpVersion >= 8.2)
                             @if ($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1')
-                                <a href = "{{ route('step3') }}" class="btn btn-install text-uppercase">Go To Next Step</a>
+                                <a href = "{{ route('step3') }}" class="btn btn-primary text-uppercase mt-3">Go To Next Step</a>
                             @else
-                                <a href = "{{ route('step2') }}" class="btn btn-install text-uppercase">Go To Next Step</a>
+                                <a href = "{{ route('step2') }}" class="btn btn-primary text-uppercase mt-3">Go To Next Step</a>
                             @endif
                         @endif
                     </p>
                 </div>
-
-                <!-- Common file -->
-                @include('installation.common')
-
             </div>
         </div>
     </div>
