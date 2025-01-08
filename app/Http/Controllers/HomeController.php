@@ -11,11 +11,13 @@ use Modules\Accounts\App\Models\SubLedger;
 use Modules\Accounts\App\Models\Voucher;
 use Modules\Accounts\App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
+use App\Traits\FileUploadTrait;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class HomeController extends Controller
 {
+    use FileUploadTrait;
     /**
      * Create a new controller instance.
      *
@@ -171,6 +173,9 @@ class HomeController extends Controller
         $user->name = $request->name;
         $user->username = $request->username;
 
+        if ($request->hasFile('image')) {
+            $user->avatar = $this->uploadFile($request->image, 'user-profile-image');
+        }
         // Update password if provided
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
