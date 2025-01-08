@@ -36,7 +36,7 @@ use Modules\Accounts\App\Http\Controllers\LedgerDetailsReportController;
 */
   
 
-Route::group(['prefix' => 'accountings','middleware' => ['auth']], function () {
+Route::group(['prefix' => 'accountings','middleware' => ['auth','isActiveUser']], function () {
     Route::controller(LedgerController::class)->group(function () {
         Route::view('/invoice', 'accounts::ledgers.invoice')->name('invoice');
         Route::get('/ledger/index', 'index')->name('ledger.index');

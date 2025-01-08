@@ -42,42 +42,44 @@ class AccountsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
-        $this->app->singleton('current_fiscal_year', function () {
-            if (auth()->check()) {
-                return FiscalYear::where('is_closed',0)->orderBy('id','desc')->first(['id','from_date','to_date','year']);
-            } else {
-                return null;
-            }
-        });
-        $this->app->singleton('prev_fiscal_year', function () {
-            if (auth()->check()) {
-                return FiscalYear::where('is_closed',1)->orderBy('id','desc')->first(['id','from_date','to_date','year']);
-            } else {
-                return null;
-            }
-        });
-        if (Schema::hasTable('day_close_fiscal_years')) {
-            $this->app->singleton('day_closing_info', function () {
+        if (env('DB_DATABASE') != "") {
+            $this->app->singleton('current_fiscal_year', function () {
                 if (auth()->check()) {
-                    return DayCloseFiscalYear::where('is_closed',0)->orderByDesc('id')->first();
+                    return FiscalYear::where('is_closed',0)->orderBy('id','desc')->first(['id','from_date','to_date','year']);
                 } else {
                     return null;
-                };
-            });
-        }
-        if (Schema::hasTable('account_configurations')) {
-            $this->app->singleton('account_configurations', function () {
-                $settings = DB::table('account_configurations')->get();
-                foreach ($settings as $setting) {
-                    $datas[$setting->name] = $setting->value;
                 }
-                return $datas;
             });
+            $this->app->singleton('prev_fiscal_year', function () {
+                if (auth()->check()) {
+                    return FiscalYear::where('is_closed',1)->orderBy('id','desc')->first(['id','from_date','to_date','year']);
+                } else {
+                    return null;
+                }
+            });
+            if (Schema::hasTable('day_close_fiscal_years')) {
+                $this->app->singleton('day_closing_info', function () {
+                    if (auth()->check()) {
+                        return DayCloseFiscalYear::where('is_closed',0)->orderByDesc('id')->first();
+                    } else {
+                        return null;
+                    };
+                });
+            }
+            if (Schema::hasTable('account_configurations')) {
+                $this->app->singleton('account_configurations', function () {
+                    $settings = DB::table('account_configurations')->get();
+                    foreach ($settings as $setting) {
+                        $datas[$setting->name] = $setting->value;
+                    }
+                    return $datas;
+                });
+            }
+            $this->app->bind(LedgerRepositoryInterface::class, LedgerRepository::class);
+            $this->app->bind(SubLedgerRepositoryInterface::class, SubLedgerRepository::class);
+            $this->app->bind(WorkOrderRepositoryInterface::class, WorkOrderRepository::class);
+            $this->app->bind(JournalRepositoryInterface::class, JournalRepository::class);
         }
-        $this->app->bind(LedgerRepositoryInterface::class, LedgerRepository::class);
-        $this->app->bind(SubLedgerRepositoryInterface::class, SubLedgerRepository::class);
-        $this->app->bind(WorkOrderRepositoryInterface::class, WorkOrderRepository::class);
-        $this->app->bind(JournalRepositoryInterface::class, JournalRepository::class);
     }
 
     /**

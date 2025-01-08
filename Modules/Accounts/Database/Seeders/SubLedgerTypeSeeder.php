@@ -30,6 +30,10 @@ class SubLedgerTypeSeeder extends Seeder
             'is_for' => 2,
             'name' => 'Premium Customer',
          ),
+         4 => array(
+            'is_for' => 0,
+            'name' => 'In-House Staff',
+         ),
       ));
     }
 }
