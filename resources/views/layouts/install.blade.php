@@ -26,16 +26,7 @@
 <body class="sb-nav-fixed">
     <!-- Begin page -->
     <div class="wrapper">
-        <div id="layoutSidenav">
-            <div id="layoutSidenav_content">
-                <main>
-                    @yield('content')
-                </main>
-    
-                @include('backend.partials.footer')
-    
-            </div>
-        </div>
+        @yield('content')
     </div>
 
     <!-- App js -->
