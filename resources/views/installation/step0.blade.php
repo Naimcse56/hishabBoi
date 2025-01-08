@@ -2,9 +2,9 @@
 @section('content')
     <div class="container pt-5">
         <div class="d-flex justify-content-center mt-5">
-            <div class="card install-card position-relative">
+            <div class="card  position-relative">
                 <!-- Content -->
-                <div class="card-body install-card-body h-100 w-100 z-3 position-relative">
+                <div class="card-body -body h-100 w-100 z-3 position-relative">
                     <!-- Top content -->
                     <div class="mar-ver pad-btm text-center">
                         <h1 class="fs-21 fw-700 text-uppercase mt-2" style="color: #3d3d3d;">E-BILLING ACCOUNTING SYSTEM INSTALLATION</h1>

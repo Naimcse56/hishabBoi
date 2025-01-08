@@ -2,7 +2,7 @@
 @section('content')
     <div class="container pt-5">
         <div class="d-flex justify-content-center mt-5">
-            <div class="card install-card position-relative position-relative">
+            <div class="card position-relative position-relative">
                 <!-- Content -->
                 <div class="card-body h-100 w-100 z-3">
                     <!-- Top content -->

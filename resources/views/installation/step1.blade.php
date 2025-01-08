@@ -2,9 +2,9 @@
 @section('content')
     <div class="container pt-5">
         <div class="d-flex justify-content-center mt-5">
-            <div class="card install-card position-relative">
+            <div class="card  position-relative">
                 <!-- Content -->
-                <div class="card-body install-card-body h-100 w-100 z-3 position-relative">
+                <div class="card-body -body h-100 w-100 z-3 position-relative">
                     <!-- Top content -->
                     <div class="mar-ver pad-btm text-center">
                         <h1 class="fs-21 fw-700 text-uppercase mt-2" style="color: #3d3d3d;">CHECKING FILE PERMISSIONS</h1>
@@ -15,12 +15,12 @@
 
                     <ul class="list-group rounded-2">
                         <li class="list-group-item fs-12 fw-600 d-flex align-items-center justify-content-between" style="line-height: 18px; color: #666; gap: 7px;">
-                            Php version 8.0
+                            Php version 8.2
 
                             @php
                                 $phpVersion = number_format((float)phpversion(), 2, '.', '');
                             @endphp
-                            @if ($phpVersion >= 8.0)
+                            @if ($phpVersion >= 8.2)
                                 <svg xmlns="http://www.w3.org/2000/svg" width="13.435" height="13.435" viewBox="0 0 13.435 13.435">
                                     <path id="Union_2" data-name="Union 2" d="M-4076.25,7a.75.75,0,0,1-.75-.75V.75a.75.75,0,0,1,.75-.75.75.75,0,0,1,.75.75V5.5h9.75a.75.75,0,0,1,.75.75.75.75,0,0,1-.75.75Z" transform="translate(2882.875 -2874.389) rotate(-45)" fill="#00ac47"/>
                                 </svg>
