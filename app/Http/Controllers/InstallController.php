@@ -39,10 +39,6 @@ class InstallController extends Controller
         // }
     }
 
-    public function step4() {
-        return view('installation.step4');
-    }
-
     public function step5() {
         return view('installation.step5');
     }
@@ -89,34 +85,23 @@ class InstallController extends Controller
             $business_settings->save();
             Session::forget('purchase_code');
         }
-        return view('installation.step6');
+        return redirect()->route('login');
     }
     public function database_installation(Request $request) {
-        if(self::check_database_connection($request->DB_HOST, $request->DB_DATABASE, $request->DB_USERNAME, $request->DB_PASSWORD)) {
+        try {
             $path = base_path('.env');
             if (file_exists($path)) {
                 foreach ($request->types as $type) {
                     $this->writeEnvironmentFile($type, $request[$type]);
                 }
-                try {
-                    Artisan::call('migrate', ['--force' => true]);
-                    Artisan::call('db:seed');
-                } catch (\Throwable $th) {
-                    dd($th);
-                }
-                return redirect('step4');
-            }else {
-                return redirect('step3');
             }
-        }else {dd("s");
-            return redirect('step3/database_error');
+            // Artisan::call('optimize:clear');
+            // Artisan::call('migrate', ['--force' => true]);
+            // Artisan::call('db:seed');
+            return view('installation.step5');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
         }
-    }
-
-    public function import_sql() {
-        Artisan::call('migrate:fresh', ['--force' => true]);
-        Artisan::call('db:seed');
-        return redirect('step5');
     }
 
     function check_database_connection($db_host = "", $db_name = "", $db_user = "", $db_pass = "") {

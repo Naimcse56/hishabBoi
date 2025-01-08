@@ -12,16 +12,9 @@
                             Your database is successfully connected. All you need to do now is hit the ‘Install’ Button. The auto installer will run a sql file, will do all the tiresome works and set up your application automatically.
                         </p>
                     </div>
-
-                    <div class="text-center mar-top pad-top">
-                        <div id="loader" style="margin-top: 20px; display: none; transition: all 0.5s;">
-                            <img loading="lazy"  src="{{ asset('assets/images/loader.gif') }}" alt="" width="20">
-                            &nbsp; Migrating database ....
-                        </div>
-                    </div>
                     
                     <div class="mb-4 pb-4 absolute-bottom-left right-0 d-flex justify-content-center">
-                      <a href="{{ route('import_sql') }}" class="btn btn-primary text-uppercase" onclick="showLoder()">MIGRATE DATABASE</a>
+                      {{-- <a href="{{ route('import_sql') }}" class="btn btn-primary text-uppercase" onclick="showLoder()">MIGRATE DATABASE</a> --}}
                     </div>
                 </div>
             </div>
