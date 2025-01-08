@@ -18,7 +18,7 @@ use Modules\Base\App\Http\Controllers\LanguageController;
 
 Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
     Route::controller(BaseController::class)->prefix('base-configurations')->group(function () {
-        Route::get('/user-permisssions', 'user_permisssions')->name('user.permisssions');
+        Route::get('/user-permisssions', 'user_permisssions')->name('user.permisssions')->middleware('permission:edit_package');
         Route::post('/store-permisssions', 'store_permisssions')->name('store.permisssions');
         Route::get('/general-settings', 'general_settings')->name('general_settings.configurations');
         Route::get('/company-settings', 'company_settings')->name('company_settings.configurations');
@@ -29,13 +29,13 @@ Route::group(['prefix' => 'system','middleware' => ['auth']], function () {
         Route::get('/sales-purchase-configuration', 'sales_purchase')->name('sales_purchase.configurations');
     });
     Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
-        Route::get('/index', 'index')->name('currencies.index');
-        Route::get('/create', 'create')->name('currencies.create');
-        Route::post('/store', 'store')->name('currencies.store');
-        Route::get('/edit/{id}', 'edit')->name('currencies.edit');
-        Route::get('/show/{id}', 'show')->name('currencies.show');
-        Route::post('/update/{id}', 'update')->name('currencies.update');
-        Route::post('/delete', 'destroy')->name('currencies.delete');
+        Route::get('/index', 'index')->name('currencies.index')->middleware(['permission:view_currency']); 
+        Route::get('/create', 'create')->name('currencies.create')->middleware(['permission:create_currency']);
+        Route::post('/store', 'store')->name('currencies.store')->middleware(['permission:create_currency']);
+        Route::get('/edit/{id}', 'edit')->name('currencies.edit')->middleware(['permission:edit_currency']);
+        Route::get('/show/{id}', 'show')->name('currencies.show')->middleware(['permission:view_currency']);
+        Route::post('/update/{id}', 'update')->name('currencies.update')->middleware(['permission:edit_currency']);
+        Route::post('/delete', 'destroy')->name('currencies.delete')->middleware(['permission:delete_currency']);
         Route::get('/list-ajax', 'list_for_select')->name('currencies.list_for_select');
     });
     Route::controller(LanguageController::class)->prefix('language')->group(function () {
