@@ -84,8 +84,8 @@ class VouchersRepository
             }
             $voucher->transactions()->update(['is_approve' => 1]);
             $voucher->update(['is_approve' => 1, 'approved_by' => auth()->user()->id]);
-            if ($voucher->referable) {
-                if ($voucher->referable->morphs->where('is_approve', 1)->sum('amount') >= $voucher->referable->payable_amount) {
+            if ($voucher->referable_id > 0) {
+                if ($voucher->referable->morphs->where('is_approved', "Approved")->sum('amount') >= $voucher->referable->payable_amount) {
                     $voucher->referable->update(['payment_status' => 'Paid']);
                 } elseif ($voucher->referable->morphs->where('is_approve', 1)->sum('amount') < $voucher->referable->payable_amount) {
                     $voucher->referable->update(['payment_status' => 'Partial']);
