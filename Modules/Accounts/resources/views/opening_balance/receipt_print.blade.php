@@ -10,7 +10,7 @@ Voucher Print
 
 <div class="row" style="margin-top: 5px;">
     <div class="col-4" style="font-size: 14px;">
-          <p class="mb-0" style="border: 1px solid #000; padding: 5px;">TK. = {{number_format($journal->amount, 2)}}</p>
+          <p class="mb-0" style="border: 1px solid #000; padding: 5px;">Amount = {{number_format($journal->amount, 2)}}</p>
     </div>
     <div class="col-4" style="font-size: 14px; text-align: center;">
           <p class="mb-0" style="border: 1px solid #000; padding: 5px; border-radius: 100px;">OPENING VOUCHER</p>
@@ -92,7 +92,6 @@ Voucher Print
          <p class="mb-0" style="border-top: 1px #666666 solid;">Prepared By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Checked By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Head of Concern</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Approved By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Approved By</p>
    </div>
 </div>
