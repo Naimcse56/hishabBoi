@@ -24,7 +24,7 @@ Voucher Print
 </div>
 <div class="row" style="margin-top: 5px;">
    <div class="col-md-12" style="font-size: 14px;">
-      <p class="mb-2" style="border-bottom: 1px dotted #000; width: 100%">Taka (In&nbsp;Words) :&nbsp;<span>{{convert_number($journal->amount)}}          &nbsp;Only</span></p>
+      <p class="mb-2" style="border-bottom: 1px dotted #000; width: 100%">Amount (In Words) :&nbsp;<span>{{convert_number($journal->amount)}} Only</span></p>
    </div>
 </div>
 <div class="row">   

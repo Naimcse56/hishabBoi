@@ -54,7 +54,7 @@
         </tr>
         <tr>
                 <td>In Words</td>
-                <td colspan="3">{{convert_number($row->amount)}}          &nbsp;Only</td>
+                <td colspan="3">{{convert_number($row->amount)}} Only</td>
         </tr>
         <tr>
                 <td>Narration</td>

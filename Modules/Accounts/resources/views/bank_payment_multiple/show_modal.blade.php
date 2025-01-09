@@ -101,7 +101,7 @@
                                    </tr>
                                    <tr>
                                         <td>In Words</td>
-                                        <td colspan="3">{{convert_number($journal->amount)}}          &nbsp;Only</td>
+                                        <td colspan="3">{{convert_number($journal->amount)}} Only</td>
                                    </tr>
                                </tbody>
                            </table>

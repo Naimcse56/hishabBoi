@@ -182,7 +182,7 @@ Sale Details
                                 </tr>
                                 <tr>
                                     <td>In Words</td>
-                                    <td colspan="4">{{convert_number($voucher->amount)}}          &nbsp;Only</td>
+                                    <td colspan="4">{{convert_number($voucher->amount)}} Only</td>
                                 </tr>
                             </tbody>
                         </table>                        
