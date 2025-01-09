@@ -32,7 +32,6 @@ Route::group(['prefix' => 'system','middleware' => ['auth','isActiveUser']], fun
         Route::get('/sales-purchase-configuration', 'sales_purchase')->name('sales_purchase.configurations');
     });
     Route::controller(CurrencyController::class)->prefix('currencies')->group(function () {
-<<<<<<< HEAD
         Route::get('/index', 'index')->name('currencies.index')->middleware(['permission:view_currency']); 
         Route::get('/create', 'create')->name('currencies.create')->middleware(['permission:create_currency']);
         Route::post('/store', 'store')->name('currencies.store')->middleware(['permission:create_currency']);
@@ -40,14 +39,6 @@ Route::group(['prefix' => 'system','middleware' => ['auth','isActiveUser']], fun
         Route::get('/show/{id}', 'show')->name('currencies.show')->middleware(['permission:view_currency']);
         Route::post('/update/{id}', 'update')->name('currencies.update')->middleware(['permission:edit_currency']);
         Route::post('/delete', 'destroy')->name('currencies.delete')->middleware(['permission:delete_currency']);
-=======
-        Route::get('/index', 'index')->name('currencies.index');
-        Route::post('/store', 'store')->name('currencies.store');
-        Route::get('/edit/{id}', 'edit')->name('currencies.edit');
-        Route::get('/show/{id}', 'show')->name('currencies.show');
-        Route::post('/update/{id}', 'update')->name('currencies.update');
-        Route::post('/delete', 'destroy')->name('currencies.delete');
->>>>>>> f33c7c682616427b1ffafc2571a50024fbdfe39c
         Route::get('/list-ajax', 'list_for_select')->name('currencies.list_for_select');
     });
     Route::controller(LanguageController::class)->prefix('language')->group(function () {
