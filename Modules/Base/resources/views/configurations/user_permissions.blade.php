@@ -28,19 +28,22 @@ Staff Permissions
                         @csrf
                         <input type="hidden" value="{{ $user_id }}"  name="user_id"/>
                         <div class="row">
-                            @foreach ($permissions as $permission) 
-                            <div class="col-md-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="{{ $permission->name }}"
-                                    @foreach ($assigned_permissions as $assigned_permission) 
-                                    @if($assigned_permission == $permission->name) checked @endif
-                                    @endforeach
-                                    >
-                                    <label class="form-check-label" for="{{ $permission->name }}">
-                                    {{ $permission->label }}
-                                    </label>
+                            @foreach ($permissions->groupBy('sub_module') as $key => $module_permission)
+                                <h6 class="mt-2">{{ucwords($key)}}</h6>
+                                @foreach ($module_permission as $permission)
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="permissions[]" value="{{ $permission->name }}" id="{{ $permission->name }}"
+                                        @foreach ($assigned_permissions as $assigned_permission) 
+                                        @if($assigned_permission == $permission->name) checked @endif
+                                        @endforeach
+                                        >
+                                        <label class="form-check-label" for="{{ $permission->name }}">
+                                        {{ $permission->label }}
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
+                                @endforeach
                             @endforeach
                             <x-common.button column=12 type="submit" id="save-btn" class="btn-primary btn-120 save-btn" :value="' Save'" :icon="'fa fa-check'"></x-common.button>
                         </div>
