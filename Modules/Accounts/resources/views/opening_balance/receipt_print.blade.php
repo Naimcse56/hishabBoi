@@ -88,7 +88,7 @@ Voucher Print
    </div>
 </div>
 <div class="row" style="margin-top: 45px;">
-   <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 10px;">
+   <div class="col-md-12 d-flex justify-content-between signing-footer">
          <p class="mb-0" style="border-top: 1px #666666 solid;">Prepared By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Checked By</p>
          <p class="mb-0" style="border-top: 1px #666666 solid;">Head of Concern</p>

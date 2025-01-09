@@ -11420,3 +11420,7 @@ max-width: 980px;
     z-index: 10;
     position: relative;
 }
+.signing-footer {
+    font-size: 14px;
+    padding-bottom: 10px;
+}

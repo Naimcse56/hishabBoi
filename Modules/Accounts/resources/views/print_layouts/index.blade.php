@@ -145,6 +145,10 @@
             z-index: 10;
             position: relative;
         }
+        .signing-footer {
+            font-size: 14px;
+            padding-bottom: 10px;
+        }
         @media print {
             .pagebreak { page-break-before: always; } /* page-break-after works, as well */
             table { page-break-after:auto }
