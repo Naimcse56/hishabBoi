@@ -19,28 +19,10 @@ class IncomeStatementController extends Controller
 {
     public function income_statement(Request $request)
     {
-        if ($request->report_type == "date_range") {
-            $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
-            $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');
-            $data['prve_date_end'] = null;
-            $data['prve_date_from'] = null;
-        } else {
-            if ($request->year) {
-                $data['filter_year'] = DB::table('fiscal_years')->find($request->year);
-                $data['filter_prev_year'] = DB::table('fiscal_years')->find($request->prev_year);
-                $start_date = $data['filter_year']->from_date;
-                $end_date = $data['filter_year']->to_date ? $data['filter_year']->to_date : now()->format('Y-m-d');
-                $data['prve_date_end'] = $data['filter_prev_year'] ? $data['filter_prev_year']->to_date : null;
-                $data['prve_date_from'] = $data['filter_prev_year'] ? $data['filter_prev_year']->from_date : null;
-            } else {
-                $start_date = app('current_fiscal_year')['from_date'];
-                $end_date = now()->format('Y-m-d');
-                $prev_fiscal_year = app('prev_fiscal_year');
-                $data['prve_date_end'] = $prev_fiscal_year ? $prev_fiscal_year['to_date'] : null;
-                $data['prve_date_from'] = $prev_fiscal_year ? $prev_fiscal_year['from_date'] : null;
-            }
-        }
-        $data['fiscal_years'] = DB::table('fiscal_years')->get();
+        $start_date = $request->start_date ? Carbon::createFromFormat('d/m/Y', $request->start_date)->format('Y-m-d') : app('day_closing_info')['from_date'];
+        $end_date = $request->end_date ? Carbon::createFromFormat('d/m/Y', $request->end_date)->format('Y-m-d') : now()->format('Y-m-d');   
+        $data['prve_date_end'] = null;
+        $data['prve_date_from'] = null;
 
         $ledgers = Ledger::get(['id','name','code','parent_id','acc_type','view_in_bs','view_in_is','type','level']);
         
