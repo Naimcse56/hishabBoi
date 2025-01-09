@@ -18,14 +18,13 @@ class BaseController extends Controller
 
      public function user_permisssions(Request $request)
     {
-            $user_id = $request->query('user_id');
-        $permissions = Permission::all();
-       
-         $user = User::find($user_id);
-    $assigned_permissions = $user ? $user->getPermissionNames()->toArray() : [];
-
+        $data['user_id'] = $request->query('user_id');
+        $data['permissions'] = Permission::all();
+    
+        $data['user'] = User::find($data['user_id']);
+        $data['assigned_permissions'] = $data['user'] ? $data['user']->getPermissionNames()->toArray() : [];
      
-        return view('base::configurations.user_permissions',compact('permissions','user_id','assigned_permissions'));
+        return view('base::configurations.user_permissions', $data);
     }
      public function store_permisssions(Request $request)
     {

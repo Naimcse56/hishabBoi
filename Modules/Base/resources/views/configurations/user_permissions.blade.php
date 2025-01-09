@@ -22,7 +22,7 @@ Staff Permissions
                     </form>
                     @if($user_id)
                     <div>
-                        <h5 class="mt-4">Permissions List</h5>
+                        <h5 class="mt-4">Permissions List for {{ $user->name }} ({{ $user->staff->staff_id }})</h5>
                     </div>
                     <form class="create_form permission" action="{{ route('store.permisssions') }}" method="POST"  >
                         @csrf
