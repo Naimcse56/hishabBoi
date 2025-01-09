@@ -82,13 +82,13 @@ Voucher Print
    @endif
 </div>
 @endforeach
-<div class="row" style="margin-top: 45px;">
+<div class="row mt-45">
    <div class="col-md-12 d-flex justify-content-between signing-footer">
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Prepared By</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Checked By</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Head of Concern</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Approved By</p>
-         <p class="mb-0" style="border-top: 1px #666666 solid;">Received By</p>
+         <p class="mb-0 top-border-signing" top-border-signing>Prepared By</p>
+         <p class="mb-0 top-border-signing">Checked By</p>
+         <p class="mb-0 top-border-signing">Head of Concern</p>
+         <p class="mb-0 top-border-signing">Approved By</p>
+         <p class="mb-0 top-border-signing">Received By</p>
    </div>
 </div>
 @endsection

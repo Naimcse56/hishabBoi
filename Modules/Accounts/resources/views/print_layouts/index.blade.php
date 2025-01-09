@@ -149,6 +149,12 @@
             font-size: 14px;
             padding-bottom: 10px;
         }
+        .mt-45 {
+            margin-top: 45px;
+        }
+        .top-border-signing {
+            border-top: 1px #666666 solid;
+        }
         @media print {
             .pagebreak { page-break-before: always; } /* page-break-after works, as well */
             table { page-break-after:auto }
