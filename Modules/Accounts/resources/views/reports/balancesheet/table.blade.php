@@ -22,7 +22,7 @@
         
         @if ($first_section->count() > 0)
             <tr>
-                <td class="fw-semibold" style="text-align: left;">{{$first_section->first()['code']}} : {{$first_section->first()['name']}}</td>
+                <td class="fw-semibold">{{$first_section->first()['code']}} : {{$first_section->first()['name']}}</td>
                 <td class="text-right nowrap fw-semibold">{{$first_section->sum('amount') >= 0 ? number_format($first_section->sum('amount'),2) : '('.number_format(abs($first_section->sum('amount')),2).')'}}</td>
             </tr>
             @foreach ($first_section->skip(1) as $k => $item)
@@ -39,14 +39,14 @@
                     
                 @endphp
                 <tr>
-                    <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;">{{$item['name']}}</td>
-                    <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                    <td class="fw-semibold tabspace-{{$item['level']}}">{{$item['name']}}</td>
+                    <td class="text-right nowrap relative-z-index"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                 </tr>
             @endforeach
         @endif
         @if ($second_section->count() > 0)
             <tr>
-                <td class="fw-semibold" style="text-align: left;">{{$second_section->first()['code']}} : {{$second_section->first()['name']}}</td>
+                <td class="fw-semibold">{{$second_section->first()['code']}} : {{$second_section->first()['name']}}</td>
                 <td class="text-right nowrap fw-semibold">{{$second_section->sum('amount') >= 0 ? number_format($second_section->sum('amount'),2) : '('.number_format(abs($second_section->sum('amount')),2).')'}}</td>
             </tr>
             @foreach ($second_section->skip(1) as $k => $item)
@@ -64,8 +64,8 @@
                     
                 @endphp
                 <tr>
-                    <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;"> {{$item['code'].' : '}} {{$item['name']}}</td>
-                    <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                    <td class="fw-semibold tabspace-{{$item['level']}}"> {{$item['code'].' : '}} {{$item['name']}}</td>
+                    <td class="text-right nowrap relative-z-index"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                 </tr>
             @endforeach
         @endif
@@ -93,14 +93,14 @@
                     
                 @endphp
                 <tr>
-                    <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;">{{$item['name']}}</td>
-                    <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                    <td class="fw-semibold tabspace-{{$item['level']}}">{{$item['name']}}</td>
+                    <td class="text-right nowrap relative-z-index"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                 </tr>
             @endforeach
         @endif
         @if ($fourth_section->count() > 0)
             <tr>
-                <td class="fw-semibold" style="text-align: left;">{{$fourth_section->first()['code']}} : {{$fourth_section->first()['name']}}</td>
+                <td class="fw-semibold">{{$fourth_section->first()['code']}} : {{$fourth_section->first()['name']}}</td>
                 <td class="text-right nowrap fw-semibold">{{$fourth_section->sum('amount') >= 0 ? number_format($fourth_section->sum('amount'),2) : '('.number_format(abs($fourth_section->sum('amount')),2).')'}}</td>
             </tr>
             @foreach ($fourth_section->skip(1) as $k => $item)
@@ -118,22 +118,22 @@
                     
                 @endphp
                 <tr>
-                    <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;">{{$item['name']}}</td>
-                    <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                    <td class="fw-semibold tabspace-{{$item['level']}}">{{$item['name']}}</td>
+                    <td class="text-right nowrap relative-z-index"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                 </tr>
             @endforeach
         @endif
         <tr>
-            <td class="fw-semibold" style="text-align: left;">Retained Earnings</td>
+            <td class="fw-semibold">Retained Earnings</td>
             <td></td>
         </tr>
         <tr>
-            <td class="" style="text-align: left;">Add: During The Year</td>
+            <td class="">Add: During The Year</td>
             <td class="text-right nowrap fw-semibold">{{number_format($first_section->sum('amount') + $second_section->sum('amount') - $third_section->sum('amount') - $fourth_section->sum('amount') - $fifth_section->sum('amount'),2)}}</td>
         </tr>
         @if ($fifth_section->count() > 0)
             <tr>
-                <td class="fw-semibold" style="text-align: left;">{{$fifth_section->first()['code']}} : {{$fifth_section->first()['name']}}</td>
+                <td class="fw-semibold">{{$fifth_section->first()['code']}} : {{$fifth_section->first()['name']}}</td>
                 <td class="text-right nowrap fw-semibold">{{$fifth_section->sum('amount') >= 0 ? number_format($fifth_section->sum('amount'),2) : '('.number_format(abs($fifth_section->sum('amount')),2).')'}}</td>
             </tr>
             @foreach ($fifth_section->skip(1) as $k => $item)
@@ -151,8 +151,8 @@
                     
                 @endphp
                 <tr>
-                    <td class="fw-semibold tabspace-{{$item['level']}}" style="text-align: left;">{{$item['name']}}</td>
-                    <td class="text-right nowrap"><a  style="z-index: 10; position: relative;" target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
+                    <td class="fw-semibold tabspace-{{$item['level']}}">{{$item['name']}}</td>
+                    <td class="text-right nowrap relative-z-index"><a target="_blank" class="text-black" href="{{route('accountings.ledger_report_details_specific_filter',['start_date' => $dateFrom, 'end_date' => $dateTo, 'account_id' => $item['id']])}}">{{$amount >= 0 ? number_format($amount,2) : '('.number_format(abs($amount),2).')'}}</a></td>
                 </tr>
             @endforeach
         @endif

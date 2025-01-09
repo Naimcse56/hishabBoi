@@ -141,6 +141,10 @@
             text-align: right !important;
         }
         .fw-semibold{font-weight:700!important}
+        .relative-z-index {
+            z-index: 10;
+            position: relative;
+        }
         @media print {
             .pagebreak { page-break-before: always; } /* page-break-after works, as well */
             table { page-break-after:auto }
