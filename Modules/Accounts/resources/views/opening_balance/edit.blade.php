@@ -73,9 +73,7 @@ Edit Opening Balance
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 text-center mt-4">
-                                <button type="submit" class="btn btn-primary save-btn "><i class="bx bx-check-double"></i>Save</button>
-                            </div>
+                            <x-common.button column=12 type="submit" id="save-btn" class="btn-primary btn-120 save-btn" :value="' Update'" :icon="'fa fa-check'"></x-common.button>
                         </div>
                     </form>
                 </div>
