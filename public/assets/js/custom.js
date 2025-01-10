@@ -78,7 +78,6 @@
           height:height,
       })
     }
-
     const deleteData = function(title, route, id) {
       Swal.fire({
           title: "Are you sure?",
