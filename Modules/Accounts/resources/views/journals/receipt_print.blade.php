@@ -66,7 +66,7 @@ $credit_info = $journal->transactions()->where('type','Cr')->first();
                </td>
            </tr>
            <tr>
-               <td colspan="2" class="col-7 text-1"><span class="fw-semibold">Bill Amount:</span> <i>{{convert_number($journal->amount)}}</i></td>
+               <td colspan="2" class="col-7 text-1"><span class="fw-semibold">Bill Amount:</span> <i>{{convert_number($journal->amount)}}</i> Only</td>
            </tr>
        </tbody>
    </table>
