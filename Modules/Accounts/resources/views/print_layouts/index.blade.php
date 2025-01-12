@@ -152,6 +152,9 @@
         .mt-45 {
             margin-top: 45px;
         }
+        .mt-5 {
+            margin-top: 5px;
+        }
         .top-border-signing {
             border-top: 1px #666666 solid;
         }

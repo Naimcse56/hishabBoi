@@ -10,8 +10,8 @@ Voucher Print
     $credit_infos = $journal->transactions()->where('type','Dr')->get();
 @endphp
 
-<div class="row" style="margin-top: 5px;">
-   <div class="col-4" style="font-size: 14px;">
+<div class="row mt-5">
+   <div class="col-4 fs-14">
          <p class="mb-0" style="border: 1px solid #000; padding: 5px;">Amount = {{number_format($journal->amount, 2)}}</p>
    </div>
    <div class="col-4" style="font-size: 14px; text-align: center;">
@@ -20,17 +20,17 @@ Voucher Print
    <div class="col-4" style="font-size: 14px; text-align: right;">
          <p class="mb-0">Voucher No : <span style="border-bottom: 1px dotted #000; min-width: 80px; padding: 5px">{{$journal->TypeName}}</span></p>
    </div>
-   <div class="col-md-12" style="text-align: right;">
+   <div class="col-md-12 text-right">
       <p class="mb-0">Date : <span style="border-bottom: 1px dotted #000; min-width: 80px; padding: 5px">{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
    </div>
 </div>
-<div class="row" style="margin-top: 5px;">
-   <div class="col-md-12" style="font-size: 14px;">
+<div class="row mt-5">
+   <div class="col-md-12 fs-14">
       <p class="mb-2" style="border-bottom: 1px dotted #000; width: 100%">Amount (In Words) :&nbsp;<span>{{convert_number($journal->amount)}} Only</span></p>
    </div>
 </div>
-<div class="row" style="margin-top: 5px;">
-   <div class="col-md-12" style="font-size: 14px;">
+<div class="row mt-5">
+   <div class="col-md-12 fs-14">
       <table class="table table-bordered mb-1">
          <thead>
             <tr>
@@ -59,7 +59,7 @@ Voucher Print
    </div>
 </div>
 <div class="row" style="margin-top: 3px; padding-bottom: 5px;">
-   <div class="col-md-12" style="font-size: 14px;">
+   <div class="col-md-12 fs-14">
       <div style="border: 1px solid; padding-left: 5px; padding-right: 5px;">
          <p class="mb-0">Particulars :&nbsp;<span>{{$journal->narration}}</span></p>
          <p class="mb-2">Concern Person :&nbsp;<span>{{$journal->concern_person}}</span></p>
