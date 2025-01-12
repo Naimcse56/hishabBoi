@@ -37,6 +37,11 @@ class Quotation extends Model
         return $this->hasMany(QuotationDetail::class);
     }
 
+    public function sale()
+    {
+        return $this->hasOne(Sale::class,'quotation_id','id');
+    }
+
     public function sub_ledger()
     {
         return $this->belongsTo(SubLedger::class, "sub_ledger_id", "id")->withDefault();

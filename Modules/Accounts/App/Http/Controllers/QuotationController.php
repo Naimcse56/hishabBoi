@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Modules\Accounts\App\Repository\Eloquents\QuotationRepository;
+use Modules\Accounts\App\Repository\Eloquents\SaleRepository;
 use DataTables;
 
 class QuotationController extends Controller
 {
     private object $quotationRepository;
 
-    public function __construct(QuotationRepository $quotationRepository)
+    public function __construct(SaleRepository $saleRepository, QuotationRepository $quotationRepository)
     {
+        $this->saleRepository = $saleRepository;
         $this->quotationRepository = $quotationRepository;
     }
     /**
@@ -52,6 +54,13 @@ class QuotationController extends Controller
     {
         $data['invoice_no'] = $this->quotationRepository->invoiceNo();
         return view('accounts::quotations.create_view',$data);
+    }
+
+    public function convert_to_sale($id)
+    {
+        $data['quotation'] = $this->quotationRepository->findById(decrypt($id));
+        $data['invoice_no'] = $this->saleRepository->invoiceNo();
+        return view('accounts::quotations.convert_to_sale',$data);
     }
 
     /**

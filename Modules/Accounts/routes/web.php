@@ -258,6 +258,7 @@ Route::group(['prefix' => 'accountings','middleware' => ['auth','isActiveUser']]
         Route::get('/create', 'create')->name('quotations.create')->middleware(['permission:create_quotation']);
         Route::post('/store', 'store')->name('quotations.store')->middleware(['permission:create_quotation']);
         Route::get('/edit/{id}', 'edit')->name('quotations.edit')->middleware(['permission:edit_quotation']);
+        Route::get('/convert-to-sale/{id}', 'convert_to_sale')->name('quotations.convert_to_sale')->middleware(['permission:create_sales']);
         Route::get('/show/{id}', 'show')->name('quotations.show')->middleware(['permission:view_quotation']);
         Route::get('/print/{id}', 'print')->name('quotations.print')->middleware(['permission:view_quotation']);
         Route::post('/update/{id}', 'update')->name('quotations.update')->middleware(['permission:edit_quotation']);
