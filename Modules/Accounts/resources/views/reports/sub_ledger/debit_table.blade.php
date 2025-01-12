@@ -40,11 +40,11 @@
                 $currentBalance = $transaction['type'] == "Cr" ? ($currentBalance + $transaction['amount']) :  ($currentBalance - $transaction['amount']);
             @endphp
             <tr>
-                <td style="vertical-align:middle;">{{$key+1}}</td>
-                <td class="nowrap " style="vertical-align:middle;">
+                <td>{{$key+1}}</td>
+                <td class="nowrap ">
                     {{ date('d-m-Y', strtotime(@$transaction['date'])) }}
                 </td>
-                <td class="nowrap " style="vertical-align:middle;"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">{{  @$transaction['txn_id'] }}</a></td>
+                <td class="nowrap "><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">{{  @$transaction['txn_id'] }}</a></td>
                 <td>
                     {{$transaction['particular']}} ;<br>
                     @if($transaction['work_order_id'] > 0)
@@ -53,7 +53,7 @@
                         W/O Site : {{$transaction['work_order_site']}}<br>
                     @endif
                     {{ $transaction['narration'] }}</td>
-                <td class="text-right nowrap " style="vertical-align:middle;">
+                <td class="text-right nowrap ">
                     @if ($transaction['type'] == "Cr")
                         @php
                             $total_dr += $transaction['amount'];
@@ -61,7 +61,7 @@
                         {{ number_format($transaction['amount'], 2, '.', '') }}
                     @endif
                 </td>
-                <td class="text-right nowrap " style="vertical-align:middle;">
+                <td class="text-right nowrap ">
                     @if ($transaction['type'] == "Dr")
                         @php
                             $total_cr += $transaction['amount'];
@@ -69,7 +69,7 @@
                         {{ number_format($transaction['amount'], 2, '.', '') }}
                     @endif
                 </td>
-                <td class="text-right nowrap " style="vertical-align:middle;">{{ number_format($currentBalance, 2, '.', '') }}</td>
+                <td class="text-right nowrap ">{{ number_format($currentBalance, 2, '.', '') }}</td>
             </tr>
         @endforeach
         <tr>

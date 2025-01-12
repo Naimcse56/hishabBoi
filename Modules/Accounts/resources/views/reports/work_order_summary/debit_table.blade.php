@@ -13,16 +13,16 @@
             <td colspan="10" class="text-center">Date Range: {{date('d, F - Y', strtotime($dateFrom)).' to '.date('d, F - Y', strtotime($dateTo))}}</td>
         </tr>
         <tr>
-            <th scope="col" style="width: 6%">Sl</th>
-            <th scope="col" style="width: 20%">Client Name.</th>
-            <th scope="col" style="width: 25%">Work Order Name</th>
-            <th scope="col" style="width: 15%">W/O No.</th>
-            <th scope="col" style="width: 6%">W/O Value</th>
-            <th scope="col" style="width: 6%">Estimated Cost</th>
-            <th scope="col" style="width: 6%">Estimated Profit</th>
-            <th scope="col" style="width: 6%">Total Project Cost</th>
-            <th scope="col" style="width: 6%">Total Payment</th>
-            <th scope="col" style="width: 2%">% of Inv.</th>
+            <th scope="col" width="3%">Sl</th>
+            <th scope="col" width="20%">Client Name.</th>
+            <th scope="col" width="25%">Work Order Name</th>
+            <th scope="col" width="15%">W/O No.</th>
+            <th scope="col" width="6%">W/O Value</th>
+            <th scope="col" width="6%">Estimated Cost</th>
+            <th scope="col" width="6%">Estimated Profit</th>
+            <th scope="col" width="6%">Total Project Cost</th>
+            <th scope="col" width="6%">Total Payment</th>
+            <th scope="col" width="2%">% of Inv.</th>
         </tr>
     </thead>
     <tbody>

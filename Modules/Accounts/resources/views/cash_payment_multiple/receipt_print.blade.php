@@ -1,6 +1,6 @@
 
 
-@extends('accounts::print_layouts.index')
+@extends('layouts.invoice')
 @section('title')
 Voucher Print
 @endsection
@@ -9,86 +9,72 @@ Voucher Print
     $debit_infos = $journal->transactions()->where('type','Cr')->get();
     $credit_infos = $journal->transactions()->where('type','Dr')->get();
 @endphp
-
-<div class="row mt-5">
-   <div class="col-4">
-         <p class="mb-0" style="border: 1px solid #000; padding: 5px;">Amount = {{number_format($journal->amount, 2)}}</p>
-   </div>
-   <div class="col-4" style="font-size: 14px; text-align: center;">
-         <p class="mb-0" style="border: 1px solid #000; padding: 5px; border-radius: 100px;">{{strtoupper($journal->TypeDetails)}}</p>
-   </div>
-   <div class="col-4" style="font-size: 14px; text-align: right;">
-         <p class="mb-0">Voucher No : <span style="border-bottom: 1px dotted #000; min-width: 80px; padding: 5px">{{$journal->TypeName}}</span></p>
-   </div>
-   <div class="col-md-12 text-right">
-      <p class="mb-0">Date : <span style="border-bottom: 1px dotted #000; min-width: 80px; padding: 5px">{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
-   </div>
-</div>
-<div class="row mt-5">
-   <div class="col-md-12">
-      <p class="mb-2" style="border-bottom: 1px dotted #000; width: 100%">Amount (In Words) :&nbsp;<span>{{convert_number($journal->amount)}} Only</span></p>
-   </div>
-</div>
-<div class="row mt-5">
-   <div class="col-md-12">
-      <table class="table table-bordered mb-1">
-         <thead>
-            <tr>
-                <th scope="col" width="30%">Ledger</th>
-                <th scope="col">Payee</th>
-                <th scope="col" width="15%">Debit</th>
-                <th scope="col" width="15%">Credit</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($journal->transactions as $item)
-                <tr>
-                     <td>{{ $item->ledger->name }} {{ $item->ledger->ac_no ? '('.$item->ledger->ac_no.')' : '' }}</td>
-                     <td>
-                           {{ $item->sub_ledger->name }}</td>
-                     <td>
-                           {{ ($item->type == "Dr") ? number_format($item->amount, 2) : "" }}
-                     </td>
-                     <td>
-                           {{ ($item->type == "Cr") ? number_format($item->amount, 2) : "" }}
-                     </td>
-                </tr>
-            @endforeach
-        </tbody>
-      </table>
-   </div>
-</div>
-<div class="row" style="margin-top: 3px; padding-bottom: 5px;">
-   <div class="col-md-12">
-      <div style="border: 1px solid; padding-left: 5px; padding-right: 5px;">
-         <p class="mb-0">Particulars :&nbsp;<span>{{$journal->narration}}</span></p>
-         <p class="mb-2">Concern Person :&nbsp;<span>{{$journal->concern_person}}</span></p>
-      </div>
-   </div>
-</div>
-@foreach ($credit_infos as $credit_info)
-<div class="row" style="margin-top: 5px; margin-left: 1px; margin-right: 1px; padding-bottom: 5px;">
-   <div class="col-md-12" style="border: 1px solid #000;font-size: 14px; padding: 5px;">
-      <p class="mb-0">Narration : <span>{{$credit_info->narration}}</span></p>
-   </div>
-   @if ($credit_info->work_order_id > 0)
-      <div class="col-md-12 d-flex justify-content-between" style="border: 1px solid #000;font-size: 14px; padding: 5px;">
-         <p class="mb-0">W/O Name. : <span>{{$credit_info->work_order->order_name}}</span><br>
-            Client Name. : <span>{{$credit_info->work_order->sub_ledger->name}}</span>
-         </p>
-         <p class="mb-0">W/O Num. : <span>{{$credit_info->work_order->order_no}}</span><br>
-            Site Name. : <span>{{$credit_info->work_order_site_detail->site_name}}</p>
-      </div>
-   @endif
-</div>
-@endforeach
-<div class="row mt-45">
-   <div class="col-md-12 d-flex justify-content-between signing-footer">
-         <p class="mb-0 top-border-signing" top-border-signing>Prepared By</p>
-         <p class="mb-0 top-border-signing">Checked By</p>
-         <p class="mb-0 top-border-signing">Head of Concern</p>
-         <p class="mb-0 top-border-signing">Approved By</p>
-         <p class="mb-0 top-border-signing">Received By</p>
-   </div>
+<div class="container-fluid invoice-container">
+   <table class="table table-bordered border border-secondary mb-0">
+       <tbody>
+           <tr>
+           <td colspan="2" class="bg-light text-center"><h3 class="mb-0">{{ app('general_setting')['company_name'] }}</h3></td>
+           </tr>
+           <tr>
+           <td colspan="2" class="text-center text-uppercase">{{ app('general_setting')['company_address'] }}</td>
+           </tr>
+           <tr>
+           <td colspan="2" class="py-1">
+               <div class="row">
+                   <div class="col">Date: {{showDateFormat($journal->date)}}</div>
+                   <div class="col text-center fw-semibold text-3 text-uppercase">{{strtoupper($journal->TypeDetails)}}</div>
+                   <div class="col text-end">Voucher No: {{$journal->TypeName}}</div>
+               </div>
+           </td>
+           </tr>
+           <tr>
+            <td colspan="2">Concern Person : {{$journal->concern_person}}</td>
+           </tr>
+           <tr>
+               <td colspan="2" class="p-0">
+                   <table class="table table-sm mb-0">
+                       <thead>
+                           <tr class="bg-light">
+                               <td class="col-4"><strong>Ledger</strong></td>
+                               <td class="text-center"><strong>Payee</strong></td>
+                               <td class="col-2 text-end"><strong>Debit</strong></td>
+                               <td class="col-2 text-end"><strong>Credit</strong></td>
+                           </tr>
+                       </thead>
+                       <tbody>
+                        @foreach ($journal->transactions as $item)
+                           <tr>
+                              <td>{{ $item->ledger->name }} {{ $item->ledger->ac_no ? '('.$item->ledger->ac_no.')' : '' }}</td>
+                              <td class="text-center">
+                                    {{ $item->sub_ledger->name }}</td>
+                              <td class="text-end nowrap">
+                                    {{ ($item->type == "Dr") ? number_format($item->amount, 2) : "" }}
+                              </td>
+                              <td class="text-end nowrap">
+                                    {{ ($item->type == "Cr") ? number_format($item->amount, 2) : "" }}
+                              </td>
+                           </tr>
+                     @endforeach
+                       </tbody>
+                   </table>
+               </td>
+           </tr>
+           <tr>
+               <td colspan="2">Particulars : {{$journal->narration}}</td>
+           </tr>
+           <tr class="bg-light fw-semibold">
+               <td colspan="2" class="col-7 py-1">
+                  <span class="fw-semibold">Total Amount:</span> <i>{{currencySymbol($journal->amount)}}</i>
+               </td>
+           </tr>
+           <tr>
+               <td colspan="2" class="col-7 text-1"><span class="fw-semibold">Bill Amount:</span> <i>{{convert_number($journal->amount)}}</i></td>
+           </tr>
+       </tbody>
+   </table>
+   <footer class="text-center mt-4">
+     <div class="btn-group btn-group-sm d-print-none"> <a href="{{route('multi-cash-payment.index')}}" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-list"></i> Back To List</a> </div>
+     <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()" class="btn btn-light border text-black-50 shadow-none"><i class="fa fa-print"></i> Print & Download</a> </div>
+   </footer>
 </div>
 @endsection

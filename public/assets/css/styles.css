@@ -11427,3 +11427,11 @@ max-width: 980px;
 .mt-45 {
     margin-top: 45px;
 }
+.details-voucher-modal-date-section {
+  font-size: 14px;
+  border-bottom: 1px #666666 solid;
+  padding-bottom: 5px;
+}
+.font-size-14 {
+  font-size: 14px;;
+}
