@@ -17,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'isActiveUser' => \App\Http\Middleware\IsActiveUser::class,
             'checkInstalled' => \App\Http\Middleware\CheckInstalled::class,
+            'localization' => \App\Http\Middleware\Localization::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
