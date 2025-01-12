@@ -41,7 +41,7 @@
             <tr>
                 <td class="nowrap ">{{$key+1}}</td>
                 <td class="nowrap ">
-                    {{ date('d-m-Y', strtotime(@$transaction['date'])) }}
+                    {{ showDateFormat(@$transaction['date']) }}
                 </td>
                 <td class="nowrap "><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">{{  @$transaction['txn_id'] }}</a></td>
                 <td>

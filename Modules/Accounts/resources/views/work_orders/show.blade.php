@@ -38,11 +38,11 @@
                                 </tr>
                                 <tr>
                                     <td>Creation Date</td>
-                                    <td>{{ date('d/m/Y', strtotime($item->date)) }}</td>
+                                    <td>{{ showDateFormat($item->date) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Close Date</td>
-                                    <td>{{ date('d/m/Y', strtotime($item->final_date)) }}</td>
+                                    <td>{{ showDateFormat($item->final_date) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Remarks</td>

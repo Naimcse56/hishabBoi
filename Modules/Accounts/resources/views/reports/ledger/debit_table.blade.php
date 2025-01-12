@@ -42,7 +42,7 @@
             @endphp
             <tr>
                 <td class="nowrap align-middle">
-                    {{ date('d-m-Y', strtotime(@$transaction['date'])) }}
+                    {{ showDateFormat(@$transaction['date']) }}
                 </td>
                 <td class="nowrap align-middle"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction['voucher_id'])) }}">{{  @$transaction['txn_id'] }}</a></td>
                 <td>

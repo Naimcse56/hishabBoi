@@ -14,7 +14,7 @@
                 
                 <div class="row">
                    <div class="col-md-12 d-flex justify-content-between details-voucher-modal-date-section" >
-                      <p class="mb-0">Date. :<span>{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
+                      <p class="mb-0">Date. :<span>{{ showDateFormat($journal->date) }}</span></p>
                       <p class="mb-0">JV No : <span>{{$journal->TypeName}}</span></p>
                    </div>
                     <div class="row">
