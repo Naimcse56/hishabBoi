@@ -3,7 +3,6 @@
     <a class="navbar-brand ps-3 fw-semibold text-bg-primary" href="{{ route('dashboard') }}">Hishab Boi</a>
     <!-- Sidebar Toggle-->
     <a class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="javascript:;"><i class="fas fa-bars"></i></a>
-    <a class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="fullscreenButton" href="javascript:;"><i class="fa fa-arrows-alt"></i></a>
 
     <ul class="navbar-nav ms-auto">
         <li class="nav-item time fw-semibold"><i class="far fa-clock text-white"></i> <span id="live-time" ></span></li>
