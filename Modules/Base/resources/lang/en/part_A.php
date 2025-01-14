@@ -1,4 +1,6 @@
 <?php return array (
+  "Word"=>"Word",
+  "Translation"=>"Translation",
   "Company Settings" => "Company Settings",
   "Company Name" => "Company Name",
   "Company Phone" => "Company Phone",

@@ -69,7 +69,7 @@ class BaseController extends Controller
 
     public function base_settings_update(Request $request)
     {
-        foreach ($request->except('_token','system_currency_id','types','APP_TIMEZONE') as $column_name => $column_value) {
+        foreach ($request->except('_token','system_currency_id','types','APP_TIMEZONE','APP_LOCALE') as $column_name => $column_value) {
             GeneralSetting::where('name',$column_name)->first()->update(['value' => $column_value]);
         }
         if ($request->system_currency_id) {

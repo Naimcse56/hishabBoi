@@ -139,10 +139,11 @@ General Setting
                                     ['id' => 'Asia/Magadan' , 'name' => '(GMT+12:00) Magadan'],
                                     ['id' => 'Pacific/Auckland' , 'name' => '(GMT+12:00) Auckland'],
                                     ['id' => 'Pacific/Fiji' , 'name' => '(GMT+12:00) Fiji']
-                                ]"></x-common.select>                               
-                                <x-common.server-side-select :required="true" column=6 name="system_language" id="system_language" class="system_language" disableOptionText="Select One" label="System Language" :options="[
+                                ]"></x-common.select>
+                                <input type="hidden" name="types[]" value="APP_LOCALE">
+                                <x-common.server-side-select :required="true" column=6 name="APP_LOCALE" id="system_language" class="system_language" disableOptionText="Select One" label="System Language" :options="[
                                     ['id' => app('general_setting')['system_language'], 'name' => app('general_setting')['system_language']]
-                                ]" :value="app('general_setting')['system_language']"></x-common.server-side-select>
+                                ]" :value="env('APP_LOCALE')"></x-common.server-side-select>
                             </div>
                          
                             <div class="row">

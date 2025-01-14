@@ -20,8 +20,8 @@ Language Translation
                     <table class="table">
                         <thead>
                             <tr>
-                            <th scope="col">{{ __('base::section_first.Word') }}</th>
-                            <th scope="col">{{ __('base::section_first.Translation') }}</th>
+                            <th scope="col">{{ __('base::part_A.Word') }}</th>
+                            <th scope="col">{{ __('base::part_A.Translation') }}</th>
                             </tr>
                         </thead>
                         <tbody>
