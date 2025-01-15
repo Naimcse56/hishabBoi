@@ -56,6 +56,11 @@
   "Staff" => "Staff",
   "Designation" => "Designation",
   "Department" => "Department",
-  "" => "",
-  "" => "",
+  "Company Settings" => "Company Settings",
+  "General Settings" => "General Settings",
+  "Currency" => "Currency",
+  "Language" => "Language",
+  "Email Setup" => "Email Setup",
+  "Sales & Purchase" => "Sales & Purchase",
+  "Staff Permissions" => "Staff Permissions",
 );
