@@ -1,6 +1,6 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark text-bg-primary">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3 fw-semibold text-bg-primary" href="{{ route('dashboard') }}">Hishab Boi</a>
+    <a class="navbar-brand ps-3 fw-semibold text-bg-primary" href="{{ route('dashboard') }}">E-Billing & Accounting</a>
     <!-- Sidebar Toggle-->
     <a class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="javascript:;"><i class="fas fa-bars"></i></a>
 

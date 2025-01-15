@@ -305,7 +305,7 @@ CREATE TABLE `general_settings` (
 --
 
 INSERT INTO `general_settings` (`id`, `name`, `value`, `created_at`, `updated_at`) VALUES
-(1, 'company_name', 'Hishab Boi', NULL, NULL),
+(1, 'company_name', 'E-Billing & Accounting', NULL, NULL),
 (2, 'company_logo', 'assets/images/invoice.png', NULL, NULL),
 (3, 'company_address', NULL, NULL, NULL),
 (4, 'company_phone', '01873844448', NULL, NULL),

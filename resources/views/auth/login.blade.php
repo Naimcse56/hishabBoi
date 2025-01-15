@@ -6,7 +6,7 @@
         <div class="login-form">
             <div class="text-center">
                 <img src="{{ asset('assets/images/icon.png') }}"  width="65px"/>
-                <h4 class="login-title">Hishab Boi</h4>
+                <h4 class="login-title">E-Billing & Accounting</h4>
             </div>
             <form method="POST" action="{{ route('login') }}" class="text-start mb-3">
                 @csrf
