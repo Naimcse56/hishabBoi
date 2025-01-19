@@ -5,7 +5,7 @@
             <div class="nav">
                 <a class="nav-link" href="{{route('dashboard')}}">
                     <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    @lang('base::menu.Dashboard')
+                    Dashboard
                 </a>
                 @include('accounts::menu')
                 @include('base::menu')
