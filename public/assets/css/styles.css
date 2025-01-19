@@ -157,7 +157,11 @@ h4, .h4 {
     color: #5a50a9;
   }
 }
-
+@media (max-width: 500px) {
+  .hide-on-small {
+      display: none !important;
+  }
+}
 h5, .h5 {
   font-size: 1.25rem;
 }
