@@ -5,9 +5,16 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Modules\Base\App\Services\SecurityService;
 
 class IsActiveUser
 {
+    protected $securityService;
+
+    public function __construct(SecurityService $securityService)
+    {
+        $this->securityService = $securityService;
+    }
     /**
      * Handle an incoming request.
      *
@@ -19,6 +26,7 @@ class IsActiveUser
             auth()->logout();
             return redirect()->route('login');
         }
+        $this->securityService->verify(env("APP_URL"), env("PURCHASE_CODE"));
         return $next($request);
     }
 }
