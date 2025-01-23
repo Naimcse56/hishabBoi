@@ -17,7 +17,7 @@
                 @isset($work_order)
                     <p class="mb-0">W/O : {{$work_order->order_name}}</p>
                     <p class="mb-0">({{$work_order->order_no}})</p>
-                    <p class="mb-0">Order Date : {{$work_order->date}}</p>
+                    <p class="mb-0">Order Date : {{showDateFormat($work_order->date)}}</p>
                 @endisset
                 <p class="mb-0">As on {{date('d, F - Y', strtotime($dateTo))}}</p>
             </th>

@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Hishab Boi
+## E-Billing & Accounting
 
 Hisab Boi is a Laravel 11 Based Accounting Software that is under developement By Monirul Islam and Naimul Islam
 

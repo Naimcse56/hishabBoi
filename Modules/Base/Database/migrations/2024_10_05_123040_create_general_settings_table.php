@@ -22,7 +22,7 @@ return new class extends Migration
         DB::table('general_settings')->insert(array(
             0 => array(
                'name' => 'company_name',
-               'value' => 'Hishab Boi',
+               'value' => 'E-Billing & Accounting',
             ),
             1 => array(
                'name' => 'company_logo',

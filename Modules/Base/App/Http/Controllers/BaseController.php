@@ -69,7 +69,7 @@ class BaseController extends Controller
 
     public function base_settings_update(Request $request)
     {
-        foreach ($request->except('_token','system_currency_id') as $column_name => $column_value) {
+        foreach ($request->except('_token','system_currency_id','types','APP_TIMEZONE','APP_LOCALE') as $column_name => $column_value) {
             GeneralSetting::where('name',$column_name)->first()->update(['value' => $column_value]);
         }
         if ($request->system_currency_id) {
@@ -77,6 +77,9 @@ class BaseController extends Controller
             $currency_symbol = explode('-',$request->system_currency_id)[1];
             GeneralSetting::where('name','system_currency_id')->first()->update(['value' => $currency_id]);
             GeneralSetting::where('name','system_currency_symbol')->first()->update(['value' => $currency_symbol]);
+        }
+        foreach ($request->types as $key => $type) {
+            $this->overWriteEnvFile($type, $request[$type]);
         }
 
         return back()->with('success', 'Updated Successfully');

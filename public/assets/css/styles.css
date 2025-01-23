@@ -157,7 +157,11 @@ h4, .h4 {
     color: #5a50a9;
   }
 }
-
+@media (max-width: 500px) {
+  .hide-on-small {
+      display: none !important;
+  }
+}
 h5, .h5 {
   font-size: 1.25rem;
 }
@@ -11426,4 +11430,12 @@ max-width: 980px;
 }
 .mt-45 {
     margin-top: 45px;
+}
+.details-voucher-modal-date-section {
+  font-size: 14px;
+  border-bottom: 1px #666666 solid;
+  padding-bottom: 5px;
+}
+.font-size-14 {
+  font-size: 14px;;
 }

@@ -12,20 +12,20 @@
                     <div class="text-center fw-semibold"> VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
-                <div class="row" style="margin-top: 0px;">
-                   <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
+                <div class="row">
+                   <div class="col-md-12 d-flex justify-content-between details-voucher-modal-date-section" >
                       
-                      <p class="mb-0">Date. :<span>{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
+                      <p class="mb-0">Date. :<span>{{ showDateFormat($journal->date) }}</span></p>
                       <p class="mb-0">Voucher No : <span>{{$journal->TypeName}}</span></p>
                    </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
+                    <div class="col-md-12 d-flex justify-content-between font-size-14">
                         <p class="mb-0">Concern Person : <span>{{$journal->concern_person}}</span></p>
                     </div>
                 </div>
                 @if ($journal->narration)
-                  <div class="row" style="margin-top: 10px;">
+                  <div class="row">
                       <div class="col-md-12 d-flex justify-content-between signing-footer">
                           <p class="mb-0">Purpose : <span>{{$journal->narration}}</span></p>
                       </div>
@@ -96,7 +96,7 @@
                            </table>
                        </div>
                    </div>
-                   <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
+                   <div class="col-md-12 d-flex justify-content-between details-voucher-modal-date-section" >
                         <p class="mb-0">Creator :<span>{{$journal->creator->name}}</span></p>
                         @if ($journal->attachment)
                             <a href="{{asset($journal->attachment)}}" class="fw-semibold" download="{{str_replace(' ','-',$journal->TypeName.'-attachment')}}"><i class="bx bx-download"></i> Attachment <i class="bx bx-download"></i></a>

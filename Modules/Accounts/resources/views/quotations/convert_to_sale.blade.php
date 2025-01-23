@@ -1,25 +1,26 @@
 @extends('layouts.admin_app')
 @section('title')
-Edit Quotation
+Convert to Sale
 @endsection
 @section('content')
 <div class="container-fluid px-4">
     <div class="d-flex justify-content-between">
-        <div><h4 class="mt-4">Edit Quotation</h4></div>
+        <div><h4 class="mt-4">Convert to Sale</h4></div>
         <div><a href="{{route('quotations.index')}}" class="btn btn-sm btn-primary mt-4"><i class="fa fa-list"></i> List</a></div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{route('quotations.update', encrypt($quotation->id))}}">
+                    <form method="POST" enctype="multipart/form-data" action="{{route('sales.store')}}">
                         @csrf
                         <div class="row mb-2">
+                            <input type="hidden" name="quotation_id" value="{{$quotation->id}}">
                             <x-common.server-side-select :required="true" column=4 name="sub_ledger_id" id="sub_ledger_id" class="sub_ledger_id" disableOptionText="Select One" label="Vendor" :options="[
                                 ['id' => $quotation->sub_ledger_id, 'name' => $quotation->sub_ledger->name]
                             ]" :value="$quotation->sub_ledger_id"></x-common.server-side-select>
                             <x-common.date-picker label="Date" :required="true" column=4 name="date" placeholder="Date" :value="date('d/m/Y', strtotime($quotation->date))" placeholder="dd/mm/yyyy" ></x-common.date-picker>
-                            <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="$quotation->invoice_no"></x-common.input>
+                            <x-common.input :required="true" column=4 id="invoice_no" name="invoice_no" label="Invoice No" placeholder="Invoice No" :value="$invoice_no"></x-common.input>
                             <x-common.input :required="false" column=4 id="ref_no" name="ref_no" label="Reference No" placeholder="Reference No" :value="$quotation->ref_no"></x-common.input>
                             <x-common.input :required="false" column=4 id="phone" name="phone" label="Phone No" placeholder="Phone No" :value="$quotation->phone"></x-common.input>
                             <x-common.server-side-select :required="true" column=12 name="product_select_id" id="product_select_id" class="product_select_id" disableOptionText="Select Product" label="Product"></x-common.server-side-select>
@@ -56,6 +57,28 @@ Edit Quotation
                                         <x-common.input :required="true" type="number" step="0.01" min="0" column=6 class="net_amount" name="net_amount" label="Net Amount" placeholder="0" :value="$quotation->payable_amount"></x-common.input>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <x-common.radio :required="true" column=6 name="payment_method" class="payment_method" label="Payment Method" placeholder="Payment Method" :value="'Cash'" :options="[
+                                            ['id' => 'Cash', 'name' => 'Cash'],
+                                            ['id' => 'Bank', 'name' => 'Bank'],
+                                            ['id' => 'Online', 'name' => 'Online']
+                                        ]"></x-common.radio>
+                                        <x-common.radio :required="true" column=6 name="payment_status" class="payment_status" label="Payment Status" placeholder="Payment Status" :value="'Due'" :options="[
+                                            ['id' => 'Due', 'name' => 'Due'],
+                                            ['id' => 'Paid', 'name' => 'Paid'],
+                                            ['id' => 'Partial', 'name' => 'Partial']
+                                        ]"></x-common.radio>
+                                        
+                                        <x-common.input :required="true" type="number" step="1" min="0" column=6 id="credit_period" name="credit_period" label="Credit Period (in days)" placeholder="Credit Period" :value="old('credit_period', 0)"></x-common.input>
+                                        <x-common.input :required="true" type="number" step="0.01" min="0" column=6 id="payment_amount" name="payment_amount" label="Payment Amount" placeholder="Payment Amount" :value="old('payment_amount', 0)"></x-common.input>
+                                        <x-common.server-side-select :required="false" column=12 name="credit_account_id" class="credit_account_id" disableOptionText="Select Account" label="Payment Recieve Account"></x-common.server-side-select>
+                                        <x-common.input :required="false" column=6 id="bank_name" name="bank_name" label="Bank Name" placeholder="Bank Name" :value="old('bank_name')"></x-common.input>
+                                        <x-common.input :required="false" column=6 id="bank_account_name" name="bank_account_name" label="Bank Account Name" placeholder="Bank Account Name" :value="old('bank_account_name')"></x-common.input>
+                                        <x-common.input :required="false" column=6 id="check_no" name="check_no" label="Cheque No" placeholder="Cheque No" :value="old('check_no')"></x-common.input>
+                                        <x-common.date-picker label="Check Maturity Date" :required="false" column=6 name="check_mature_date" placeholder="Check Maturity Date" :value="date('d/m/Y')" placeholder="dd/mm/yyyy" ></x-common.date-picker>
+                                    </div>
+                                </div>
                             </div>
                         </fieldset>
                         <div class="row">
@@ -87,6 +110,26 @@ Edit Quotation
                                 search: params.term,
                                 page: params.page || 1,
                                 is_selling: "yes"
+                            }
+                            return query;
+                    },
+                    cache: false
+                },
+                escapeMarkup: function (m) {
+                    return m;
+                }
+            });
+            $(".credit_account_id").select2({
+                ajax: {
+                    url: '{{route('ledger.transactional_list_for_select')}}',
+                    type: "get",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                            var query = {
+                                search: params.term,
+                                page: params.page || 1,
+                                type: "cash_bank",
                             }
                             return query;
                     },

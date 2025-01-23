@@ -126,11 +126,15 @@ class HomeController extends Controller
                                 ->get();
         $data['income_expense_array'] = array();
         $data['asset_liability_array'] = array();
+        $data['income_chart_array'] = [];
+        $data['expense_chart_array'] = [];
         foreach ($income_amounts as $key => $income_amount) {
             $new_detail_data['month'] = $income_amount->month;
             $new_detail_data['income'] = $income_amount->income;
             $new_detail_data['expense'] = $expense_amounts[$key]->expense;
             array_push($data['income_expense_array'], $new_detail_data);
+            $data['income_chart_array'][] = [$income_amount->month, $income_amount->income];
+            $data['expense_chart_array'][] = [$expense_amounts[$key]->month, $expense_amounts[$key]->expense];
         }
         foreach ($asset_amounts as $key => $asset_amount) {
             $new_data['month'] = $asset_amount->month;

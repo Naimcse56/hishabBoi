@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> @yield('title', 'Error') | {{ config('app.name', 'Hishab Boi') }}</title>
+    <title> @yield('title', 'Error') | {{ config('app.name', 'E-Billing & Accounting') }}</title>
     <link href="{{asset('assets/css/styles.css')}}" rel="stylesheet" type="text/css" />
 
 </head>

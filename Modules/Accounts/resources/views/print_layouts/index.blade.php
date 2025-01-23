@@ -7,7 +7,7 @@
     </script>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> @yield('title', 'Print') | {{ config('app.name', 'Hishab Boi') }}</title>
+    <title> @yield('title', 'Print') | {{ config('app.name', 'E-Billing & Accounting') }}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -151,6 +151,9 @@
         }
         .mt-45 {
             margin-top: 45px;
+        }
+        .mt-5 {
+            margin-top: 5px;
         }
         .top-border-signing {
             border-top: 1px #666666 solid;

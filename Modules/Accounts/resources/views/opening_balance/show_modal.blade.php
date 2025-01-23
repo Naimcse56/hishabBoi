@@ -12,21 +12,21 @@
                     <div class="text-center fw-semibold"> VOUCHER ({{ $journal->TypeDetails }}) </div>
                 </div>
                 
-                <div class="row" style="margin-top: 0px;">
-                   <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
+                <div class="row">
+                   <div class="col-md-12 d-flex justify-content-between details-voucher-modal-date-section" >
                       
-                      <p class="mb-0">Date. :<span>{{ date('d-m-Y', strtotime($journal->date)) }}</span></p>
+                      <p class="mb-0">Date. :<span>{{ showDateFormat($journal->date) }}</span></p>
                       <p class="mb-0">Voucher No : <span>{{$journal->TypeName}}</span></p>
                    </div>
                     <div class="row">
-                        <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
+                        <div class="col-md-12 d-flex justify-content-between font-size-14">
                             <p class="mb-0">Concern Person : <span>{{$journal->concern_person}}</span></p>
                         </div>
                     </div>
                 </div>
                 @if ($journal->is_approve == 2)
                   <div class="row">
-                      <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; padding-bottom: 5px;">
+                      <div class="col-md-12 d-flex justify-content-between font-size-14">
                           <p class="mb-0 text-danger fw-semibold">Reject Note : <span>{{$journal->rejection_comment}}</span></p>
                       </div>
                   </div>
@@ -101,7 +101,7 @@
                            </table>
                        </div>
                    </div>
-                   <div class="col-md-12 d-flex justify-content-between" style="font-size: 14px; border-bottom: 1px #666666 solid; padding-bottom: 5px;">
+                   <div class="col-md-12 d-flex justify-content-between details-voucher-modal-date-section" >
                         <p class="mb-0">Creator :<span>{{$journal->creator->name}}</span></p>
                         @if ($journal->updated_by != null)
                         <p class="mb-0">Updator :<span>{{$journal->updator->name}}</span></p>

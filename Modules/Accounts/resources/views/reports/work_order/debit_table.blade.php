@@ -116,7 +116,7 @@
             @endphp
             <tr>
                 <td class="nowrap">
-                    {{ date('d-m-Y', strtotime(@$transaction->date)) }}
+                    {{ showDateFormat(@$transaction->date) }}
                 </td>
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($transaction->voucher_id)) }}">{{  @$transaction->voucher->TypeName }}</a></td>
                 <td>{{ $transaction->narration }}</td>
@@ -147,7 +147,7 @@
             @endphp
             <tr>
                 <td class="nowrap">
-                    {{ date('d-m-Y', strtotime(@$rcv_transaction->date)) }}
+                    {{ showDateFormat(@$rcv_transaction->date) }}
                 </td>
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($rcv_transaction->voucher_id)) }}">{{  @$rcv_transaction->voucher->TypeName }}</a></td>
                 <td>{{ $rcv_transaction->narration }}</td>
@@ -184,7 +184,7 @@
             @endphp
             <tr>
                 <td class="nowrap">
-                    {{ date('d-m-Y', strtotime(@$exp_transaction->date)) }}
+                    {{ showDateFormat(@$exp_transaction->date) }}
                 </td>
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($exp_transaction->voucher_id)) }}">{{  @$exp_transaction->voucher->TypeName }}</a></td>
                 <td>{{ $exp_transaction->narration }}</td>
@@ -214,7 +214,7 @@
             @endphp
             <tr>
                 <td class="nowrap">
-                    {{ date('d-m-Y', strtotime(@$pay_transaction->date)) }}
+                    {{ showDateFormat(@$pay_transaction->date) }}
                 </td>
                 <td class="nowrap"><a href="javascript:;" class="detail_info text-black" data-route="{{ route('journal.show',encrypt($pay_transaction->voucher_id)) }}">{{  @$pay_transaction->voucher->TypeName }}</a></td>
                 <td>{{ $pay_transaction->narration }}</td>

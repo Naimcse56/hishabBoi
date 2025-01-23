@@ -97,9 +97,84 @@ Dashboard
                 </div>
             </div>
         </div>
+        <div class="col-md-12 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="income_chart"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="expense_chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
 @push('scripts')
     <script src="{{asset('assets/plugins/chart/google_chart.min.js')}}"></script>
+    <script type="text/javascript">
+        // Load the Google Chart library
+        google.charts.load('current', {
+            packages: ['corechart', 'line']
+        });
+
+        // Draw the charts when the library is loaded
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            // Income Chart Data
+            var incomeData = google.visualization.arrayToDataTable([
+                ['Month', 'Income'],
+                @foreach ($income_chart_array as $data)
+                    ['{{ $data[0] }}', {{ $data[1] }}],
+                @endforeach
+            ]);
+
+            var incomeOptions = {
+                title: 'Monthly Income',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                hAxis: {
+                    title: 'Month',
+                    format: '0'
+                },
+                vAxis: {
+                    title: 'Income',
+                    format: 'currency'
+                }
+            };
+
+            var incomeChart = new google.visualization.LineChart(document.getElementById('income_chart'));
+            incomeChart.draw(incomeData, incomeOptions);
+
+            // Expense Chart Data
+            var expenseData = google.visualization.arrayToDataTable([
+                ['Month', 'Expense'],
+                @foreach ($expense_chart_array as $data)
+                    ['{{ $data[0] }}', {{ $data[1] }}],
+                @endforeach
+            ]);
+
+            var expenseOptions = {
+                title: 'Monthly Expense',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                hAxis: {
+                    title: 'Month',
+                    format: '0'
+                },
+                vAxis: {
+                    title: 'Expense',
+                    format: 'currency'
+                }
+            };
+
+            var expenseChart = new google.visualization.LineChart(document.getElementById('expense_chart'));
+            expenseChart.draw(expenseData, expenseOptions);
+        }
+    </script>
 @endpush

@@ -6,4 +6,10 @@
             <i class="fa fa-trash"></i>
         </button>
     @endif
+    @if ($row->is_approved == 'Approved' && $row->sale()->count() == 0)
+        <a href="{{route('quotations.convert_to_sale',encrypt($row->id))}}" class="btn btn-sm btn-warning">Conver to Sale</a>
+    @endif
+    @if ($row->sale()->count() > 0)
+        <a href="{{route('sales.show',encrypt($row->sale->id))}}" class="btn btn-sm btn-secondary">{{$row->sale->invoice_no}}</a>
+    @endif
 </div>
